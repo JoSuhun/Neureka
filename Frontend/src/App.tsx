@@ -1,9 +1,14 @@
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <>
-      <div>야무지게 개발을!! 야개!!!</div>
+      <BrowserRouter>
+      <Routes>
+        <Route/>
+      </Routes>
+      </BrowserRouter>
     </>
   )
 }
