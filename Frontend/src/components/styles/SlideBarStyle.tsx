@@ -3,7 +3,7 @@ import styled from "styled-components";
 const SlideWrapper = styled.div`
   height: 8vh;
   width: 100%;
-  background-color: #040461;
+  background-color: var(--color-navy);
   align-items: center;
   overflow: hidden;
   @keyframes infiniteAnimation1 {

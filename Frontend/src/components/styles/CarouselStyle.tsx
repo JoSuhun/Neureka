@@ -50,13 +50,13 @@ const IndexBox = styled.div`
   display: flex;
   justify-content: center;
   .focused_card {
-    color: blue;
+    color: var(--color-navy);
   }
 `;
 
 const CardIndex = styled(StopIcon)`
   font-size: 1.1rem !important;
-  color: #ececec;
+  color: var(--color-lightgrey);
 `;
 
 const CarouselCard = styled.div<{ bgimage: string }>`
@@ -94,20 +94,20 @@ const CarouselCard = styled.div<{ bgimage: string }>`
     margin: 0;
   }
   .card1-title {
-    background-color: #ff7700;
+    background-color: var(--color-orange);
     top: 40%;
     left: 0;
     font-size: 2rem;
   }
   .card1-content {
-    background-color: #ffffff;
-    color: #040082;
+    background-color: white;
+    color: var(--color-navy);
     top: 60%;
     left: 0;
     font-size: 1.5rem;
   }
   .card2-title {
-    background-color: #ffb700;
+    background-color: var(--color-yellow);
     top: 50%;
     left: 3%;
     font-size: 2rem;
@@ -118,7 +118,7 @@ const CarouselCard = styled.div<{ bgimage: string }>`
     font-size: 1.5rem;
   }
   .card3-title {
-    background-color: #00233b;
+    background-color: var(--color-dark);
     text-align: center;
     /* left: 40%; */
     /* top: 30%; */
