@@ -34,7 +34,7 @@ const NavbarBody = styled.div`
         font-size: 120%;
         text-align: center;
         align-items: center;
-        background-color: #ff7530;
+        background-color: var(--color-orange);
         color: white;
         border: none;
         border-radius: 10px;
@@ -42,7 +42,7 @@ const NavbarBody = styled.div`
         height: 5vh;
       }
       .login-btn {
-        background-color: navy;
+        background-color: var(--color-navy);
         margin-right: 5%;
       }
       :nth-child(1) {

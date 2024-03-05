@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import NavbarBody from '../common/styles/NavbarStyle'
+import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isopen, setIsopen] = useState(false)
+
+  const navigate = useNavigate()
   // 스크롤 시 네비게이션 색상 변경
   // const updateScroll = () => {
   //   setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -22,7 +25,7 @@ function Navbar() {
           <span></span>
           <span className="title">STOCKER</span>
           <div className="button-section">
-            <button className="login-btn">LOGIN</button>
+            <button className="login-btn" onClick={()=>navigate('/login')}>LOGIN</button>
             <button onClick={navtoggle}>MENU</button>
           </div>
         </div>
