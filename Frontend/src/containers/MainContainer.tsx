@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Navbar from '../common/Navbar'
 import Carousel from '../components/Main/Carousel'
 import SlideBar from '../components/Main/SlideBar'
-import AuthModal from '../components/Auth/AuthModal'
+import AuthModal from '@src/components/Auth/AuthModal'
 
 type Props = {}
 
