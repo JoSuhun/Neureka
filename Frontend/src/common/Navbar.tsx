@@ -43,8 +43,7 @@ const Navbar = () => {
     navtoggle()
   }
 
-  const google_url = (window.location.href =
-    'http://localhost:8080/oauth2/authorization/google')
+  const google_url = 'http://localhost:8080/oauth2/authorization/google'
 
   const SNS = (url: string) => {
     console.log('qqq')
