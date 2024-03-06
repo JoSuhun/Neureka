@@ -83,7 +83,7 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("https://localhost:5173/").permitAll()
+                        .requestMatchers("/").permitAll()
                         .requestMatchers("my").hasRole("USER")
                         .anyRequest().authenticated());
 
