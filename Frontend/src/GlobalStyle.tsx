@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
     html {
       --color-text: black;
       --color-dark: #00233b;
-      --color-grey: #F0F3FF;
+      --color-lightblue: #F0F3FF;
       --color-lightgrey: #ececec;
       --color-navy: #333A73;
       --color-blue: #387ADF;
