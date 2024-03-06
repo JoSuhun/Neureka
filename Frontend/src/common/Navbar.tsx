@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import NavbarBody from '../common/styles/NavbarStyle'
 import { useNavigate } from 'react-router-dom'
+import AuthModal from '../components/Auth/AuthModal'
 
-function Navbar() {
+type Props={
+  modalOpen: boolean,
+  handleModal:()=>void,
+}
+
+const Navbar = ({modalOpen, handleModal}:Props) => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isopen, setIsopen] = useState(false)
 
@@ -14,18 +20,22 @@ function Navbar() {
 
   const navtoggle = () => setIsopen(!isopen)
 
+
   // useEffect(() => {
   //   window.addEventListener("scroll", updateScroll);
   // });
 
   return (
     <>
+      {/* <AuthModal modalOpen={modalOpen} handleModal={handleModal} /> */}
       <NavbarBody>
         <div className={scrollPosition < 60 ? 'nav change' : 'nav change'}>
           <span></span>
           <span className="title">STOCKER</span>
           <div className="button-section">
-            <button className="login-btn" onClick={()=>navigate('/login')}>LOGIN</button>
+            <button className="login-btn" onClick={() => handleModal()}>
+              LOGIN
+            </button>
             <button onClick={navtoggle}>MENU</button>
           </div>
         </div>

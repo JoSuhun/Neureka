@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-const SlideWrapper = styled.div`
+export const SlideWrapper = styled.div`
   height: 8vh;
   width: 100%;
   background-color: var(--color-navy);
@@ -28,32 +28,30 @@ const SlideWrapper = styled.div`
       transform: translateX(-200%);
     }
   }
-  .slide-container {
-    width: 200%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    .slide-box {
-      align-items: center;
-      &.original {
-        animation: 120s linear infinite normal none running infiniteAnimation1;
-      }
-      &.clone {
-        animation: 120s linear infinite infiniteAnimation2;
-      }
-    }
-  }
-`;
+`
 
-const SlideText = styled.div`
+export const SlideBox = styled.div`
+  width: 200%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+`
+
+export const SlideText = styled.div`
   display: inline-block;
   color: white;
-  font-family: "SEBANG_Gothic_Bold";
+  font-family: 'SEBANG_Gothic_Regular';
   font-size: 2rem;
   font-style: italic;
   font-weight: 200;
   margin: 0 20px;
-`;
+`
 
-export { SlideWrapper, SlideText };
+export const SlideOriginal = styled.div`
+  animation: 120s linear infinite normal none running infiniteAnimation1;
+`
+
+export const SlideClone = styled.div`
+  animation: 120s linear infinite infiniteAnimation2;
+`
