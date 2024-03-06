@@ -6,15 +6,17 @@ import NewsPage from './pages/NewsPage'
 import Navbar from './common/Navbar'
 import StockPage from './pages/StockPage'
 import NewsDatailPage from './pages/NewsDatailPage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDatailPage />} />
           <Route path="/stocks" element={<StockPage />} />

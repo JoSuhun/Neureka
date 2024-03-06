@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import kakao from '/image/kakaotalk.png'
 import google from '/image/google.png'
 
-
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
@@ -44,10 +43,18 @@ const Navbar = () => {
     navtoggle()
   }
 
+  const google_url = (window.location.href =
+    'http://localhost:8080/oauth2/authorization/google')
+
+  const SNS = (url: string) => {
+    console.log('qqq')
+    window.location.href = url
+  }
+
   return (
     <>
       <n.Wrapper>
-        <n.Nav className='nav'>
+        <n.Nav className="nav">
           <span></span>
           <n.NavTitle className="title" onClick={goHome}>
             STOCKER
@@ -85,7 +92,7 @@ const Navbar = () => {
               <n.LoginIcon src={kakao} />
               카카오톡으로 시작하기
             </n.LoginSelect>
-            <n.LoginSelect>
+            <n.LoginSelect onClick={() => SNS(google_url)}>
               <n.LoginIcon src={google} />
               구글로 시작하기
             </n.LoginSelect>
