@@ -4,7 +4,7 @@ import GlobalStyle from './GlobalStyle'
 import MainPage from './pages/MainPage'
 import NewsPage from './pages/NewsPage'
 import Navbar from './common/Navbar'
-import StockPage from './pages/StockPage'
+import StocksPage from './pages/StocksPage'
 import NewsDatailPage from './pages/NewsDatailPage'
 
 function App() {
@@ -12,12 +12,12 @@ function App() {
     <>
       <GlobalStyle />
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDatailPage />} />
-          <Route path="/stocks" element={<StockPage />} />
+          <Route path="/stocks" element={<StocksPage />} />
         </Routes>
       </BrowserRouter>
     </>
