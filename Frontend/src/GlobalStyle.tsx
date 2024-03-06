@@ -4,9 +4,11 @@ const GlobalStyle = createGlobalStyle`
     html {
       --color-text: black;
       --color-dark: #00233b;
+      --color-grey: #F0F3FF;
       --color-lightgrey: #ececec;
-      --color-navy: #040461;
-      --color-orange: #ff7530;
+      --color-navy: #333A73;
+      --color-blue: #387ADF;
+      --color-orange: #FBA834;
       --color-yellow: #ffb700;
     }
 
@@ -26,14 +28,29 @@ const GlobalStyle = createGlobalStyle`
           font-style: normal;
       }
       @font-face {
+          font-family: 'SEBANG_Gothic_Regular';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Regular.woff') format('woff');
+      }
+      @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Pretendard-Thin';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff');
         font-weight: 100;
         font-style: normal;
       }
       margin: 0;
       font-family: 'Pretendard-Regular';
-
+    }
+    div {
+      margin: 0;
+    }
+    p {
+      margin: 0;
     }
 `
 

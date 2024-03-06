@@ -20,7 +20,7 @@ const NavbarBody = styled.div`
     z-index: 5;
     .title {
       font-weight: 700;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       letter-spacing: 0.2rem;
     }
     .button-section {

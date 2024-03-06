@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Wrapper,
-  Container,
-  Slides,
-  Slide,
-  PrevButton,
-  NextButton,
-  IndexBox,
-  CardIndex,
-} from "../styles/CarouselStyle"
+import * as c from '../styles/Main/CarouselStyle'
 import CarouselItem from './CarouselItem'
 
-function Carousel() {
+const Carousel = () => {
   const [counter, setCounter] = useState(0)
   const cards = ['1', '2', '3']
   const handleNext = () => {
@@ -41,25 +32,25 @@ function Carousel() {
   }, [cards.length])
 
   return (
-    <Wrapper>
-      <Container>
-        <PrevButton onClick={handlePrev} />
-        <Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
+    <c.Wrapper>
+      <c.Container>
+        <c.PrevButton onClick={handlePrev} />
+        <c.Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
           {cards.map((card, index) => (
-            <Slide key={index}>
+            <c.Slide key={index}>
               <CarouselItem type={card} />
-            </Slide>
+            </c.Slide>
           ))}
-        </Slides>
-        <NextButton onClick={handleNext} />
-      </Container>
+        </c.Slides>
+        <c.NextButton onClick={handleNext} />
+      </c.Container>
 
-      <IndexBox>
-        {cards.map((image, index) => (
-          <CardIndex className={index === counter ? 'focused_card' : ''} />
+      <c.IndexBox>
+        {cards.map((card, index) => (
+          <c.CardIndex className={index === counter ? 'focused_card' : ''} />
         ))}
-      </IndexBox>
-    </Wrapper>
+      </c.IndexBox>
+    </c.Wrapper>
   )
 }
 

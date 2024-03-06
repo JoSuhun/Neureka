@@ -1,25 +1,25 @@
-import React from "react";
-import { SlideWrapper, SlideText } from "../styles/SlideBarStyle";
+import React from 'react'
+import * as s from '../styles/Main/SlideBarStyle'
 
 const SlideBar = () => {
   return (
-    <SlideWrapper>
-      <div className="slide-container">
-        <div className="slide-box original">
-          <SlideText>TODAY'S STOCKER</SlideText>
-          <SlideText>ECONOMIC NEWS RECOMMENDATION</SlideText>
-          <SlideText>CUSTOMIZED NEWS HUB</SlideText>
-          <SlideText>NEWS & STOCK</SlideText>
-        </div>
-        <div className="slide-box clone">
-          <SlideText>TODAY'S STOCKER</SlideText>
-          <SlideText>ECONOMIC NEWS RECOMMENDATION</SlideText>
-          <SlideText>CUSTOMIZED NEWS HUB</SlideText>
-          <SlideText>NEWS & STOCK</SlideText>
-        </div>
-      </div>
-    </SlideWrapper>
-  );
-};
+    <s.SlideWrapper>
+      <s.SlideBox>
+        <s.SlideOriginal>
+          <s.SlideText>TODAY'S STOCKER</s.SlideText>
+          <s.SlideText>ECONOMIC NEWS RECOMMENDATION</s.SlideText>
+          <s.SlideText>CUSTOMIZED NEWS HUB</s.SlideText>
+          <s.SlideText>NEWS & STOCK</s.SlideText>
+        </s.SlideOriginal>
+        <s.SlideClone>
+          <s.SlideText>TODAY'S STOCKER</s.SlideText>
+          <s.SlideText>ECONOMIC NEWS RECOMMENDATION</s.SlideText>
+          <s.SlideText>CUSTOMIZED NEWS HUB</s.SlideText>
+          <s.SlideText>NEWS & STOCK</s.SlideText>
+        </s.SlideClone>
+      </s.SlideBox>
+    </s.SlideWrapper>
+  )
+}
 
-export default SlideBar;
+export default SlideBar
