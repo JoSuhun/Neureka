@@ -45,8 +45,7 @@ const Navbar = () => {
 
   const google_url = 'http://localhost:8080/oauth2/authorization/google'
 
-  const SNS = (url: string) => {
-    console.log('qqq')
+  const login = (url: string) => {
     window.location.href = url
   }
 
@@ -91,7 +90,7 @@ const Navbar = () => {
               <n.LoginIcon src={kakao} />
               카카오톡으로 시작하기
             </n.LoginSelect>
-            <n.LoginSelect onClick={() => SNS(google_url)}>
+            <n.LoginSelect onClick={() => login(google_url)}>
               <n.LoginIcon src={google} />
               구글로 시작하기
             </n.LoginSelect>

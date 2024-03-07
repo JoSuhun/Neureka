@@ -13,7 +13,7 @@ const MainContainer = (props: Props) => {
     <>
       <SlideBar />
       <MainCard />
-      <MainCard />
+      <div style={{ height: '30vh', backgroundColor: 'black' }}>z</div>
     </>
   )
 }
