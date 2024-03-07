@@ -25,6 +25,13 @@ public class SecurityConfig {
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTUtil jwtUtil;
 
+    //swagger 설정
+    private static final String[] AUTH_WHITELIST = {
+            "/", "/api/**", "/graphiql", "/graphql",
+            "/swagger-ui/**", "/api-docs", "/swagger-ui-custom.html",
+            "/v3/api-docs/**", "/api-docs/**", "/swagger-ui.html"
+    };
+
     public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomSuccessHandler customSuccessHandler, JWTUtil jwtUtil) {
 
         this.customOAuth2UserService = customOAuth2UserService;
@@ -83,7 +90,7 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers( AUTH_WHITELIST).permitAll()
                         .requestMatchers("my").hasRole("USER")
                         .anyRequest().authenticated());
 
