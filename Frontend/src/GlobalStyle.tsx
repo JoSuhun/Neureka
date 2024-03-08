@@ -3,9 +3,10 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
     html {
       --color-text: black;
-      --color-dark: #00233b;
+      --color-dark: #072539;
       --color-lightblue: #F0F3FF;
-      --color-lightgrey: #c9c9c9;
+      --color-lightgrey: #f9f9f9;
+      --color-grey: #7a7a7a;
       --color-navy: #333A73;
       --color-blue: #387ADF;
       --color-orange: #FBA834;

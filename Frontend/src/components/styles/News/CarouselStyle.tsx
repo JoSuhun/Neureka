@@ -5,17 +5,17 @@ import StopIcon from '@mui/icons-material/Stop'
 
 export const Wrapper = styled.div`
   overflow: hidden;
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
 `
 
 export const Container = styled.div`
   height: 60vh;
   width: 100vw;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  margin: 0 auto;
 `
 
 export const Slides = styled.div`
@@ -42,7 +42,7 @@ export const NextButton = styled(ArrowRightIcon)`
   border: none;
   position: absolute;
   z-index: 10;
-  right: 1%;
+  right: 0;
   color: white;
 `
 
@@ -73,7 +73,7 @@ export const CarouselCard = styled.div<{ bgimage: string }>`
   justify-content: center;
   align-items: center;
   z-index: 0;
-  font-family: 'SEBANG_Gothic_Bold';
+
   &::before {
     background-color: #000000;
     opacity: 0.5;
@@ -93,51 +93,11 @@ export const CarouselCard = styled.div<{ bgimage: string }>`
   }
 `
 
-export const CardTitle1 = styled.p`
+export const HeadLine = styled.p`
   background-color: var(--color-orange);
-  position: absolute;
-  color: white;
-  top: 40%;
-  left: 0;
-  font-size: 2rem;
-`
-
-export const CardContent1 = styled.p`
-  position: absolute;
-  background-color: white;
-  color: var(--color-navy);
-  top: 60%;
-  left: 0;
-  font-size: 1.5rem;
-`
-
-export const CardTitle2 = styled.p`
-  position: absolute;
-  background-color: var(--color-yellow);
-  color: white;
-  top: 50%;
-  left: 3%;
-  font-size: 2rem;
-`
-
-export const CardContent2 = styled.p`
   position: absolute;
   color: white;
   top: 65%;
   left: 0;
-  font-size: 1.5rem;
-`
-
-export const CardTitle3 = styled.p`
-  background-color: var(--color-dark);
-  color: white;
-  text-align: center;
-  font-size: 2.2rem;
-  width: 15vw;
-  height: 10%;
-`
-
-export const CardContent3 = styled.p`
-  color: white;
-  font-size: 1.5rem;
+  font-size: 2rem;
 `

@@ -33,8 +33,8 @@ const Carousel = () => {
 
   return (
     <c.Wrapper>
+      <c.PrevButton onClick={handlePrev} />
       <c.Container>
-        <c.PrevButton onClick={handlePrev} />
         <c.Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
           {cards.map((card, index) => (
             <c.Slide key={index}>
@@ -42,8 +42,8 @@ const Carousel = () => {
             </c.Slide>
           ))}
         </c.Slides>
-        <c.NextButton onClick={handleNext} />
       </c.Container>
+      <c.NextButton onClick={handleNext} />
 
       <c.IndexBox>
         {cards.map((card, index) => (
