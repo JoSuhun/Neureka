@@ -1,5 +1,11 @@
+import * as s from '../styles/Stocks/SearchStocksSectionStyle'
+
 const SearchStocksSection = () => {
-  return <div>검색 기능</div>
+  return (
+    <>
+      <s.Wrapper>검색</s.Wrapper>
+    </>
+  )
 }
 
 export default SearchStocksSection
