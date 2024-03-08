@@ -4,18 +4,74 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d973f0a-abaf-4a40-b445-9e5df97b204d" name="Changes" comment="" />
+    <list default="true" id="5d973f0a-abaf-4a40-b445-9e5df97b204d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/config/CorsMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/config/CorsMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/dto/CustomOAuth2User.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/dto/CustomOAuth2User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/dto/GoogleResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/dto/GoogleResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/dto/NaverResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/dto/NaverResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/dto/OAuth2Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/dto/OAuth2Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/jwt/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/jwt/JWTFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/jwt/JWTUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/jwt/JWTUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/oauth2/CustomSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/oauth2/CustomSuccessHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/service/CustomOAuth2UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/service/CustomOAuth2UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/oauthjwt/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/java/com/ssafy/stocker/user/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stocker/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/stocker/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2dO5sIuI7eyTr1HCOoFHEySjRSe" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "last_opened_file_path": "C:/Users/SSAFY/Desktop/S10P22C105"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/san",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/SSAFY/Desktop/특화/S10P22C105/Backend/stocker/build.gradle",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d973f0a-abaf-4a40-b445-9e5df97b204d" name="Changes" comment="" />
+      <created>1709866492936</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709866492936</updated>
+      <workItem from="1709866494549" duration="1154000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

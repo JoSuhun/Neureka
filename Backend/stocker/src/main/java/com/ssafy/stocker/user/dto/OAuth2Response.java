@@ -1,4 +1,4 @@
-package com.ssafy.stocker.oauthjwt.dto;
+package com.ssafy.stocker.user.dto;
 
 public interface OAuth2Response {
 

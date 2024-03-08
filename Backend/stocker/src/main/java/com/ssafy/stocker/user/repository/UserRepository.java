@@ -1,6 +1,6 @@
-package com.ssafy.stocker.oauthjwt.repository;
+package com.ssafy.stocker.user.repository;
 
-import com.ssafy.stocker.oauthjwt.entity.UserEntity;
+import com.ssafy.stocker.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

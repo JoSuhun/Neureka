@@ -1,9 +1,9 @@
-package com.ssafy.stocker.oauthjwt.config;
+package com.ssafy.stocker.user.config;
 
-import com.ssafy.stocker.oauthjwt.jwt.JWTFilter;
-import com.ssafy.stocker.oauthjwt.jwt.JWTUtil;
-import com.ssafy.stocker.oauthjwt.oauth2.CustomSuccessHandler;
-import com.ssafy.stocker.oauthjwt.service.CustomOAuth2UserService;
+import com.ssafy.stocker.user.jwt.JWTFilter;
+import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.user.oauth2.CustomSuccessHandler;
+import com.ssafy.stocker.user.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -90,9 +90,9 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers( AUTH_WHITELIST).permitAll()
-                        .requestMatchers("my").hasRole("USER")
-                        .anyRequest().authenticated());
+//                        .requestMatchers( AUTH_WHITELIST).permitAll()
+//                        .requestMatchers("my").hasRole("USER")
+                        .anyRequest().permitAll());
 
         //세션 설정 : STATELESS
         http

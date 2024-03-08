@@ -1,8 +1,7 @@
-package com.ssafy.stocker.oauthjwt.controller;
+package com.ssafy.stocker.user.controller;
 
-import com.ssafy.stocker.oauthjwt.dto.UserDTO;
-import com.ssafy.stocker.oauthjwt.entity.UserEntity;
-import com.ssafy.stocker.oauthjwt.service.UserService;
+import com.ssafy.stocker.user.entity.UserEntity;
+import com.ssafy.stocker.user.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
