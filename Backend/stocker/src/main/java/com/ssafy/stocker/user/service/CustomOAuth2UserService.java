@@ -1,8 +1,9 @@
-package com.ssafy.stocker.oauthjwt.service;
+package com.ssafy.stocker.user.service;
 
-import com.ssafy.stocker.oauthjwt.dto.*;
-import com.ssafy.stocker.oauthjwt.entity.UserEntity;
-import com.ssafy.stocker.oauthjwt.repository.UserRepository;
+import com.ssafy.stocker.user.dto.*;
+import com.ssafy.stocker.user.entity.UserEntity;
+import com.ssafy.stocker.user.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -10,6 +11,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
@@ -23,7 +25,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        System.out.println(oAuth2User);
+        log.info(oAuth2User.toString());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;

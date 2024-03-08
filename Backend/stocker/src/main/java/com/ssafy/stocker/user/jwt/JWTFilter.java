@@ -1,19 +1,23 @@
-package com.ssafy.stocker.oauthjwt.jwt;
+package com.ssafy.stocker.user.jwt;
 
-import com.ssafy.stocker.oauthjwt.dto.CustomOAuth2User;
-import com.ssafy.stocker.oauthjwt.dto.UserDTO;
+import com.ssafy.stocker.user.dto.CustomOAuth2User;
+import com.ssafy.stocker.user.dto.UserDTO;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
+@Slf4j
 public class JWTFilter extends OncePerRequestFilter {
 
     private final JWTUtil jwtUtil;
@@ -26,20 +30,14 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String authorization = null;
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
 
-            if (cookie.getName().equals("Authorization")) {
+        String accessToken = request.getHeader("Authorization") ;
 
-                authorization = cookie.getValue();
-            }
-        }
 
         //Authorization 헤더 검증
-        if (authorization == null) {
+        if (accessToken == null) {
 
-            System.out.println("token null");
+            log.info("token null");
             filterChain.doFilter(request, response);
 
             //조건이 해당되면 메소드 종료 (필수)
@@ -47,20 +45,22 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         //토큰
-        String token = authorization;
+        try {
+            jwtUtil.isExpired(accessToken);
+        } catch (ExpiredJwtException e) {
 
-        if (jwtUtil.isExpired(token)) {
+            //response body
+            PrintWriter writer = response.getWriter();
+            writer.print("access token expired");
 
-            System.out.println("token expired");
-            filterChain.doFilter(request, response);
-
-            //조건이 해당되면 메소드 종료 (필수)
+            //response status code
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         //토큰에서 username과 role 획득
-        String username = jwtUtil.getUsername(token);
-        String role = jwtUtil.getRole(token);
+        String username = jwtUtil.getUsername(accessToken);
+        String role = jwtUtil.getRole(accessToken);
 
         //userDTO를 생성하여 값 set
         UserDTO userDTO = new UserDTO();

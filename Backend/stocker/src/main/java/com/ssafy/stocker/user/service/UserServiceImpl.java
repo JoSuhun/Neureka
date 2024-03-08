@@ -1,8 +1,7 @@
-package com.ssafy.stocker.oauthjwt.service;
+package com.ssafy.stocker.user.service;
 
-import com.ssafy.stocker.oauthjwt.dto.UserDTO;
-import com.ssafy.stocker.oauthjwt.entity.UserEntity;
-import com.ssafy.stocker.oauthjwt.repository.UserRepository;
+import com.ssafy.stocker.user.entity.UserEntity;
+import com.ssafy.stocker.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

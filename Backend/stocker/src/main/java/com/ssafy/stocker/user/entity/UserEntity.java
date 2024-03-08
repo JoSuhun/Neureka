@@ -1,4 +1,4 @@
-package com.ssafy.stocker.oauthjwt.entity;
+package com.ssafy.stocker.user.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
