@@ -10,8 +10,8 @@ type Props = {}
 const NewsContainer = (props: Props) => {
   return (
     <>
+      <Carousel />
       <Wrapper>
-        <Carousel />
         <Search />
         <CustomizedNews />
         <NewsList />
