@@ -16,9 +16,8 @@ const NewsList = (props: Props) => {
 
   const last = Math.ceil(news.length / 15)
 
-  const handlePage = (event: any) => {
-    const nowPage = parseInt(event.target.outerText)
-    setPage(nowPage)
+  const handlePage = (event: React.ChangeEvent<unknown>, page: number) => {
+    setPage(page)
   }
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const NewsList = (props: Props) => {
         <n.PageStack>
           <n.NewsPagination
             count={last}
-            onChange={e => handlePage(e)}
+            onChange={handlePage}
             variant="outlined"
             color="primary"
           />

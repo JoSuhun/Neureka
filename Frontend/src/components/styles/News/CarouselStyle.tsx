@@ -5,8 +5,6 @@ import StopIcon from '@mui/icons-material/Stop'
 
 export const Wrapper = styled.div`
   overflow: hidden;
-  border-top-right-radius: 40px;
-  border-top-left-radius: 40px;
   display: flex;
   justify-content: center;
   flex-direction: column;
