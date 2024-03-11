@@ -71,12 +71,32 @@ export const Nav = styled.div`
   position: sticky;
   z-index: 1000;
   background-color: #ffffff;
+  &.changed {
+    background-color: transparent;
+    &::before {
+      background-color: var(--color-navy);
+      opacity: 0.8;
+      opacity: 0.9;
+      width: 100%;
+      height: 100%;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+    .title {
+      color: white;
+    }
+  }
 `
 export const NavTitle = styled.span`
   cursor: pointer;
   font-weight: 700;
   font-size: 2.4rem;
   letter-spacing: 0.2rem;
+  z-index: 1001;
 `
 export const NavButton = styled.div`
   position: absolute;
@@ -95,6 +115,7 @@ export const NavButton = styled.div`
     border-radius: 10px;
     width: 100px;
     height: 5vh;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.174);
   }
 `
 export const LoginBtn = styled.button`
@@ -119,6 +140,7 @@ export const MenuBox = styled.div`
   }
   &.nav-close {
     transform: translateY(-100%);
+    opacity: 0;
   }
 `
 export const MenuList = styled.div`
@@ -150,6 +172,7 @@ export const LoginBox = styled.div`
   }
   &.login-close {
     transform: translateY(-100%);
+    opacity: 0;
   }
 `
 
@@ -169,7 +192,7 @@ export const LoginSelect = styled.p`
   padding: 2%;
   border-radius: 10px;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: var(--color-lightblue);
   }
 `
