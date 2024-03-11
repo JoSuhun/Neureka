@@ -8,6 +8,7 @@ import google from '/image/google.png'
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
+  const [scrollPosition, setScrollPosition] = useState(0)
   const navigate = useNavigate()
 
   const navtoggle = () => {
@@ -49,10 +50,21 @@ const Navbar = () => {
     window.location.href = url
   }
 
+  // 스크롤 시 네비게이션 색상 변경
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll)
+  })
+
   return (
     <>
       <n.Wrapper>
-        <n.Nav className="nav">
+        <n.Nav
+          className={scrollPosition > 100 ? `nav changed` : `nav original`}
+        >
           <span></span>
           <n.NavTitle className="title" onClick={goHome}>
             STOCKER
