@@ -36,15 +36,15 @@ const Search = (props: Props) => {
 
   return (
     <>
-      <s.Wrapper>
-        <s.SearchBox>
+      <s.Wrapper className="header-wrapper">
+        <s.SearchBox className="search-box">
           <s.SearchBar>
             <s.SearchInput />
             <s.SearchButton type="submit">검색</s.SearchButton>
           </s.SearchBar>
         </s.SearchBox>
 
-        <s.HotKeyword>
+        <s.HotKeyword className="hot-keyword">
           <s.KeywordTitle>실시간 인기 키워드</s.KeywordTitle>
           <s.SelectBox>
             <s.Label>

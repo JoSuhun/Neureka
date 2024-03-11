@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import GlobalStyle from './GlobalStyle'
 import MainPage from './pages/MainPage'
@@ -7,6 +7,7 @@ import Navbar from './common/Navbar'
 import StocksPage from './pages/StocksPage'
 import NewsDatailPage from './pages/NewsDatailPage'
 import LoginPage from './pages/LoginPage'
+import Footer from './common/Footer'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/news/:id" element={<NewsDatailPage />} />
           <Route path="/stocks" element={<StocksPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

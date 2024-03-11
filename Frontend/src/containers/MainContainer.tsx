@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import Navbar from '../common/Navbar'
-import Carousel from '../components/News/Carousel'
+import { useEffect, useState } from 'react'
 import SlideBar from '../components/Main/SlideBar'
-// import AuthModal from '../components/Auth/AuthModal'
-import AuthModal from '@src/components/Auth/AuthModal'
 import MainCard from '@src/components/Main/MainCard'
 
 type Props = {}
 
 const MainContainer = (props: Props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <SlideBar />

@@ -9,11 +9,29 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1% 0%;
+  @media screen and (max-width: 992px) {
+  }
+  @media screen and (max-width: 768px) {
+    &.header-wrapper {
+      flex-direction: column;
+      height: 20vh;
+    }
+    .search-box {
+      width: 100%;
+    }
+    .hot-keyword {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  @media screen and (max-width: 576px) {
+  }
 `
 
 export const SearchBox = styled.div`
   width: 65%;
-  height: 100%;
+  height: 70px;
+  margin-top: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +65,6 @@ export const SearchInput = styled.input`
 `
 
 export const SearchButton = styled(SearchIcon)`
-  /* background-color: var(--color-blue); */
   border-radius: 10px;
   font-size: 1.5em !important;
   aspect-ratio: 1;
@@ -62,6 +79,7 @@ export const HotKeyword = styled.div`
   width: 30%;
   display: flex;
   flex-direction: column;
+  margin-left: 3%;
 `
 
 export const KeywordTitle = styled.p`

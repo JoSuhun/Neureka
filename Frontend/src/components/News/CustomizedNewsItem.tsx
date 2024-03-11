@@ -12,7 +12,7 @@ const CustomizedNewsItem = (props: Props) => {
       <c.NewsList>
         <c.NewsThumbnail image={image} />
         <c.NewsSection>
-          <c.NewsTitle>
+          <c.NewsTitle className="news-title">
             너와 행복했던 1155일의 기록…'푸'린세스 다이어리
           </c.NewsTitle>
           <c.NewsContent className="news-content">

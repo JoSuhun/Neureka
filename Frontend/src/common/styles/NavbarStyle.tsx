@@ -93,8 +93,7 @@ export const Nav = styled.div`
 `
 export const NavTitle = styled.span`
   cursor: pointer;
-  font-weight: 700;
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   letter-spacing: 0.2rem;
   z-index: 1001;
 `
