@@ -11,6 +11,21 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: var(--color-lightblue);
+  @media screen and (max-width: 992px) {
+    img {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 576px) {
+    .news-title {
+      font-size: 1.1rem;
+    }
+    .news-content {
+      -webkit-line-clamp: 2;
+    }
+  }
 `
 export const Title = styled.div`
   width: 100%;
