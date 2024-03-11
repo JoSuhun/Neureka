@@ -6,18 +6,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 import json
-from konlpy.tag import Okt
-from collections import Counter
 from tqdm import tqdm
 
 # 페이지 소스 가져오기
 driver = webdriver.Chrome()
-BASE_URL = "https://finance.naver.com/news/news_list.naver?mode=LSS2D&section_id=101&section_id2=258&page="
+BASE_URL = "https://finance.naver.com/news/mainnews.naver?&page="
 article_list = []
 keyword_dict = {}
 
 # 마지막 페이지 확인하는 조건
-last_page_selector = "#contentarea_left > table > tbody > tr > td > table > tbody > tr > td.pgRR"
+last_page_selector = "#contentarea_left > table > tbody > tr > td.pgRR"
 
 # 첫 번째 페이지부터 시작하여 마지막 페이지까지 크롤링.
 current_page = 1
@@ -29,32 +27,24 @@ while True:
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
 
-    count = 1
-    # 페이지의 뉴스 항목을 크롤링합니다.
-    for idx in range(1, 11):  # 한 페이지당 최대 10개의 기사가 있으므로 범위를 1부터 10까지로 수정합니다.
+
+    # 페이지의 뉴스 항목을 크롤링
+    for idx in range(1, 11):  # 한 페이지당 최대 10개의 기사가 있으므로 범위를 1부터 10까지
         article_dict = {}
         flag = True
         # Thumbnail URL 가져오기
-        thumbnail_tag = soup.select_one(f'#contentarea_left > ul > li.newsList.top > dl > dt:nth-child({count}) img')
+        thumbnail_tag = soup.select_one(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dt > a > img')
         article_dict['thumbnail_url'] = thumbnail_tag.get('src') if thumbnail_tag else None
-        if thumbnail_tag is not None:
-            count += 1
-            flag = False
 
         # 기사 제목과 링크 가져오기
-        if flag:
-            article_subjects = soup.select(f'#contentarea_left > ul > li.newsList.top > dl > dt:nth-child({count})')
-        else:
-            article_subjects = soup.select(f'#contentarea_left > ul > li.newsList.top > dl > dd:nth-child({count})')
+        article_subjects = soup.select(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSubject > a')
 
         for article_subject in article_subjects:
             article_dict['article_title'] = article_subject.text.strip() if article_subject else None
-            article_dict['article_link'] = article_subject.find('a')['href'] if article_subject.find('a') else None
-
-        count += 1
+            article_dict['article_link'] = article_subject['href'] if article_subject else None
 
         # 기사 요약, 언론사, 날짜 및 시간 가져오기
-        article_summary = soup.select_one(f'#contentarea_left > ul > li.newsList.top > dl > dd:nth-child({count})')
+        article_summary = soup.select_one(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSummary')
         if article_summary:
             # Summary 정리
             summary_text = article_summary.text.strip().replace('\n', '').replace('\t', '')
@@ -68,7 +58,6 @@ while True:
             date_time_tag = article_summary.find('span', class_='wdate')
             article_dict['date_time'] = date_time_tag.text.strip() if date_time_tag else None
 
-            count += 1
         if article_dict.get('article_link'):
             article_list.append(article_dict)
 
@@ -102,62 +91,27 @@ for idx, article in enumerate(article_list, start=1):
 with open('news_data.json', 'w', encoding='utf-8') as f:
     json.dump(article_list, f, ensure_ascii=False, indent=4)
 
-# with open('keyword.json', 'w', encoding='utf-8') as f:
-#     json.dump(keyword_dict, f, ensure_ascii=False, indent=4)
 
-
-keyword_repeat_count = 1
+text_list = []
 def keyword_extraction(url, keyword_dict):
     # 기사 리스트 속 기사
     driver2 = webdriver.Chrome()
     driver2.get(url)
     time.sleep(2)
     html_content = driver2.page_source
-    soup = BeautifulSoup(html_content, "html.parser")
-    article_text = soup.find("article").get_text(strip=True)
+    beautiful_soup = BeautifulSoup(html_content, "html.parser")
+    article_text = beautiful_soup.find("article").get_text(strip=True)
+    text_list.append(article_text)
 
-    # 그냥 요약문 가지고 단어 빈도수 추출
-    # article_text = url
-
-    okt = Okt()
-    article_text = okt.nouns(article_text)
-    count_keyword = Counter(article_text)
-    remove_char_counter = Counter({x: count_keyword[x] for x in count_keyword if len(x) > 1})
-
-    korean_stopwords_path = "./korean_stopwords.txt"
-
-    # 텍스트 파일을 오픈합니다.
-    with open(korean_stopwords_path, encoding='utf-8') as f:
-        stopwords = f.readlines()
-    stopwords = [x.strip() for x in stopwords]
-
-    # 불용어 데이터를 제거합니다.
-    remove_char_counter = Counter({x: remove_char_counter[x] for x in count_keyword if x not in stopwords})
-
-    for key, value in remove_char_counter.items():
-        if value != 0:
-            if key in keyword_dict:
-                keyword_dict[key] += value  # 이미 존재하는 경우 현재 값에 더함
-            else:
-                keyword_dict[key] = value
-
-    # driver2.quit()
+    # return article_text
 
 
 # 리스트의 모든 요소에 대해 루프를 돌면서 article_link 사용
 for article in tqdm(article_list):
-    keyword_repeat_count += 1
-
-    if keyword_repeat_count >= 200:
-        break
-
     article_link = article.get('article_link')  # article_link 추출
-    if article.get('thumbnail_url') is not None:
+    if article_link is not None:
         keyword_extraction(article_link, keyword_dict)
 
-    # 그냥 요약문가지고 단어 빈도수 추출
-    # article_link = article.get('article_summary')
-    # keyword_extraction(article_link, keyword_dict)
 
 with open('keyword.json', 'w', encoding='utf-8') as f:
     json.dump(keyword_dict, f, ensure_ascii=False, indent=4)

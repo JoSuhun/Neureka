@@ -1,7 +1,27 @@
+# -*- coding: utf-8 -*-
+import re
 from transformers import pipeline
 
-# 요약 파이프라인을 로드합니다. 여기서는 "t5-small" 모델을 사용합니다.
+# 불용어 리스트를 불러오는 함수
+def load_stopwords(filepath):
+    with open(filepath, 'r', encoding='utf-8') as file:
+        stopwords = file.readlines()
+        stopwords = [line.strip() for line in stopwords]
+    return stopwords
+
+# 텍스트 전처리 함수
+def preprocess_text(text, stopwords):
+    # 한글, 영문자, 숫자를 제외한 모든 문자를 제거
+    text = re.sub(r'[^\w\s가-힣]', '', text)
+    # 불용어 제거
+    text = ' '.join(word for word in text.split() if word.lower() not in stopwords)
+    return text
+
+# 요약 파이프라인 로드
 summarizer = pipeline("summarization", model="t5-small")
+
+# 불용어 리스트 불러오기
+stopwords = load_stopwords("korean_stopwords.txt")
 
 # 요약할 텍스트입니다. 여기에 실제 요약하고 싶은 텍스트를 넣습니다.
 text = """
@@ -31,6 +51,9 @@ text = """
 
 현재 두 형제와 그 배우자·자녀 지분을 모두 합치면 28.4%다. 이 지분은 OCI 통합을 이끈 모친 송영숙 한미약품그룹 회장과 그 특수관계인의 지분 31.9%과 큰 차이가 없다.
 """
+
+# 텍스트 전처리 수행
+preprocessed_text = preprocess_text(text, stopwords)
 
 # 텍스트 요약을 수행합니다.
 summary = summarizer(text, max_length=130, min_length=30, do_sample=False)
