@@ -64,13 +64,13 @@ export const Wrapper = styled.div`
 export const Nav = styled.div`
   /* font-family: 'Giants-Inline'; */
   /* font-family: 'Giants-Regular'; */
-  font-family: 'SEBANG_Gothic_Regular';
+  /* font-family: 'SEBANG_Gothic_Regular'; */
 
   height: 13vh;
   transition-duration: 300ms;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   position: sticky;
   z-index: 1000;
   background-color: white;
@@ -96,9 +96,10 @@ export const Nav = styled.div`
 export const NavTitle = styled.span`
   cursor: pointer;
   font-size: 1.7rem;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.5rem;
   z-index: 1001;
-  font-weight: 700;
+  /* font-weight: 700; */
+  margin-left: 20px;
 `
 export const NavButton = styled.div`
   position: absolute;
@@ -107,21 +108,22 @@ export const NavButton = styled.div`
   display: flex;
   justify-content: space-between;
   button {
-    font-family: 'SEBANG_Gothic_Bold';
+    font-family: 'SEBANG_Gothic_Regular';
+
     color: var(--color-dark);
     cursor: pointer;
-    font-size: 120%;
+    font-size: 130%;
     text-align: center;
     align-items: center;
     border: none;
     border-radius: 10px;
-    width: 100px;
-    height: 5vh;
+    width: 90px;
+    height: 6vh;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.174);
   }
 `
 export const LoginBtn = styled.button`
-  margin-right: 5%;
+  margin-right: 7%;
   /* background-color: var(--color-orange); */
   &:hover {
     color: var(--color-blue);
