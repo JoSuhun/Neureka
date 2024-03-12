@@ -45,11 +45,10 @@ const MainInfoSection = () => {
 
   return (
     <s.Container>
-      <s.Title>
-        삼성전자
-        <s.Number>(000000)</s.Number>
-      </s.Title>
-
+      <s.TopContainer>
+        <s.Title>삼성전자</s.Title>
+        <s.CodeNumber>(005930)</s.CodeNumber>
+      </s.TopContainer>
       <StockNewsSection />
       <StockChartSection />
 
