@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import GlobalStyle from './GlobalStyle'
-import MainPage from './pages/MainPage'
-import NewsPage from './pages/NewsPage'
-import Navbar from './common/Navbar'
-import StocksPage from './pages/StocksPage'
-import NewsDatailPage from './pages/NewsDatailPage'
-import LoginPage from './pages/LoginPage'
-import Footer from './common/Footer'
+import GlobalStyle from '@src/GlobalStyle'
+import MainPage from '@src/pages/MainPage'
+import Navbar from '@src/common/Navbar'
+import LoginPage from '@src/pages/LoginPage'
+import NewsPage from '@src/pages/NewsPage'
+import NewsDatailPage from '@src/pages/NewsDatailPage'
+import StocksPage from '@src/pages/StocksPage'
+import Footer from '@src/common/Footer'
 
 function App() {
   return (
