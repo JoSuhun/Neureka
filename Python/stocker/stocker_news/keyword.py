@@ -1,8 +1,8 @@
-import time
 import os
 import numpy as np
 from bs4 import BeautifulSoup
 import json
+import time
 import itertools
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -30,19 +30,20 @@ tagger = Tagger(API_KEY,'localhost', 5757) # KPF에서 제공하는 바른 형�
 # model = SentenceTransformer('bongsoo/kpf-sbert-128d-v1')
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 
-
+# 키워드에 연관된 기사
+keyword_news = {}
 
 def keyword_extraction(url, keyword_dict = {}):
     # 기사 리스트 속 기사
     driver2 = webdriver.Chrome()
     driver2.get(url)
-    time.sleep(2)
+    time.sleep(0.2)
     html_content = driver2.page_source
     beautiful_soup = BeautifulSoup(html_content, "html.parser")
     article_text = beautiful_soup.find("article").get_text(strip=True)
     return article_text
 
-def keyword_ext(text):
+def keyword_ext(article_id, text):
 
     tokenized_doc = tagger.pos(text)
     tokenized_nouns = ' '.join([word[0] for word in tokenized_doc if word[1] == 'NNG' or word[1] == 'NNP'])
@@ -54,11 +55,12 @@ def keyword_ext(text):
 
     doc_embedding = model.encode([text])
     candidate_embeddings = model.encode(candidates)
-    return mmr(doc_embedding, candidate_embeddings, candidates, top_n=3, diversity=0.3)
+    return mmr(article_id, doc_embedding, candidate_embeddings, candidates, top_n=3, diversity=0.3), tokenized_nouns
 
-def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
-    if len(words) == 0:  # 후보 단어 목록이 비어있으면 빈 리스트를 반환합니다.
-        return []
+def mmr(article_id, doc_embedding, candidate_embeddings, words, top_n, diversity):
+
+    if len(words) <= top_n:  # 후보 단어 목록이 적으면 그냥 있는 단어가 다 키워드임
+        return words    # 데이터가 적다면 그냥 무시해버리는 방법도 있음 => return []
 
     # 문서와 각 키워드들 간의 유사도가 적혀있는 리스트
     word_doc_similarity = cosine_similarity(candidate_embeddings, doc_embedding)
@@ -91,20 +93,34 @@ def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
         candidates_idx.remove(mmr_idx)
 
     # print(keywords_idx)
-
-    return [words[idx] for idx in keywords_idx]
+    top_keywords = [words[idx] for idx in keywords_idx]
+    for keyword in top_keywords :
+        tmp = keyword_news.get(keyword, {"cnt": 0, "article_id": []})
+        tmp["cnt"] += 1
+        tmp["article_id"].append(article_id)
+        keyword_news[keyword] = tmp
+    return top_keywords
 
 if __name__ == "__main__":
+    
     # 스크립트의 현재 디렉토리를 기반으로 파일의 경로를 설정합니다.
     current_directory = os.path.dirname(__file__)
     file_path = os.path.join(current_directory, 'news_data.json')
     with open(file_path, 'r', encoding='utf-8') as file:
         news_data = json.load(file)
-    
-    for i in range(len(news_data)) :
+        
+    a = time.time()
+    for i in range(len(news_data)) :     
+        start_time = time.time()
         url = news_data[i]["article_link"]
         text = keyword_extraction(url)
-        news_data[i]["keyword"] = keyword_ext(text) 
-        print(news_data[i]["keyword"])
+        news_data[i]["id"] = i
+        news_data[i]["keyword"], news_data[i]["nouns"] = keyword_ext(i, text)
+        # print(f'{i}번째 기사 작업 시간: {time.time()-start_time}초')
+    # print("데이터 처리 총 시간: ", time.time() - a)
+
     with open('news/news_data.json', 'w', encoding='utf-8') as file:
         json.dump(news_data, file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지
+    
+    with open('news/keyword_data.json', 'w', encoding='utf-8') as file:
+        json.dump(keyword_news, file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지import time
