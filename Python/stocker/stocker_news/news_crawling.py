@@ -23,7 +23,7 @@ while True:
     # 페이지마다 URL을 생성합니다.
     url = BASE_URL + str(current_page)
     driver.get(url)
-    time.sleep(2)
+    time.sleep(0.5)
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -92,28 +92,28 @@ with open('news_data.json', 'w', encoding='utf-8') as f:
     json.dump(article_list, f, ensure_ascii=False, indent=4)
 
 
-text_list = []
-def keyword_extraction(url, keyword_dict):
-    # 기사 리스트 속 기사
-    driver2 = webdriver.Chrome()
-    driver2.get(url)
-    time.sleep(2)
-    html_content = driver2.page_source
-    beautiful_soup = BeautifulSoup(html_content, "html.parser")
-    article_text = beautiful_soup.find("article").get_text(strip=True)
-    text_list.append(article_text)
-
-    # return article_text
-
-
-# 리스트의 모든 요소에 대해 루프를 돌면서 article_link 사용
-for article in tqdm(article_list):
-    article_link = article.get('article_link')  # article_link 추출
-    if article_link is not None:
-        keyword_extraction(article_link, keyword_dict)
-
-
-with open('keyword.json', 'w', encoding='utf-8') as f:
-    json.dump(keyword_dict, f, ensure_ascii=False, indent=4)
+# text_list = []
+# def keyword_extraction(url, keyword_dict):
+#     # 기사 리스트 속 기사
+#     driver2 = webdriver.Chrome()
+#     driver2.get(url)
+#     time.sleep(2)
+#     html_content = driver2.page_source
+#     beautiful_soup = BeautifulSoup(html_content, "html.parser")
+#     article_text = beautiful_soup.find("article").get_text(strip=True)
+#     text_list.append(article_text)
+#
+#     # return article_text
+#
+#
+# # 리스트의 모든 요소에 대해 루프를 돌면서 article_link 사용
+# for article in tqdm(article_list):
+#     article_link = article.get('article_link')  # article_link 추출
+#     if article_link is not None:
+#         keyword_extraction(article_link, keyword_dict)
+#
+#
+# with open('keyword.json', 'w', encoding='utf-8') as f:
+#     json.dump(keyword_dict, f, ensure_ascii=False, indent=4)
 
 print("[+] done")
