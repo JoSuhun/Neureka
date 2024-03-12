@@ -2,6 +2,7 @@ package com.ssafy.stocker.user.oauth2;
 
 import com.ssafy.stocker.user.dto.CustomOAuth2User;
 import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.user.service.RedisService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,17 +26,17 @@ import java.util.concurrent.TimeUnit;
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JWTUtil jwtUtil;
-    private RedisTemplate<String, String> redisTemplate;
+    private final RedisService redisService;
 
     @Value("${access.token.expiration.time}")
     private Long accessExpireMs ;
 
     @Value("${refresh.token.expiration.time}")
     private Long refreshExpireMs ;
-    public CustomSuccessHandler(JWTUtil jwtUtil, RedisTemplate<String, String> redisTemplate) {
+    public CustomSuccessHandler(JWTUtil jwtUtil, RedisService redisService) {
 
         this.jwtUtil = jwtUtil;
-        this.redisTemplate = redisTemplate;
+        this.redisService = redisService;
     }
 
     @Override
@@ -67,11 +68,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
 
         //redis 에 담아서 reftoken 관리
-        ValueOperations<String, String> vop = redisTemplate.opsForValue();
-        vop.set(username, refresh, refreshExpireMs , TimeUnit.MILLISECONDS);
+
+        redisService.setValues(username, refresh, refreshExpireMs );
 
 
-        response.setHeader("Authorization" , access);
+        response.setHeader("Authorization" , "Bearer " +access);
         response.addCookie(createCookie("refresh", refresh));
         response.sendRedirect("http://localhost:5173/");
     }
