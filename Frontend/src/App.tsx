@@ -4,7 +4,7 @@ import MainPage from '@src/pages/MainPage'
 import Navbar from '@src/common/Navbar'
 import LoginPage from '@src/pages/LoginPage'
 import NewsPage from '@src/pages/NewsPage'
-import NewsDatailPage from '@src/pages/NewsDatailPage'
+import NewsDetailPage from '@src/pages/NewsDetailPage'
 import StocksPage from '@src/pages/StocksPage'
 import Footer from '@src/common/Footer'
 
