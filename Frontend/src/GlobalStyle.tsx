@@ -44,6 +44,12 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 100;
         font-style: normal;
       }
+      @font-face {
+          font-family: 'Giants-Regular';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Regular.woff2') format('woff2');
+          /* font-weight: 700; */
+          font-style: normal;
+      }
       margin: 0;
       font-family: 'Pretendard-Regular';
     }

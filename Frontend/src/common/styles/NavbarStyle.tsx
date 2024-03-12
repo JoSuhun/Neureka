@@ -62,7 +62,10 @@ export const Wrapper = styled.div`
 `
 
 export const Nav = styled.div`
-  font-family: 'Giants-Inline';
+  /* font-family: 'Giants-Inline'; */
+  /* font-family: 'Giants-Regular'; */
+  font-family: 'SEBANG_Gothic_Regular';
+
   height: 13vh;
   transition-duration: 300ms;
   display: flex;
@@ -70,12 +73,11 @@ export const Nav = styled.div`
   justify-content: center;
   position: sticky;
   z-index: 1000;
-  background-color: #ffffff;
+  background-color: white;
   &.changed {
     background-color: transparent;
     &::before {
-      background-color: var(--color-navy);
-      opacity: 0.8;
+      background-color: var(--color-lightgrey);
       opacity: 0.9;
       width: 100%;
       height: 100%;
@@ -86,16 +88,17 @@ export const Nav = styled.div`
       right: 0;
       left: 0;
     }
-    .title {
+    /* .title {
       color: white;
-    }
+    } */
   }
 `
 export const NavTitle = styled.span`
   cursor: pointer;
-  font-size: 2.5rem;
+  font-size: 1.7rem;
   letter-spacing: 0.2rem;
   z-index: 1001;
+  font-weight: 700;
 `
 export const NavButton = styled.div`
   position: absolute;
@@ -105,11 +108,11 @@ export const NavButton = styled.div`
   justify-content: space-between;
   button {
     font-family: 'SEBANG_Gothic_Bold';
+    color: var(--color-dark);
     cursor: pointer;
     font-size: 120%;
     text-align: center;
     align-items: center;
-    color: white;
     border: none;
     border-radius: 10px;
     width: 100px;
@@ -118,12 +121,18 @@ export const NavButton = styled.div`
   }
 `
 export const LoginBtn = styled.button`
-  background-color: var(--color-orange);
   margin-right: 5%;
+  /* background-color: var(--color-orange); */
+  &:hover {
+    color: var(--color-blue);
+  }
 `
 
 export const MenuBtn = styled.button`
-  background-color: var(--color-navy);
+  /* background-color: var(--color-navy); */
+  &:hover {
+    color: var(--color-orange);
+  }
 `
 
 export const MenuBox = styled.div`
@@ -143,7 +152,7 @@ export const MenuBox = styled.div`
   }
 `
 export const MenuList = styled.div`
-  color: navy;
+  color: var(--color-navy);
 `
 export const MenuSelect = styled.p`
   cursor: pointer;
