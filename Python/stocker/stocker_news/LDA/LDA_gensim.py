@@ -1,0 +1,94 @@
+import json
+import gensim
+import pandas as pd
+    
+    
+# 이미 키워드가 추출된 기사 크롤링 데이터를 가져오기
+with open('../news_data.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+    
+# 모든 기사의 키워드 가져오기
+tokenized_doc = [article["keyword"] for article in data]
+
+# 가져온 키워드를 바탕으로 word dictionary 만들기
+dictionary = gensim.corpora.Dictionary(tokenized_doc)
+
+# 가져온 키워드와 word dictionary를 바탕으로 corpus 만들기
+corpus = [dictionary.doc2bow(text) for text in tokenized_doc]
+
+
+# # =========================
+# # 모델 학습하기. 가져온 데이터를 이용하여 최초 1회 실행하면 이후 학습된 모델 데이터를 저장합니다
+# # 토픽의 개수 Hyper params
+# NUM_TOPICS = 10 
+# # corpus와 word dictionary, 기타 hyper params로 LdaModel 학습하기 및 토픽 리스트 추출하기
+# ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics = NUM_TOPICS, id2word=dictionary, passes=15)
+
+# # 학습된 LDA모델 따로 저장하기
+# # 모델 저장
+# ldamodel.save('model/lda_model')
+
+# 저장된 LDA모델 불러오기
+ldamodel = gensim.models.ldamodel.LdaModel.load('model/lda_model')
+# 토픽의 단어 4개만 추출하여 출력하기
+topics = ldamodel.print_topics(num_words=4)
+for topic in topics:
+    print(topic)
+
+# # =========================
+
+# # =========================
+# # 추출한 토픽 리스트를 바탕으로 특정 기사가 어느 토픽에 해당할 확률이 가까운지 계산하기
+# for i in range(1,6):
+#     doc_topics = ldamodel.get_document_topics(new_corpus[i])
+#     print(f"{i}번째 기사")
+#     for topic, prob in doc_topics:
+#         print(f"토픽 {topic}: 확률 {round(prob*100, 2)}")
+# # =========================
+
+# =========================
+# 문서별 토픽 분포를 나타내는 함수입니다
+def make_topictable_per_doc(ldamodel, corpus):
+    topics = []
+
+    # 몇 번째 문서인지를 의미하는 문서 번호와 해당 문서의 토픽 비중을 한 줄씩 꺼내온다.
+    for i, topic_list in enumerate(ldamodel[corpus]):
+        doc = topic_list[0] if ldamodel.per_word_topics else topic_list
+        doc = sorted(doc, key=lambda x: (x[1]), reverse=True)
+
+        # 모든 문서에 대해서 각각 아래를 수행
+        for j, (topic_num, prop_topic) in enumerate(doc): #  몇 번 토픽인지와 비중을 나눠서 저장한다.
+            if j == 0:  # 정렬을 한 상태이므로 가장 앞에 있는 것이 가장 비중이 높은 토픽
+                topics.append([int(topic_num), round(prop_topic, 4), topic_list])
+                break
+
+    # 리스트를 데이터프레임으로 변환
+    topic_table = pd.DataFrame(topics, columns=['Topic', 'Weight', 'Topic_List'])
+    return topic_table
+
+topictable = make_topictable_per_doc(ldamodel, corpus)
+topictable = topictable.reset_index() # 문서 번호을 의미하는 열(column)로 사용하기 위해서 인덱스 열을 하나 더 만든다.
+topictable.columns = ['문서 번호', '가장 비중이 높은 토픽', '가장 높은 토픽의 비중', '각 토픽의 비중']
+# 문서별 토픽 분포 나타내기
+print(topictable[:10])
+# =========================
+
+# # =========================
+# # LDA 시각화하기
+# import pyLDAvis
+# import pyLDAvis.gensim_models as gensimvis
+
+# # 학습된 LDA 모델을 시각화합니다. 토픽별 단어 분포를 나타냅니다
+# vis_data = gensimvis.prepare(ldamodel, corpus, dictionary)
+# # 시각화 자료 display(작동안함)
+# # pyLDAvis.display(vis_data)
+
+# # 시각화 데이터를 저장합니다.
+# pyLDAvis.save_html(vis_data, 'lda_visualization.html')
+# # =========================
+
+
+    
+
+
+
