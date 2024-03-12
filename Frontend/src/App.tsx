@@ -5,7 +5,7 @@ import MainPage from './pages/MainPage'
 import NewsPage from './pages/NewsPage'
 import Navbar from './common/Navbar'
 import StocksPage from './pages/StocksPage'
-import NewsDatailPage from './pages/NewsDatailPage'
+import NewsDetailPage from './pages/NewsDetailPage'
 import LoginPage from './pages/LoginPage'
 import Footer from './common/Footer'
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/:id" element={<NewsDatailPage />} />
+          <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/stocks" element={<StocksPage />} />
         </Routes>
         <Footer />
