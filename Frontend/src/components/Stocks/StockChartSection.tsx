@@ -11,35 +11,31 @@ const StockChartSection = () => {
   }, [])
 
   return (
-    <>
-      <s.Info>
-        <s.InfoTable border={1}>
-          <s.TableTr>
-            <s.TableTd rowSpan={2}>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <s.Price>{price.toLocaleString('ko-KR')}</s.Price>
-                전일대비 어쩌구 저쩌구 얼씨구
-              </div>
-            </s.TableTd>
-            <s.TableTd>전일 ㅇㅇㄴ</s.TableTd>
-            <s.TableTd>고가 ㄴㄴㄴ</s.TableTd>
-            <s.TableTd>거래량 ㄴㄴㄴ</s.TableTd>
-          </s.TableTr>
-          <s.TableTr>
-            <s.TableTd>시가</s.TableTd>
-            <s.TableTd>저가</s.TableTd>
-            <s.TableTd>거래대금</s.TableTd>
-          </s.TableTr>
-        </s.InfoTable>
-      </s.Info>
+    <s.Container>
+      <s.Title>실시간 시세</s.Title>
 
-      <s.Graph>그ㅡㅡㅡㅡㅡ래ㅐㅐㅐㅐㅐ프ㅡㅡㅡㅡㅡ랍니다</s.Graph>
-    </>
+      <s.InfoWrap>
+        <s.LeftWrap>
+          <s.LeftTopWrap>74,100</s.LeftTopWrap>
+          <s.LeftBottomWrap>전일대비 : ?</s.LeftBottomWrap>
+        </s.LeftWrap>
+        <s.Divider />
+        <s.RightWrap>
+          <s.RightTopWrap>
+            <div>전일 74,900</div>
+            <div>고가 74,800</div>
+            <div>거래량 13,011,138</div>
+          </s.RightTopWrap>
+          <s.RightBottomWrap>
+            <div>시가 74,600</div>
+            <div>저가 73,900</div>
+            <div>거래대금 966,088 백만</div>
+          </s.RightBottomWrap>
+        </s.RightWrap>
+      </s.InfoWrap>
+
+      <s.GraphWrap>그ㅡㅡㅡㅡㅡ래ㅐㅐㅐㅐㅐ프ㅡㅡㅡㅡㅡ랍니다</s.GraphWrap>
+    </s.Container>
   )
 }
 
