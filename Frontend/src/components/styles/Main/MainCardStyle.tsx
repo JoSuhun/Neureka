@@ -24,9 +24,7 @@ export const Wrapper = styled.div<{ bgimage: string }>`
 `
 export const MainTitle = styled.p`
   margin: 2%;
-  width: 100%;
   font-family: 'Pretendard-Thin';
-
   /* font-family: 'SEBANG_Gothic_Regular'; */
 
   color: white;
@@ -40,9 +38,6 @@ export const MainTitle1 = styled.span`
   margin-left: 15px;
   color: white;
   position: relative;
-  svg {
-    font-size: 2rem !important;
-  }
 
   &.original {
     opacity: 0;
@@ -59,15 +54,15 @@ export const BoxTitle = styled.div`
   font-style: italic;
   font-size: 2.2rem;
   color: var(--color-grey);
-  width: 70%;
+  /* width: 0%; */
   background-image: linear-gradient(
     to right,
     white,
     white 50%,
     var(--color-lightgrey) 50%
   );
-  background-size: 200% 100%;
-  background-position: -100%;
+  /* background-size: 200% 100%;
+  background-position: -100%; */
   display: inline-block;
   margin: 2%;
   position: relative;
@@ -92,7 +87,7 @@ export const BoxTitle = styled.div`
   }
 
   &:hover::before {
-    width: 50%;
+    width: 120%;
   }
   &.original {
     opacity: 0;
