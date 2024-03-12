@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 
 export const Container = styled.div`
   background-color: var(--color-lightgrey);
@@ -11,46 +9,32 @@ export const Container = styled.div`
   min-height: 100vh;
   padding: 0 2%;
   padding-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
 `
-export const Title = styled.p`
-  color: var(--color-dark);
+
+export const TopContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   background-color: var(--color-lightgrey);
-  font-size: 2rem;
-  font-weight: 700;
   padding: 2% 0;
   border-bottom: 2px solid var(--color-dark);
   top: 13vh;
   position: sticky;
 `
-export const Number = styled.span`
+
+export const Title = styled.p`
+  color: var(--color-dark);
+  font-size: 2rem;
+  font-weight: 600;
+`
+
+export const CodeNumber = styled.span`
   font-size: 1rem;
   color: var(--color-grey);
-  margin: 0 10px;
-`
-export const Info = styled.div`
-  background-color: white;
-  height: 15vh;
-`
-export const InfoTable = styled.table`
-  width: 100%;
-  height: 100%;
-`
-export const TableTd = styled.td`
-  padding: 10px;
-`
-
-export const Price = styled.span`
-  color: var(--color-blue);
-  font-size: 1.7rem;
-  font-weight: 700;
-`
-export const TableTr = styled.tr``
-
-export const Graph = styled.div`
-  margin: 20px 0;
-  width: 100%;
-  height: 60vh;
-  background-color: lightskyblue;
+  margin-left: 10px;
+  align-self: flex-end;
 `
 
 export const NewsTab = styled.div``
