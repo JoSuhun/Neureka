@@ -65,9 +65,8 @@ const Navbar = () => {
         <n.Nav
           className={scrollPosition > 100 ? `nav changed` : `nav original`}
         >
-          <span></span>
           <n.NavTitle className="title" onClick={goHome}>
-            STOCKER
+            NEWSNEWSNEWS
           </n.NavTitle>
           <n.NavButton className="button-section">
             <n.LoginBtn className="login-btn" onClick={logintoggle}>
