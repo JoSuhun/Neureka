@@ -30,7 +30,7 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-
+        //bearer 떼고 받음
         String accessToken = request.getHeader("Authorization") ;
 
 
@@ -44,6 +44,10 @@ public class JWTFilter extends OncePerRequestFilter {
             return;
         }
 
+        log.info(accessToken);
+        accessToken = accessToken.split(" ")[1];
+
+        log.info("accessTOken : " + accessToken) ;
         //토큰
         try {
             jwtUtil.isExpired(accessToken);
