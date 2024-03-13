@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import * as n from '@src/containers/styles/NewsDetailContainerStyle'
 
-import bgimage from '/image/thumbnail-sample.gif'
+import bgimage from '/image/bg-image-newsDetail.jpg'
 import ArticleContent from '@src/components/NewsDetail/ArticleContent'
 import ArticleGrade from '@src/components/NewsDetail/ArticleGrade'
 import SimilarArticle from '@src/components/NewsDetail/SimilarArticle'

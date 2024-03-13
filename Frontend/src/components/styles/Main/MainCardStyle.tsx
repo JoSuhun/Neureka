@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div<{ bgimage: string }>`
-  height: 80vh;
+  height: 70vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   background-image: url(${props => props.bgimage});
+  background-position: center;
   background-size: cover;
   justify-content: end;
   padding-bottom: 3%;
@@ -19,16 +20,15 @@ export const Wrapper = styled.div<{ bgimage: string }>`
     width: 100%;
     height: 100%;
     background-size: cover;
-    background: linear-gradient(70deg, var(--color-dark) 50%, #0000008f 50%);
+    background: linear-gradient(70deg, var(--color-dark) 50%, #00000046 50%);
   }
 `
 export const MainTitle = styled.p`
   margin: 2%;
-  width: 100%;
-  font-family: 'Pretendard-Thin';
-
+  /* font-family: 'Pretendard-Thin'; */
   /* font-family: 'SEBANG_Gothic_Regular'; */
-
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 100;
   color: white;
   position: relative;
 
@@ -40,9 +40,6 @@ export const MainTitle1 = styled.span`
   margin-left: 15px;
   color: white;
   position: relative;
-  svg {
-    font-size: 2rem !important;
-  }
 
   &.original {
     opacity: 0;
@@ -59,17 +56,17 @@ export const BoxTitle = styled.div`
   font-style: italic;
   font-size: 2.2rem;
   color: var(--color-grey);
-  width: 70%;
+  /* width: 0%; */
   background-image: linear-gradient(
     to right,
     white,
     white 50%,
     var(--color-lightgrey) 50%
   );
-  background-size: 200% 100%;
-  background-position: -100%;
+  /* background-size: 200% 100%;
+  background-position: -100%; */
   display: inline-block;
-  margin: 2%;
+  padding: 2%;
   position: relative;
   -webkit-background-clip: text;
   /* -webkit-text-fill-color: transparent; */
@@ -79,7 +76,7 @@ export const BoxTitle = styled.div`
     background: white;
     display: block;
     position: absolute;
-    bottom: -3px;
+    bottom: 15px;
     left: 0;
     width: 0;
     height: 1px;
@@ -92,7 +89,7 @@ export const BoxTitle = styled.div`
   }
 
   &:hover::before {
-    width: 50%;
+    width: 110%;
   }
   &.original {
     opacity: 0;

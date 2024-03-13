@@ -41,12 +41,14 @@ export const SlideBox = styled.div`
 export const SlideText = styled.div`
   display: inline-block;
   color: white;
-  font-family: 'SEBANG_Gothic_Regular';
+  /* font-family: 'SEBANG_Gothic_Regular'; */
   /* font-family: 'Bebas Neue', sans-serif; */
-  font-size: 2rem;
-  /* font-style: italic; */
-  font-weight: 200;
-  margin: 0 20px;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 100;
+
+  font-size: 2.5rem;
+  font-style: italic;
+  margin: 0 15px;
 `
 
 export const SlideOriginal = styled.div`
