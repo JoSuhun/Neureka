@@ -9,24 +9,6 @@ if __name__ == '__main__':
     print("?")
 
 
-class Item:
-    collection = db['item_collection']  # MongoDB 컬렉션 설정
-
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
-
-    def save(self):
-        """문서 저장"""
-        document = self.__dict__
-        self.collection.insert_one(document)
-
-    @classmethod
-    def find_by_name(cls, name):
-        """이름으로 문서 조회"""
-        return cls.collection.find_one({"name": name})
-
-
 class SummaryArticle:
     collection = db['summary_article_collection']
 

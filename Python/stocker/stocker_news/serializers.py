@@ -1,7 +1,11 @@
 from rest_framework import serializers
-from .models import Item
 
-class ItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Item
-        fields = '__all__'
+
+class SummaryArticleSerializer(serializers.Serializer):
+    thumbnail_url = serializers.URLField()
+    article_title = serializers.CharField(max_length=1024)
+    article_link = serializers.URLField()
+    article_summary = serializers.CharField()
+    press = serializers.CharField(max_length=255)
+    date_time = serializers.DateTimeField()
+    keywords = serializers.JSONField()

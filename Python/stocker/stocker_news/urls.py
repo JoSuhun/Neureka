@@ -5,7 +5,7 @@ from .views import news_api
 from .views import news_bubble
 
 router = DefaultRouter()
-router.register(r'items', views.ItemViewSet)
+router.register(r'base', views.SummaryArticleViewSet, basename='base')
 
 urlpatterns = [
     path('api/', include(router.urls)),

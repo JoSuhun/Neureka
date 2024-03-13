@@ -6,9 +6,10 @@ from django.contrib import admin
 # Register your models here.
 # loglogs/admin.py
 from django.contrib import admin
-from .models import RequestLog
+# from .models import RequestLog
 
 # Register your models here.
+
 
 class MultiDBModelAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
@@ -33,6 +34,7 @@ class MultiDBModelAdmin(admin.ModelAdmin):
         # on the 'other' database.
         return super().formfield_for_manytomany(db_field, request, using=self.using, **kwargs)
 
+
 class RequestLogAdmin(MultiDBModelAdmin):
     using = 'mongodb'
 
@@ -40,4 +42,5 @@ class RequestLogAdmin(MultiDBModelAdmin):
     list_filter = ('status_code', 'request_method',)
     ordering = ('-created_at',)
 
-admin.site.register(RequestLog, RequestLogAdmin)
+
+# admin.site.register(RequestLog, RequestLogAdmin)
