@@ -1,39 +1,61 @@
 import React, { useCallback, useEffect, useState } from 'react'
-
 import * as m from '@src/components/styles/Main/MainCardStyle'
-
-import wrapperbgimage from '/image/bg-image.jpg'
-
-import newspaperbgimage from '/image/bg-image-newspaper.jpg'
+import wrapperbgimage from '/image/bg-image4.jpg'
+import wrapperbgimage2 from '/image/bg-image-newspaper.jpg'
+import wrapperbgimage3 from '/image/bg-image-newsDetail.jpg'
 
 type Props = {}
 
 const MainCard = (props: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0)
-
-  const updateScroll = () => {
-    setScrollPosition(window.scrollY || document.documentElement.scrollTop)
-  }
-
   const [hover, setHover] = useState(false)
+  const [hover2, setHover2] = useState(false)
 
-  const onMouseEnter = () => {
+  const updateScroll = useCallback(() => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop)
+  }, [])
+
+  const onMouseEnter = useCallback(() => {
     setHover(true)
-  }
+  }, [])
 
-  const onMouseLeave = () => {
+  const onMouseLeave = useCallback(() => {
     setHover(false)
-  }
+  }, [])
+
+  const onMouseEnter2 = useCallback(() => {
+    setHover2(true)
+  }, [])
+
+  const onMouseLeave2 = useCallback(() => {
+    setHover2(false)
+  }, [])
 
   useEffect(() => {
     window.addEventListener('scroll', updateScroll)
-  })
+    return () => {
+      window.removeEventListener('scroll', updateScroll)
+    }
+  }, [updateScroll])
+
+  // background image 미리 로드
+  useEffect(() => {
+    const images = [wrapperbgimage, wrapperbgimage2, wrapperbgimage3]
+    images.forEach(image => {
+      const img = new Image()
+      img.src = image
+    })
+  }, [])
 
   return (
     <>
       <m.Wrapper
         bgimage={
-          hover && scrollPosition >= 100 ? newspaperbgimage : wrapperbgimage
+          hover && scrollPosition >= 100
+            ? wrapperbgimage2
+            : hover2 && scrollPosition >= 100
+              ? wrapperbgimage3
+              : wrapperbgimage
         }
       >
         <m.MainTitle>
@@ -56,8 +78,8 @@ const MainCard = (props: Props) => {
         <m.Box>
           <m.BoxTitle
             className={scrollPosition < 100 ? `original` : `changed`}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+            onMouseEnter={onMouseEnter2}
+            onMouseLeave={onMouseLeave2}
           >
             기업 정보를 승현이에게 알려줘 - ㅋㅋ
           </m.BoxTitle>
