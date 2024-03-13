@@ -26,8 +26,6 @@ tagger = Tagger(API_KEY,'localhost', 5757) # KPF에서 제공하는 바른 형�
 # model = SentenceTransformer('bongsoo/kpf-sbert-128d-v1')
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 
-# 키워드에 연관된 기사
-keyword_news = {}
 
 def keyword_extraction(url, keyword_dict = {}):
     # 기사 리스트 속 기사
@@ -98,13 +96,23 @@ def mmr(article_id, doc_embedding, candidate_embeddings, words, top_n, diversity
     return top_keywords
 
 if __name__ == "__main__":
-    
+
     # 스크립트의 현재 디렉토리를 기반으로 파일의 경로를 설정합니다.
     current_directory = os.path.dirname(__file__)
     file_path = os.path.join(current_directory, 'news_data.json')
+    keyword_path = os.path.join(current_directory, 'keyword_data.json')
+    # 키워드에 연관된 기사
+    try:
+        with open(keyword_path, 'r', encoding='utf-8') as file:
+            keyword_news = json.load(file)
+    except FileNotFoundError:
+        # 파일이 없을 경우 빈 딕셔너리로 처리
+        keyword_news = {}
+
+    # 기사 데이터
     with open(file_path, 'r', encoding='utf-8') as file:
         news_data = json.load(file)
-        
+
     a = time.time()
     for i in range(len(news_data)) :     
         start_time = time.time()
@@ -112,8 +120,8 @@ if __name__ == "__main__":
         text = keyword_extraction(url)
         news_data[i]["id"] = i
         news_data[i]["keyword"], news_data[i]["nouns"] = keyword_ext(i, text)
-        # print(f'{i}번째 기사 작업 시간: {time.time()-start_time}초')
-    # print("데이터 처리 총 시간: ", time.time() - a)
+        print(f'{i}번째 기사 작업 시간: {time.time()-start_time}초')
+    print("데이터 처리 총 시간: ", time.time() - a)
 
     with open('news/news_data.json', 'w', encoding='utf-8') as file:
         json.dump(news_data, file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지
