@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div<{ bgimage: string }>`
-  height: 80vh;
+  height: 70vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   background-image: url(${props => props.bgimage});
+  background-position: center;
   background-size: cover;
   justify-content: end;
   padding-bottom: 3%;
@@ -19,61 +20,82 @@ export const Wrapper = styled.div<{ bgimage: string }>`
     width: 100%;
     height: 100%;
     background-size: cover;
-    background: linear-gradient(70deg, var(--color-dark) 50%, #0000008f 50%);
+    background: linear-gradient(70deg, var(--color-dark) 50%, #00000046 50%);
   }
 `
+export const MainTitle = styled.p`
+  margin: 2%;
+  /* font-family: 'Pretendard-Thin'; */
+  /* font-family: 'SEBANG_Gothic_Regular'; */
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 100;
+  color: white;
+  position: relative;
+
+  font-size: 5rem;
+  /* font-weight: 700; */
+`
+
+export const MainTitle1 = styled.span`
+  margin-left: 15px;
+  color: white;
+  position: relative;
+
+  &.original {
+    opacity: 0;
+  }
+`
+
 export const Box = styled.p`
   width: 100%;
   font-family: 'Pretendard-Thin';
-
-  color: white;
+  position: relative;
 `
 
 export const BoxTitle = styled.div`
   font-style: italic;
-  font-size: 3.5rem;
-  width: 100%;
-
+  font-size: 2.2rem;
+  color: var(--color-grey);
+  /* width: 0%; */
   background-image: linear-gradient(
     to right,
     white,
     white 50%,
     var(--color-lightgrey) 50%
   );
-  background-size: 200% 100%;
-  background-position: -100%;
+  /* background-size: 200% 100%;
+  background-position: -100%; */
   display: inline-block;
-  margin: 2% 0;
+  padding: 2%;
   position: relative;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   transition: all 0.3s ease-in-out;
   &::before {
     content: '';
     background: white;
     display: block;
     position: absolute;
-    bottom: -3px;
+    bottom: 15px;
     left: 0;
     width: 0;
-    height: 3px;
+    height: 1px;
     transition: all 0.3s ease-in-out;
   }
   &:hover {
     background-position: 0;
     cursor: pointer;
-  }
-  &:hover p {
-    color: red;
-    opacity: 1;
-    -webkit-transform: translateY(0%);
-    -moz-transform: translateY(0%);
-    transform: translateY(0%);
+    color: white;
   }
 
   &:hover::before {
-    width: 50%;
+    width: 110%;
   }
+  &.original {
+    opacity: 0;
+    transform: translateY(-80%);
+  }
+  transition: all 300ms ease-in-out;
 `
 
 export const BoxContent = styled.p`

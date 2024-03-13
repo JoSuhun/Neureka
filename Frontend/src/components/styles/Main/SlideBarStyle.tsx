@@ -41,17 +41,20 @@ export const SlideBox = styled.div`
 export const SlideText = styled.div`
   display: inline-block;
   color: white;
-  font-family: 'SEBANG_Gothic_Regular';
-  font-size: 2rem;
+  /* font-family: 'SEBANG_Gothic_Regular'; */
+  /* font-family: 'Bebas Neue', sans-serif; */
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 100;
+
+  font-size: 2.5rem;
   font-style: italic;
-  font-weight: 200;
-  margin: 0 20px;
+  margin: 0 15px;
 `
 
 export const SlideOriginal = styled.div`
-  animation: 120s linear infinite normal none running infiniteAnimation1;
+  animation: 150s linear infinite normal none running infiniteAnimation1;
 `
 
 export const SlideClone = styled.div`
-  animation: 120s linear infinite infiniteAnimation2;
+  animation: 150s linear infinite infiniteAnimation2;
 `

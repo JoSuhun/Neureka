@@ -71,6 +71,7 @@ export const CarouselCard = styled.div<{ bgimage: string }>`
   justify-content: center;
   align-items: center;
   z-index: 0;
+  cursor: pointer;
 
   &::before {
     background-color: #000000;
