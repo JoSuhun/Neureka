@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const HeaderImage = styled.div<{ bgimage: string }>`
-  background-color: lightcoral;
   height: 60vh;
   background-image: url(${props => props.bgimage});
   background-size: cover;
