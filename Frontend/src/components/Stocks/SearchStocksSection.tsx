@@ -2,14 +2,11 @@ import * as s from '@src/components/styles/Stocks/SearchStocksSectionStyle'
 
 const SearchStocksSection = () => {
   return (
-    <s.Wrapper>
-      <s.SearchBox>
-        <s.SearchBar>
-          <s.SearchInput />
-          <s.SearchButton type="submit">검색</s.SearchButton>
-        </s.SearchBar>
-      </s.SearchBox>
-    </s.Wrapper>
+    <s.Container>
+      {/* <s.SearchInput />
+      <s.SearchButton type="submit">검색</s.SearchButton> */}
+      <div>검색</div>
+    </s.Container>
   )
 }
 
