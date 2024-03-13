@@ -19,7 +19,7 @@ export const InfoWrap = styled.div`
   width: 100%;
   height: 15vh;
   padding: 3% 0;
-  border-top: 3px solid #000;
+  border: 2px solid #000;
 `
 
 export const LeftWrap = styled.div`
