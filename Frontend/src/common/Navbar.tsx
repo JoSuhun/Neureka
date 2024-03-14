@@ -66,7 +66,8 @@ const Navbar = () => {
           className={scrollPosition > 100 ? `nav changed` : `nav original`}
         >
           <n.NavTitle className="title" onClick={goHome}>
-            이름 뭐로 함 정말
+            <span>N</span>
+            Eureka
           </n.NavTitle>
           <n.NavButton className="button-section">
             <n.LoginBtn className="login-btn" onClick={logintoggle}>
@@ -89,19 +90,16 @@ const Navbar = () => {
             <n.MenuSelect>개인 정보 설정</n.MenuSelect>
           </n.MenuList>
         </n.MenuBox>
-        <n.LoginBox
-          className={
-            isLoginOpen
-              ? 'navbar-container login-open'
-              : 'navbar-container login-close'
-          }
-        >
-          <n.MenuList className="nav-selector">
-            <n.LoginSelect>
+        <n.LoginBox className={isLoginOpen ? 'login-open' : 'login-close'}>
+          <n.MenuList>
+            <n.LoginSelect className="login-selector">
               <n.LoginIcon src={kakao} />
               카카오톡으로 시작하기
             </n.LoginSelect>
-            <n.LoginSelect onClick={() => login(google_url)}>
+            <n.LoginSelect
+              className="login-selector"
+              onClick={() => login(google_url)}
+            >
               <n.LoginIcon src={google} />
               구글로 시작하기
             </n.LoginSelect>

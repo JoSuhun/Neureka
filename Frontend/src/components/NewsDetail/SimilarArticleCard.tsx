@@ -13,10 +13,13 @@ type Props = {
 const SimilarArticleCard = ({ image, title, content }: Props) => {
   return (
     <>
-      <c.Wrapper>
-        <c.Thumbnail src={image ? image : defaultThumbnail} />
-        <c.Title>{title}</c.Title>
-        <c.Content>{content}</c.Content>
+      <c.Wrapper className="card">
+        <c.Thumbnail
+          src={image ? image : defaultThumbnail}
+          className="card-thumbnail"
+        />
+        <c.Title className="card-title">{title}</c.Title>
+        <c.Content className="card-content">{content}</c.Content>
       </c.Wrapper>
     </>
   )

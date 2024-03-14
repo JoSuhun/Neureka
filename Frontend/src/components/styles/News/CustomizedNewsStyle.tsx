@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   /* background-color: beige; */
   width: 86%;
-  height: 40vh;
+  /* height: 40vh; */
   padding: 2% 7%;
   border-top: 1px solid var(--color-navy);
   border-bottom: 1px solid var(--color-navy);
@@ -20,9 +20,10 @@ export const Wrapper = styled.div`
   }
   @media screen and (max-width: 576px) {
     .news-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     .news-content {
+      font-size: 0.9rem;
       -webkit-line-clamp: 2;
     }
   }
@@ -49,11 +50,12 @@ export const NewsList = styled.div`
   &:hover .news-content {
     color: black;
   }
+  padding: 10px 0;
 `
 
 export const NewsThumbnail = styled.img<{ image: string }>`
   width: 30%;
-  height: 90%;
+  height: 130px;
   background: url(${props => props.image});
   background-size: cover;
 `

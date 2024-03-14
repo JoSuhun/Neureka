@@ -9,15 +9,15 @@ type Props = {}
 const NewsCard = (props: Props) => {
   return (
     <>
-      <n.NewCardBox>
-        <n.NewsThumbnailBox className="box">
+      <n.NewCardBox className="card-box">
+        <n.NewsThumbnailBox className="card-thumbnail">
           <n.NewsThumbnail image={image} />
         </n.NewsThumbnailBox>
         <n.News>
-          <n.NewsTitle>
+          <n.NewsTitle className="card-title">
             레고켐바이오, 기업가치 저평가?…해외 ADC 업체들 주가 ‘날개’
           </n.NewsTitle>
-          <n.NewsContent>
+          <n.NewsContent className="card-content">
             최근 시장에선 레고켐바이오가 글로벌 빅파마인
             브리스톨마이어스스큅(BMS)과 기술이전 계약이 임박했다는 소문이
             돌았다. BMS는 지난해 12월 중국 ADC업체 시스트이뮨(SystImmune)과 임상
