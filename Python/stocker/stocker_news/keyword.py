@@ -123,8 +123,8 @@ if __name__ == "__main__":
         print(f'{i}번째 기사 작업 시간: {time.time()-start_time}초')
     print("데이터 처리 총 시간: ", time.time() - a)
 
-    with open('news/news_data.json', 'w', encoding='utf-8') as file:
+    with open('news_data.json', 'w', encoding='utf-8') as file:
         json.dump(news_data, file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지
     
-    with open('news/keyword_data.json', 'w', encoding='utf-8') as file:
+    with open('keyword_data.json', 'w', encoding='utf-8') as file:
         json.dump(keyword_news, file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지import time
