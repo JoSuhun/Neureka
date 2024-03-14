@@ -8,6 +8,33 @@ export const Wrapper = styled.div`
   width: 80%;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    .article-title {
+      font-size: 1.5rem;
+    }
+    .article-date {
+      font-size: 0.9rem;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .article-content {
+      line-height: 2;
+      font-size: 1rem;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .article-title {
+      font-size: 1.3rem;
+    }
+    .article-date {
+      font-size: 0.8rem;
+    }
+  }
+  @media screen and (max-width: 576px) {
+    .article-thumbnail {
+      display: none;
+    }
+  }
 `
 export const Title = styled.div`
   width: 100%;

@@ -11,18 +11,6 @@ export const Wrapper = styled.div`
   overflow: hidden;
 
   @media screen and (max-width: 992px) {
-    .nav {
-      .button-section {
-        flex-direction: column;
-        button {
-          width: 100px;
-          height: 4vh;
-        }
-        .login-btn {
-          margin-bottom: 3%;
-        }
-      }
-    }
     .nav-selector {
       p {
         font-size: 1.4rem;
@@ -33,6 +21,19 @@ export const Wrapper = styled.div`
     }
   }
   @media screen and (max-width: 768px) {
+    .nav {
+      .button-section {
+        flex-direction: column;
+        button {
+          width: 80px;
+          height: 4vh;
+          font-size: 100%;
+        }
+        .login-btn {
+          margin-bottom: 10px;
+        }
+      }
+    }
     .nav-selector {
       p {
         font-size: 1.3rem;
@@ -43,18 +44,6 @@ export const Wrapper = styled.div`
     }
   }
   @media screen and (max-width: 576px) {
-    .nav {
-      .button-section {
-        button {
-          width: 80px;
-          height: 4vh;
-          font-size: 100%;
-        }
-        .login-btn {
-          margin-bottom: 3%;
-        }
-      }
-    }
     .navbar-container {
       width: 50%;
     }
@@ -93,20 +82,22 @@ export const Nav = styled.div`
 `
 export const NavTitle = styled.span`
   cursor: pointer;
-  font-size: 1.7rem;
-  letter-spacing: 0.5rem;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
   z-index: 1001;
-  /* font-weight: 700; */
   margin-left: 20px;
+  span {
+    color: var(--color-navy);
+  }
 `
 export const NavButton = styled.div`
   position: absolute;
   z-index: 999;
-  right: 5%;
+  right: 20px;
   display: flex;
   justify-content: space-between;
   button {
-    font-family: 'SEBANG_Gothic_Regular';
+    /* font-family: 'SEBANG_Gothic_Regular'; */
 
     color: var(--color-dark);
     cursor: pointer;
@@ -168,7 +159,7 @@ export const MenuSelect = styled.p`
 `
 
 export const LoginBox = styled.div`
-  width: 20%;
+  width: 300px;
   height: auto;
   background-color: #ecececdb;
   position: fixed;

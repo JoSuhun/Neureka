@@ -10,14 +10,14 @@ const ArticleContent = (props: Props) => {
   return (
     <>
       <n.Wrapper>
-        <n.Title>
+        <n.Title className="article-title">
           “68명 뽑는데 5000여명 몰렸다”…KG모빌리티, 신입·경력 채용 진행
         </n.Title>
-        <n.Date>2024. 05. 04. 오전 11:80</n.Date>
-        <n.Image src={sample} />
-        <n.Content>
-          KG모빌리티(이하 KGM)가 진행한 신입·경력 사원 채용에 5000명이 넘는
-          인재들이 지원했다. KGM은 신성장 동력 확보를 위해 2년 연속으로 채용문을
+        <n.Date className="article-date">2024. 05. 04. 오전 11:80</n.Date>
+        <n.Image className="article-thumbnail" src={sample} />
+        <n.Content className="article-content">
+          KG모빌리티(이하 KGM)가 진행한 이승현·윤주찬 사원 채용에 5000명이 넘는
+          조수훈이 지원했다. KGM은 신성장 동력 확보를 위해 2년 연속으로 채용문을
           열었다고 12일 밝혔다. KGM은 지난해 연구개발(R&D) 중심의 인력 53명을
           공개 채용한 데 이어, 올해는 R&D 인력뿐 아니라 경영관리, 생산기술,
           품질관리, 디자인, 마케팅, 국내영업, 해외영업 등 전 부문에 걸쳐 우수
