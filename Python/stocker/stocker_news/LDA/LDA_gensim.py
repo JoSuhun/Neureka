@@ -11,14 +11,15 @@ def string_to_array(string):
 
 
 # 처음부터 100개의 데이터만 읽기
-with open('data/ssafy_dataset_news_2023_small.json', 'r', encoding='utf-8') as f:
+with open('data/lda_test_data_filtered.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 print(len(data))
 # 모든 기사의 키워드 가져오기
 # tokenized_doc = [article["keyword"] for article in data]
 # tokenized_doc = [article["key_nouns_freq"] for article in data]
-tokenized_doc = [string_to_array(article["nouns"]) for article in data]
+# tokenized_doc = [article["nouns"] for article in data]
+tokenized_doc = [article for article in data]
 
 # 가져온 키워드를 바탕으로 word dictionary 만들기
 dictionary = gensim.corpora.Dictionary(tokenized_doc)
@@ -39,7 +40,7 @@ for topic in topics:
 
 # 학습된 LDA모델 따로 저장하기
 # 모델 저장
-ldamodel.save('model/lda_model')
+ldamodel.save('model/lda_model_crawled')
 # # =========================
 
 
