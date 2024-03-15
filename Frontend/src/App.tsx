@@ -7,6 +7,8 @@ import NewsPage from '@src/pages/NewsPage'
 import NewsDetailPage from '@src/pages/NewsDetailPage'
 import StocksPage from '@src/pages/StocksPage'
 import Footer from '@src/common/Footer'
+import MyPage from './pages/MyPage'
+import DictionaryPage from './pages/DictionaryPage'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/stocks" element={<StocksPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/dictionary" element={<DictionaryPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
