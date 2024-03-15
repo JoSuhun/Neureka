@@ -31,7 +31,7 @@ const NewsList = (props: Props) => {
   return (
     <>
       <n.Wrapper>
-        <n.NewsBox>
+        <n.NewsBox className="news-box">
           {data.map((it, idx) => (
             <NewsCard />
           ))}
