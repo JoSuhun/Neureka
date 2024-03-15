@@ -133,7 +133,7 @@ export const MenuBox = styled.div`
   position: fixed;
   z-index: 800;
   right: 0;
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
   &.nav-open {
     transform: translateY(0);
   }

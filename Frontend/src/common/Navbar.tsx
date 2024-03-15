@@ -44,6 +44,16 @@ const Navbar = () => {
     navtoggle()
   }
 
+  const goDictionary = () => {
+    navigate('/dictionary')
+    navtoggle()
+  }
+
+  const goMyPage = () => {
+    navigate('/mypage')
+    navtoggle()
+  }
+
   const google_url = 'http://localhost:8080/oauth2/authorization/google'
 
   const login = (url: string) => {
@@ -86,8 +96,11 @@ const Navbar = () => {
           <n.MenuList className="nav-selector">
             <n.MenuSelect onClick={goHome}>HOME</n.MenuSelect>
             <n.MenuSelect onClick={goNews}>오늘의 뉴스 확인하기</n.MenuSelect>
-            <n.MenuSelect onClick={goStocks}>나의 종목 뉴스</n.MenuSelect>
-            <n.MenuSelect>개인 정보 설정</n.MenuSelect>
+            <n.MenuSelect onClick={goStocks}>기업 정보 조회</n.MenuSelect>
+            <n.MenuSelect onClick={goDictionary}>
+              경제 용어 사전?? 경제 용어 모음집??
+            </n.MenuSelect>
+            <n.MenuSelect onClick={goMyPage}>개인 정보 설정</n.MenuSelect>
           </n.MenuList>
         </n.MenuBox>
         <n.LoginBox className={isLoginOpen ? 'login-open' : 'login-close'}>
