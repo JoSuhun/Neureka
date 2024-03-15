@@ -40,13 +40,20 @@ for topic in topics:
 
 # 학습된 LDA모델 따로 저장하기
 # 모델 저장
-ldamodel.save('model/lda_model_crawled')
+import os
+from datetime import date
+# 오늘 날짜 얻기
+today_folder_path = f"model/{date.today()}"
+if not os.path.exists(today_folder_path):
+    os.makedirs(today_folder_path)
+    print(f"'{today_folder_path}' 폴더가 생성되었습니다.")
+ldamodel.save(today_folder_path+'/lda_model_crawled')
 # # =========================
 
 
 # # =========================
 # # 저장된 LDA모델 불러오기
-# ldamodel = gensim.models.ldamodel.LdaModel.load('model/lda_model')
+# ldamodel = gensim.models.ldamodel.LdaModel.load('model/lda_model_crawled')
 # # 토픽의 단어 4개만 추출하여 출력하기
 # topics = ldamodel.print_topics(num_words=10)
 # for topic in topics:
@@ -98,16 +105,16 @@ print(topictable[:10])
 # =========================
 
 
-# =========================
-# LDA 시각화하기
-import pyLDAvis
-import pyLDAvis.gensim_models as gensimvis
+# # =========================
+# # LDA 시각화하기
+# import pyLDAvis
+# import pyLDAvis.gensim_models as gensimvis
 
-# 학습된 LDA 모델을 시각화합니다. 토픽별 단어 분포를 나타냅니다
-vis_data = gensimvis.prepare(ldamodel, corpus, dictionary)
-# 시각화 자료 display(작동안함)
-# pyLDAvis.display(vis_data)
+# # 학습된 LDA 모델을 시각화합니다. 토픽별 단어 분포를 나타냅니다
+# vis_data = gensimvis.prepare(ldamodel, corpus, dictionary)
+# # 시각화 자료 display(작동안함)
+# # pyLDAvis.display(vis_data)
 
-# 시각화 데이터를 저장합니다.
-pyLDAvis.save_html(vis_data, 'lda_visualization.html')
-# =========================
+# # 시각화 데이터를 저장합니다.
+# pyLDAvis.save_html(vis_data, 'lda_visualization.html')
+# # =========================
