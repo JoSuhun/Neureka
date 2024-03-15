@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 import json
-from tqdm import tqdm
 
 from datetime import datetime, timedelta
 
@@ -25,7 +24,7 @@ day_count = 0
 today = datetime.now()
 
 while True:
-    if len(article_list) >= 1000:
+    if len(article_list) >= 500:
         break
 
     # 오늘 날짜에서 하루를 빼서 어제의 날짜를 계산
