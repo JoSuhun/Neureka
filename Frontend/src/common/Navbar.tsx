@@ -77,7 +77,7 @@ const Navbar = () => {
         >
           <n.NavTitle className="title" onClick={goHome}>
             <span>N</span>
-            Eureka
+            Eúrēka
           </n.NavTitle>
           <n.NavButton className="button-section">
             <n.LoginBtn className="login-btn" onClick={logintoggle}>

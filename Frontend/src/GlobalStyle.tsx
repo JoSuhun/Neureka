@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
       --color-blue: #387ADF;
       --color-orange: #FF7A00;
       --color-yellow: #ffb700;
+
+      --shadow: 0 2px 2px rgba(0, 0, 0, 0.268);
+      --shadow-inner : rgba(0, 0, 0, 0.053) 0px -2px 5px 0px inset;
+      --shadow-outer : rgba(89, 89, 89, 0.178) 0px 50px 100px -20px inset, rgba(95, 95, 95, 0.151) 0px 30px 60px -30px, rgba(86, 86, 86, 0.178) 0px -2px 6px 0px inset;
+
     }
 
     body {
