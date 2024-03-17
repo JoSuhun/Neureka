@@ -46,9 +46,7 @@ export const NewCardBox = styled.div`
   height: 300px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.048),
-    0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: var(--shadow);
   cursor: pointer;
   &:hover img {
     transform: scale(1.05);

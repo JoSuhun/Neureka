@@ -5,9 +5,7 @@ export const Wrapper = styled.div`
   width: 32%;
   display: flex;
   flex-direction: column;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.048),
-    0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: var(--shadow);
   cursor: pointer;
   &:hover div {
     color: black;
