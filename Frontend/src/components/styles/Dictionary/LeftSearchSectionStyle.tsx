@@ -65,13 +65,11 @@ export const SearchTitle = styled.p`
 
 export const SearchContent = styled.div``
 
-export const saveBtn = styled.img`
-  width: 30px;
-  cursor: pointer;
-  /* margin-left: 5px; */
-`
 export const Words = styled.div`
+  margin-top: 20px;
   overflow-y: scroll;
+  height: 80%;
+
   &.long {
     height: 57%;
   }
