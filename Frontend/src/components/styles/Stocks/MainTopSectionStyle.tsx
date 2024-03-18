@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 export const Container = styled.div`
   display: flex;
@@ -21,4 +22,17 @@ export const CodeNumber = styled.span`
   font-size: 1rem;
   margin-left: 10px;
   align-self: flex-end;
+`
+
+export const AddButton = styled(AddCircleIcon)`
+  color: #ffc700;
+  font-size: 1.5rem !important;
+  margin-left: auto;
+  align-self: flex-end;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `
