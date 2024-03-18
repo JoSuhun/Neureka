@@ -23,9 +23,15 @@ const SearchInput = ({ search, setSearch, setQuestion }: Props) => {
     setQuestion(content)
   }
 
+  const goSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setSearch(true)
+    setQuestion(content)
+  }
+
   return (
     <s.SearchBox>
-      <s.SearchBar>
+      <s.SearchBar onSubmit={goSubmit}>
         <s.SearchInput
           value={content}
           onChange={event => SetContent(event.target.value)}
