@@ -24,9 +24,13 @@ export const Content = styled.div`
   font-family: 'Pretendard-Thin';
   color: var(--color-dark);
   padding-top: 10px;
+  line-height: 1.3;
 `
 export const saveBtn = styled.img`
   width: 30px;
   cursor: pointer;
-  /* margin-left: 5px; */
+  margin-left: 5px;
+  &:hover {
+    transform: rotate(10deg);
+  }
 `

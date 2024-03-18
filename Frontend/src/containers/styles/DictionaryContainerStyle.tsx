@@ -8,12 +8,20 @@ export const Wrapper = styled.div`
   align-items: center;
 `
 export const Box = styled.div`
-  height: 80vh;
+  min-height: 80vh;
   width: 90%;
   display: flex;
   justify-content: space-between;
   border-radius: 30px;
-  box-shadow: var(--shadow-inner);
+  @media screen and (max-width: 1200px) {
+  }
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 576px) {
+  }
 
   /* gap: 0 5px; */
 `

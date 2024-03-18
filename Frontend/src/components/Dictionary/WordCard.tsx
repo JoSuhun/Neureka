@@ -8,7 +8,7 @@ import save from '/image/save.png'
 import notsave from '/image/notsave.png'
 
 type Props = {
-  word: Word
+  word: Word | null
 }
 
 const WordCard = ({ word }: Props) => {
@@ -22,14 +22,14 @@ const WordCard = ({ word }: Props) => {
       <c.Card>
         <c.CardBox>
           <c.Title>
-            {word.title}
+            {word?.title}
             {isSave ? (
               <c.saveBtn src={save} onClick={ToggleSave} />
             ) : (
               <c.saveBtn src={notsave} onClick={ToggleSave} />
             )}
           </c.Title>
-          <c.Content>{word.content}</c.Content>
+          <c.Content>{word?.content}</c.Content>
         </c.CardBox>
       </c.Card>
     </>
