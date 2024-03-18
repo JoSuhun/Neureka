@@ -1,0 +1,5184 @@
+{
+    "코인": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861295",
+            "https://n.news.naver.com/mnews/article/417/0000988916",
+            "https://n.news.naver.com/mnews/article/009/0005271261",
+            "https://n.news.naver.com/mnews/article/417/0000987962"
+        ]
+    },
+    "먹튀": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861295"
+        ]
+    },
+<<<<<<< HEAD:Python/neurek/neureka_news/keyword_data.json
+    "감독원": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861295",
+            "https://n.news.naver.com/mnews/article/008/0005011253",
+            "https://n.news.naver.com/mnews/article/648/0000023969",
+            "https://n.news.naver.com/mnews/article/469/0000789910",
+            "https://n.news.naver.com/mnews/article/018/0005689349"
+=======
+    "충격": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861295",
+            "https://n.news.naver.com/mnews/article/215/0001152705"
+>>>>>>> 25cb12a3bbba6c2de95a9eb9d00bf01bf4abf099:Python/stocker/stocker_news/keyword_data.json
+        ]
+    },
+    "인플레이션": {
+        "count": 19,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002281092",
+            "https://n.news.naver.com/mnews/article/417/0000989017",
+            "https://n.news.naver.com/mnews/article/001/0014564998",
+            "https://n.news.naver.com/mnews/article/015/0004960175",
+            "https://n.news.naver.com/mnews/article/277/0005392394",
+            "https://n.news.naver.com/mnews/article/215/0001152946",
+            "https://n.news.naver.com/mnews/article/277/0005391807",
+            "https://n.news.naver.com/mnews/article/277/0005391802",
+            "https://n.news.naver.com/mnews/article/215/0001152624",
+            "https://n.news.naver.com/mnews/article/215/0001152570",
+            "https://n.news.naver.com/mnews/article/015/0004959132",
+            "https://n.news.naver.com/mnews/article/277/0005391277",
+            "https://n.news.naver.com/mnews/article/018/0005690830",
+            "https://n.news.naver.com/mnews/article/277/0005391255",
+            "https://n.news.naver.com/mnews/article/215/0001152550",
+            "https://n.news.naver.com/mnews/article/011/0004312137",
+            "https://n.news.naver.com/mnews/article/215/0001152397",
+            "https://n.news.naver.com/mnews/article/277/0005390703",
+            "https://n.news.naver.com/mnews/article/215/0001152201"
+        ]
+    },
+    "비트코인": {
+        "count": 21,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002281092",
+            "https://n.news.naver.com/mnews/article/417/0000989017",
+            "https://n.news.naver.com/mnews/article/366/0000978031",
+            "https://n.news.naver.com/mnews/article/009/0005272656",
+            "https://n.news.naver.com/mnews/article/277/0005392280",
+            "https://n.news.naver.com/mnews/article/029/0002861110",
+            "https://n.news.naver.com/mnews/article/029/0002860908",
+            "https://n.news.naver.com/mnews/article/018/0005690926",
+            "https://n.news.naver.com/mnews/article/018/0005690825",
+            "https://n.news.naver.com/mnews/article/057/0001805215",
+            "https://n.news.naver.com/mnews/article/009/0005271109",
+            "https://n.news.naver.com/mnews/article/215/0001152448",
+            "https://n.news.naver.com/mnews/article/215/0001152447",
+            "https://n.news.naver.com/mnews/article/417/0000988063",
+            "https://n.news.naver.com/mnews/article/215/0001152427",
+            "https://n.news.naver.com/mnews/article/215/0001152396",
+            "https://n.news.naver.com/mnews/article/009/0005270765",
+            "https://n.news.naver.com/mnews/article/277/0005390760",
+            "https://n.news.naver.com/mnews/article/009/0005270681",
+            "https://n.news.naver.com/mnews/article/138/0002168538",
+            "https://n.news.naver.com/mnews/article/417/0000987688"
+        ]
+    },
+    "급락세": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002281092",
+            "https://n.news.naver.com/mnews/article/008/0005012331",
+            "https://n.news.naver.com/mnews/article/417/0000989029",
+            "https://n.news.naver.com/mnews/article/003/0012425581"
+        ]
+    },
+    "약세": {
+        "count": 22,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272997",
+            "https://n.news.naver.com/mnews/article/015/0004960477",
+            "https://n.news.naver.com/mnews/article/016/0002280850",
+            "https://n.news.naver.com/mnews/article/421/0007413273",
+            "https://n.news.naver.com/mnews/article/015/0004960175",
+            "https://n.news.naver.com/mnews/article/018/0005692510",
+            "https://n.news.naver.com/mnews/article/008/0005012028",
+            "https://n.news.naver.com/mnews/article/421/0007410716",
+            "https://n.news.naver.com/mnews/article/018/0005691664",
+            "https://n.news.naver.com/mnews/article/008/0005010793",
+            "https://n.news.naver.com/mnews/article/015/0004958724",
+            "https://n.news.naver.com/mnews/article/001/0014556688",
+            "https://n.news.naver.com/mnews/article/018/0005689988",
+            "https://n.news.naver.com/mnews/article/008/0005010394",
+            "https://n.news.naver.com/mnews/article/011/0004311655",
+            "https://n.news.naver.com/mnews/article/015/0004958477",
+            "https://n.news.naver.com/mnews/article/008/0005010194",
+            "https://n.news.naver.com/mnews/article/015/0004958284",
+            "https://n.news.naver.com/mnews/article/008/0005010013",
+            "https://n.news.naver.com/mnews/article/011/0004311184",
+            "https://n.news.naver.com/mnews/article/018/0005689255",
+            "https://n.news.naver.com/mnews/article/001/0014554190"
+        ]
+    },
+    "분당구": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272997"
+        ]
+    },
+    "주식": {
+        "count": 40,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272997",
+            "https://n.news.naver.com/mnews/article/018/0005692923",
+            "https://n.news.naver.com/mnews/article/016/0002280841",
+            "https://n.news.naver.com/mnews/article/016/0002280822",
+            "https://n.news.naver.com/mnews/article/366/0000978031",
+            "https://n.news.naver.com/mnews/article/014/0005156436",
+            "https://n.news.naver.com/mnews/article/629/0000273628",
+            "https://n.news.naver.com/mnews/article/016/0002280417",
+            "https://n.news.naver.com/mnews/article/366/0000977760",
+            "https://n.news.naver.com/mnews/article/001/0014562243",
+            "https://n.news.naver.com/mnews/article/030/0003188988",
+            "https://n.news.naver.com/mnews/article/014/0005155897",
+            "https://n.news.naver.com/mnews/article/009/0005271977",
+            "https://n.news.naver.com/mnews/article/018/0005691697",
+            "https://n.news.naver.com/mnews/article/015/0004959521",
+            "https://n.news.naver.com/mnews/article/008/0005011323",
+            "https://n.news.naver.com/mnews/article/243/0000057285",
+            "https://n.news.naver.com/mnews/article/009/0005271592",
+            "https://n.news.naver.com/mnews/article/421/0007407657",
+            "https://n.news.naver.com/mnews/article/030/0003188585",
+            "https://n.news.naver.com/mnews/article/014/0005155244",
+            "https://n.news.naver.com/mnews/article/215/0001152569",
+            "https://n.news.naver.com/mnews/article/018/0005690849",
+            "https://n.news.naver.com/mnews/article/009/0005271294",
+            "https://n.news.naver.com/mnews/article/014/0005155059",
+            "https://n.news.naver.com/mnews/article/011/0004312139",
+            "https://n.news.naver.com/mnews/article/009/0005271184",
+            "https://n.news.naver.com/mnews/article/648/0000023947",
+            "https://n.news.naver.com/mnews/article/215/0001152447",
+            "https://n.news.naver.com/mnews/article/366/0000976985",
+            "https://n.news.naver.com/mnews/article/014/0005154374",
+            "https://n.news.naver.com/mnews/article/015/0004958511",
+            "https://n.news.naver.com/mnews/article/014/0005154305",
+            "https://n.news.naver.com/mnews/article/009/0005270497",
+            "https://n.news.naver.com/mnews/article/015/0004958423",
+            "https://n.news.naver.com/mnews/article/421/0007403568",
+            "https://n.news.naver.com/mnews/article/009/0005270435",
+            "https://n.news.naver.com/mnews/article/015/0004958133",
+            "https://n.news.naver.com/mnews/article/031/0000819054",
+            "https://n.news.naver.com/mnews/article/366/0000976641"
+        ]
+    },
+    "대형주": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960477",
+            "https://n.news.naver.com/mnews/article/277/0005391807",
+            "https://n.news.naver.com/mnews/article/015/0004959522"
+        ]
+    },
+    "파산": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960477",
+            "https://n.news.naver.com/mnews/article/009/0005272664",
+            "https://n.news.naver.com/mnews/article/009/0005272485",
+            "https://n.news.naver.com/mnews/article/277/0005391881"
+        ]
+    },
+    "엔비디아": {
+        "count": 29,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392749",
+            "https://n.news.naver.com/mnews/article/009/0005272970",
+            "https://n.news.naver.com/mnews/article/215/0001153031",
+            "https://n.news.naver.com/mnews/article/018/0005692565",
+            "https://n.news.naver.com/mnews/article/029/0002861086",
+            "https://n.news.naver.com/mnews/article/009/0005272076",
+            "https://n.news.naver.com/mnews/article/119/0002809151",
+            "https://n.news.naver.com/mnews/article/001/0014561862",
+            "https://n.news.naver.com/mnews/article/018/0005691734",
+            "https://n.news.naver.com/mnews/article/001/0014561725",
+            "https://n.news.naver.com/mnews/article/001/0014561672",
+            "https://n.news.naver.com/mnews/article/011/0004312474",
+            "https://n.news.naver.com/mnews/article/009/0005271349",
+            "https://n.news.naver.com/mnews/article/018/0005690317",
+            "https://n.news.naver.com/mnews/article/421/0007404517",
+            "https://n.news.naver.com/mnews/article/018/0005689964",
+            "https://n.news.naver.com/mnews/article/011/0004311655",
+            "https://n.news.naver.com/mnews/article/015/0004958511",
+            "https://n.news.naver.com/mnews/article/015/0004958423",
+            "https://n.news.naver.com/mnews/article/648/0000023917",
+            "https://n.news.naver.com/mnews/article/016/0002278532",
+            "https://n.news.naver.com/mnews/article/011/0004311184",
+            "https://n.news.naver.com/mnews/article/421/0007402066",
+            "https://n.news.naver.com/mnews/article/215/0001152224",
+            "https://n.news.naver.com/mnews/article/016/0002278262",
+            "https://n.news.naver.com/mnews/article/018/0005689255",
+            "https://n.news.naver.com/mnews/article/001/0014554190",
+            "https://n.news.naver.com/mnews/article/277/0005390208",
+            "https://n.news.naver.com/mnews/article/011/0004311048"
+        ]
+    },
+    "관건": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392749"
+        ]
+    },
+    "콘퍼런스": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392749",
+            "https://n.news.naver.com/mnews/article/215/0001153031"
+        ]
+    },
+    "부결": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273871",
+            "https://n.news.naver.com/mnews/article/277/0005392268",
+            "https://n.news.naver.com/mnews/article/031/0000820098"
+        ]
+    },
+    "다올투자증권": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273871",
+            "https://n.news.naver.com/mnews/article/366/0000978163",
+            "https://n.news.naver.com/mnews/article/243/0000057346",
+            "https://n.news.naver.com/mnews/article/243/0000057219",
+            "https://n.news.naver.com/mnews/article/015/0004958523"
+        ]
+    },
+    "주총": {
+        "count": 18,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273871",
+            "https://n.news.naver.com/mnews/article/366/0000978163",
+            "https://n.news.naver.com/mnews/article/015/0004960400",
+            "https://n.news.naver.com/mnews/article/215/0001153005",
+            "https://n.news.naver.com/mnews/article/015/0004960135",
+            "https://n.news.naver.com/mnews/article/001/0014564515",
+            "https://n.news.naver.com/mnews/article/009/0005272435",
+            "https://n.news.naver.com/mnews/article/014/0005156373",
+            "https://n.news.naver.com/mnews/article/018/0005691769",
+            "https://n.news.naver.com/mnews/article/119/0002809110",
+            "https://n.news.naver.com/mnews/article/469/0000790330",
+            "https://n.news.naver.com/mnews/article/031/0000820098",
+            "https://n.news.naver.com/mnews/article/366/0000977522",
+            "https://n.news.naver.com/mnews/article/029/0002860656",
+            "https://n.news.naver.com/mnews/article/014/0005154991",
+            "https://n.news.naver.com/mnews/article/016/0002279263",
+            "https://n.news.naver.com/mnews/article/243/0000057219",
+            "https://n.news.naver.com/mnews/article/018/0005689889"
+        ]
+    },
+    "급등주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272970"
+        ]
+    },
+    "하락장": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272970",
+            "https://n.news.naver.com/mnews/article/119/0002807848"
+        ]
+    },
+    "번스타인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692923"
+        ]
+    },
+    "강세": {
+        "count": 11,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692923",
+            "https://n.news.naver.com/mnews/article/015/0004960184",
+            "https://n.news.naver.com/mnews/article/629/0000273626",
+            "https://n.news.naver.com/mnews/article/011/0004312694",
+            "https://n.news.naver.com/mnews/article/421/0007407909",
+            "https://n.news.naver.com/mnews/article/243/0000057235",
+            "https://n.news.naver.com/mnews/article/277/0005390999",
+            "https://n.news.naver.com/mnews/article/417/0000988063",
+            "https://n.news.naver.com/mnews/article/629/0000272811",
+            "https://n.news.naver.com/mnews/article/014/0005154276",
+            "https://n.news.naver.com/mnews/article/001/0014554228"
+        ]
+    },
+    "주주의": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978163",
+            "https://n.news.naver.com/mnews/article/015/0004960400",
+            "https://n.news.naver.com/mnews/article/014/0005156438",
+            "https://n.news.naver.com/mnews/article/243/0000057346",
+            "https://n.news.naver.com/mnews/article/014/0005156324",
+            "https://n.news.naver.com/mnews/article/018/0005689113"
+        ]
+    },
+    "이사진": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392713",
+            "https://n.news.naver.com/mnews/article/648/0000023902"
+        ]
+    },
+    "위기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392713"
+        ]
+    },
+    "상장사": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392713",
+            "https://n.news.naver.com/mnews/article/277/0005391826",
+            "https://n.news.naver.com/mnews/article/009/0005271596",
+            "https://n.news.naver.com/mnews/article/366/0000977283",
+            "https://n.news.naver.com/mnews/article/277/0005390717",
+            "https://n.news.naver.com/mnews/article/018/0005689103"
+        ]
+    },
+    "볼멘소리오세철": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960400"
+        ]
+    },
+    "합병": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392681",
+            "https://n.news.naver.com/mnews/article/031/0000820173",
+            "https://n.news.naver.com/mnews/article/243/0000057170"
+        ]
+    },
+    "임주현": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392681",
+            "https://n.news.naver.com/mnews/article/366/0000977522"
+        ]
+    },
+    "한미약품": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392681"
+        ]
+    },
+    "정관": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960394"
+        ]
+    },
+    "유한양행": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960394"
+        ]
+    },
+    "창업주": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960394",
+            "https://n.news.naver.com/mnews/article/648/0000023985",
+            "https://n.news.naver.com/mnews/article/648/0000023900"
+        ]
+    },
+    "마이크로소프트": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001153031",
+            "https://n.news.naver.com/mnews/article/014/0005155244",
+            "https://n.news.naver.com/mnews/article/018/0005690872"
+        ]
+    },
+    "위메이드플레이": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012331"
+        ]
+    },
+    "상장": {
+        "count": 31,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012331",
+            "https://n.news.naver.com/mnews/article/009/0005272663",
+            "https://n.news.naver.com/mnews/article/018/0005692439",
+            "https://n.news.naver.com/mnews/article/277/0005392280",
+            "https://n.news.naver.com/mnews/article/029/0002861110",
+            "https://n.news.naver.com/mnews/article/009/0005272316",
+            "https://n.news.naver.com/mnews/article/014/0005156245",
+            "https://n.news.naver.com/mnews/article/014/0005155897",
+            "https://n.news.naver.com/mnews/article/009/0005271992",
+            "https://n.news.naver.com/mnews/article/018/0005691706",
+            "https://n.news.naver.com/mnews/article/011/0004312840",
+            "https://n.news.naver.com/mnews/article/011/0004312832",
+            "https://n.news.naver.com/mnews/article/417/0000988611",
+            "https://n.news.naver.com/mnews/article/018/0005691623",
+            "https://n.news.naver.com/mnews/article/243/0000057292",
+            "https://n.news.naver.com/mnews/article/003/0012424581",
+            "https://n.news.naver.com/mnews/article/015/0004959207",
+            "https://n.news.naver.com/mnews/article/215/0001152598",
+            "https://n.news.naver.com/mnews/article/421/0007407304",
+            "https://n.news.naver.com/mnews/article/014/0005155211",
+            "https://n.news.naver.com/mnews/article/014/0005155160",
+            "https://n.news.naver.com/mnews/article/015/0004958964",
+            "https://n.news.naver.com/mnews/article/018/0005690678",
+            "https://n.news.naver.com/mnews/article/031/0000819671",
+            "https://n.news.naver.com/mnews/article/421/0007406107",
+            "https://n.news.naver.com/mnews/article/277/0005390999",
+            "https://n.news.naver.com/mnews/article/008/0005010442",
+            "https://n.news.naver.com/mnews/article/215/0001152405",
+            "https://n.news.naver.com/mnews/article/277/0005390760",
+            "https://n.news.naver.com/mnews/article/119/0002808199",
+            "https://n.news.naver.com/mnews/article/029/0002860110"
+        ]
+    },
+    "급등세": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273806",
+            "https://n.news.naver.com/mnews/article/015/0004959762",
+            "https://n.news.naver.com/mnews/article/029/0002860718",
+            "https://n.news.naver.com/mnews/article/215/0001152598",
+            "https://n.news.naver.com/mnews/article/011/0004312142",
+            "https://n.news.naver.com/mnews/article/014/0005154372",
+            "https://n.news.naver.com/mnews/article/009/0005270681"
+        ]
+    },
+    "이정재": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273806",
+            "https://n.news.naver.com/mnews/article/629/0000273626",
+            "https://n.news.naver.com/mnews/article/030/0003188988",
+            "https://n.news.naver.com/mnews/article/015/0004959762",
+            "https://n.news.naver.com/mnews/article/011/0004312624",
+            "https://n.news.naver.com/mnews/article/029/0002860718",
+            "https://n.news.naver.com/mnews/article/025/0003347030",
+            "https://n.news.naver.com/mnews/article/015/0004959246",
+            "https://n.news.naver.com/mnews/article/421/0007407447",
+            "https://n.news.naver.com/mnews/article/015/0004958881"
+        ]
+    },
+    "래몽래인도": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273806"
+        ]
+    },
+    "유동성": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692825"
+        ]
+    },
+    "최저": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692825"
+        ]
+    },
+    "금리": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692825",
+            "https://n.news.naver.com/mnews/article/417/0000989017",
+            "https://n.news.naver.com/mnews/article/018/0005692408",
+            "https://n.news.naver.com/mnews/article/215/0001152705",
+            "https://n.news.naver.com/mnews/article/018/0005690714",
+            "https://n.news.naver.com/mnews/article/001/0014554190"
+        ]
+    },
+    "이사회": {
+        "count": 9,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007413593",
+            "https://n.news.naver.com/mnews/article/417/0000989029",
+            "https://n.news.naver.com/mnews/article/277/0005392278",
+            "https://n.news.naver.com/mnews/article/648/0000023948",
+            "https://n.news.naver.com/mnews/article/119/0002808279",
+            "https://n.news.naver.com/mnews/article/029/0002860363",
+            "https://n.news.naver.com/mnews/article/008/0005010222",
+            "https://n.news.naver.com/mnews/article/277/0005390646",
+            "https://n.news.naver.com/mnews/article/031/0000819211"
+        ]
+    },
+    "실패": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007413593"
+        ]
+    },
+    "김기수": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007413593"
+        ]
+    },
+    "sk하이닉스": {
+        "count": 17,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313655",
+            "https://n.news.naver.com/mnews/article/016/0002280850",
+            "https://n.news.naver.com/mnews/article/014/0005156439",
+            "https://n.news.naver.com/mnews/article/015/0004959988",
+            "https://n.news.naver.com/mnews/article/015/0004959952",
+            "https://n.news.naver.com/mnews/article/016/0002280267",
+            "https://n.news.naver.com/mnews/article/277/0005391278",
+            "https://n.news.naver.com/mnews/article/009/0005271116",
+            "https://n.news.naver.com/mnews/article/011/0004311797",
+            "https://n.news.naver.com/mnews/article/008/0005010442",
+            "https://n.news.naver.com/mnews/article/215/0001152404",
+            "https://n.news.naver.com/mnews/article/001/0014556688",
+            "https://n.news.naver.com/mnews/article/629/0000272811",
+            "https://n.news.naver.com/mnews/article/648/0000023917",
+            "https://n.news.naver.com/mnews/article/011/0004311184",
+            "https://n.news.naver.com/mnews/article/421/0007402066",
+            "https://n.news.naver.com/mnews/article/215/0001152224"
+        ]
+    },
+    "순매도": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313655",
+            "https://n.news.naver.com/mnews/article/008/0005011778",
+            "https://n.news.naver.com/mnews/article/014/0005155606",
+            "https://n.news.naver.com/mnews/article/421/0007407126",
+            "https://n.news.naver.com/mnews/article/243/0000057173"
+        ]
+    },
+    "미래에셋증권": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313655",
+            "https://n.news.naver.com/mnews/article/119/0002809110",
+            "https://n.news.naver.com/mnews/article/011/0004312474",
+            "https://n.news.naver.com/mnews/article/629/0000273117",
+            "https://n.news.naver.com/mnews/article/009/0005271294",
+            "https://n.news.naver.com/mnews/article/009/0005271184",
+            "https://n.news.naver.com/mnews/article/119/0002808317",
+            "https://n.news.naver.com/mnews/article/018/0005689988"
+        ]
+    },
+    "항공": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280931",
+            "https://n.news.naver.com/mnews/article/016/0002280795"
+        ]
+    },
+    "가치": {
+        "count": 9,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280931",
+            "https://n.news.naver.com/mnews/article/215/0001153005",
+            "https://n.news.naver.com/mnews/article/005/0001681154",
+            "https://n.news.naver.com/mnews/article/008/0005011959",
+            "https://n.news.naver.com/mnews/article/018/0005690851",
+            "https://n.news.naver.com/mnews/article/016/0002279322",
+            "https://n.news.naver.com/mnews/article/008/0005010397",
+            "https://n.news.naver.com/mnews/article/015/0004958399",
+            "https://n.news.naver.com/mnews/article/009/0005270146"
+        ]
+    },
+    "허탈감": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280931"
+        ]
+    },
+    "위메이드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000989029"
+        ]
+    },
+    "코스피": {
+        "count": 30,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280850",
+            "https://n.news.naver.com/mnews/article/138/0002168953",
+            "https://n.news.naver.com/mnews/article/009/0005272634",
+            "https://n.news.naver.com/mnews/article/014/0005156439",
+            "https://n.news.naver.com/mnews/article/008/0005011886",
+            "https://n.news.naver.com/mnews/article/018/0005692065",
+            "https://n.news.naver.com/mnews/article/008/0005011778",
+            "https://n.news.naver.com/mnews/article/016/0002280267",
+            "https://n.news.naver.com/mnews/article/015/0004959757",
+            "https://n.news.naver.com/mnews/article/366/0000977577",
+            "https://n.news.naver.com/mnews/article/011/0004312694",
+            "https://n.news.naver.com/mnews/article/014/0005155606",
+            "https://n.news.naver.com/mnews/article/018/0005691234",
+            "https://n.news.naver.com/mnews/article/021/0002626200",
+            "https://n.news.naver.com/mnews/article/008/0005011138",
+            "https://n.news.naver.com/mnews/article/018/0005690870",
+            "https://n.news.naver.com/mnews/article/015/0004958978",
+            "https://n.news.naver.com/mnews/article/009/0005271261",
+            "https://n.news.naver.com/mnews/article/008/0005010793",
+            "https://n.news.naver.com/mnews/article/015/0004958887",
+            "https://n.news.naver.com/mnews/article/021/0002625919",
+            "https://n.news.naver.com/mnews/article/015/0004958724",
+            "https://n.news.naver.com/mnews/article/008/0005010397",
+            "https://n.news.naver.com/mnews/article/009/0005270736",
+            "https://n.news.naver.com/mnews/article/015/0004958477",
+            "https://n.news.naver.com/mnews/article/009/0005270575",
+            "https://n.news.naver.com/mnews/article/008/0005010194",
+            "https://n.news.naver.com/mnews/article/015/0004958284",
+            "https://n.news.naver.com/mnews/article/009/0005270131",
+            "https://n.news.naver.com/mnews/article/119/0002807848"
+        ]
+    },
+    "테슬라": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007413273",
+            "https://n.news.naver.com/mnews/article/009/0005272664",
+            "https://n.news.naver.com/mnews/article/009/0005272485",
+            "https://n.news.naver.com/mnews/article/421/0007410716",
+            "https://n.news.naver.com/mnews/article/029/0002861004",
+            "https://n.news.naver.com/mnews/article/015/0004959521",
+            "https://n.news.naver.com/mnews/article/243/0000057235",
+            "https://n.news.naver.com/mnews/article/421/0007405188",
+            "https://n.news.naver.com/mnews/article/421/0007404517",
+            "https://n.news.naver.com/mnews/article/215/0001152256"
+        ]
+    },
+    "에코프로머티리얼즈": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007413273"
+        ]
+    },
+    "영국령": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280841"
+        ]
+    },
+    "해외": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280841",
+            "https://n.news.naver.com/mnews/article/015/0004959764",
+            "https://n.news.naver.com/mnews/article/015/0004959123",
+            "https://n.news.naver.com/mnews/article/009/0005270836",
+            "https://n.news.naver.com/mnews/article/014/0005154575",
+            "https://n.news.naver.com/mnews/article/009/0005270736",
+            "https://n.news.naver.com/mnews/article/009/0005270575"
+        ]
+    },
+    "리츠인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280822"
+        ]
+    },
+    "배당금": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280822",
+            "https://n.news.naver.com/mnews/article/008/0005011886",
+            "https://n.news.naver.com/mnews/article/119/0002809110",
+            "https://n.news.naver.com/mnews/article/629/0000273117",
+            "https://n.news.naver.com/mnews/article/021/0002625919",
+            "https://n.news.naver.com/mnews/article/366/0000976938"
+        ]
+    },
+    "회피jb금융지주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392569"
+        ]
+    },
+    "얼라인파트너스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392569"
+        ]
+    },
+    "전북은행": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392569"
+        ]
+    },
+    "태영건설": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272754",
+            "https://n.news.naver.com/mnews/article/215/0001152978",
+            "https://n.news.naver.com/mnews/article/629/0000273628",
+            "https://n.news.naver.com/mnews/article/215/0001152795"
+        ]
+    },
+    "부진": {
+        "count": 16,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272754",
+            "https://n.news.naver.com/mnews/article/009/0005272664",
+            "https://n.news.naver.com/mnews/article/009/0005272485",
+            "https://n.news.naver.com/mnews/article/029/0002861004",
+            "https://n.news.naver.com/mnews/article/009/0005271990",
+            "https://n.news.naver.com/mnews/article/009/0005271292",
+            "https://n.news.naver.com/mnews/article/009/0005271059",
+            "https://n.news.naver.com/mnews/article/030/0003188247",
+            "https://n.news.naver.com/mnews/article/009/0005270736",
+            "https://n.news.naver.com/mnews/article/009/0005270651",
+            "https://n.news.naver.com/mnews/article/015/0004958479",
+            "https://n.news.naver.com/mnews/article/009/0005270575",
+            "https://n.news.naver.com/mnews/article/009/0005270521",
+            "https://n.news.naver.com/mnews/article/014/0005153916",
+            "https://n.news.naver.com/mnews/article/018/0005689157",
+            "https://n.news.naver.com/mnews/article/018/0005689093"
+        ]
+    },
+    "혹한기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272754"
+        ]
+    },
+    "삼성물산": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001153005",
+            "https://n.news.naver.com/mnews/article/277/0005392278",
+            "https://n.news.naver.com/mnews/article/016/0002279249"
+        ]
+    },
+    "인수자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280795"
+        ]
+    },
+    "급급": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280795"
+        ]
+    },
+    "쿠팡이": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692585"
+        ]
+    },
+    "알리익스프레스": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692585",
+            "https://n.news.naver.com/mnews/article/018/0005691664"
+        ]
+    },
+    "알리바바그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692585"
+        ]
+    },
+    "위기설": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152978",
+            "https://n.news.naver.com/mnews/article/119/0002809111"
+        ]
+    },
+    "연준": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152978",
+            "https://n.news.naver.com/mnews/article/018/0005692498",
+            "https://n.news.naver.com/mnews/article/001/0014564789",
+            "https://n.news.naver.com/mnews/article/009/0005271990",
+            "https://n.news.naver.com/mnews/article/001/0014561725",
+            "https://n.news.naver.com/mnews/article/001/0014561672",
+            "https://n.news.naver.com/mnews/article/215/0001152624",
+            "https://n.news.naver.com/mnews/article/011/0004312137",
+            "https://n.news.naver.com/mnews/article/018/0005690149",
+            "https://n.news.naver.com/mnews/article/001/0014554228"
+        ]
+    },
+    "이틀": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564998",
+            "https://n.news.naver.com/mnews/article/015/0004959757",
+            "https://n.news.naver.com/mnews/article/018/0005689988"
+        ]
+    },
+    "노동부": {
+        "count": 9,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564998",
+            "https://n.news.naver.com/mnews/article/015/0004960175",
+            "https://n.news.naver.com/mnews/article/277/0005392394",
+            "https://n.news.naver.com/mnews/article/001/0014564789",
+            "https://n.news.naver.com/mnews/article/215/0001152946",
+            "https://n.news.naver.com/mnews/article/277/0005391277",
+            "https://n.news.naver.com/mnews/article/277/0005391255",
+            "https://n.news.naver.com/mnews/article/215/0001152550",
+            "https://n.news.naver.com/mnews/article/277/0005390703"
+        ]
+    },
+    "동결": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960192"
+        ]
+    },
+    "불확실": {
+        "count": 11,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960192",
+            "https://n.news.naver.com/mnews/article/011/0004313482",
+            "https://n.news.naver.com/mnews/article/001/0014562829",
+            "https://n.news.naver.com/mnews/article/119/0002809111",
+            "https://n.news.naver.com/mnews/article/018/0005690926",
+            "https://n.news.naver.com/mnews/article/215/0001152570",
+            "https://n.news.naver.com/mnews/article/018/0005689892",
+            "https://n.news.naver.com/mnews/article/009/0005270651",
+            "https://n.news.naver.com/mnews/article/009/0005270521",
+            "https://n.news.naver.com/mnews/article/243/0000057173",
+            "https://n.news.naver.com/mnews/article/011/0004311048"
+        ]
+    },
+    "물가": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960192",
+            "https://n.news.naver.com/mnews/article/018/0005692506",
+            "https://n.news.naver.com/mnews/article/018/0005692498",
+            "https://n.news.naver.com/mnews/article/018/0005691234",
+            "https://n.news.naver.com/mnews/article/277/0005391380",
+            "https://n.news.naver.com/mnews/article/009/0005271349",
+            "https://n.news.naver.com/mnews/article/215/0001152554"
+        ]
+    },
+    "하이투자증권": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692569",
+            "https://n.news.naver.com/mnews/article/009/0005271109",
+            "https://n.news.naver.com/mnews/article/119/0002808279",
+            "https://n.news.naver.com/mnews/article/629/0000272811",
+            "https://n.news.naver.com/mnews/article/009/0005270516",
+            "https://n.news.naver.com/mnews/article/243/0000057196",
+            "https://n.news.naver.com/mnews/article/018/0005689155",
+            "https://n.news.naver.com/mnews/article/015/0004958142"
+        ]
+    },
+    "디스인플레이션": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692569",
+            "https://n.news.naver.com/mnews/article/001/0014556688"
+        ]
+    },
+    "유가": {
+        "count": 9,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692569",
+            "https://n.news.naver.com/mnews/article/421/0007410228",
+            "https://n.news.naver.com/mnews/article/277/0005391888",
+            "https://n.news.naver.com/mnews/article/277/0005391802",
+            "https://n.news.naver.com/mnews/article/277/0005391255",
+            "https://n.news.naver.com/mnews/article/215/0001152550",
+            "https://n.news.naver.com/mnews/article/243/0000057235",
+            "https://n.news.naver.com/mnews/article/277/0005390703",
+            "https://n.news.naver.com/mnews/article/215/0001152201"
+        ]
+    },
+    "프랑스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692565"
+        ]
+    },
+    "머신러닝": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692565"
+        ]
+    },
+    "이마트": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/138/0002168953",
+            "https://n.news.naver.com/mnews/article/011/0004312873",
+            "https://n.news.naver.com/mnews/article/011/0004312751"
+        ]
+    },
+    "승진": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/138/0002168953"
+        ]
+    },
+    "보험주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960184",
+            "https://n.news.naver.com/mnews/article/138/0002168768"
+        ]
+    },
+    "이익": {
+        "count": 11,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960184",
+            "https://n.news.naver.com/mnews/article/015/0004959762",
+            "https://n.news.naver.com/mnews/article/001/0014561940",
+            "https://n.news.naver.com/mnews/article/015/0004959732",
+            "https://n.news.naver.com/mnews/article/018/0005691773",
+            "https://n.news.naver.com/mnews/article/421/0007407315",
+            "https://n.news.naver.com/mnews/article/421/0007407304",
+            "https://n.news.naver.com/mnews/article/011/0004311797",
+            "https://n.news.naver.com/mnews/article/215/0001152404",
+            "https://n.news.naver.com/mnews/article/366/0000976952",
+            "https://n.news.naver.com/mnews/article/015/0004958140"
+        ]
+    },
+    "유안타증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978031"
+        ]
+    },
+    "소송": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978017",
+            "https://n.news.naver.com/mnews/article/011/0004313391",
+            "https://n.news.naver.com/mnews/article/018/0005691489"
+        ]
+    },
+    "브룩필드자산운용": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978017"
+        ]
+    },
+    "미래에셋자산운용": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978017",
+            "https://n.news.naver.com/mnews/article/009/0005272076",
+            "https://n.news.naver.com/mnews/article/015/0004959387",
+            "https://n.news.naver.com/mnews/article/021/0002625919",
+            "https://n.news.naver.com/mnews/article/008/0005010442"
+        ]
+    },
+    "테슬라발": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313482"
+        ]
+    },
+    "급락": {
+        "count": 13,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313482",
+            "https://n.news.naver.com/mnews/article/005/0001681144",
+            "https://n.news.naver.com/mnews/article/011/0004313391",
+            "https://n.news.naver.com/mnews/article/005/0001681042",
+            "https://n.news.naver.com/mnews/article/001/0014561672",
+            "https://n.news.naver.com/mnews/article/215/0001152700",
+            "https://n.news.naver.com/mnews/article/215/0001152586",
+            "https://n.news.naver.com/mnews/article/008/0005010220",
+            "https://n.news.naver.com/mnews/article/648/0000023922",
+            "https://n.news.naver.com/mnews/article/421/0007402066",
+            "https://n.news.naver.com/mnews/article/018/0005689255",
+            "https://n.news.naver.com/mnews/article/015/0004958155",
+            "https://n.news.naver.com/mnews/article/277/0005390208"
+        ]
+    },
+    "연봉킹": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978014",
+            "https://n.news.naver.com/mnews/article/016/0002278334"
+        ]
+    },
+    "한양증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978014"
+        ]
+    },
+    "상여금": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000978014"
+        ]
+    },
+    "달러": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692510",
+            "https://n.news.naver.com/mnews/article/018/0005692065",
+            "https://n.news.naver.com/mnews/article/018/0005691234",
+            "https://n.news.naver.com/mnews/article/057/0001805215",
+            "https://n.news.naver.com/mnews/article/015/0004958887",
+            "https://n.news.naver.com/mnews/article/215/0001152396",
+            "https://n.news.naver.com/mnews/article/009/0005270741",
+            "https://n.news.naver.com/mnews/article/277/0005390327",
+            "https://n.news.naver.com/mnews/article/138/0002168538",
+            "https://n.news.naver.com/mnews/article/011/0004311092"
+        ]
+    },
+    "다음날": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692510"
+        ]
+    },
+    "삼익공업": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313476"
+        ]
+    },
+    "로봇": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313476",
+            "https://n.news.naver.com/mnews/article/015/0004958884",
+            "https://n.news.naver.com/mnews/article/031/0000819671",
+            "https://n.news.naver.com/mnews/article/421/0007406107",
+            "https://n.news.naver.com/mnews/article/014/0005154888"
+        ]
+    },
+    "생산": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313476",
+            "https://n.news.naver.com/mnews/article/421/0007412780"
+        ]
+    },
+    "캐피탈사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156547"
+        ]
+    },
+    "토지비": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156547"
+        ]
+    },
+    "브릿지": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156547"
+        ]
+    },
+    "휘발유": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692506",
+            "https://n.news.naver.com/mnews/article/018/0005692498"
+        ]
+    },
+    "스태그플레이션": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692506"
+        ]
+    },
+    "전력난": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392407"
+        ]
+    },
+    "급증": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392407"
+        ]
+    },
+    "원자로": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392407"
+        ]
+    },
+    "삼성전자": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012428051",
+            "https://n.news.naver.com/mnews/article/009/0005272634",
+            "https://n.news.naver.com/mnews/article/029/0002861084",
+            "https://n.news.naver.com/mnews/article/648/0000024020",
+            "https://n.news.naver.com/mnews/article/014/0005155606",
+            "https://n.news.naver.com/mnews/article/008/0005009849",
+            "https://n.news.naver.com/mnews/article/015/0004958140",
+            "https://n.news.naver.com/mnews/article/018/0005689139"
+        ]
+    },
+    "상향": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012428051"
+        ]
+    },
+    "메리츠증권": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012428051",
+            "https://n.news.naver.com/mnews/article/648/0000024020",
+            "https://n.news.naver.com/mnews/article/215/0001152799",
+            "https://n.news.naver.com/mnews/article/001/0014561940",
+            "https://n.news.naver.com/mnews/article/018/0005690714",
+            "https://n.news.naver.com/mnews/article/018/0005689381"
+        ]
+    },
+    "cj제일제당": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012165"
+        ]
+    },
+    "밸류에이션": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012165",
+            "https://n.news.naver.com/mnews/article/015/0004958929",
+            "https://n.news.naver.com/mnews/article/277/0005390838"
+        ]
+    },
+    "자회사": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012165",
+            "https://n.news.naver.com/mnews/article/366/0000977671",
+            "https://n.news.naver.com/mnews/article/366/0000977327",
+            "https://n.news.naver.com/mnews/article/421/0007407315"
+        ]
+    },
+    "증자": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007412780",
+            "https://n.news.naver.com/mnews/article/011/0004312624",
+            "https://n.news.naver.com/mnews/article/025/0003347030",
+            "https://n.news.naver.com/mnews/article/015/0004958881"
+        ]
+    },
+    "광저우": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007412780"
+        ]
+    },
+    "엔터사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156534"
+        ]
+    },
+    "저점": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156534",
+            "https://n.news.naver.com/mnews/article/015/0004960040",
+            "https://n.news.naver.com/mnews/article/009/0005272064",
+            "https://n.news.naver.com/mnews/article/138/0002168768",
+            "https://n.news.naver.com/mnews/article/277/0005391501"
+        ]
+    },
+    "하이브": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156534"
+        ]
+    },
+    "인기": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988916",
+            "https://n.news.naver.com/mnews/article/025/0003346915"
+        ]
+    },
+    "모자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988916"
+        ]
+    },
+    "코인러": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988914"
+        ]
+    },
+    "고공": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988914"
+        ]
+    },
+    "아들": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988914"
+        ]
+    },
+    "연기금": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/005/0001681154",
+            "https://n.news.naver.com/mnews/article/008/0005011959",
+            "https://n.news.naver.com/mnews/article/008/0005011778",
+            "https://n.news.naver.com/mnews/article/009/0005272072",
+            "https://n.news.naver.com/mnews/article/014/0005155947",
+            "https://n.news.naver.com/mnews/article/469/0000790330"
+        ]
+    },
+    "매수세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/005/0001681154"
+        ]
+    },
+    "루머": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/005/0001681144",
+            "https://n.news.naver.com/mnews/article/005/0001681042",
+            "https://n.news.naver.com/mnews/article/215/0001152700"
+        ]
+    },
+    "바이오": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/005/0001681144",
+            "https://n.news.naver.com/mnews/article/243/0000057292",
+            "https://n.news.naver.com/mnews/article/003/0012424581",
+            "https://n.news.naver.com/mnews/article/008/0005010793"
+        ]
+    },
+    "페드워치": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392394"
+        ]
+    },
+    "실업": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564789"
+        ]
+    },
+    "로보스타": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272663"
+        ]
+    },
+    "엔젤로보틱스공모": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272663"
+        ]
+    },
+    "수익": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272656",
+            "https://n.news.naver.com/mnews/article/015/0004959187"
+        ]
+    },
+    "가상": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272656"
+        ]
+    },
+    "예상": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152946"
+        ]
+    },
+    "영업익": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272634",
+            "https://n.news.naver.com/mnews/article/009/0005272064",
+            "https://n.news.naver.com/mnews/article/009/0005271059"
+        ]
+    },
+    "반대표": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960135"
+        ]
+    },
+    "포스코홀딩스": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960135",
+            "https://n.news.naver.com/mnews/article/018/0005691769",
+            "https://n.news.naver.com/mnews/article/018/0005690713"
+        ]
+    },
+    "nh투자증권": {
+        "count": 11,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004313391",
+            "https://n.news.naver.com/mnews/article/018/0005692439",
+            "https://n.news.naver.com/mnews/article/029/0002860672",
+            "https://n.news.naver.com/mnews/article/031/0000819837",
+            "https://n.news.naver.com/mnews/article/016/0002279249",
+            "https://n.news.naver.com/mnews/article/029/0002860363",
+            "https://n.news.naver.com/mnews/article/277/0005390646",
+            "https://n.news.naver.com/mnews/article/031/0000819211",
+            "https://n.news.naver.com/mnews/article/016/0002278334",
+            "https://n.news.naver.com/mnews/article/011/0004311092",
+            "https://n.news.naver.com/mnews/article/011/0004311048"
+        ]
+    },
+    "ipo": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692439"
+        ]
+    },
+    "캐나다은행": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960040"
+        ]
+    },
+    "원자재": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960040"
+        ]
+    },
+    "차명": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692410"
+        ]
+    },
+    "오스템임": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692410"
+        ]
+    },
+    "내부자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692410"
+        ]
+    },
+    "회사채": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692408",
+            "https://n.news.naver.com/mnews/article/277/0005391499",
+            "https://n.news.naver.com/mnews/article/018/0005690714",
+            "https://n.news.naver.com/mnews/article/008/0005010606",
+            "https://n.news.naver.com/mnews/article/014/0005154388",
+            "https://n.news.naver.com/mnews/article/001/0014556098",
+            "https://n.news.naver.com/mnews/article/018/0005689381",
+            "https://n.news.naver.com/mnews/article/001/0014554154"
+        ]
+    },
+    "차익": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692408",
+            "https://n.news.naver.com/mnews/article/215/0001152915",
+            "https://n.news.naver.com/mnews/article/008/0005011307",
+            "https://n.news.naver.com/mnews/article/018/0005690825",
+            "https://n.news.naver.com/mnews/article/009/0005271273",
+            "https://n.news.naver.com/mnews/article/421/0007404517",
+            "https://n.news.naver.com/mnews/article/016/0002278532"
+        ]
+    },
+    "연봉": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564523"
+        ]
+    },
+    "퇴직": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564523"
+        ]
+    },
+    "함영주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564523"
+        ]
+    },
+    "코인베이스글로벌": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960029",
+            "https://n.news.naver.com/mnews/article/011/0004312142"
+        ]
+    },
+    "마이크로스트래티지": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960029",
+            "https://n.news.naver.com/mnews/article/277/0005392280",
+            "https://n.news.naver.com/mnews/article/029/0002861110",
+            "https://n.news.naver.com/mnews/article/018/0005690149"
+        ]
+    },
+    "채굴주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004960029",
+            "https://n.news.naver.com/mnews/article/009/0005270746"
+        ]
+    },
+    "텔레그램": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/005/0001681042"
+        ]
+    },
+    "방경만": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564515",
+            "https://n.news.naver.com/mnews/article/421/0007412291",
+            "https://n.news.naver.com/mnews/article/277/0005392268"
+        ]
+    },
+    "경쟁사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014564515"
+        ]
+    },
+    "분기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156439"
+        ]
+    },
+    "이수스페셜티케미컬": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156438",
+            "https://n.news.naver.com/mnews/article/014/0005156324"
+        ]
+    },
+    "액면": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156438"
+        ]
+    },
+    "이자율": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156436"
+        ]
+    },
+    "메타바이오메드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156436"
+        ]
+    },
+    "분쟁": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057346",
+            "https://n.news.naver.com/mnews/article/277/0005391827",
+            "https://n.news.naver.com/mnews/article/003/0012421028",
+            "https://n.news.naver.com/mnews/article/243/0000057219",
+            "https://n.news.naver.com/mnews/article/469/0000789910",
+            "https://n.news.naver.com/mnews/article/018/0005689113"
+        ]
+    },
+    "반도체": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152915",
+            "https://n.news.naver.com/mnews/article/009/0005272076",
+            "https://n.news.naver.com/mnews/article/215/0001152799",
+            "https://n.news.naver.com/mnews/article/001/0014561862",
+            "https://n.news.naver.com/mnews/article/277/0005391617",
+            "https://n.news.naver.com/mnews/article/008/0005010394",
+            "https://n.news.naver.com/mnews/article/215/0001152319",
+            "https://n.news.naver.com/mnews/article/031/0000819082",
+            "https://n.news.naver.com/mnews/article/015/0004958155",
+            "https://n.news.naver.com/mnews/article/277/0005390208"
+        ]
+    },
+    "도이치모터스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152915"
+        ]
+    },
+    "윤활유": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977949"
+        ]
+    },
+    "인수": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977949",
+            "https://n.news.naver.com/mnews/article/277/0005391822"
+        ]
+    },
+    "지크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977949"
+        ]
+    },
+    "도쿄증권거래소": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959988"
+        ]
+    },
+    "2718": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959988"
+        ]
+    },
+    "배당액": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272435",
+            "https://n.news.naver.com/mnews/article/015/0004959764"
+        ]
+    },
+    "순이익": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272435",
+            "https://n.news.naver.com/mnews/article/009/0005272253",
+            "https://n.news.naver.com/mnews/article/015/0004959846",
+            "https://n.news.naver.com/mnews/article/009/0005272075",
+            "https://n.news.naver.com/mnews/article/008/0005011573",
+            "https://n.news.naver.com/mnews/article/421/0007407657",
+            "https://n.news.naver.com/mnews/article/366/0000977327",
+            "https://n.news.naver.com/mnews/article/018/0005690851"
+        ]
+    },
+    "가치주": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959986",
+            "https://n.news.naver.com/mnews/article/018/0005691662",
+            "https://n.news.naver.com/mnews/article/243/0000057173",
+            "https://n.news.naver.com/mnews/article/018/0005689157"
+        ]
+    },
+    "롯데칠성": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959986"
+        ]
+    },
+    "베어링자산운용": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959986"
+        ]
+    },
+    "중국": {
+        "count": 12,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012028",
+            "https://n.news.naver.com/mnews/article/015/0004959577",
+            "https://n.news.naver.com/mnews/article/215/0001152705",
+            "https://n.news.naver.com/mnews/article/014/0005155566",
+            "https://n.news.naver.com/mnews/article/277/0005391501",
+            "https://n.news.naver.com/mnews/article/277/0005390891",
+            "https://n.news.naver.com/mnews/article/008/0005010389",
+            "https://n.news.naver.com/mnews/article/009/0005270746",
+            "https://n.news.naver.com/mnews/article/009/0005270651",
+            "https://n.news.naver.com/mnews/article/009/0005270521",
+            "https://n.news.naver.com/mnews/article/014/0005153916",
+            "https://n.news.naver.com/mnews/article/018/0005689103"
+        ]
+    },
+    "반발": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005012028"
+        ]
+    },
+    "손실": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007412291",
+            "https://n.news.naver.com/mnews/article/277/0005392268",
+            "https://n.news.naver.com/mnews/article/648/0000023956",
+            "https://n.news.naver.com/mnews/article/030/0003188247",
+            "https://n.news.naver.com/mnews/article/648/0000023924",
+            "https://n.news.naver.com/mnews/article/018/0005689568",
+            "https://n.news.naver.com/mnews/article/003/0012418617",
+            "https://n.news.naver.com/mnews/article/016/0002278334",
+            "https://n.news.naver.com/mnews/article/018/0005689349",
+            "https://n.news.naver.com/mnews/article/003/0012418185"
+        ]
+    },
+    "담배": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007412291"
+        ]
+    },
+    "개비": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156373"
+        ]
+    },
+    "필립모리스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156373"
+        ]
+    },
+    "행동주의": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392278",
+            "https://n.news.naver.com/mnews/article/469/0000790330"
+        ]
+    },
+    "주요": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011959",
+            "https://n.news.naver.com/mnews/article/014/0005155947"
+        ]
+    },
+    "동화": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156324"
+        ]
+    },
+    "워크아웃": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273628"
+        ]
+    },
+    "래몽래인": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273626",
+            "https://n.news.naver.com/mnews/article/030/0003188988",
+            "https://n.news.naver.com/mnews/article/421/0007407447"
+        ]
+    },
+    "의약품": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272316",
+            "https://n.news.naver.com/mnews/article/014/0005155566",
+            "https://n.news.naver.com/mnews/article/018/0005690866"
+        ]
+    },
+    "삼성자산운용": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272316"
+        ]
+    },
+    "애널리스트": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959952",
+            "https://n.news.naver.com/mnews/article/029/0002861086",
+            "https://n.news.naver.com/mnews/article/029/0002861004",
+            "https://n.news.naver.com/mnews/article/277/0005391617",
+            "https://n.news.naver.com/mnews/article/018/0005690317",
+            "https://n.news.naver.com/mnews/article/215/0001152256"
+        ]
+    },
+    "이세철": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959952"
+        ]
+    },
+    "슈퍼마이크로컴퓨터": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861086",
+            "https://n.news.naver.com/mnews/article/009/0005271605"
+        ]
+    },
+    "적자": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861084",
+            "https://n.news.naver.com/mnews/article/015/0004958477",
+            "https://n.news.naver.com/mnews/article/015/0004958140"
+        ]
+    },
+    "현대자동차": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861084"
+        ]
+    },
+    "토스증권": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272253",
+            "https://n.news.naver.com/mnews/article/243/0000057326",
+            "https://n.news.naver.com/mnews/article/015/0004959846"
+        ]
+    },
+    "컴퓨터": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272253"
+        ]
+    },
+    "우선주의": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011886"
+        ]
+    },
+    "한솔아이원스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156245"
+        ]
+    },
+    "수정": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156245"
+        ]
+    },
+    "에코프로비엠": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272250"
+        ]
+    },
+    "토론": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272250",
+            "https://n.news.naver.com/mnews/article/009/0005271869",
+            "https://n.news.naver.com/mnews/article/018/0005691555",
+            "https://n.news.naver.com/mnews/article/011/0004312743",
+            "https://n.news.naver.com/mnews/article/366/0000977550",
+            "https://n.news.naver.com/mnews/article/243/0000057286",
+            "https://n.news.naver.com/mnews/article/421/0007408939",
+            "https://n.news.naver.com/mnews/article/003/0012423739",
+            "https://n.news.naver.com/mnews/article/016/0002279763",
+            "https://n.news.naver.com/mnews/article/029/0002860672"
+        ]
+    },
+    "바이오주": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272250",
+            "https://n.news.naver.com/mnews/article/009/0005271992",
+            "https://n.news.naver.com/mnews/article/119/0002809120",
+            "https://n.news.naver.com/mnews/article/014/0005154372",
+            "https://n.news.naver.com/mnews/article/014/0005154276",
+            "https://n.news.naver.com/mnews/article/015/0004958402"
+        ]
+    },
+    "코인마켓캡": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272248",
+            "https://n.news.naver.com/mnews/article/029/0002860834",
+            "https://n.news.naver.com/mnews/article/016/0002279759",
+            "https://n.news.naver.com/mnews/article/009/0005271273",
+            "https://n.news.naver.com/mnews/article/030/0003188307",
+            "https://n.news.naver.com/mnews/article/016/0002278958",
+            "https://n.news.naver.com/mnews/article/001/0014556396",
+            "https://n.news.naver.com/mnews/article/029/0002860110"
+        ]
+    },
+    "급등": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272248",
+            "https://n.news.naver.com/mnews/article/009/0005271261",
+            "https://n.news.naver.com/mnews/article/215/0001152448",
+            "https://n.news.naver.com/mnews/article/277/0005390717",
+            "https://n.news.naver.com/mnews/article/014/0005154374",
+            "https://n.news.naver.com/mnews/article/014/0005154305",
+            "https://n.news.naver.com/mnews/article/421/0007403568"
+        ]
+    },
+    "알트코인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272248"
+        ]
+    },
+    "에코비트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280520"
+        ]
+    },
+    "매각": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280520",
+            "https://n.news.naver.com/mnews/article/018/0005690229"
+        ]
+    },
+    "씨티글로벌마켓증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280520"
+        ]
+    },
+    "실적": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000024020",
+            "https://n.news.naver.com/mnews/article/215/0001152799",
+            "https://n.news.naver.com/mnews/article/015/0004959159",
+            "https://n.news.naver.com/mnews/article/243/0000057191",
+            "https://n.news.naver.com/mnews/article/015/0004958146"
+        ]
+    },
+    "목표": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057326",
+            "https://n.news.naver.com/mnews/article/009/0005271924",
+            "https://n.news.naver.com/mnews/article/009/0005271747",
+            "https://n.news.naver.com/mnews/article/031/0000819837",
+            "https://n.news.naver.com/mnews/article/018/0005690849",
+            "https://n.news.naver.com/mnews/article/014/0005155160",
+            "https://n.news.naver.com/mnews/article/215/0001152256"
+        ]
+    },
+    "한국투자증권": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057326",
+            "https://n.news.naver.com/mnews/article/119/0002808317"
+        ]
+    },
+    "디오홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977792"
+        ]
+    },
+    "나이스투자파트너스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977792"
+        ]
+    },
+    "에이치프라이빗에쿼티": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977792"
+        ]
+    },
+    "아시아": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005692065"
+        ]
+    },
+    "유튜브": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977770"
+        ]
+    },
+    "사기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977770"
+        ]
+    },
+    "펀드": {
+        "count": 10,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977770",
+            "https://n.news.naver.com/mnews/article/011/0004312840",
+            "https://n.news.naver.com/mnews/article/011/0004312693",
+            "https://n.news.naver.com/mnews/article/009/0005271747",
+            "https://n.news.naver.com/mnews/article/008/0005011307",
+            "https://n.news.naver.com/mnews/article/015/0004959187",
+            "https://n.news.naver.com/mnews/article/009/0005271294",
+            "https://n.news.naver.com/mnews/article/009/0005271184",
+            "https://n.news.naver.com/mnews/article/366/0000977074",
+            "https://n.news.naver.com/mnews/article/009/0005270424"
+        ]
+    },
+    "한은": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014562829"
+        ]
+    },
+    "감소세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014562829"
+        ]
+    },
+    "일리노이주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007410716"
+        ]
+    },
+    "김승연": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959846"
+        ]
+    },
+    "급감": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280417",
+            "https://n.news.naver.com/mnews/article/011/0004312139"
+        ]
+    },
+    "개미": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280417"
+        ]
+    },
+    "카카오게임즈": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977760",
+            "https://n.news.naver.com/mnews/article/018/0005691735"
+        ]
+    },
+    "절반": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977760",
+            "https://n.news.naver.com/mnews/article/001/0014562243"
+        ]
+    },
+    "개발": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156016"
+        ]
+    },
+    "현대차증권": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156016",
+            "https://n.news.naver.com/mnews/article/015/0004959732",
+            "https://n.news.naver.com/mnews/article/009/0005271592",
+            "https://n.news.naver.com/mnews/article/421/0007406484"
+        ]
+    },
+    "냉각": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005156016"
+        ]
+    },
+    "배당주의": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272075"
+        ]
+    },
+    "키움증권": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272075",
+            "https://n.news.naver.com/mnews/article/008/0005011512"
+        ]
+    },
+    "정유주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007410228"
+        ]
+    },
+    "주유": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007410228"
+        ]
+    },
+    "은행": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273474"
+        ]
+    },
+    "배상": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273474"
+        ]
+    },
+    "우려": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273474",
+            "https://n.news.naver.com/mnews/article/018/0005691734",
+            "https://n.news.naver.com/mnews/article/011/0004311655"
+        ]
+    },
+    "가이드라인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272072"
+        ]
+    },
+    "첨병": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272072"
+        ]
+    },
+    "달러트리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392028"
+        ]
+    },
+    "패밀리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392028"
+        ]
+    },
+    "순손실": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005392028"
+        ]
+    },
+    "낸드": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005272064",
+            "https://n.news.naver.com/mnews/article/011/0004311797",
+            "https://n.news.naver.com/mnews/article/215/0001152404"
+        ]
+    },
+    "2698": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002280267"
+        ]
+    },
+    "남성": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014562243"
+        ]
+    },
+    "두산로보틱스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011634"
+        ]
+    },
+    "기대감": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011634",
+            "https://n.news.naver.com/mnews/article/015/0004958925"
+        ]
+    },
+    "엔젤로보틱스": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011634",
+            "https://n.news.naver.com/mnews/article/018/0005691706",
+            "https://n.news.naver.com/mnews/article/417/0000988611",
+            "https://n.news.naver.com/mnews/article/015/0004958884",
+            "https://n.news.naver.com/mnews/article/031/0000819671",
+            "https://n.news.naver.com/mnews/article/421/0007406107",
+            "https://n.news.naver.com/mnews/article/014/0005154888"
+        ]
+    },
+    "셀트리온제약": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012425581",
+            "https://n.news.naver.com/mnews/article/015/0004959757",
+            "https://n.news.naver.com/mnews/article/015/0004959418"
+        ]
+    },
+    "폭탄": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012425581"
+        ]
+    },
+    "카카오엔터테인먼트": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959764",
+            "https://n.news.naver.com/mnews/article/009/0005271059"
+        ]
+    },
+    "부채": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152795"
+        ]
+    },
+    "티와이홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152795"
+        ]
+    },
+    "스튜어드십코드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155947"
+        ]
+    },
+    "폭증": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002809151"
+        ]
+    },
+    "천문학": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002809151"
+        ]
+    },
+    "갤럭시s24": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014561940"
+        ]
+    },
+    "오리온": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959732"
+        ]
+    },
+    "신약": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155897",
+            "https://n.news.naver.com/mnews/article/015/0004958402",
+            "https://n.news.naver.com/mnews/article/015/0004958146"
+        ]
+    },
+    "배터리": {
+        "count": 8,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691773",
+            "https://n.news.naver.com/mnews/article/015/0004959577",
+            "https://n.news.naver.com/mnews/article/015/0004958925",
+            "https://n.news.naver.com/mnews/article/421/0007406484",
+            "https://n.news.naver.com/mnews/article/421/0007405188",
+            "https://n.news.naver.com/mnews/article/277/0005390838",
+            "https://n.news.naver.com/mnews/article/366/0000976926",
+            "https://n.news.naver.com/mnews/article/031/0000819082"
+        ]
+    },
+    "동원시스템즈": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691773"
+        ]
+    },
+    "매출액": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977671",
+            "https://n.news.naver.com/mnews/article/031/0000820172",
+            "https://n.news.naver.com/mnews/article/018/0005690317",
+            "https://n.news.naver.com/mnews/article/366/0000976724",
+            "https://n.news.naver.com/mnews/article/018/0005689139"
+        ]
+    },
+    "현대오일뱅크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977671"
+        ]
+    },
+    "김준형": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691769"
+        ]
+    },
+    "서울역북부역세권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691768"
+        ]
+    },
+    "한화건설": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691768"
+        ]
+    },
+    "재개발": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691768"
+        ]
+    },
+    "탈피": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000820173"
+        ]
+    },
+    "매출": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000820173"
+        ]
+    },
+    "베트남": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000820172"
+        ]
+    },
+    "하향": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000820172"
+        ]
+    },
+    "과열": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988655",
+            "https://n.news.naver.com/mnews/article/009/0005271605",
+            "https://n.news.naver.com/mnews/article/016/0002279759",
+            "https://n.news.naver.com/mnews/article/018/0005690825",
+            "https://n.news.naver.com/mnews/article/009/0005270653"
+        ]
+    },
+    "화폐": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988655"
+        ]
+    },
+    "상승장": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988655",
+            "https://n.news.naver.com/mnews/article/119/0002809120",
+            "https://n.news.naver.com/mnews/article/009/0005271924"
+        ]
+    },
+    "나스닥": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014561862"
+        ]
+    },
+    "연간": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391888"
+        ]
+    },
+    "이익률": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391888",
+            "https://n.news.naver.com/mnews/article/008/0005011323",
+            "https://n.news.naver.com/mnews/article/277/0005391278",
+            "https://n.news.naver.com/mnews/article/015/0004958712",
+            "https://n.news.naver.com/mnews/article/031/0000819073"
+        ]
+    },
+    "혈당": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271992"
+        ]
+    },
+    "아세아시멘트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011573"
+        ]
+    },
+    "향후": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011573"
+        ]
+    },
+    "일렉트릭": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152772"
+        ]
+    },
+    "부킹홀딩스쇼피파이": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152772"
+        ]
+    },
+    "열외": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152772"
+        ]
+    },
+    "컴투스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691735"
+        ]
+    },
+    "흥행": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691735"
+        ]
+    },
+    "미국": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691734"
+        ]
+    },
+    "수요일": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271990"
+        ]
+    },
+    "제너럴모터스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391881"
+        ]
+    },
+    "자금난": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391881"
+        ]
+    },
+    "한국거래소그동안": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002809120"
+        ]
+    },
+    "금값": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271977",
+            "https://n.news.naver.com/mnews/article/009/0005271109",
+            "https://n.news.naver.com/mnews/article/277/0005390999",
+            "https://n.news.naver.com/mnews/article/009/0005270746",
+            "https://n.news.naver.com/mnews/article/001/0014554228"
+        ]
+    },
+    "리스크": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271977",
+            "https://n.news.naver.com/mnews/article/648/0000023956",
+            "https://n.news.naver.com/mnews/article/021/0002625920",
+            "https://n.news.naver.com/mnews/article/023/0003821594"
+        ]
+    },
+    "기술력": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691706"
+        ]
+    },
+    "건설사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002809111"
+        ]
+    },
+    "하반기": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312873",
+            "https://n.news.naver.com/mnews/article/011/0004312771",
+            "https://n.news.naver.com/mnews/article/011/0004312751"
+        ]
+    },
+    "위기감": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312873",
+            "https://n.news.naver.com/mnews/article/011/0004312771"
+        ]
+    },
+    "배당": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391827",
+            "https://n.news.naver.com/mnews/article/015/0004959159",
+            "https://n.news.naver.com/mnews/article/243/0000057170"
+        ]
+    },
+    "삼양패키징": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391827"
+        ]
+    },
+    "씨씨에스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391826"
+        ]
+    },
+    "사채": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391826"
+        ]
+    },
+    "차입금": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691697"
+        ]
+    },
+    "sk인천석유화학": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691697"
+        ]
+    },
+    "사모": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391822",
+            "https://n.news.naver.com/mnews/article/016/0002279322"
+        ]
+    },
+    "한앤컴퍼니": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391822"
+        ]
+    },
+    "밸류트랩": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011546"
+        ]
+    },
+    "sk텔레콤": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011546"
+        ]
+    },
+    "프리미엄": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011546"
+        ]
+    },
+    "항공사": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691666",
+            "https://n.news.naver.com/mnews/article/015/0004959520"
+        ]
+    },
+    "인천국제공항공사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691666"
+        ]
+    },
+    "수요": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691666"
+        ]
+    },
+    "기술주의": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014561725",
+            "https://n.news.naver.com/mnews/article/015/0004959132"
+        ]
+    },
+    "비만": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312840",
+            "https://n.news.naver.com/mnews/article/011/0004312693"
+        ]
+    },
+    "공모주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312832",
+            "https://n.news.naver.com/mnews/article/030/0003188799"
+        ]
+    },
+    "삼현": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312832",
+            "https://n.news.naver.com/mnews/article/009/0005271744",
+            "https://n.news.naver.com/mnews/article/119/0002808199",
+            "https://n.news.naver.com/mnews/article/031/0000819054"
+        ]
+    },
+    "테무": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691664",
+            "https://n.news.naver.com/mnews/article/421/0007407126"
+        ]
+    },
+    "관망세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391807"
+        ]
+    },
+    "베어링고배당증권투자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691662"
+        ]
+    },
+    "공포": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691662"
+        ]
+    },
+    "강세장": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860908",
+            "https://n.news.naver.com/mnews/article/029/0002860834"
+        ]
+    },
+    "채굴량": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860908"
+        ]
+    },
+    "밸류업": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011512",
+            "https://n.news.naver.com/mnews/article/008/0005011138"
+        ]
+    },
+    "장세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011512"
+        ]
+    },
+    "공모": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988611"
+        ]
+    },
+    "다우존스": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391802",
+            "https://n.news.naver.com/mnews/article/018/0005690830"
+        ]
+    },
+    "골드만삭스": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271924",
+            "https://n.news.naver.com/mnews/article/015/0004959522"
+        ]
+    },
+    "탈세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805486"
+        ]
+    },
+    "부동산": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805486"
+        ]
+    },
+    "실소유주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805486"
+        ]
+    },
+    "과일": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805484"
+        ]
+    },
+    "사과": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805484"
+        ]
+    },
+    "소매가격": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805484"
+        ]
+    },
+    "유통그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312771"
+        ]
+    },
+    "일본제철": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391773"
+        ]
+    },
+    "도요타": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391773"
+        ]
+    },
+    "노조": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391773",
+            "https://n.news.naver.com/mnews/article/277/0005391479"
+        ]
+    },
+    "인베스트먼트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691623"
+        ]
+    },
+    "드론": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691623",
+            "https://n.news.naver.com/mnews/article/014/0005153910"
+        ]
+    },
+    "반등": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959577",
+            "https://n.news.naver.com/mnews/article/018/0005689155"
+        ]
+    },
+    "공매도": {
+        "count": 7,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271869",
+            "https://n.news.naver.com/mnews/article/018/0005691555",
+            "https://n.news.naver.com/mnews/article/366/0000977550",
+            "https://n.news.naver.com/mnews/article/243/0000057286",
+            "https://n.news.naver.com/mnews/article/003/0012423739",
+            "https://n.news.naver.com/mnews/article/021/0002626200",
+            "https://n.news.naver.com/mnews/article/016/0002279763"
+        ]
+    },
+    "금감원장": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271869",
+            "https://n.news.naver.com/mnews/article/018/0005689488",
+            "https://n.news.naver.com/mnews/article/003/0012418617",
+            "https://n.news.naver.com/mnews/article/215/0001152217"
+        ]
+    },
+    "이복현": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691555",
+            "https://n.news.naver.com/mnews/article/366/0000977550",
+            "https://n.news.naver.com/mnews/article/003/0012423739",
+            "https://n.news.naver.com/mnews/article/016/0002279763"
+        ]
+    },
+    "매각가": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312751"
+        ]
+    },
+    "오상헬스케어": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057292",
+            "https://n.news.naver.com/mnews/article/003/0012424581",
+            "https://n.news.naver.com/mnews/article/030/0003188585",
+            "https://n.news.naver.com/mnews/article/215/0001152569"
+        ]
+    },
+    "셀리버리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000820098"
+        ]
+    },
+    "감독원장": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312743",
+            "https://n.news.naver.com/mnews/article/018/0005689133"
+        ]
+    },
+    "한국주식투자자연합회": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312743",
+            "https://n.news.naver.com/mnews/article/243/0000057286"
+        ]
+    },
+    "배상액": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977577",
+            "https://n.news.naver.com/mnews/article/021/0002625920"
+        ]
+    },
+    "은행사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977577"
+        ]
+    },
+    "왕좌": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959522"
+        ]
+    },
+    "도요타자동차": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959521"
+        ]
+    },
+    "알래스카항공": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959520"
+        ]
+    },
+    "사우스웨스트항공": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959520"
+        ]
+    },
+    "금융": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312694"
+        ]
+    },
+    "김치": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860834",
+            "https://n.news.naver.com/mnews/article/009/0005270653"
+        ]
+    },
+    "3파전": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312693"
+        ]
+    },
+    "내년": {
+        "count": 1,
+        "links": [
+<<<<<<< HEAD:Python/neurek/neureka_news/keyword_data.json
+            "https://n.news.naver.com/mnews/article/215/0001152705"
+        ]
+    },
+    "내년": {
+        "count": 1,
+        "links": [
+=======
+>>>>>>> 25cb12a3bbba6c2de95a9eb9d00bf01bf4abf099:Python/stocker/stocker_news/keyword_data.json
+            "https://n.news.naver.com/mnews/article/018/0005691489"
+        ]
+    },
+    "유럽": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005691489"
+        ]
+    },
+    "hlb생명과학": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152700"
+        ]
+    },
+    "폭발": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271747",
+            "https://n.news.naver.com/mnews/article/015/0004958399"
+        ]
+    },
+    "건설주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271746"
+        ]
+    },
+    "하락세": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271746",
+            "https://n.news.naver.com/mnews/article/015/0004958929",
+            "https://n.news.naver.com/mnews/article/009/0005271116"
+        ]
+    },
+    "이베스트투자증권": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271746",
+            "https://n.news.naver.com/mnews/article/215/0001152597",
+            "https://n.news.naver.com/mnews/article/016/0002278262"
+        ]
+    },
+    "자동차": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271744",
+            "https://n.news.naver.com/mnews/article/008/0005010158",
+            "https://n.news.naver.com/mnews/article/015/0004958399"
+        ]
+    },
+    "모터": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271744",
+            "https://n.news.naver.com/mnews/article/119/0002808199"
+        ]
+    },
+    "테크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011323"
+        ]
+    },
+    "형제": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977522",
+            "https://n.news.naver.com/mnews/article/003/0012421028"
+        ]
+    },
+    "신한투자증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007408939"
+        ]
+    },
+    "박순혁": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007408939"
+        ]
+    },
+    "와이더플래닛": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312624",
+            "https://n.news.naver.com/mnews/article/025/0003347030",
+            "https://n.news.naver.com/mnews/article/015/0004959246",
+            "https://n.news.naver.com/mnews/article/015/0004958881"
+        ]
+    },
+    "전일": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959418"
+        ]
+    },
+    "희비": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959418",
+            "https://n.news.naver.com/mnews/article/629/0000272956"
+        ]
+    },
+    "스탠더드앤드푸어스": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057285",
+            "https://n.news.naver.com/mnews/article/277/0005391380",
+            "https://n.news.naver.com/mnews/article/015/0004959132"
+        ]
+    },
+    "고점": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057285",
+            "https://n.news.naver.com/mnews/article/277/0005391278"
+        ]
+    },
+    "국채커버드콜": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011307"
+        ]
+    },
+    "삼성바이오로직스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155566"
+        ]
+    },
+    "리츠": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959387"
+        ]
+    },
+    "경쟁": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959387",
+            "https://n.news.naver.com/mnews/article/015/0004958142"
+        ]
+    },
+    "예언가": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271605"
+        ]
+    },
+    "여성": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977483"
+        ]
+    },
+    "리더십": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977483"
+        ]
+    },
+    "신한금융그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977483"
+        ]
+    },
+    "초록뱀미디어": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271596"
+        ]
+    },
+    "장윤정": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271596"
+        ]
+    },
+    "김동진": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271592"
+        ]
+    },
+<<<<<<< HEAD:Python/neurek/neureka_news/keyword_data.json
+=======
+    "감독원": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011253",
+            "https://n.news.naver.com/mnews/article/648/0000023969",
+            "https://n.news.naver.com/mnews/article/469/0000789910",
+            "https://n.news.naver.com/mnews/article/018/0005689349"
+        ]
+    },
+>>>>>>> 25cb12a3bbba6c2de95a9eb9d00bf01bf4abf099:Python/stocker/stocker_news/keyword_data.json
+    "갈등": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011253",
+            "https://n.news.naver.com/mnews/article/629/0000273106",
+            "https://n.news.naver.com/mnews/article/031/0000819211"
+        ]
+    },
+    "지적": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011253",
+            "https://n.news.naver.com/mnews/article/243/0000057251"
+        ]
+    },
+    "휴온스그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023985"
+        ]
+    },
+    "윤명용": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023985"
+        ]
+    },
+    "투자업계": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188799",
+            "https://n.news.naver.com/mnews/article/648/0000023924"
+        ]
+    },
+    "이름": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188799"
+        ]
+    },
+    "탐침": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391617"
+        ]
+    },
+    "구주주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014559995"
+        ]
+    },
+    "청약": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014559995",
+            "https://n.news.naver.com/mnews/article/030/0003188585"
+        ]
+    },
+    "대한전선": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014559995"
+        ]
+    },
+    "오해": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/021/0002626200"
+        ]
+    },
+    "현대비앤지스틸": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312474"
+        ]
+    },
+    "전기료": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279759"
+        ]
+    },
+    "재테크족": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279758",
+            "https://n.news.naver.com/mnews/article/016/0002279626"
+        ]
+    },
+    "엔화": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279758",
+            "https://n.news.naver.com/mnews/article/016/0002279626",
+            "https://n.news.naver.com/mnews/article/011/0004312137",
+            "https://n.news.naver.com/mnews/article/008/0005010220",
+            "https://n.news.naver.com/mnews/article/009/0005270497"
+        ]
+    },
+    "외화": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279758",
+            "https://n.news.naver.com/mnews/article/018/0005689112"
+        ]
+    },
+    "윤석열": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860718"
+        ]
+    },
+    "전력망": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007407909"
+        ]
+    },
+    "두산에너빌리티": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007407909"
+        ]
+    },
+    "삼성생명": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/138/0002168768"
+        ]
+    },
+    "증권주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011138",
+            "https://n.news.naver.com/mnews/article/009/0005271292"
+        ]
+    },
+    "성장주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391501"
+        ]
+    },
+    "완커": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391499"
+        ]
+    },
+    "무디스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391499"
+        ]
+    },
+    "소각": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007407657"
+        ]
+    },
+    "조선소": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391479"
+        ]
+    },
+    "무역법": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391479"
+        ]
+    },
+    "테마주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959246",
+            "https://n.news.naver.com/mnews/article/421/0007407447"
+        ]
+    },
+    "그리핀": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152624"
+        ]
+    },
+    "토스뱅크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279626"
+        ]
+    },
+    "프롬바이오": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959207",
+            "https://n.news.naver.com/mnews/article/215/0001152598"
+        ]
+    },
+    "권리락": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959207"
+        ]
+    },
+    "보유엔비디아": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819877"
+        ]
+    },
+    "추론": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819877"
+        ]
+    },
+    "오픈엣지테크놀로지": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819877"
+        ]
+    },
+    "니켈광산": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819876"
+        ]
+    },
+    "인도네시아": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819876"
+        ]
+    },
+    "다이나믹디자인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819876"
+        ]
+    },
+    "코리아에셋투자증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023969"
+        ]
+    },
+    "인하우스펀드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023969"
+        ]
+    },
+    "홍콩": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152597",
+            "https://n.news.naver.com/mnews/article/030/0003188063",
+            "https://n.news.naver.com/mnews/article/018/0005689488",
+            "https://n.news.naver.com/mnews/article/215/0001152217"
+        ]
+    },
+    "은행주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152597"
+        ]
+    },
+    "신한삼성전자알파펀드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959187"
+        ]
+    },
+    "불신": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860672"
+        ]
+    },
+    "빅테크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155244"
+        ]
+    },
+    "위험": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152586",
+            "https://n.news.naver.com/mnews/article/030/0003188063"
+        ]
+    },
+    "그랜섬": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152586"
+        ]
+    },
+    "현대홈쇼핑": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977327"
+        ]
+    },
+    "신영증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690926"
+        ]
+    },
+    "현대홈쇼핑흥국증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959159"
+        ]
+    },
+    "둔화": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391380"
+        ]
+    },
+    "현대지에프홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007407315"
+        ]
+    },
+    "차파트너스자산운용": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860656",
+            "https://n.news.naver.com/mnews/article/016/0002279263"
+        ]
+    },
+    "자사주의": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860656"
+        ]
+    },
+    "하나증권": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007407304",
+            "https://n.news.naver.com/mnews/article/018/0005690851",
+            "https://n.news.naver.com/mnews/article/277/0005390838"
+        ]
+    },
+    "배당일": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819837"
+        ]
+    },
+    "주주분": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155211"
+        ]
+    },
+    "dsc인베스트먼트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155211"
+        ]
+    },
+    "경신": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690872"
+        ]
+    },
+    "블루칩": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690872"
+        ]
+    },
+    "호실적": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271349"
+        ]
+    },
+    "전날": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690870"
+        ]
+    },
+    "김석환": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690870"
+        ]
+    },
+    "파업": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690866"
+        ]
+    },
+    "의료": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690866"
+        ]
+    },
+    "지난달": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152570"
+        ]
+    },
+    "인버스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152569"
+        ]
+    },
+    "장기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690849"
+        ]
+    },
+    "네이버": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007407126"
+        ]
+    },
+    "주거비": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391277",
+            "https://n.news.naver.com/mnews/article/215/0001152554"
+        ]
+    },
+    "둔화세": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152554",
+            "https://n.news.naver.com/mnews/article/018/0005690830"
+        ]
+    },
+    "풀무원": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959123"
+        ]
+    },
+    "고메이푸드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004959123"
+        ]
+    },
+    "투자금": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977286"
+        ]
+    },
+    "cgi홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977286"
+        ]
+    },
+    "상환": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977286"
+        ]
+    },
+    "몸값": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977283",
+            "https://n.news.naver.com/mnews/article/366/0000976926",
+            "https://n.news.naver.com/mnews/article/366/0000976641"
+        ]
+    },
+    "제공노브랜드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977283"
+        ]
+    },
+    "코인피디어": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988291"
+        ]
+    },
+    "시바이누코인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988291"
+        ]
+    },
+    "플로키": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000988291"
+        ]
+    },
+    "제이와이피파트너스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155163"
+        ]
+    },
+    "kb인베스트먼트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155163"
+        ]
+    },
+    "박진영": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155163"
+        ]
+    },
+    "신년사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155160"
+        ]
+    },
+    "하원": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391256"
+        ]
+    },
+    "바이든": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391256",
+            "https://n.news.naver.com/mnews/article/629/0000272956",
+            "https://n.news.naver.com/mnews/article/009/0005270765",
+            "https://n.news.naver.com/mnews/article/277/0005390146"
+        ]
+    },
+    "청문회": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005391256"
+        ]
+    },
+    "보통주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273117"
+        ]
+    },
+    "농협중앙회장": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273106",
+            "https://n.news.naver.com/mnews/article/014/0005154328",
+            "https://n.news.naver.com/mnews/article/008/0005010222",
+            "https://n.news.naver.com/mnews/article/417/0000987657"
+        ]
+    },
+    "내정윤병운": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000273106"
+        ]
+    },
+    "총장": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/025/0003346915"
+        ]
+    },
+    "철학": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/025/0003346915"
+        ]
+    },
+    "하나금융지주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271292",
+            "https://n.news.naver.com/mnews/article/243/0000057170"
+        ]
+    },
+    "자산": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/057/0001805215",
+            "https://n.news.naver.com/mnews/article/015/0004958920",
+            "https://n.news.naver.com/mnews/article/029/0002860110"
+        ]
+    },
+    "구글트렌드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271273"
+        ]
+    },
+    "상법": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690715"
+        ]
+    },
+    "경기도": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690715"
+        ]
+    },
+    "라비돌호텔": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690715"
+        ]
+    },
+    "주총일": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690713"
+        ]
+    },
+    "권태균": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690713"
+        ]
+    },
+    "위축": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155059"
+        ]
+    },
+    "kb증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005155059"
+        ]
+    },
+    "로보어드바이저": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958978"
+        ]
+    },
+    "테스트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958978"
+        ]
+    },
+    "증권업": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057251",
+            "https://n.news.naver.com/mnews/article/421/0007404521"
+        ]
+    },
+    "배상안": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057251",
+            "https://n.news.naver.com/mnews/article/018/0005689568"
+        ]
+    },
+    "레딧이": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958964"
+        ]
+    },
+    "월스트리트베츠": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958964"
+        ]
+    },
+    "금감원": {
+        "count": 5,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690678",
+            "https://n.news.naver.com/mnews/article/648/0000023956",
+            "https://n.news.naver.com/mnews/article/008/0005010222",
+            "https://n.news.naver.com/mnews/article/018/0005689568",
+            "https://n.news.naver.com/mnews/article/003/0012418185"
+        ]
+    },
+    "오류": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690678"
+        ]
+    },
+    "코인베이스개인투자자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312142"
+        ]
+    },
+    "레버리지": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004312139"
+        ]
+    },
+    "도쿄증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958929"
+        ]
+    },
+    "mg손해": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279322"
+        ]
+    },
+    "메모리": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005271116",
+            "https://n.news.naver.com/mnews/article/015/0004958511"
+        ]
+    },
+    "목소리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154991"
+        ]
+    },
+    "강스템바이오텍": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154991"
+        ]
+    },
+    "sk이노베이션": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958925"
+        ]
+    },
+    "연방항공청": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958920"
+        ]
+    },
+    "조비": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958920"
+        ]
+    },
+    "포스코dx": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007406484"
+        ]
+    },
+    "알테오젠": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958887"
+        ]
+    },
+    "웨어러블": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958884"
+        ]
+    },
+    "가상자산": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010680"
+        ]
+    },
+    "블라인드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010680"
+        ]
+    },
+    "호가": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010680"
+        ]
+    },
+    "반대": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279263"
+        ]
+    },
+    "전문의": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154888"
+        ]
+    },
+    "안다자산운용": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279249"
+        ]
+    },
+    "트럼프": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/629/0000272956",
+            "https://n.news.naver.com/mnews/article/215/0001152397",
+            "https://n.news.naver.com/mnews/article/009/0005270765",
+            "https://n.news.naver.com/mnews/article/277/0005390146"
+        ]
+    },
+    "푸본생명": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010606"
+        ]
+    },
+    "완판": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010606"
+        ]
+    },
+    "한미사이언스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023948"
+        ]
+    },
+    "정족수": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023948"
+        ]
+    },
+    "괴리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977074"
+        ]
+    },
+    "퇴출": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000977074"
+        ]
+    },
+    "강세론자": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188307",
+            "https://n.news.naver.com/mnews/article/215/0001152427"
+        ]
+    },
+    "이더리움": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188307",
+            "https://n.news.naver.com/mnews/article/417/0000987961"
+        ]
+    },
+    "영국": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023947",
+            "https://n.news.naver.com/mnews/article/277/0005390327"
+        ]
+    },
+    "일본": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023947"
+        ]
+    },
+    "경영": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/021/0002625920"
+        ]
+    },
+    "거래소": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188264",
+            "https://n.news.naver.com/mnews/article/215/0001152448",
+            "https://n.news.naver.com/mnews/article/417/0000988063",
+            "https://n.news.naver.com/mnews/article/016/0002278961",
+            "https://n.news.naver.com/mnews/article/008/0005010220",
+            "https://n.news.naver.com/mnews/article/648/0000023922"
+        ]
+    },
+    "포스코인터내셔널": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188264",
+            "https://n.news.naver.com/mnews/article/009/0005270836"
+        ]
+    },
+    "파마리서치": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188264"
+        ]
+    },
+    "어펄마캐피탈": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279035"
+        ]
+    },
+    "제이엔텍": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279035"
+        ]
+    },
+    "emc홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279035"
+        ]
+    },
+    "퇴진nh투자증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279034"
+        ]
+    },
+    "수장직": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279034",
+            "https://n.news.naver.com/mnews/article/016/0002278967"
+        ]
+    },
+    "퇴임": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002279034",
+            "https://n.news.naver.com/mnews/article/016/0002278967"
+        ]
+    },
+    "한미약품그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012421028"
+        ]
+    },
+    "모건스탠리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690229"
+        ]
+    },
+    "수송스퀘어": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690229"
+        ]
+    },
+    "빚투": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152447",
+            "https://n.news.naver.com/mnews/article/014/0005154374",
+            "https://n.news.naver.com/mnews/article/014/0005154305",
+            "https://n.news.naver.com/mnews/article/421/0007403568"
+        ]
+    },
+    "한빛소프트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/030/0003188247"
+        ]
+    },
+    "헝가리": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007405188"
+        ]
+    },
+    "민족주의": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390891"
+        ]
+    },
+    "구설수": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390891"
+        ]
+    },
+    "채굴": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152427"
+        ]
+    },
+    "대신증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278967"
+        ]
+    },
+    "원료": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270836"
+        ]
+    },
+    "헤럴드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278961"
+        ]
+    },
+    "시세": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278961",
+            "https://n.news.naver.com/mnews/article/417/0000987962"
+        ]
+    },
+    "보잉": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005690149"
+        ]
+    },
+    "케이스톤파트너스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976985"
+        ]
+    },
+    "케이유이호투자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976985"
+        ]
+    },
+    "엘살바도르": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278958"
+        ]
+    },
+    "달러화": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278958",
+            "https://n.news.naver.com/mnews/article/018/0005689560",
+            "https://n.news.naver.com/mnews/article/018/0005689187",
+            "https://n.news.naver.com/mnews/article/018/0005689155"
+        ]
+    },
+    "혼조세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958724"
+        ]
+    },
+    "카카오": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154577"
+        ]
+    },
+    "마진": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154577"
+        ]
+    },
+    "한화증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154577"
+        ]
+    },
+    "운용사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154575"
+        ]
+    },
+    "재간접": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154575"
+        ]
+    },
+    "손실액": {
+        "count": 6,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002808317",
+            "https://n.news.naver.com/mnews/article/421/0007404521",
+            "https://n.news.naver.com/mnews/article/023/0003821594",
+            "https://n.news.naver.com/mnews/article/030/0003188063",
+            "https://n.news.naver.com/mnews/article/215/0001152217",
+            "https://n.news.naver.com/mnews/article/018/0005689133"
+        ]
+    },
+    "노트북": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958712"
+        ]
+    },
+    "리노공업": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958712"
+        ]
+    },
+    "케이뱅크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152405"
+        ]
+    },
+    "빗썸코리아": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152405"
+        ]
+    },
+    "한화에어": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976952"
+        ]
+    },
+    "방산": {
+        "count": 3,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976952",
+            "https://n.news.naver.com/mnews/article/014/0005153910",
+            "https://n.news.naver.com/mnews/article/031/0000819054"
+        ]
+    },
+    "저커버그": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152397",
+            "https://n.news.naver.com/mnews/article/277/0005390147"
+        ]
+    },
+    "대교홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023937"
+        ]
+    },
+    "후계": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023937"
+        ]
+    },
+    "강호철": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023937"
+        ]
+    },
+    "도박": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152396"
+        ]
+    },
+    "변경": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002808279"
+        ]
+    },
+    "블룸버그통신": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390760"
+        ]
+    },
+    "이서현": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976938"
+        ]
+    },
+    "상속세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976938"
+        ]
+    },
+    "한섬닷컴": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010397"
+        ]
+    },
+    "불완전": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007404521",
+            "https://n.news.naver.com/mnews/article/648/0000023924"
+        ]
+    },
+    "티디엠투자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390717"
+        ]
+    },
+    "등락": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010394",
+            "https://n.news.naver.com/mnews/article/648/0000023917"
+        ]
+    },
+    "연산": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010389"
+        ]
+    },
+    "세탁기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010389"
+        ]
+    },
+    "미니소": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010383"
+        ]
+    },
+    "중국판": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010383"
+        ]
+    },
+    "짝퉁": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010383"
+        ]
+    },
+    "도쿄일렉트론": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689964"
+        ]
+    },
+    "반도체소부장": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689964"
+        ]
+    },
+    "현대차그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976926"
+        ]
+    },
+    "제약업체": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010338"
+        ]
+    },
+    "종양학": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010338"
+        ]
+    },
+    "화이자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010338"
+        ]
+    },
+    "채굴자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000987962"
+        ]
+    },
+    "업그레이드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000987961"
+        ]
+    },
+    "프로토콜": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000987961"
+        ]
+    },
+    "예금": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/023/0003821594"
+        ]
+    },
+    "비싸비트코인": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270741",
+            "https://n.news.naver.com/mnews/article/009/0005270653"
+        ]
+    },
+    "급등락": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270741",
+            "https://n.news.naver.com/mnews/article/138/0002168538"
+        ]
+    },
+    "나진상가": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689895"
+        ]
+    },
+    "용산라이프시티피에프브이": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689895"
+        ]
+    },
+    "네오밸류다": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689895"
+        ]
+    },
+    "인수전": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004311620",
+            "https://n.news.naver.com/mnews/article/366/0000976728"
+        ]
+    },
+    "이스타항공": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004311620"
+        ]
+    },
+    "난색lx그룹": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004311620"
+        ]
+    },
+    "라임펀드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/469/0000789910"
+        ]
+    },
+    "소송전": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689892"
+        ]
+    },
+    "jc파트너스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689892"
+        ]
+    },
+    "효성신설지주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689889"
+        ]
+    },
+    "일가": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689889"
+        ]
+    },
+    "인선": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002860363"
+        ]
+    },
+    "오너": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958602"
+        ]
+    },
+    "고려아연": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958602"
+        ]
+    },
+    "코리아써키트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958602"
+        ]
+    },
+    "사모채": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154388"
+        ]
+    },
+    "공모채": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154388"
+        ]
+    },
+    "바이넥스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154372"
+        ]
+    },
+    "백기사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958523"
+        ]
+    },
+    "sk증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958523"
+        ]
+    },
+    "금융사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270686"
+        ]
+    },
+    "농협법": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270686"
+        ]
+    },
+    "대주주": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270686",
+            "https://n.news.naver.com/mnews/article/648/0000023922"
+        ]
+    },
+    "현물": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270681",
+            "https://n.news.naver.com/mnews/article/417/0000987688"
+        ]
+    },
+    "아이폰": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958479"
+        ]
+    },
+    "에프앤가이드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958479"
+        ]
+    },
+    "업비트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014556396"
+        ]
+    },
+    "글로벌": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014556396"
+        ]
+    },
+    "상장위": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007404181"
+        ]
+    },
+    "철회": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007404181"
+        ]
+    },
+    "이브로드캐스팅": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/421/0007404181"
+        ]
+    },
+    "신임": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154328"
+        ]
+    },
+    "최종": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154328",
+            "https://n.news.naver.com/mnews/article/277/0005390646"
+        ]
+    },
+    "대표직": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270516"
+        ]
+    },
+    "세대교체": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270516"
+        ]
+    },
+    "봄기운": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005154276"
+        ]
+    },
+    "블룸버그": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152319"
+        ]
+    },
+    "지능": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152319",
+            "https://n.news.naver.com/mnews/article/018/0005689156"
+        ]
+    },
+    "반도체주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010194"
+        ]
+    },
+    "공사채": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014556098",
+            "https://n.news.naver.com/mnews/article/001/0014554154"
+        ]
+    },
+    "한전채": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/001/0014556098",
+            "https://n.news.naver.com/mnews/article/001/0014554154"
+        ]
+    },
+    "환차익": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270497"
+        ]
+    },
+    "성적": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958423"
+        ]
+    },
+    "엔고": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689688"
+        ]
+    },
+    "자동차주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689688"
+        ]
+    },
+    "급락도": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689688"
+        ]
+    },
+    "셀트리온": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958402"
+        ]
+    },
+    "죽스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010158"
+        ]
+    },
+    "무인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010158"
+        ]
+    },
+    "임원": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057196"
+        ]
+    },
+    "성무용": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057196"
+        ]
+    },
+    "신한지주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270435"
+        ]
+    },
+    "열풍": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270435"
+        ]
+    },
+    "미국채": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270424",
+            "https://n.news.naver.com/mnews/article/009/0005270131"
+        ]
+    },
+    "국채엔화노출액티브": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270424"
+        ]
+    },
+    "고용": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689560",
+            "https://n.news.naver.com/mnews/article/018/0005689187"
+        ]
+    },
+    "1315": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689560",
+            "https://n.news.naver.com/mnews/article/018/0005689187"
+        ]
+    },
+    "애플": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278532"
+        ]
+    },
+    "처벌": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689488"
+        ]
+    },
+    "엔터테인먼트사": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057191",
+            "https://n.news.naver.com/mnews/article/008/0005010013"
+        ]
+    },
+    "바닥론": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/243/0000057191"
+        ]
+    },
+    "인도회의당": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278524"
+        ]
+    },
+    "간디": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278524"
+        ]
+    },
+    "총선": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278524"
+        ]
+    },
+    "와이지엔터테인먼트": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958284"
+        ]
+    },
+    "최동준": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012418617"
+        ]
+    },
+    "에스엠": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005010013"
+        ]
+    },
+    "축소": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689381"
+        ]
+    },
+    "신한증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689355"
+        ]
+    },
+    "홍콩els": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689355",
+            "https://n.news.naver.com/mnews/article/018/0005689349"
+        ]
+    },
+    "과징금": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689355"
+        ]
+    },
+    "성경식품": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976728"
+        ]
+    },
+    "개미식품": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976728"
+        ]
+    },
+    "엔젠어날리시스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976724"
+        ]
+    },
+    "췌장암": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976724"
+        ]
+    },
+    "천차만별": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/003/0012418185"
+        ]
+    },
+    "회복력": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390327"
+        ]
+    },
+    "bnk투자증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152224"
+        ]
+    },
+    "한빛레이저": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819082"
+        ]
+    },
+    "조정기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/016/0002278262"
+        ]
+    },
+    "일본거래소": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958175"
+        ]
+    },
+    "공시": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958175"
+        ]
+    },
+    "상장부": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958175"
+        ]
+    },
+    "커머스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005153916"
+        ]
+    },
+    "알에프시스템즈": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/014/0005153910"
+        ]
+    },
+    "금은방": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/011/0004311092"
+        ]
+    },
+    "탱크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819073"
+        ]
+    },
+    "세진중공업": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/031/0000819073"
+        ]
+    },
+    "가상화폐": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000987688"
+        ]
+    },
+    "불안": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958155"
+        ]
+    },
+    "베르나르": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270146",
+            "https://n.news.naver.com/mnews/article/277/0005390147"
+        ]
+    },
+    "머스크": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270146"
+        ]
+    },
+    "손익": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005009849"
+        ]
+    },
+    "컨센서스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005009849"
+        ]
+    },
+    "셀트리온헬스케어": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958146"
+        ]
+    },
+    "대성홀딩스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023902"
+        ]
+    },
+    "후계자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023902"
+        ]
+    },
+    "유진투자증권증권": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689157"
+        ]
+    },
+    "김동원": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689156"
+        ]
+    },
+    "고객사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689156"
+        ]
+    },
+    "사내": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958142"
+        ]
+    },
+    "흑자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689139"
+        ]
+    },
+    "배당다우존스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/009/0005270131"
+        ]
+    },
+    "계열사": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390183"
+        ]
+    },
+    "석유": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390183"
+        ]
+    },
+    "sk플라즈마": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390183"
+        ]
+    },
+    "태광엠티": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023900"
+        ]
+    },
+    "신발": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/648/0000023900"
+        ]
+    },
+    "무기": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958133"
+        ]
+    },
+    "최광식": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/015/0004958133"
+        ]
+    },
+    "차등": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689133"
+        ]
+    },
+    "기술주": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/215/0001152201"
+        ]
+    },
+    "매수": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/119/0002807848"
+        ]
+    },
+    "자산액": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976645"
+        ]
+    },
+    "나이지리아": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976645"
+        ]
+    },
+    "소득세": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976645"
+        ]
+    },
+    "호석화": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689113"
+        ]
+    },
+    "런던": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689112"
+        ]
+    },
+    "야간": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689112"
+        ]
+    },
+    "씨메스": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/366/0000976641"
+        ]
+    },
+    "윙입푸드": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689103"
+        ]
+    },
+    "취임식": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000987657"
+        ]
+    },
+    "지배": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/417/0000987657"
+        ]
+    },
+    "부자": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390147"
+        ]
+    },
+    "박빙": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/277/0005390146"
+        ]
+    },
+    "테슬라밸류체인": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689093"
+        ]
+    },
+    "화재": {
+        "count": 1,
+        "links": [
+            "https://n.news.naver.com/mnews/article/018/0005689093"
+        ]
+    }
+}
