@@ -33,7 +33,7 @@ def save_article_list(article_list):
 
 try:
     while True:
-        if len(article_list) >= 100:
+        if len(article_list) >= 10:
             break
 
         # 오늘 날짜에서 하루를 빼서 어제의 날짜를 계산

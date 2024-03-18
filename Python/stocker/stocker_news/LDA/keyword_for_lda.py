@@ -116,7 +116,8 @@ if __name__ == "__main__":
     # 스크립트의 현재 디렉토리를 기반으로 파일의 경로를 설정합니다.
     newsDataTime = time.time()
     current_directory = os.path.dirname(__file__)
-    file_path = os.path.join(current_directory, 'data/lda_test_data.json')
+    # file_path = os.path.join(current_directory, 'data/lda_test_data.json')
+    file_path = os.path.join(current_directory, 'data/lda_news_data.json')
     with open(file_path, 'r', encoding='utf-8') as file:
         news_data = json.load(file)
         

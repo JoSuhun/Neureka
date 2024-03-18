@@ -28,37 +28,40 @@ dictionary = gensim.corpora.Dictionary(tokenized_doc)
 corpus = [dictionary.doc2bow(text) for text in tokenized_doc]
 
 
-# =========================
-# 모델 학습하기. 가져온 데이터를 이용하여 최초 1회 실행하면 이후 학습된 모델 데이터를 저장합니다
-# 토픽의 개수 Hyper params
-NUM_TOPICS = 10 
-# corpus와 word dictionary, 기타 hyper params로 LdaModel 학습하기 및 토픽 리스트 추출하기
-ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics = NUM_TOPICS, id2word=dictionary, passes=15)
-topics = ldamodel.print_topics(num_words=10)
-for topic in topics:
-    print(topic)
-
-# 학습된 LDA모델 따로 저장하기
-# 모델 저장
-import os
-from datetime import date
-# 오늘 날짜 얻기
-today_folder_path = f"model/{date.today()}"
-if not os.path.exists(today_folder_path):
-    os.makedirs(today_folder_path)
-    print(f"'{today_folder_path}' 폴더가 생성되었습니다.")
-ldamodel.save(today_folder_path+'/lda_model_crawled')
 # # =========================
-
-
-# # =========================
-# # 저장된 LDA모델 불러오기
-# ldamodel = gensim.models.ldamodel.LdaModel.load('model/lda_model_crawled')
-# # 토픽의 단어 4개만 추출하여 출력하기
+# # 모델 학습하기. 가져온 데이터를 이용하여 최초 1회 실행하면 이후 학습된 모델 데이터를 저장합니다
+# # 토픽의 개수 Hyper params
+# NUM_TOPICS = 10 
+# # corpus와 word dictionary, 기타 hyper params로 LdaModel 학습하기 및 토픽 리스트 추출하기
+# ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics = NUM_TOPICS, id2word=dictionary, passes=15)
 # topics = ldamodel.print_topics(num_words=10)
 # for topic in topics:
 #     print(topic)
-# # =========================
+
+# # 학습된 LDA모델 따로 저장하기
+# # 모델 저장
+# import os
+# from datetime import date
+# # 오늘 날짜 얻기
+# today_folder_path = f"model/{date.today()}"
+# if not os.path.exists(today_folder_path):
+#     os.makedirs(today_folder_path)
+#     print(f"'{today_folder_path}' 폴더가 생성되었습니다.")
+# ldamodel.save(today_folder_path+'/lda_model_crawled')
+# # # =========================
+
+
+# =========================
+# 저장된 LDA모델 불러오기
+from datetime import date
+# today_folder_path = f"model/{date.today()}"
+today_folder_path = "model/2024-03-17"
+ldamodel = gensim.models.ldamodel.LdaModel.load(today_folder_path+ '/lda_model_crawled')
+# 토픽의 단어 4개만 추출하여 출력하기
+topics = ldamodel.print_topics(num_words=10)
+for topic in topics:
+    print(topic)
+# =========================
 
 
 # # =========================

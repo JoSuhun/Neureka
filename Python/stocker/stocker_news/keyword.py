@@ -13,7 +13,8 @@ from bareunpy import Tagger
 
 # 바른AI를 사용해 형태소 분석을 진행
 # https://bareun.ai/docs
-API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
+# API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
+API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
 tagger = Tagger(API_KEY, 'localhost', 5757)
 
 # Sentence Transformer 모델 로드
