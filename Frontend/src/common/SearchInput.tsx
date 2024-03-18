@@ -6,18 +6,21 @@ import { Content } from '@src/components/styles/NewsDetail/ArticleContentStyle'
 type Props = {
   search: boolean
   setSearch: (search: boolean) => void
+
+  setQuestion: (question: string) => void
 }
 
-const SearchInput = ({ search, setSearch }: Props) => {
+const SearchInput = ({ search, setSearch, setQuestion }: Props) => {
   const [content, SetContent] = useState('')
 
-  const searchToggle = () => {
-    setSearch(!search)
+  const clearSearch = () => {
+    setSearch(false)
+    SetContent('')
   }
 
-  const clearSearch = () => {
-    searchToggle()
-    SetContent('')
+  const goSearch = () => {
+    setSearch(true)
+    setQuestion(content)
   }
 
   return (
@@ -30,7 +33,7 @@ const SearchInput = ({ search, setSearch }: Props) => {
         {search ? (
           <s.ClearButton onClick={clearSearch} />
         ) : (
-          <s.SearchButton onClick={() => searchToggle()} />
+          <s.SearchButton onClick={goSearch} />
         )}
       </s.SearchBar>
     </s.SearchBox>

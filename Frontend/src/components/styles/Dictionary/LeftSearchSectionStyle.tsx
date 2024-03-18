@@ -26,10 +26,10 @@ export const SearchBar = styled.div`
   input {
     &:focus {
       outline: none;
-      border-bottom: 2px solid var(--color-yellow);
+      border-bottom: 2px solid var(--color-blue);
     }
     &:hover {
-      border-bottom: 2px solid var(--color-yellow);
+      border-bottom: 2px solid var(--color-blue);
     }
   }
 `
@@ -40,15 +40,12 @@ export const SearchResult = styled.div`
   height: 0;
   opacity: 0;
   padding: 10px 5%;
-
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
   transition: all 500ms ease-in-out;
 
   line-height: 1.7;
   color: var(--color-navy);
 
-  box-shadow: var(--shadow-inner);
+  box-shadow: var(--shadow);
   &.open {
     height: 30vh;
     transition: all 500ms ease-in-out;

@@ -7,17 +7,21 @@ type Props = {}
 
 const LeftSearchSection = (props: Props) => {
   const [search, setSearch] = useState(false)
+  const [question, setQuestion] = useState('')
   return (
     <>
       <l.Wrapper>
         <l.Box>
           <l.SearchBar>
-            <SearchInput search={search} setSearch={setSearch} />
+            <SearchInput
+              search={search}
+              setSearch={setSearch}
+              setQuestion={setQuestion}
+            />
           </l.SearchBar>
           <l.SearchResult className={search ? `open` : `close`}>
-            모르겠는데요
-            모르겠는데요모르겠는데요모르겠는데요모르겠는데요모르겠는데요모르겠는데요
-            모르겠는데요모르겠는데요
+            {question}
+            어쩌고저쩌고
           </l.SearchResult>
         </l.Box>
       </l.Wrapper>

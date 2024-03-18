@@ -9,6 +9,7 @@ const RightWordsSection = (props: Props) => {
   return (
     <>
       <r.Wrapper>
+        <r.Title>MARK</r.Title>
         <r.Box>
           <WordCard />
           <WordCard />
