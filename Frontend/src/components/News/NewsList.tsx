@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import axios from 'axios'
+
 import * as n from '../styles/News/NewsListStyle'
 import NewsCard from './NewsCard'
 // import Pagination from './Pagination'
@@ -19,6 +21,14 @@ const NewsList = (props: Props) => {
   const handlePage = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page)
   }
+
+  // 뉴스 조회 api
+  useEffect(() => {
+    // axios
+    //   .get('http://127.0.0.1:8000/news/api/today/')
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err))
+  }, [])
 
   useEffect(() => {
     if (page === last) {

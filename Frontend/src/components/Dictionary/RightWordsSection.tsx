@@ -6,16 +6,15 @@ import WordCard from './WordCard'
 type Props = {}
 
 const RightWordsSection = (props: Props) => {
+  const words = Array.from({ length: 10 }, (_, idx) => idx)
   return (
     <>
       <r.Wrapper>
         <r.Title>MARK</r.Title>
         <r.Box>
-          <WordCard />
-          <WordCard />
-          <WordCard />
-          <WordCard />
-          <WordCard />
+          {words.map((it, idx) => (
+            <WordCard />
+          ))}
         </r.Box>
       </r.Wrapper>
     </>
