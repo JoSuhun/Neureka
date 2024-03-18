@@ -12,9 +12,9 @@ const RightWordsSection = (props: Props) => {
       <r.Wrapper>
         <r.Title>MARK</r.Title>
         <r.Box>
-          {words.map((it, idx) => (
+          {/* {words.map((it, idx) => (
             <WordCard />
-          ))}
+          ))} */}
         </r.Box>
       </r.Wrapper>
     </>

@@ -16,10 +16,17 @@ export const CardBox = styled.div`
 export const Title = styled.p`
   color: var(--color-dark);
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 `
 
 export const Content = styled.div`
   font-family: 'Pretendard-Thin';
   color: var(--color-dark);
   padding-top: 10px;
+`
+export const saveBtn = styled.img`
+  width: 30px;
+  cursor: pointer;
+  /* margin-left: 5px; */
 `
