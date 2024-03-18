@@ -56,6 +56,7 @@ export const ResultWrap = styled.div`
   overflow-y: auto;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #f9f9f9;
 `
 
 export const ResultItem = styled.li`
