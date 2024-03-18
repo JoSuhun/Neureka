@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useAtom } from 'jotai'
 import { StockType } from '@src/types/stockType'
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward'
+import { selectedStockAtom } from '@src/stores/stockAtom'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import * as s from '@src/components/styles/Stocks/SearchStocksSectionStyle'
 
@@ -9,6 +10,7 @@ const SearchStocksSection = () => {
   const [searchBy, setSearchBy] = useState<string>('name') // select 분류
   const [searchTerm, setSearchTerm] = useState<string>('') // 검색어 입력
   const [showDropdown, setShowDropdown] = useState<boolean>(false) // 필터링 결과 드롭다운 여부
+  const [selectedStock, setSelectedStock] = useAtom(selectedStockAtom) // select 한 종목
 
   const handleSearchByChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -20,7 +22,13 @@ const SearchStocksSection = () => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setSearchTerm(event.target.value)
-    setShowDropdown(true) // 검색어 입력 시 드롭다운 표시
+    setShowDropdown(true)
+  }
+
+  const handleSelectStock = (stock: StockType) => {
+    setSelectedStock(stock)
+    setSearchTerm(stock.name)
+    setShowDropdown(false)
   }
 
   const filteredStocks = kospi200List.filter(stock =>
@@ -59,16 +67,19 @@ const SearchStocksSection = () => {
             value={searchTerm}
             onChange={handleSearchTermChange}
           />
-          <SearchOutlinedIcon onClick={() => setShowDropdown(true)} />
+          <s.SearchIcon onClick={() => setShowDropdown(true)} />
         </s.SearchBox>
         {showDropdown && (
           <s.ResultWrap>
             {filteredStocks.map(stock => (
-              <s.ResultItem key={stock.code}>
+              <s.ResultItem
+                key={stock.code}
+                onClick={() => handleSelectStock(stock)}
+              >
                 <span>
                   {stock.name} ({stock.code})
                 </span>
-                <ArrowOutwardIcon />
+                <s.ArrowIcon />
               </s.ResultItem>
             ))}
           </s.ResultWrap>
