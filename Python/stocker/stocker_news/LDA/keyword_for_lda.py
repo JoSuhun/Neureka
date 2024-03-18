@@ -116,38 +116,41 @@ if __name__ == "__main__":
     # 스크립트의 현재 디렉토리를 기반으로 파일의 경로를 설정합니다.
     newsDataTime = time.time()
     current_directory = os.path.dirname(__file__)
-    file_path = os.path.join(current_directory, 'data/ssafy_dataset_news_2023.json')
+    # file_path = os.path.join(current_directory, 'data/lda_test_data.json')
+    file_path = os.path.join(current_directory, 'data/lda_news_data.json')
     with open(file_path, 'r', encoding='utf-8') as file:
         news_data = json.load(file)
         
     print(len(news_data))
     print("데이터 처리 총 시간: ", time.time() - newsDataTime)
     
-    len_news_data = 5000
+    len_news_data = len(news_data)
         
+    with open("stop_words.txt", "r", encoding="utf-8") as file:
+        stop_words = [word.rstrip() for word in file.readlines()]
+    # print(stop_words)
     a = time.time()
+    count = 0
     for i in range(len_news_data):
         start_time = time.time()
         # url = news_data[i]["article_link"]
         # text = keyword_extraction(url)
-        text = news_data[i]["article"]
-        if not text:
-            news_data[i]["nouns"] = []
-            # news_data[i]["keyword"] = []
-            # news_data[i]["key_nouns_freq"] = []
-            continue # text가 비어있는 경우
-        # print(text)
+        # text = news_data[i]["article"]
+        text = news_data[i]
+        # if not text: # text가 비어있는 경우
+        #     news_data[i]["nouns"] = []
+        #     continue
+        
         # news_data[i]["id"] = i
         # news_data[i]["keyword"], news_data[i]["nouns"] = keyword_ext(i, text)
-        
         # keyword_now, nouns_now = keyword_ext(i, text)
         # news_data[i]["keyword"] = keyword_now
         # news_data[i]["key_nouns_freq"] = keyword_nouns_frequency(keyword_now, nouns_now)
-        news_data[i]["nouns"] = keyword_nouns(text)
-        # print(f"{i} 번째 기사 키워드")
-        # print(news_data[i]["keyword"])
-        # print(news_data[i]["nouns"])
-        # print(f'{i}번째 기사 작업')
+        # news_data[i]["nouns"] = keyword_nouns(text).split()
+        tokenized_text = keyword_nouns(text).split()
+        # news_data[i] = tokenized_text.apply(lambda x: [word for word in x if word not in (stop_words)])
+        news_data[i] = [token for token in tokenized_text if token not in stop_words and len(token) >= 2]
+        
         print(f'{i}번째 기사 작업 시간: {time.time()-start_time}초')
     print("데이터 처리 총 시간: ", time.time() - a)
 
@@ -155,7 +158,7 @@ if __name__ == "__main__":
     #     json.dump(news_data, file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지
         
         
-    with open('data/ssafy_dataset_news_2023_small.json', 'w', encoding='utf-8') as file:
+    with open('data/lda_test_data_filtered.json', 'w', encoding='utf-8') as file:
         json.dump(news_data[:len_news_data], file, ensure_ascii=False, indent=4)  # 한글 등 유니코드 문자를 그대로 유지
         
         
