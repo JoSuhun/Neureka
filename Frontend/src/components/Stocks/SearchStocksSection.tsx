@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
 import { StockType } from '@src/types/stockType'
 import { selectedStockAtom } from '@src/stores/stockAtom'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import * as s from '@src/components/styles/Stocks/SearchStocksSectionStyle'
 
 const SearchStocksSection = () => {
