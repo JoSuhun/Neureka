@@ -70,13 +70,15 @@ public class ReissueServiceImpl implements ReissueService{
             return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
         }
 
-        //DB에 저장되어 있는지 확인
+//        DB에 저장되어 있는지 확인
         Boolean isExist = redisService.checkExistsValue(refresh);
         if (!isExist) {
 
             //response body
             return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
         }
+
+
 
         String username = jwtUtil.getUsername(refresh);
         String role = jwtUtil.getRole(refresh);
