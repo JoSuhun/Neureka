@@ -11,7 +11,7 @@ const ArticleGrade = (props: Props) => {
 
   return (
     <>
-      <g.Wrapper>
+      <g.Wrapper className="article-grade">
         <g.GradeMsg>다음에도 이 주제의 기사를 읽고 싶으신가요?</g.GradeMsg>
         <Rating
           value={value}

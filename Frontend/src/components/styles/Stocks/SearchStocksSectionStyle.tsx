@@ -1,55 +1,71 @@
 import styled from 'styled-components'
 
-import SearchIcon from '@mui/icons-material/Search'
-
-export const Wrapper = styled.div`
-  height: 40%;
+export const Container = styled.div`
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-`
-export const SearchBox = styled.div`
-  width: 90%;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 3%;
+  padding: 3%;
+
+  > * {
+    margin-bottom: 5%;
+  }
 `
 
-export const SearchBar = styled.div`
-  width: 90%;
-  height: 60%;
+export const Title = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+`
+
+export const Wrap = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+`
+
+export const SelectBox = styled.select`
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+`
+
+export const SearchBox = styled.div`
+  width: 100%;
+  display: flex;
   align-items: center;
-  background-color: white;
-  padding: 0 3%;
-  border-radius: 10px;
-  box-shadow: inset 0.5px 0.5px 2px 0.5px #e2e2e2;
+  margin-bottom: 10px;
 `
 
 export const SearchInput = styled.input`
-  width: 100%;
-  height: 90%;
-  border: none;
-  background-color: transparent;
-  font-size: 0%.8;
-  &:focus {
-    outline: none;
-    border-bottom: 2px solid var(--color-blue);
-  }
-  &:hover {
-    border-bottom: 2px solid var(--color-blue);
-  }
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `
 
-export const SearchButton = styled(SearchIcon)`
-  border-radius: 10px;
-  font-size: 1.2em !important;
-  aspect-ratio: 1;
-  height: 1.3em !important;
-  width: 1.3em !important;
-  padding: 1%;
-  color: var(--color-dark);
-  cursor: pointer;
+export const ResultWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`
+
+export const ResultItem = styled.div`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+
+  & > span:first-child {
+    flex: 1;
+    margin-right: 5px;
+  }
+
+  & > span:last-child {
+    margin-left: 5px;
+  }
 `

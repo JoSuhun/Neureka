@@ -17,15 +17,27 @@ const CarouselItem = ({ type }: Props) => {
   return (
     <>
       {type === '1' ? (
-        <c.CarouselCard bgimage={bgimage} onClick={() => navigate('/news/1')}>
+        <c.CarouselCard
+          className="carousel-item"
+          bgimage={bgimage}
+          onClick={() => navigate('/news/1')}
+        >
           <c.HeadLine>헤드라인 어쩌구 저쩌구 중요한 내용</c.HeadLine>
         </c.CarouselCard>
       ) : type === '2' ? (
-        <c.CarouselCard bgimage={bgimage2} onClick={() => navigate('/news/2')}>
+        <c.CarouselCard
+          className="carousel-item"
+          bgimage={bgimage2}
+          onClick={() => navigate('/news/2')}
+        >
           <c.HeadLine>헤드라인 어쩌구 저쩌구 중요한 내용</c.HeadLine>
         </c.CarouselCard>
       ) : (
-        <c.CarouselCard bgimage={bgimage3} onClick={() => navigate('/news/3')}>
+        <c.CarouselCard
+          className="carousel-item"
+          bgimage={bgimage3}
+          onClick={() => navigate('/news/3')}
+        >
           <c.HeadLine>헤드라인 어쩌구 저쩌구 중요한 내용</c.HeadLine>
         </c.CarouselCard>
       )}

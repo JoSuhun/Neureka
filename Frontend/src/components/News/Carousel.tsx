@@ -34,7 +34,7 @@ const Carousel = () => {
   return (
     <c.Wrapper>
       <c.PrevButton onClick={handlePrev} />
-      <c.Container>
+      <c.Container className="carousel">
         <c.Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
           {cards.map((card, index) => (
             <c.Slide key={index}>

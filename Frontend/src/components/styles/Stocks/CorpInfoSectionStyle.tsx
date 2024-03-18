@@ -1,8 +1,5 @@
 import styled from 'styled-components'
 
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,24 +12,37 @@ export const Title = styled.div`
   font-weight: bold;
 `
 
-export const NewsTab = styled.div``
+export const Wrap = styled.div`
+  border-top: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+`
 
-export const TabBox = styled.div``
+export const Tabs = styled.ul`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  border-radius: 10px 10px 0 0;
+  padding: 0;
+  margin: 1% 0;
+  font-weight: 400;
 
-export const InfoTabs = styled(Tabs)`
-  width: 100%;
-  border-bottom: 1px solid var(--color-grey);
-  button {
-    width: 33.3333%;
+  .submenu {
+    display: flex;
+    width: 10%;
+    padding: 1%;
+    font-size: 0.9rem;
+    transition: 0.5s;
+  }
+
+  .focused {
+    color: deepskyblue;
+    border-bottom: 1px solid deepskyblue;
   }
 `
 
-export const InfoTab = styled(Tab)`
-  background-color: blue;
-`
-
-export const InfoBox = styled.div`
-  background-color: beige;
-  width: 100%;
-  height: 50vh;
+export const Content = styled.div`
+  background-color: antiquewhite;
+  min-height: 50vh;
 `

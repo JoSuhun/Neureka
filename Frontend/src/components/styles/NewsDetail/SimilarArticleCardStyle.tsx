@@ -5,13 +5,11 @@ export const Wrapper = styled.div`
   width: 32%;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow);
   cursor: pointer;
   &:hover div {
     color: black;
   }
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.048),
-    0 1px 2px rgba(0, 0, 0, 0.24);
 `
 export const Thumbnail = styled.img`
   width: 100%;
@@ -22,7 +20,7 @@ export const Thumbnail = styled.img`
 export const Title = styled.p`
   padding: 0 10px;
   margin: 10px 0;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -40,4 +38,6 @@ export const Content = styled.div`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   color: var(--color-grey);
+  padding: 0 10px;
+  margin-bottom: 10px;
 `

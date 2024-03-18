@@ -8,6 +8,29 @@ export const Wrapper = styled.div`
   flex-direction: column;
   background-color: var(--color-lightgrey);
   padding-bottom: 3%;
+  @media screen and (max-width: 1200px) {
+    .card-box {
+      height: 250px;
+    }
+    .card-title {
+      font-size: 1rem;
+    }
+    .card-content {
+      font-size: 0.9rem;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .news-box {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 576px) {
+    .news-box {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
 `
 
 export const NewsBox = styled.div`
@@ -23,9 +46,7 @@ export const NewCardBox = styled.div`
   height: 300px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.048),
-    0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: var(--shadow);
   cursor: pointer;
   &:hover img {
     transform: scale(1.05);

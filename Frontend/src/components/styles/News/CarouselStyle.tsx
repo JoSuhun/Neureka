@@ -9,6 +9,31 @@ export const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   position: relative;
+  @media screen and (max-width: 992px) {
+    .carousel {
+      height: 55vh;
+    }
+    .carousel-item {
+      p {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .carousel {
+      height: 50vh;
+    }
+    .carousel-item {
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  @media screen and (max-width: 576px) {
+    .carousel {
+      height: 40vh;
+    }
+  }
 `
 
 export const Container = styled.div`

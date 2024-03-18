@@ -21,8 +21,8 @@ const SimilarArticle = (props: Props) => {
   return (
     <>
       <s.Wrapper>
-        <s.Title>방금 보신 기사와 비슷해요 !</s.Title>
-        <s.ArticleBox>
+        <s.Title className="title">방금 보신 기사와 비슷해요 !</s.Title>
+        <s.ArticleBox className="card-box">
           <SimilarArticleCard
             image={sampleimage}
             title={title}

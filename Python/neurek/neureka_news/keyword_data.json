@@ -14,6 +14,7 @@
             "https://n.news.naver.com/mnews/article/029/0002861295"
         ]
     },
+<<<<<<< HEAD:Python/neurek/neureka_news/keyword_data.json
     "감독원": {
         "count": 5,
         "links": [
@@ -22,6 +23,13 @@
             "https://n.news.naver.com/mnews/article/648/0000023969",
             "https://n.news.naver.com/mnews/article/469/0000789910",
             "https://n.news.naver.com/mnews/article/018/0005689349"
+=======
+    "충격": {
+        "count": 2,
+        "links": [
+            "https://n.news.naver.com/mnews/article/029/0002861295",
+            "https://n.news.naver.com/mnews/article/215/0001152705"
+>>>>>>> 25cb12a3bbba6c2de95a9eb9d00bf01bf4abf099:Python/stocker/stocker_news/keyword_data.json
         ]
     },
     "인플레이션": {
@@ -2840,15 +2848,18 @@
             "https://n.news.naver.com/mnews/article/011/0004312693"
         ]
     },
-    "충격": {
+    "내년": {
         "count": 1,
         "links": [
+<<<<<<< HEAD:Python/neurek/neureka_news/keyword_data.json
             "https://n.news.naver.com/mnews/article/215/0001152705"
         ]
     },
     "내년": {
         "count": 1,
         "links": [
+=======
+>>>>>>> 25cb12a3bbba6c2de95a9eb9d00bf01bf4abf099:Python/stocker/stocker_news/keyword_data.json
             "https://n.news.naver.com/mnews/article/018/0005691489"
         ]
     },
@@ -3037,6 +3048,18 @@
             "https://n.news.naver.com/mnews/article/009/0005271592"
         ]
     },
+<<<<<<< HEAD:Python/neurek/neureka_news/keyword_data.json
+=======
+    "감독원": {
+        "count": 4,
+        "links": [
+            "https://n.news.naver.com/mnews/article/008/0005011253",
+            "https://n.news.naver.com/mnews/article/648/0000023969",
+            "https://n.news.naver.com/mnews/article/469/0000789910",
+            "https://n.news.naver.com/mnews/article/018/0005689349"
+        ]
+    },
+>>>>>>> 25cb12a3bbba6c2de95a9eb9d00bf01bf4abf099:Python/stocker/stocker_news/keyword_data.json
     "갈등": {
         "count": 3,
         "links": [

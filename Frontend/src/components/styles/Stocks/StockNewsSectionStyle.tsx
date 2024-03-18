@@ -14,6 +14,6 @@ export const Title = styled.div`
 `
 
 export const Wrap = styled.div`
+  border-top: 1px solid #000;
   height: 45vh;
-  background-color: bisque;
 `

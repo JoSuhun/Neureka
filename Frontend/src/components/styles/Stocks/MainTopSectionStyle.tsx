@@ -7,7 +7,7 @@ export const Container = styled.div`
   padding: 2% 0;
   border-bottom: 2px solid var(--color-dark);
   top: 13vh;
-  position: sticky;
+  /* position: sticky; */
 `
 
 export const Title = styled.p`
