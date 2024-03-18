@@ -1,5 +1,6 @@
 import time
 from neurek.neureka_news.models import DetailsArticle
+from LDA.keyword_for_lda import text_through_LDA_probability
 import requests
 import numpy as np
 from bs4 import BeautifulSoup
@@ -75,6 +76,7 @@ def process_article(article, stop_word):
     # 여기서 DB에 원문기사를 저장하는 로직
     url = article["article_link"]
     text = keyword_extraction(url)
+    topic = text_through_LDA_probability(text)
     keywords, nouns = keyword_ext(text, stop_word)
     article["keywords"] = keywords
     article["nouns"] = nouns
