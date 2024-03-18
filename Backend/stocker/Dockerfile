@@ -1,4 +1,3 @@
-
 # jdk17 Image Start
 FROM openjdk:17
 
