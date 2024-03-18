@@ -12,6 +12,7 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 # 바른AI를 사용해 형태소 분석을 진행
+# https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
 tagger = Tagger(API_KEY, 'localhost', 5757)
 
