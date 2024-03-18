@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as s from '../styles/News/HeaderStyle'
+import SearchInput from '@src/common/SearchInput'
 
 type Props = {}
 
 const Search = (props: Props) => {
+  const [search, setSearch] = useState(false)
+
   const hotkeywords = [
     '김유산',
     '윤주찬',
@@ -37,12 +40,9 @@ const Search = (props: Props) => {
   return (
     <>
       <s.Wrapper className="header-wrapper">
-        <s.SearchBox className="search-box">
-          <s.SearchBar>
-            <s.SearchInput />
-            <s.SearchButton type="submit">검색</s.SearchButton>
-          </s.SearchBar>
-        </s.SearchBox>
+        <s.SearchBar className="search-box">
+          <SearchInput search={search} setSearch={setSearch} />
+        </s.SearchBar>
 
         <s.HotKeyword className="hot-keyword">
           <s.KeywordTitle>실시간 인기 키워드</s.KeywordTitle>
