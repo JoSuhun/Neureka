@@ -11,7 +11,7 @@ export const SearchBox = styled.div`
   align-self: center;
 `
 
-export const SearchBar = styled.div`
+export const SearchBar = styled.form`
   width: 100%;
   height: 100%;
   display: flex;

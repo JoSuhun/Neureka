@@ -11,10 +11,23 @@ export const Wrapper = styled.div`
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
 `
+
+export const Title = styled.p`
+  font-family: 'Pretendard-Thin';
+  color: var(--color-navy);
+  margin-top: 25px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  padding-bottom: 5px;
+  width: 80%;
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--color-dark);
+`
+
 export const Box = styled.div`
+  align-self: center;
   width: 80%;
   height: 100%;
-  margin: 20px;
   overflow-y: scroll;
   /* padding: 15px; */
 `
