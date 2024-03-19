@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  height: 70vh;
   width: 80vw;
   background-color: beige;
   display: flex;
@@ -22,10 +21,10 @@ export const ToggleContainer = styled.div`
 // 카테고리 박스 토글용 버튼
 export const CategoryToggle = styled.button`
   background-color: var(--color-yellow);
-  margin-bottom: -1px;
   color: white;
   width: 40%;
   height: 40px;
+  border: 1px solid black;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   font-size: 20px;
@@ -33,18 +32,27 @@ export const CategoryToggle = styled.button`
 type CategoryBoxProps = {
   show: boolean
 };
+
 export const CategoryBox = styled.div<CategoryBoxProps>`
+  margin-top: -1px;
   display: flex;
   flex-wrap: wrap;
   visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
   width: 90%;
-  height: ${({ show }) => (show ? '500px' : '0')};
+  height: ${({ show }) => (show ? '150px' : '0')};
   transition: all 0.3s;
+  gap: 10px; /* 각 Category 사이의 간격 */
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+
 `;
 
 
+
 export const Category = styled.button<CategoryBoxProps>`
-  width: 20%;
+  width: 18%;
+  height: 50px;
   border: 1px black solid;
   opacity: ${({ show }) => (show ? '1' : '0')};
   transition: opacity 0.3s ease;
@@ -52,9 +60,11 @@ export const Category = styled.button<CategoryBoxProps>`
 
 export const ChartBox = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  height: 400px;
+  justify-content: center;
+  /* align-items: center; */
+  height: 1000px;
   width: 90%;
+  border: 1px solid black;
 `;
 
 export const NewsBox = styled.div`
