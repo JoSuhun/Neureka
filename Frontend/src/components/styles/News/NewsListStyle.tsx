@@ -38,27 +38,28 @@ export const NewsBox = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  padding: 40px;
+  padding: 40px 7%;
 `
 
 export const NewCardBox = styled.div`
   background-color: white;
   height: 300px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: var(--shadow);
   cursor: pointer;
   &:hover img {
     transform: scale(1.05);
   }
-  &:hover .box {
-    opacity: 0.7;
+  &:hover .card-thumbnail {
+    opacity: 0.8;
   }
 `
 
 export const NewsThumbnailBox = styled.div`
   width: 100%;
   height: 60%;
+  transition: all 200ms ease-in-out;
 `
 
 export const NewsThumbnail = styled.img<{ image: string }>`
@@ -66,7 +67,8 @@ export const NewsThumbnail = styled.img<{ image: string }>`
   background-size: cover;
   width: 100%;
   height: 100%;
-  transition: all 200ms ease-in;
+  opacity: 1;
+  transition: all 200ms ease-in-out;
 `
 
 export const News = styled.div`
