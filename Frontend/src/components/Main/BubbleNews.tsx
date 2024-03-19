@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import * as b from '@src/components/styles/Main/BubbleNews'
 import { atom, useAtom } from 'jotai'
 import BubbleChart from '@src/components/Main/BubbleChart';
+import KeywordNews from '@src/components/Main/KeywordNews';
 
 type Props = {}
 type Category = String;
@@ -12,7 +13,7 @@ export type KeywordCount = {
 export const categoryToggleAtom = atom(true);
 export const categoriesAtom = atom<Category[]>([]);
 export const KeywordsAtom = atom<KeywordCount[]>([]);
-
+export const SelectedKeywordAtom = atom<string>('');
 const BubbleNews = () => {
   const [categories, setCategories] = useAtom(categoriesAtom);
   const [keywords, setKeywords] = useAtom(KeywordsAtom);
@@ -89,7 +90,9 @@ const BubbleNews = () => {
         <b.ChartBox>
           <BubbleChart />
         </b.ChartBox>
-        <b.NewsBox>aa</b.NewsBox>
+        <b.NewsBox>
+          <KeywordNews />
+        </b.NewsBox>
       </b.Wrapper>
     </>
   )

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import { useAtom } from 'jotai';
-import { KeywordCount, KeywordsAtom } from '@src/components/Main/BubbleNews';
+import { KeywordCount, KeywordsAtom, SelectedKeywordAtom } from '@src/components/Main/BubbleNews';
 import * as b from '@src/components/styles/Main/BubbleChart';
 type Bubble = d3.SimulationNodeDatum & {
   id: number;
@@ -12,6 +12,7 @@ type Bubble = d3.SimulationNodeDatum & {
 };
 
 const BubbleChart = () => {
+  const [selectedKeyword, setSelectedKeyword] = useAtom<string>(SelectedKeywordAtom);
   const [keywords] = useAtom<KeywordCount[]>(KeywordsAtom);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [selectedBubbleId, setSelectedBubbleId] = useState<number | null>(null);
@@ -64,7 +65,6 @@ const BubbleChart = () => {
       {bubbles.map((bubble) => (
         <b.Graph
           key={bubble.id}
-          className="bubble"
           transform={`translate(${bubble.x}, ${bubble.y})`}
           onClick={() => console.log(bubble.name)}
         >
@@ -72,8 +72,12 @@ const BubbleChart = () => {
             r={selectedBubbleId === bubble.id ? bubble.r * 1.1 : bubble.r}
             fill={getColorForCount(Math.pow((bubble.r - 10) / 10, 2))}
           />
-          <b.KeywordBox radius={bubble.r}>
-            <b.Keyword radius={bubble.r}>
+          <b.KeywordBox 
+            radius={bubble.r}
+            x={-bubble.r} // 버블 반지름의 음수 값을 x 위치로 설정
+            y={-bubble.r} // 버블 반지름의 음수 값을 y 위치로 설정
+          >
+            <b.Keyword radius={bubble.r} >
               {bubble.name}
             </b.Keyword>
           </b.KeywordBox>
