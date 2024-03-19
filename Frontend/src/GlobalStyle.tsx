@@ -57,6 +57,21 @@ const GlobalStyle = createGlobalStyle`
       }
       margin: 0;
       font-family: 'Pretendard-Regular';
+
+      // 스크롤 바 색상
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: var(--color-navy);
+      }
+      // 스크롤 바 배경 색상
+      &::-webkit-scrollbar-track {
+        background: var(--color-lightgrey);
+
+      }
+      // 스크롤 바 너비
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
     }
     div {
       margin: 0;

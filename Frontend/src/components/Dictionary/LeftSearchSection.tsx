@@ -12,24 +12,16 @@ import SearchInput from './SearchInput'
 
 type Props = {
   data: Word[] | null
-  // originalWords: Word[] | null
 }
 
 const LeftSearchSection = ({ data }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useState<null | string>(null)
 
-  const [words, SetWords] = useState<null | Word[]>(null)
-  const [originalWords, SetOriginalWords] = useState<null | Word[]>(null)
+  const [words, SetWords] = useState<null | Word[]>(data)
+  const [originalWords, SetOriginalWords] = useState<null | Word[]>(data)
 
-  // 전체 단어 조회
-  useEffect(() => {
-    SetWords(data)
-    SetOriginalWords(data)
-    setQuestion('')
-  }, [])
-
-  // 키워드가 제목 또는 내용에 포함된 카드만 조회
+  // 키워드 검색 시 제목 또는 내용에 포함된 카드만 조회 (검색 내용이 없을 시 전체 단어 보여줌)
   useEffect(() => {
     if (question) {
       const filteredWords = words?.filter(
