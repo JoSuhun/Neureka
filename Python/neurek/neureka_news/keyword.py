@@ -10,7 +10,7 @@ from tqdm import tqdm
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
-from bareunpy import Tagger
+# from bareunpy import Tagger
 
 # 바른AI를 사용해 형태소 분석을 진행
 # https://bareun.ai/docs

@@ -4,25 +4,18 @@ import LeftSearchSection from '@src/components/Dictionary/LeftSearchSection'
 import RightWordsSection from '@src/components/Dictionary/RightWordsSection'
 
 import { useQuery } from 'react-query'
-import axios from 'axios'
+import { fetchWords } from '@src/apis/DictionaryApi'
 
 import { Word } from '@src/types/WordType'
 
 type Props = {}
 
 const DictionaryContainer = (props: Props) => {
-  // const [words, SetWords] = useState<null | Word[]>(null)
-  // const [originalWords, SetOriginalWords] = useState<null | Word[]>(null)
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const getWords = async () => {
-    return await axios.get('http://localhost:8080/api/v1/dictionary/get/list')
-  }
-
-  const { isLoading, data, isError, error } = useQuery('get-words', getWords)
+  const { isLoading, data, isError, error } = useQuery('get-words', fetchWords)
 
   if (isLoading) return <>Loading . . .</>
   if (isError) return <>{error}</>
