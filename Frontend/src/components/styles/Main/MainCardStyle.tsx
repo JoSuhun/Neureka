@@ -1,119 +1,109 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div<{ bgimage: string }>`
-  height: 70vh;
+export const Wrapper = styled.div`
+  height: 80vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const Box = styled.div<{ bgimage: string }>`
+  width: 95%;
+  height: 90%;
+  border-radius: 30px;
+
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
   background-image: url(${props => props.bgimage});
   background-position: center;
   background-size: cover;
-  justify-content: end;
-  padding-bottom: 3%;
+  /* justify-content: center; */
+
+  color: white;
+
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &::before {
     position: absolute;
+    z-index: 1;
     content: '';
+    border-radius: 30px;
+    box-shadow: var(--shadow);
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 120%;
     background-size: cover;
     background: linear-gradient(70deg, var(--color-dark) 50%, #00000046 50%);
   }
-`
-export const MainTitle = styled.p`
-  margin: 2%;
-  /* font-family: 'Pretendard-Thin'; */
-  /* font-family: 'SEBANG_Gothic_Regular'; */
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
-  font-weight: 100;
-  color: white;
-  position: relative;
 
-  font-size: 5rem;
-  /* font-weight: 700; */
-`
-
-export const MainTitle1 = styled.span`
-  margin-left: 15px;
-  color: white;
-  position: relative;
-
-  &.original {
-    opacity: 0;
+  * {
+    z-index: 2;
+    font-family: 'Pretendard-Thin';
   }
 `
 
-export const Box = styled.p`
-  width: 100%;
-  font-family: 'Pretendard-Thin';
-  position: relative;
+export const Title = styled.div`
+  /* background-color: red; */
+  margin-left: 3%;
+  padding-top: 25%;
+  margin-bottom: 20px;
+  font-size: 4rem;
+  width: 45%;
+
+  &.changed {
+    border-bottom: 2px solid white;
+  }
 `
 
-export const BoxTitle = styled.div`
-  font-style: italic;
-  font-size: 2.2rem;
-  color: var(--color-grey);
-  /* width: 0%; */
-  background-image: linear-gradient(
-    to right,
-    white,
-    white 50%,
-    var(--color-lightgrey) 50%
-  );
-  /* background-size: 200% 100%;
-  background-position: -100%; */
-  display: inline-block;
-  padding: 2%;
-  position: relative;
-  -webkit-background-clip: text;
-  /* -webkit-text-fill-color: transparent; */
-  transition: all 0.3s ease-in-out;
-  &::before {
-    content: '';
-    background: white;
-    display: block;
-    position: absolute;
-    bottom: 15px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    transition: all 0.3s ease-in-out;
-  }
-  &:hover {
-    background-position: 0;
-    cursor: pointer;
-    color: white;
-  }
+export const Info = styled.p`
+  width: max-content;
+  font-size: 1.7rem;
+  color: var(--color-lightgrey);
+  margin-left: 3%;
+  padding: 10px 0;
 
-  &:hover::before {
-    width: 110%;
-  }
-  &.original {
-    opacity: 0;
-    transform: translateY(-80%);
-  }
-  transition: all 300ms ease-in-out;
-`
-
-export const BoxContent = styled.p`
-  position: relative;
-  margin-left: 1%;
-  font-size: 1.5rem;
-  color: var(--color-orange);
   opacity: 0;
-  -webkit-transition:
-    -webkit-transform 0.3s,
-    opacity 0.3s;
-  -moz-transition:
-    -moz-transform 0.3s,
-    opacity 0.3s;
-  transition:
-    transform 0.3s,
-    opacity 0.3s;
-  -webkit-transform: translateY(-100%);
-  -moz-transform: translateY(-100%);
-  transform: translateY(-200%);
+  transform: translateY(30%);
+  transition: all 300ms ease-in-out;
+
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-yellow);
+    font-family: 'Pretendard-Regular';
+    span {
+      opacity: 1;
+    }
+  }
+  &.changed {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  span {
+    opacity: 0;
+  }
+`
+
+export const Cursor = styled.div`
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.05);
+  position: fixed;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  z-index: 9;
+  width: 60px;
+  cursor: none;
 `
