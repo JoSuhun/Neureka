@@ -8,7 +8,7 @@ from selenium import webdriver
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
-from bareunpy import Tagger
+# from bareunpy import Tagger
 
 # 바른AI를 사용해 형태소 분석을 진행합니다
 # 형태소 분석을 위해서 Docker 환경에 GPU 버전으로 컨테이너와 이미지를 설치했습니다.
@@ -185,32 +185,32 @@ def text_through_LDA_probability(text):
 
     from datetime import date
     # LDA 모델이 저장된 경로
-    today_folder_path = f"model/{date.today()}"
-    # today_folder_path = "model/2024-03-17"
+    # today_folder_path = f"model/{date.today()}"
+    today_folder_path = "model/main_model"
     # 저장된 LDA모델 불러오기
     ldamodel = gensim.models.ldamodel.LdaModel.load(today_folder_path + '/lda_model_crawled')
 
     topics_list = [
-        "기타",
-        "은행",
-        "기술연구",
+        "경영",
+        "금융",
+        "신기술",
         "반도체",
         "가상화폐",
-        "주식",
+        "유가증권",
         "부동산",
         "정치",
-        "규제",
-        "펀드",
+        "금융",
+        "유가증권",
         "경영",
         "기타",
-        "정부정책, 정치",
-        "해외금리",
+        "정치",
+        "해외토픽",
         "가상화폐",
         "반도체",
-        "주식",
+        "유가증권",
         "부동산",
-        "기타",
-        "해외기업"
+        "경영",
+        "해외토픽"
     ]
 
     doc_topics = ldamodel.get_document_topics(corpus)
@@ -224,5 +224,5 @@ def text_through_LDA_probability(text):
         # max_prob = max(max_prob, round(prob*100, 2))
 
         # print(f"토픽 {topic}: 확률 {round(prob*100, 2)}")
-
+    if(max_prob < 33) : return "기타"
     return topic_name

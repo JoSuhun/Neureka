@@ -34,9 +34,6 @@ corpus = [dictionary.doc2bow(text) for text in tokenized_doc]
 # NUM_TOPICS = 20
 # # corpus와 word dictionary, 기타 hyper params로 LdaModel 학습하기 및 토픽 리스트 추출하기
 # ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics = NUM_TOPICS, id2word=dictionary, passes=15)
-# topics = ldamodel.print_topics(num_words=10)
-# for topic in topics:
-#     print(topic)
 
 # # 학습된 LDA모델 따로 저장하기
 # # 모델 저장
@@ -57,20 +54,23 @@ from datetime import date
 today_folder_path = f"model/{date.today()}"
 # today_folder_path = "model/2024-03-17"
 ldamodel = gensim.models.ldamodel.LdaModel.load(today_folder_path+ '/lda_model_crawled')
-# 토픽의 단어 4개만 추출하여 출력하기
-import re
-topics = ldamodel.print_topics(num_words=10)
-countTmp = 1
-for topic in topics:
-    # print(topic)
-    print(countTmp, end=" 번째 : ")
-    matches = re.findall(r'"([^"]*)"', topic[1])
-    for match in matches:
-        print(match, end=" | ")
-    print()
-    print()
-    countTmp += 1
 # =========================
+
+# =========================
+# # 토픽의 단어 4개만 추출하여 출력하기
+# import re
+# topics = ldamodel.print_topics(num_words=10)
+# countTmp = 1
+# for topic in topics:
+#     # print(topic)
+#     print(countTmp, end=" 번째 : ")
+#     matches = re.findall(r'"([^"]*)"', topic[1])
+#     for match in matches:
+#         print(match, end=" | ")
+#     print()
+#     print()
+#     countTmp += 1
+# # =========================
 
 
 # # =========================
@@ -119,16 +119,16 @@ for i in range(1,6):
 # # =========================
 
 
-# =========================
-# LDA 시각화하기
-import pyLDAvis
-import pyLDAvis.gensim_models as gensimvis
+# # =========================
+# # LDA 시각화하기
+# import pyLDAvis
+# import pyLDAvis.gensim_models as gensimvis
 
-# 학습된 LDA 모델을 시각화합니다. 토픽별 단어 분포를 나타냅니다
-vis_data = gensimvis.prepare(ldamodel, corpus, dictionary)
-# 시각화 자료 display(작동안함)
-# pyLDAvis.display(vis_data)
+# # 학습된 LDA 모델을 시각화합니다. 토픽별 단어 분포를 나타냅니다
+# vis_data = gensimvis.prepare(ldamodel, corpus, dictionary)
+# # 시각화 자료 display(작동안함)
+# # pyLDAvis.display(vis_data)
 
-# 시각화 데이터를 저장합니다.
-pyLDAvis.save_html(vis_data, 'lda_visualization.html')
-# =========================
+# # 시각화 데이터를 저장합니다.
+# pyLDAvis.save_html(vis_data, 'lda_visualization.html')
+# # =========================
