@@ -10,25 +10,23 @@ import WordCard from './WordCard'
 import { Word } from '@src/types/WordType'
 import SearchInput from './SearchInput'
 
-type Props = {}
+type Props = {
+  data: Word[] | null
+  // originalWords: Word[] | null
+}
 
-const LeftSearchSection = (props: Props) => {
+const LeftSearchSection = ({ data }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useState<null | string>(null)
+
   const [words, SetWords] = useState<null | Word[]>(null)
   const [originalWords, SetOriginalWords] = useState<null | Word[]>(null)
 
   // 전체 단어 조회
   useEffect(() => {
-    axios
-      .get('http://localhost:8080/api/v1/dictionary/get/list')
-      .then(res => {
-        console.log(res.data)
-        SetWords(res.data)
-        SetOriginalWords(res.data)
-        setQuestion('')
-      })
-      .catch(err => console.log(err))
+    SetWords(data)
+    SetOriginalWords(data)
+    setQuestion('')
   }, [])
 
   // 키워드가 제목 또는 내용에 포함된 카드만 조회
