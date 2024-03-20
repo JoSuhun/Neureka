@@ -34,13 +34,10 @@ pipeline {
                 // Push Docker image to Docker Hub
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        dockerImages = docker.images()
+                        dockerImages = sh(script: "${DOCKER_HOME}/docker images --format \"{{.Repository}}:{{.Tag}}\"", returnStdout: true).trim().split('\n')
                         dockerImages.each { image ->
-                            def imageName = image.id.replaceFirst('^.*?/', '')
-                            def imageNameParts = imageName.tokenize(':')
-                            def imageNameWithoutTag = imageNameParts[0]
-                            if (imageNameWithoutTag.startsWith('neureka-')) {
-                                docker.image(image.id).push('latest')
+                            if (image.startsWith('neureka-')) {
+                                sh "${DOCKER_HOME}/docker push ${image}"
                             }
                         }
                     }
