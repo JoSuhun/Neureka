@@ -47,14 +47,14 @@ export const SlideText = styled.div`
   font-weight: 100;
 
   font-size: 2.5rem;
-  font-style: italic;
+  /* font-style: italic; */
   margin: 0 15px;
 `
 
 export const SlideOriginal = styled.div`
-  animation: 150s linear infinite normal none running infiniteAnimation1;
+  animation: 170s linear infinite normal none running infiniteAnimation1;
 `
 
 export const SlideClone = styled.div`
-  animation: 150s linear infinite infiniteAnimation2;
+  animation: 170s linear infinite infiniteAnimation2;
 `

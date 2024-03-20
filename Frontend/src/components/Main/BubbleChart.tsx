@@ -76,7 +76,6 @@ const BubbleChart = () => {
       {bubbles.map(bubble => (
         <b.Graph
           key={bubble.id}
-          className="bubble"
           transform={`translate(${bubble.x}, ${bubble.y})`}
           onClick={() => handleSelectKeyword(bubble.name)}
         >

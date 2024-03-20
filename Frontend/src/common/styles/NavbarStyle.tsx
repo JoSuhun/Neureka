@@ -62,11 +62,11 @@ export const Nav = styled.div`
   /* justify-content: center; */
   position: sticky;
   z-index: 1000;
-  background-color: white;
+  background-color: var(--color-lightgrey);
   opacity: 1;
   &::before {
     background-color: var(--color-lightgrey);
-    opacity: 0.9;
+    opacity: 0.8;
     width: 100%;
     height: 100%;
     content: '';
@@ -97,18 +97,17 @@ export const NavButton = styled.div`
   display: flex;
   justify-content: space-between;
   button {
-    /* font-family: 'SEBANG_Gothic_Regular'; */
-
     color: var(--color-dark);
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
     cursor: pointer;
-    font-size: 130%;
+    font-size: 1.5rem;
     text-align: center;
     align-items: center;
     border: none;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     width: 90px;
     height: 6vh;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.174);
+    box-shadow: var(--shadow);
   }
 `
 export const LoginBtn = styled.button`
@@ -151,7 +150,7 @@ export const MenuSelect = styled.p`
   padding-left: 3%;
   font-size: 1.5rem;
   font-weight: 200;
-  font-family: 'Noto Sans KR', sans-serif;
+
   &:hover {
     color: white;
     background-color: #ff7530;

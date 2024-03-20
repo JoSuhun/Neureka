@@ -18,7 +18,7 @@ const Footer = (props: Props) => {
 
         <f.FooterInfo>
           <p>Economic News & Stock HUB</p>
-          <p>C105 STOCKER</p>
+          <p>C105 NEúrēka</p>
         </f.FooterInfo>
       </f.Wrapper>
     </>
