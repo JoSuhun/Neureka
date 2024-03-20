@@ -9,3 +9,7 @@ class SummaryArticleSerializer(serializers.Serializer):
     press = serializers.CharField(max_length=255)
     date_time = serializers.DateTimeField()
     keywords = serializers.JSONField()
+
+
+class LinksSerializer(serializers.Serializer):
+    links = serializers.ListField(child=serializers.URLField())

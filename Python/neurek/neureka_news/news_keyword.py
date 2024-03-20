@@ -22,6 +22,9 @@ tagger = Tagger(API_KEY, 'localhost', 5757)
 # Sentence Transformer 모델 로드
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 
+# # 처음부터 100개의 데이터만 읽기
+# with open('LDA/lda_test_data_filtered.json', 'r', encoding='utf-8') as f:
+#     data = json.load(f)
 
 def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
     word_doc_similarity = cosine_similarity(candidate_embeddings, doc_embedding.reshape(1, -1))

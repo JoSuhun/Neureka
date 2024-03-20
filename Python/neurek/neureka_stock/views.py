@@ -20,7 +20,7 @@ def fetch_and_save_krx_data(request):
 
     # 'Date' 인덱스를 일반 열로 변환하고 날짜 형식을 'YYYY-MM-DD'로 변경합니다.
     df_krx.reset_index(inplace=True)
-    df_krx['date'] = df_krx['date'].dt.strftime('%Y-%m-%d')  # 이 부분은 'Date'가 이미 소문자로 변경되었으므로 수정할 필요가 없습니다.
+    df_krx['Date'] = df_krx['Date'].dt.strftime('%Y-%m-%d')  # 이 부분은 'Date'가 이미 소문자로 변경되었으므로 수정할 필요가 없습니다.
 
     # DataFrame을 JSON 형식의 문자열로 변환합니다.
     json_data = df_krx.to_json(orient='records', force_ascii=False)
