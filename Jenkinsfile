@@ -1,69 +1,33 @@
 pipeline {
     agent any
-
-    environment {
-        DOCKER_HOME = '/usr/bin' // Docker CLI가 설치된 경로
-    }
-
+    
     stages {
-        stage('Build and Push Docker Image') {
+        stage('Build and Push Docker Images') {
             steps {
-                // Git pull
-                checkout scm
-
-                // Build Docker image for the changed folder
                 script {
-                    // Get the list of changed files
-                    def changedFiles = sh(script: 'git diff --name-only HEAD^ HEAD', returnStdout: true).trim().split('\n')
-
-                    // Check if any of the changed files are Dockerfiles
-                    def dockerFiles = changedFiles.findAll { it.endsWith('Dockerfile') }
-
-                    // Build Docker image for each folder containing Dockerfile
-                    dockerFiles.each { dockerFile ->
-                        def folderPath = dockerFile.substring(0, dockerFile.lastIndexOf('/'))
-                        def imageName = "neureka-${folderPath.replace('/', '-')}"
-                        sh "${DOCKER_HOME}/docker build -t ${imageName} ${folderPath}"
-                    }
+                    // 각 프로젝트 폴더에서 Docker 이미지를 빌드하고 Docker Hub에 푸시
+                    buildAndPushImage('Frontend')
+                    buildAndPushImage('Backend')
+                    buildAndPushImage('Python')
                 }
             }
         }
-        
-        stage('Push Docker Image to Docker Hub') {
+        stage('Deploy with Docker Compose') {
             steps {
-                // Push Docker image to Docker Hub
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        dockerImages = docker.images()
-                        dockerImages.each { image ->
-                            def imageName = image.id.replaceFirst('^.*?/', '')
-                            def imageNameParts = imageName.tokenize(':')
-                            def imageNameWithoutTag = imageNameParts[0]
-                            if (imageNameWithoutTag.startsWith('neureka-')) {
-                                docker.image(image.id).push('latest')
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        stage('Run Docker Compose') {
-            steps {
-                // Run Docker Compose
-                script {
-                    sh 'docker-compose -f docker-compose.yml up -d'
-                }
+                // Docker Compose를 사용하여 배포
+                sh 'docker-compose pull'
+                sh 'docker-compose up -d'
             }
         }
     }
+}
 
-    post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline execution failed!'
-        }
+def buildAndPushImage(projectName) {
+    // 프로젝트 폴더로 이동하여 Docker 이미지 빌드 및 푸시
+    dir("${projectName}") {
+        // Docker 이미지 빌드
+        sh "docker build -t yourdockerhubusername/neureka-${projectName}:latest ."
+        // Docker Hub에 이미지 푸시
+        sh "docker push yourdockerhubusername/neureka-${projectName}:latest"
     }
 }
