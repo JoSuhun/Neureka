@@ -24,7 +24,6 @@ export const CategoryToggle = styled.button`
   color: white;
   width: 40%;
   height: 40px;
-  border: 1px solid black;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   font-size: 20px;
@@ -50,7 +49,6 @@ export const CategoryBox = styled.div<CategoryBoxProps>`
 export const Category = styled.button<CategoryBoxProps>`
   width: 18%;
   height: 50px;
-  border: 1px black solid;
   opacity: ${({ show }) => (show ? '1' : '0')};
   transition: opacity 0.3s ease;
 `
@@ -61,7 +59,6 @@ export const ChartBox = styled.div`
   /* align-items: center; */
   min-height: 500px;
   width: 90%;
-  border: 1px solid black;
 `
 
 export const NewsBox = styled.div`

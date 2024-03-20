@@ -9,6 +9,8 @@ export const container = styled.div`
 
 export const NewsWrapper = styled.div`
   width: 80vw;
+  display: flex;
+  justify-content: center;
   border: 1px solid black;
   min-height: 200px;
 `
