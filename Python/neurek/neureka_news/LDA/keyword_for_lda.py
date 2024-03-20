@@ -1,59 +1,22 @@
 import os
-import numpy as np
-from bs4 import BeautifulSoup
 import json
 import time
-import itertools
-from selenium import webdriver
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
-# from bareunpy import Tagger
+from bareunpy import Tagger
 
 # 바른AI를 사용해 형태소 분석을 진행합니다
 # 형태소 분석을 위해서 Docker 환경에 GPU 버전으로 컨테이너와 이미지를 설치했습니다.
 # 도커 이미지 설치 문서 URL : https://bareun.ai/docs -> 설치 -> 도커로 설치
 # 바른 image gpu버전  도커 허브 : https://hub.docker.com/r/bareunai/bareun-gpu
-API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
+# API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
+API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
 # print("API 키 입니다." , API_KEY)
 tagger = Tagger(API_KEY, 'localhost', 5757)  # KPF에서 제공하는 바른 형태소분석기
 
-# 모델 선정 과정입니다. 기사의 특이한 단어를 추출 -> 기관이나 기업에 대한 단어를 최소화 ddobokki님이 finetunig한 roberta 모델을 사용했습니다.
-# model = SentenceTransformer('KPF/KPF-bert-ner')
-# model = SentenceTransformer('yunaissance/kpfbert-base')
-# model = SentenceTransformer('jinmang2/kpfbert')
-# model = SentenceTransformer('bongsoo/kpf-sbert-v1.1')
-# model = SentenceTransformer('bongsoo/kpf-sbert-128d-v1')
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 
 # 키워드에 연관된 기사
 keyword_news = {}
-
-
-def keyword_extraction(url, keyword_dict={}):
-    # 기사 리스트 속 기사
-    driver2 = webdriver.Chrome()
-    driver2.get(url)
-    time.sleep(0.2)
-    html_content = driver2.page_source
-    beautiful_soup = BeautifulSoup(html_content, "html.parser")
-    article_text = beautiful_soup.find("article").get_text(strip=True)
-    return article_text
-
-
-def keyword_ext(article_id, text):
-    tokenized_doc = tagger.pos(text)
-    tokenized_nouns = ' '.join([word[0] for word in tokenized_doc if word[1] == 'NNG' or word[1] == 'NNP'])
-
-    n_gram_range = (1, 1)
-    # print(tokenized_nouns)
-    count = CountVectorizer(ngram_range=n_gram_range).fit([tokenized_nouns])
-    candidates = count.get_feature_names_out()
-
-    doc_embedding = model.encode([text])
-    candidate_embeddings = model.encode(candidates)
-    return mmr(article_id, doc_embedding, candidate_embeddings, candidates, top_n=5, diversity=0.3), tokenized_nouns
-
 
 def keyword_nouns(text):
     tokenized_doc = tagger.pos(text)
@@ -69,50 +32,6 @@ def keyword_nouns_frequency(top_keywords, text):
             if i == j:
                 k_n_freq.append(i)
     return k_n_freq
-
-
-def mmr(article_id, doc_embedding, candidate_embeddings, words, top_n, diversity):
-    if len(words) <= top_n:  # 후보 단어 목록이 적으면 그냥 있는 단어가 다 키워드임
-        return words  # 데이터가 적다면 그냥 무시해버리는 방법도 있음 => return []
-
-    # 문서와 각 키워드들 간의 유사도가 적혀있는 리스트
-    word_doc_similarity = cosine_similarity(candidate_embeddings, doc_embedding)
-
-    # 각 키워드들 간의 유사도
-    word_similarity = cosine_similarity(candidate_embeddings)
-
-    # 문서와 가장 높은 유사도를 가진 키워드의 인덱스를 추출.
-    # 만약, 2번 문서가 가장 유사도가 높았다면
-    # keywords_idx = [2]
-    keywords_idx = [np.argmax(word_doc_similarity)]
-
-    # 가장 높은 유사도를 가진 키워드의 인덱스를 제외한 문서의 인덱스들
-    # 만약, 2번 문서가 가장 유사도가 높았다면
-    # ==> candidates_idx = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10 ... 중략 ...]
-    candidates_idx = [i for i in range(len(words)) if i != keywords_idx[0]]
-
-    # 최고의 키워드는 이미 추출했으므로 top_n-1번만큼 아래를 반복.
-    # ex) top_n = 5라면, 아래의 loop는 4번 반복됨.
-    for _ in range(top_n - 1):
-        candidate_similarities = word_doc_similarity[candidates_idx, :]
-        target_similarities = np.max(word_similarity[candidates_idx][:, keywords_idx], axis=1)
-
-        # MMR을 계산
-        mmr = (1 - diversity) * candidate_similarities - diversity * target_similarities.reshape(-1, 1)
-        mmr_idx = candidates_idx[np.argmax(mmr)]
-
-        # keywords & candidates를 업데이트
-        keywords_idx.append(mmr_idx)
-        candidates_idx.remove(mmr_idx)
-
-    # print(keywords_idx)
-    top_keywords = [words[idx] for idx in keywords_idx]
-    for keyword in top_keywords:
-        tmp = keyword_news.get(keyword, {"cnt": 0, "article_id": []})
-        tmp["cnt"] += 1
-        tmp["article_id"].append(article_id)
-        keyword_news[keyword] = tmp
-    return top_keywords
 
 
 if __name__ == "__main__":
@@ -173,44 +92,63 @@ if __name__ == "__main__":
 def text_through_LDA_probability(text):
     import gensim
     # 기사본문(텍스트) 토큰화.
+    # tokenized_text_TTLP = [word for word in text.split() if word not in stop_words]
+    # dictionary = gensim.corpora.Dictionary([tokenized_text_TTLP])
+
+    # 불용어 불러오기
+    # with open("stop_words.txt", "r", encoding="utf-8") as file:
+    #     stop_word_TTLP = [word.rstrip() for word in file.readlines()]
+
+    # 불용어 처리
+    # tokenized_text_TTLP = [token for token in tokenized_text_TTLP if token not in stop_word_TTLP and len(token) >= 2]
+    # tokenized text를 이용해 dictionary와 corpus 만들기
+    # dictionary = gensim.corpora.Dictionary(tokenized_text_TTLP)
+
+    # -------
+    # 기사본문(텍스트) 토큰화.
     tokenized_text_TTLP = keyword_nouns(text).split()
     # 불용어 불러오기
-    with open("stop_words.txt", "r", encoding="utf-8") as file:
+    with open("LDA/stop_words.txt", "r", encoding="utf-8") as file:
         stop_word_TTLP = [word.rstrip() for word in file.readlines()]
     # 불용어 처리
     tokenized_text_TTLP = [token for token in tokenized_text_TTLP if token not in stop_word_TTLP and len(token) >= 2]
     # tokenized text를 이용해 dictionary와 corpus 만들기
-    dictionary = gensim.corpora.Dictionary(tokenized_text_TTLP)
+    dictionary = gensim.corpora.Dictionary([tokenized_text_TTLP])
+
     corpus = dictionary.doc2bow(tokenized_text_TTLP)
 
     from datetime import date
     # LDA 모델이 저장된 경로
     # today_folder_path = f"model/{date.today()}"
-    today_folder_path = "model/main_model"
+
+    # news_keyword.py 기준으로 경로를 지정해야함
+    # today_folder_path = "/model/main_model"
+    # today_folder_path = "LDA/model/main_model"
+    today_folder_path = "LDA/model/2024-03-20"
     # 저장된 LDA모델 불러오기
     ldamodel = gensim.models.ldamodel.LdaModel.load(today_folder_path + '/lda_model_crawled')
 
     topics_list = [
-        "경영",
-        "금융",
-        "신기술",
         "반도체",
+        "기술",
+        "경영",
+        "금융",
+        "경영",
+        "금융",
         "가상화폐",
-        "유가증권",
-        "부동산",
-        "정치",
         "금융",
         "유가증권",
-        "경영",
+        "해외토픽",
         "기타",
         "정치",
+        "기술",
         "해외토픽",
-        "가상화폐",
         "반도체",
-        "유가증권",
-        "부동산",
+        "해외토픽",
         "경영",
-        "해외토픽"
+        "경영",
+        "유가증권",
+        "유가증권"
     ]
 
     doc_topics = ldamodel.get_document_topics(corpus)
@@ -218,7 +156,7 @@ def text_through_LDA_probability(text):
     max_prob = 0
     topic_name = ""
     for topic, prob in doc_topics:
-        if (max_prob < round(prob * 100, 2)):
+        if max_prob < round(prob * 100, 2):
             max_prob = round(prob * 100, 2)
             topic_name = topics_list[topic]
         # max_prob = max(max_prob, round(prob*100, 2))
