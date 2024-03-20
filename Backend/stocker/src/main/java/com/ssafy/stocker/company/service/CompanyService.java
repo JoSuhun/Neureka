@@ -8,5 +8,6 @@ public interface CompanyService {
     List<CompanyEntity> findCompanyList();
 
 
-    String[] companyStockPrice(String code);
+
+    void addLikeCompany(String userId, Integer companyId);
 }

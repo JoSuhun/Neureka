@@ -1,12 +1,13 @@
 package com.ssafy.stocker.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+//import com.ssafy.stocker.company.entity.UserCompanyEntity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,4 +25,9 @@ public class UserEntity {
     private String email;
 
     private String role;
+
+
+
+//    @OneToMany(mappedBy = "user")
+//    private Set<UserCompanyEntity> userCompanyEntities = new HashSet<>();
 }

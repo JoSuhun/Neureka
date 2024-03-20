@@ -3,6 +3,7 @@ package com.ssafy.stocker.company.controller;
 
 import com.ssafy.stocker.company.entity.CompanyEntity;
 import com.ssafy.stocker.company.service.CompanyService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class CompanyController {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
+    @Operation(summary = "주식 최근 10년간 가격을 조회합니다." )
     @GetMapping("/stock/price")
     public ResponseEntity<String> getDataFromDjango(@RequestParam String code) {
         String url = "/finance/fetch-krx/?code=" + code;
@@ -37,6 +39,8 @@ public class CompanyController {
     }
 
 
+    @Operation(summary = "주식 목록 리스트를 조회합니다." )
+
     @GetMapping("/list")
     public ResponseEntity<?> findList() {
         try {
@@ -48,26 +52,18 @@ public class CompanyController {
         }
     }
 
+    @Operation(summary = "~ing" )
     @PostMapping("like")
-    public ResponseEntity<?> addLikeCompany(@RequestParam String userId , @RequestParam Integer code){
+    public ResponseEntity<?> addLikeCompany(@RequestParam String email , @RequestParam Integer codeId){
         try {
-
+            companyService.addLikeCompany(email , codeId);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e){
-
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return null;
+
     }
 
-//    @GetMapping("/stock/price")
-//    public ResponseEntity<?> findStockPrice(@RequestParam String code){
-//        try {
-//             String[] stockPrice = companyService.companyStockPrice(code);
-//
-//            return new ResponseEntity<CompanyEntity>(company , HttpStatus.OK);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-//        }
-//    }
 }
