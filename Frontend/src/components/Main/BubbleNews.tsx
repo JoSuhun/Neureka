@@ -2,17 +2,15 @@ import React, { useEffect } from 'react'
 import * as b from '@src/components/styles/Main/BubbleNews'
 import { atom, useAtom } from 'jotai'
 import BubbleChart from '@src/components/Main/BubbleChart'
+import { Categories } from '@src/types/MainType'
+import {
+  categoriesAtom,
+  categoryToggleAtom,
+  keywordsAtom,
+} from '@src/stores/mainAtom'
 
+import Category from '@src/components/Main/Category'
 type Props = {}
-type Category = string
-export type KeywordCount = {
-  name: string
-  count: number
-}
-export const categoryToggleAtom = atom(true)
-export const categoriesAtom = atom<Category[]>([])
-export const keywordsAtom = atom<KeywordCount[]>([])
-export const selectedKeywordAtom = atom<string>('')
 
 const BubbleNews = () => {
   const [selectedCategories, setCategories] = useAtom(categoriesAtom)
@@ -52,35 +50,8 @@ const BubbleNews = () => {
     ])
   }, [])
 
-  const handleCategories = (selectedCategory: Category) => {
-    setCategories(prev => {
-      const isExisting = prev.includes(selectedCategory)
-      if (isExisting) {
-        return prev.filter(category => category !== selectedCategory)
-      } else {
-        const sortedSelectedCategories = [...prev, selectedCategory].sort(
-          (a, b) => {
-            return Categories.indexOf(a) - Categories.indexOf(b)
-          },
-        )
-        return sortedSelectedCategories
-      }
-    })
-  }
   const [categoryToggle, setCategoryToggle] = useAtom(categoryToggleAtom)
   const handleToggleCategory = () => setCategoryToggle(prev => !prev)
-  const Categories = [
-    '경영',
-    '금융',
-    '기술',
-    '반도체',
-    '가상화폐',
-    '유가증권',
-    '부동산',
-    '정치',
-    '해외토픽',
-    '기타',
-  ]
 
   return (
     <>
@@ -90,26 +61,34 @@ const BubbleNews = () => {
             카테고리 선택
           </b.CategoryToggle>
         </b.ToggleContainer>
-        <b.CategoryBox show={categoryToggle}>
+        <b.CategoryContainer show={categoryToggle}>
           {Categories.map((element, key) => (
-            <b.Category
-              onClick={() => handleCategories(element)}
+            <Category
+              name={element.name}
+              image={element.image}
               show={categoryToggle}
-            >
-              {element}
-            </b.Category>
+            />
           ))}
-        </b.CategoryBox>
-        <b.CategoryBox show={categoryToggle}>
+        </b.CategoryContainer>
+        <b.CategoryContainer show={categoryToggle}>
+          {selectedCategories.map((element, key) => (
+            <Category
+              name={element.name}
+              image={element.image}
+              show={categoryToggle}
+            />
+          ))}
+        </b.CategoryContainer>
+        {/* <b.CategoryContainer show={categoryToggle}>
           {selectedCategories.map((element, key) => (
             <b.Category
               onClick={() => handleCategories(element)}
               show={categoryToggle}
             >
-              {element}
+              {element.name}
             </b.Category>
           ))}
-        </b.CategoryBox>
+        </b.CategoryContainer> */}
         <b.ChartBox>
           <BubbleChart />
         </b.ChartBox>
