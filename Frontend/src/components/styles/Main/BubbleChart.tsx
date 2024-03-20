@@ -1,28 +1,33 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Svg = styled.svg`
   width: 1000px;
   height: 600px;
   border: 1px solid black;
-`;
+`
 
-export const Graph = styled.g``;
+export const Graph = styled.g``
 
-export const Bubble = styled.circle``;
+export const Bubble = styled.circle``
 
 export const KeywordBox = styled.foreignObject<{ radius: number }>`
   width: ${(props: { radius: number }) => props.radius * 2}px;
   height: ${(props: { radius: number }) => props.radius * 2}px;
-  x: ${(props: { radius: number }) => -props.radius}px;
-  y: ${(props: { radius: number }) => -props.radius / 3.14}px;
-`;
+  display: flex; // Flexbox를 사용하여 내부 컨텐츠 중앙 정렬
+  justify-content: center; // 가로 축에서 중앙 정렬
+  align-items: center; // 세로 축에서 중앙 정렬
+  overflow: hidden; // 버블 크기를 넘어가는 텍스트 숨김
+`
 
 export const Keyword = styled.div<{ radius: number }>`
-  font-size: ${(props) => 10 + 2 ** (props.radius / 18)}px;
   word-wrap: break-word;
   color: white;
-  width: ${(props) => props.radius * 2}px;
   text-align: center;
-  max-height: ${(props) => props.radius * 2}px;
+  max-height: ${props => props.radius * 2}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${(props: { radius: number }) => 10 + 2 ** (props.radius / 18)}px;
   overflow: hidden;
-`;
+  height: 100%;
+`

@@ -49,4 +49,21 @@ export const Words = styled.div`
   margin-top: 20px;
   overflow-y: scroll;
   height: 80%;
+
+  // 스크롤 바 색상
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    height: 20%;
+    background: #387bdf61;
+  }
+  // 스크롤 바 배경 색상
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: 1px solid #387bdf61;
+    background: var(--color-lightgrey);
+  }
+  // 스크롤 바 너비
+  &::-webkit-scrollbar {
+    width: 9px;
+  }
 `

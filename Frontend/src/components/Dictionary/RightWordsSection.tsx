@@ -9,7 +9,7 @@ type Props = {}
 
 const RightWordsSection = (props: Props) => {
   const [markedWords, SetMarkedWrods] = useState<null | number[]>(null)
-  const words = Array.from({ length: 2 }, (_, idx) => idx)
+  const words = Array.from({ length: 12 }, (_, idx) => idx)
   // const words = null
   useEffect(() => {
     SetMarkedWrods(words)
