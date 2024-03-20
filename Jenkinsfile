@@ -6,44 +6,53 @@ pipeline {
     }
 
     stages {
-        stage('Build Docker Images') { // 이미지 빌드 단계
+        stage('Build and Push Docker Image') {
             steps {
                 // Git pull
                 checkout scm
 
-                // Build Docker images for all Dockerfiles in Frontend, Backend, Python folders
+                // Build Docker image for the changed folder
                 script {
-                    def folders = ['Frontend', 'Backend', 'Python']
+                    // Get the list of changed files
+                    def changedFiles = sh(script: 'git diff --name-only HEAD^ HEAD', returnStdout: true).trim().split('\n')
 
-                    folders.each { folder ->
-                        def dockerFiles = sh(script: "find ${folder} -name 'Dockerfile'", returnStdout: true).trim().split('\n')
+                    // Check if any of the changed files are Dockerfiles
+                    def dockerFiles = changedFiles.findAll { it.endsWith('Dockerfile') }
 
-                        sh "echo ${dockerFiles}"
-                        dockerFiles.each { dockerFile ->
-                            def imageName = dockerFile.tokenize('/')[0]
-                            sh "echo ${imageName}"
-                            sh "echo ${dockerFile}"
-                            sh "${DOCKER_HOME}/docker build -t ${imageName} ${dockerFile}"
+                    // Build Docker image for each folder containing Dockerfile
+                    dockerFiles.each { dockerFile ->
+                        def folderPath = dockerFile.substring(0, dockerFile.lastIndexOf('/'))
+                        def imageName = "neureka-${folderPath.replace('/', '-')}"
+                        sh "${DOCKER_HOME}/docker build -t ${imageName} ${folderPath}"
+                    }
+                }
+            }
+        }
+        
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                // Push Docker image to Docker Hub
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        dockerImages = docker.images()
+                        dockerImages.each { image ->
+                            def imageName = image.id.replaceFirst('^.*?/', '')
+                            def imageNameParts = imageName.tokenize(':')
+                            def imageNameWithoutTag = imageNameParts[0]
+                            if (imageNameWithoutTag.startsWith('neureka-')) {
+                                docker.image(image.id).push('latest')
+                            }
                         }
                     }
                 }
             }
         }
 
-        stage('Push Docker Images to Docker Hub') { // 도커 허브 푸시 단계
+        stage('Run Docker Compose') {
             steps {
-                // Push Docker images to Docker Hub
+                // Run Docker Compose
                 script {
-                    def folders = ['Frontend', 'Backend', 'Python']
-
-                    folders.each { folder ->
-                        def dockerFiles = sh(script: "find ${folder} -name 'Dockerfile'", returnStdout: true).trim().split('\n')
-
-                        dockerFiles.each { dockerFile ->
-                            def imageName = dockerFile.tokenize('/')[0]
-                            sh "${DOCKER_HOME}/docker push ${imageName}"
-                        }
-                    }
+                    sh 'docker-compose -f docker-compose.yml up -d'
                 }
             }
         }
