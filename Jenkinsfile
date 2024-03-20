@@ -18,8 +18,11 @@ pipeline {
                     folders.each { folder ->
                         def dockerFiles = sh(script: "find ${folder} -name 'Dockerfile'", returnStdout: true).trim().split('\n')
 
+                        sh "echo ${dockerFiles}"
                         dockerFiles.each { dockerFile ->
                             def imageName = dockerFile.tokenize('/')[0]
+                            sh "echo ${imageName}"
+                            sh "echo ${dockerFile}"
                             sh "${DOCKER_HOME}/docker build -t ${imageName} ${dockerFile}"
                         }
                     }
