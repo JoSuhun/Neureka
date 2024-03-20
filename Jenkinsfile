@@ -25,6 +25,9 @@ pipeline {
                         def imageName = "neureka-${folderPath.replace('/', '-')}"
                         sh "${DOCKER_HOME}/docker build -t ${imageName} ${folderPath}"
                     }
+
+                    // Login to Docker Hub
+                    sh 'echo "비밀번호" | docker login -u csw1511 --password-stdin https://registry.hub.docker.com'
                 }
             }
         }
