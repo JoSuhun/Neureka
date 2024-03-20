@@ -10,23 +10,29 @@ import Footer from '@src/common/Footer'
 import MyPage from './pages/MyPage'
 import DictionaryPage from './pages/DictionaryPage'
 
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
+
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/:id" element={<NewsDetailPage />} />
-          <Route path="/stocks" element={<StocksPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/dictionary" element={<DictionaryPage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/news/:id" element={<NewsDetailPage />} />
+            <Route path="/stocks" element={<StocksPage />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/dictionary" element={<DictionaryPage />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </QueryClientProvider>
     </>
   )
 }

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
-import SlideBar from '../components/Main/SlideBar'
+import SlideBar from '@src/components/Main/SlideBar'
 import MainCard from '@src/components/Main/MainCard'
+import BubbleNews from '@src/components/Main/BubbleNews'
+import * as m from '@src/containers/styles/MainContainer'
+import KeywordNews from '@src/components/Main/KeywordNews'
 
 type Props = {}
 
@@ -10,9 +13,15 @@ const MainContainer = (props: Props) => {
   }, [])
   return (
     <>
-      <SlideBar />
-      <MainCard />
-      <div style={{ height: '30vh', backgroundColor: 'black' }}>z</div>
+      <m.container>
+        <SlideBar />
+        <MainCard />
+        <div style={{ height: '50px' }}></div>
+        <BubbleNews />
+        <m.NewsWrapper>
+          <KeywordNews />
+        </m.NewsWrapper>
+      </m.container>
     </>
   )
 }

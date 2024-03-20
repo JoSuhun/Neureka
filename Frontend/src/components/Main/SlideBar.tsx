@@ -6,13 +6,13 @@ const SlideBar = () => {
     <s.SlideWrapper>
       <s.SlideBox>
         <s.SlideOriginal>
-          <s.SlideText>TODAY'S STOCKER</s.SlideText>
+          <s.SlideText>TODAY'S NEúrēka</s.SlideText>
           <s.SlideText>ECONOMIC NEWS RECOMMENDATION</s.SlideText>
           <s.SlideText>CUSTOMIZED NEWS HUB</s.SlideText>
           <s.SlideText>NEWS & STOCK</s.SlideText>
         </s.SlideOriginal>
         <s.SlideClone>
-          <s.SlideText>TODAY'S STOCKER</s.SlideText>
+          <s.SlideText>TODAY'S NEúrēka</s.SlideText>
           <s.SlideText>ECONOMIC NEWS RECOMMENDATION</s.SlideText>
           <s.SlideText>CUSTOMIZED NEWS HUB</s.SlideText>
           <s.SlideText>NEWS & STOCK</s.SlideText>

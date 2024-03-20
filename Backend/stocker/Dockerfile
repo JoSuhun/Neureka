@@ -1,4 +1,3 @@
-
 # jdk17 Image Start
 FROM openjdk:17
 
@@ -15,3 +14,4 @@ EXPOSE 8080
 
 # 실행 명령어
 ENTRYPOINT ["java", "-jar", "app.jar"]
+

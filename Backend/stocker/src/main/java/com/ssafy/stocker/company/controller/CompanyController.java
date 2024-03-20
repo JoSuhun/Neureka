@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -16,9 +17,23 @@ import java.util.List;
 public class CompanyController {
 
     private final CompanyService companyService;
-
-    public CompanyController(CompanyService companyService){
+    private final WebClient webClient ;
+    public CompanyController(CompanyService companyService, WebClient.Builder webClientBuilder){
         this.companyService = companyService;
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
+    }
+
+    @GetMapping("/stock/price")
+    public ResponseEntity<String> getDataFromDjango(@RequestParam String code) {
+        String url = "/finance/fetch-krx/?code=" + code;
+
+        String response = webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        return ResponseEntity.ok(response);
     }
 
 
