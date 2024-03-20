@@ -92,30 +92,12 @@ if __name__ == "__main__":
 def text_through_LDA_probability(text):
     import gensim
     # 기사본문(텍스트) 토큰화.
-    # tokenized_text_TTLP = [word for word in text.split() if word not in stop_words]
-    # dictionary = gensim.corpora.Dictionary([tokenized_text_TTLP])
-
-    # 불용어 불러오기
-    # with open("stop_words.txt", "r", encoding="utf-8") as file:
-    #     stop_word_TTLP = [word.rstrip() for word in file.readlines()]
-
-    # 불용어 처리
-    # tokenized_text_TTLP = [token for token in tokenized_text_TTLP if token not in stop_word_TTLP and len(token) >= 2]
-    # tokenized text를 이용해 dictionary와 corpus 만들기
-    # dictionary = gensim.corpora.Dictionary(tokenized_text_TTLP)
-
-    # -------
-    # 기사본문(텍스트) 토큰화.
     tokenized_text_TTLP = keyword_nouns(text).split()
     # 불용어 불러오기
     with open("LDA/stop_words.txt", "r", encoding="utf-8") as file:
         stop_word_TTLP = [word.rstrip() for word in file.readlines()]
     # 불용어 처리
     tokenized_text_TTLP = [token for token in tokenized_text_TTLP if token not in stop_word_TTLP and len(token) >= 2]
-    # tokenized text를 이용해 dictionary와 corpus 만들기
-    dictionary = gensim.corpora.Dictionary([tokenized_text_TTLP])
-
-    corpus = dictionary.doc2bow(tokenized_text_TTLP)
 
     from datetime import date
     # LDA 모델이 저장된 경로
@@ -127,6 +109,13 @@ def text_through_LDA_probability(text):
     today_folder_path = "LDA/model/2024-03-20"
     # 저장된 LDA모델 불러오기
     ldamodel = gensim.models.ldamodel.LdaModel.load(today_folder_path + '/lda_model_crawled')
+
+    # tokenized text를 이용해 dictionary와 corpus 만들기
+    # dictionary = gensim.corpora.Dictionary(data)
+    dictionary = ldamodel.id2word
+
+    corpus = dictionary.doc2bow(tokenized_text_TTLP)
+
 
     topics_list = [
         "반도체",
