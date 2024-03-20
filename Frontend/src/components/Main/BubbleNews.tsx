@@ -4,7 +4,7 @@ import { atom, useAtom } from 'jotai'
 import BubbleChart from '@src/components/Main/BubbleChart'
 
 type Props = {}
-type Category = String
+type Category = string
 export type KeywordCount = {
   name: string
   count: number
@@ -13,8 +13,9 @@ export const categoryToggleAtom = atom(true)
 export const categoriesAtom = atom<Category[]>([])
 export const keywordsAtom = atom<KeywordCount[]>([])
 export const selectedKeywordAtom = atom<string>('')
+
 const BubbleNews = () => {
-  const [categories, setCategories] = useAtom(categoriesAtom)
+  const [selectedCategories, setCategories] = useAtom(categoriesAtom)
   const [keywords, setKeywords] = useAtom(keywordsAtom)
   useEffect(() => {
     setKeywords([
@@ -57,18 +58,29 @@ const BubbleNews = () => {
       if (isExisting) {
         return prev.filter(category => category !== selectedCategory)
       } else {
-        return [...prev, selectedCategory].sort()
+        const sortedSelectedCategories = [...prev, selectedCategory].sort(
+          (a, b) => {
+            return Categories.indexOf(a) - Categories.indexOf(b)
+          },
+        )
+        return sortedSelectedCategories
       }
     })
   }
   const [categoryToggle, setCategoryToggle] = useAtom(categoryToggleAtom)
   const handleToggleCategory = () => setCategoryToggle(prev => !prev)
-  const Array = []
-  for (let i = 1; i <= 10; i++) {
-    // 이미 있는 카테고리 수에 i를 더해 새 카테고리 이름 생성
-    const newCategoryName = `카테고리${i}`
-    Array.push(newCategoryName)
-  }
+  const Categories = [
+    '경영',
+    '금융',
+    '기술',
+    '반도체',
+    '가상화폐',
+    '유가증권',
+    '부동산',
+    '정치',
+    '해외토픽',
+    '기타',
+  ]
 
   return (
     <>
@@ -78,9 +90,8 @@ const BubbleNews = () => {
             카테고리 선택
           </b.CategoryToggle>
         </b.ToggleContainer>
-
         <b.CategoryBox show={categoryToggle}>
-          {Array.map((element, key) => (
+          {Categories.map((element, key) => (
             <b.Category
               onClick={() => handleCategories(element)}
               show={categoryToggle}
@@ -90,7 +101,7 @@ const BubbleNews = () => {
           ))}
         </b.CategoryBox>
         <b.CategoryBox show={categoryToggle}>
-          {categories.map((element, key) => (
+          {selectedCategories.map((element, key) => (
             <b.Category
               onClick={() => handleCategories(element)}
               show={categoryToggle}
@@ -99,7 +110,6 @@ const BubbleNews = () => {
             </b.Category>
           ))}
         </b.CategoryBox>
-
         <b.ChartBox>
           <BubbleChart />
         </b.ChartBox>
