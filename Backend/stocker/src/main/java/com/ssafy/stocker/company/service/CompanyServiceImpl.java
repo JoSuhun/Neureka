@@ -11,11 +11,11 @@ import java.util.List;
 public class CompanyServiceImpl implements  CompanyService {
 
     private final CompanyRepository companyRepository ;
-    private final RestTemplate restTemplate;
+
 
     public CompanyServiceImpl(CompanyRepository companyRepository,RestTemplate restTemplate){
         this.companyRepository = companyRepository;
-        this.restTemplate = restTemplate;
+
     }
 
     @Override
@@ -24,11 +24,8 @@ public class CompanyServiceImpl implements  CompanyService {
     }
 
 
-
     @Override
-    public String[] companyStockPrice(String code) {
-        String djangoUrl = "http://localhost/data?" + code ;
-        String[] jsonResponse = restTemplate.getForObject(djangoUrl , String[].class);
-        return jsonResponse;
+    public void addLikeCompany(String codeId, Integer code) {
+
     }
 }

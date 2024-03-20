@@ -4,6 +4,9 @@ package com.ssafy.stocker.company.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity(name = "company")
 @Getter
 public class CompanyEntity {
@@ -17,4 +20,8 @@ public class CompanyEntity {
 
     @Column(name = "company_name")
     private String companyName;
+
+
+//    @OneToMany(mappedBy = "company")
+//    private Set<UserCompanyEntity> userCompanyEntities = new HashSet<>();
 }
