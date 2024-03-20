@@ -2,34 +2,19 @@ version: '3'
 
 services:
   Frontend:
-    image: csw1511/stockerfrontend
+    image: csw1511/neureka-frontend
     ports:
       - "5174:5174"
     restart: always
 
   Backend:
-    image: csw1511/stocker
+    image: csw1511/neureka-backend
     ports:
       - "8080:8080"
     restart: always
 
   Python:
-    image: csw1511/neureka_new
+    image: csw1511/neureka-python
     ports:
       - "8000:8000"
     restart: always
-
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-    restart: always
-
-  bareun:
-    image: bareunai/bareun:latest
-    ports:
-      - "5757:5757"
-      - "9902:9902"
-    volumes:
-      - ~/bareun/var:/bareun/var
-    restart: unless-stopped

@@ -29,7 +29,7 @@ pipeline {
             steps {
                 // Push Docker image to Docker Hub
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'your-docker-hub-credentials') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         dockerImages = docker.images()
                         dockerImages.each { image ->
                             def imageName = image.id.replaceFirst('^.*?/', '')

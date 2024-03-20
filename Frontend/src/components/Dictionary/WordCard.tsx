@@ -22,14 +22,16 @@ const WordCard = ({ word }: Props) => {
       <c.Card>
         <c.CardBox>
           <c.Title>
-            {word?.title}
+            <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
             {isSave ? (
               <c.saveBtn src={save} onClick={ToggleSave} />
             ) : (
               <c.saveBtn src={notsave} onClick={ToggleSave} />
             )}
           </c.Title>
-          <c.Content>{word?.content}</c.Content>
+          <c.Content>
+            <div dangerouslySetInnerHTML={{ __html: word?.content || '' }} />
+          </c.Content>
         </c.CardBox>
       </c.Card>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import axios from 'axios'
 
@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack'
 type Props = {}
 
 const NewsList = (props: Props) => {
+  const boxRef = useRef<HTMLDivElement>(null)
   const news = Array.from({ length: 50 }, (_, idx) => idx)
 
   const [page, setPage] = useState(1)
@@ -36,11 +37,14 @@ const NewsList = (props: Props) => {
     } else {
       setData(news.slice(15 * (page - 1), 15 * page))
     }
+    if (boxRef.current) {
+      boxRef.current.scrollIntoView()
+    }
   }, [page])
 
   return (
     <>
-      <n.Wrapper>
+      <n.Wrapper ref={boxRef}>
         <n.NewsBox className="news-box">
           {data.map((it, idx) => (
             <NewsCard />
