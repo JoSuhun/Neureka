@@ -98,7 +98,9 @@ export const NavButton = styled.div`
   justify-content: space-between;
   button {
     color: var(--color-dark);
+    background-color: transparent;
     font-family: 'IBM Plex Sans Condensed', sans-serif;
+    font-weight: 300;
     cursor: pointer;
     font-size: 1.5rem;
     text-align: center;
@@ -107,7 +109,6 @@ export const NavButton = styled.div`
     /* border-radius: 10px; */
     width: 90px;
     height: 6vh;
-    box-shadow: var(--shadow);
   }
 `
 export const LoginBtn = styled.button`

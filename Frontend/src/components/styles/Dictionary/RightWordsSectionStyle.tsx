@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   background-color: #e6ebff;
   border-left: 2px dashed var(--color-blue);
   width: 50%;
-  min-height: 80vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,9 +43,25 @@ export const Title = styled.p`
 export const Box = styled.div`
   align-self: center;
   width: 80%;
-  height: 100%;
+  height: 80%;
   overflow-y: scroll;
-  /* padding: 15px; */
+
+  // 스크롤 바 색상
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    height: 20%;
+    background: #387bdf61;
+  }
+  // 스크롤 바 배경 색상
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: 1px solid #387bdf61;
+    background: var(--color-lightgrey);
+  }
+  // 스크롤 바 너비
+  &::-webkit-scrollbar {
+    width: 9px;
+  }
 `
 export const WordContainer = styled.div`
   height: 100%;

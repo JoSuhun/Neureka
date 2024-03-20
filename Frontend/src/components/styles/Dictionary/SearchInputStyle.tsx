@@ -29,6 +29,7 @@ export const SearchInput = styled.input`
   border: none;
   background-color: transparent;
   font-size: 1rem;
+  font-family: 'Galmuri11', sans-serif;
   text-align: end;
 `
 
