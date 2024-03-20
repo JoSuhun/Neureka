@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import * as d3 from 'd3'
 import { useAtom } from 'jotai'
-import {
-  KeywordCount,
-  keywordsAtom,
-  selectedKeywordAtom,
-} from '@src/components/Main/BubbleNews'
 import * as b from '@src/components/styles/Main/BubbleChart'
-type Bubble = d3.SimulationNodeDatum & {
-  id: number
-  x: number
-  y: number
-  r: number
-  name: string
-}
+import { Bubble, KeywordCount } from '@src/types/MainType'
+import { keywordsAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 
 const BubbleChart = () => {
   const [keywords] = useAtom<KeywordCount[]>(keywordsAtom)
   const [bubbles, setBubbles] = useState<Bubble[]>([])
   const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
+
   const [selectedBubbleId, setSelectedBubbleId] = useState<number | null>(null)
 
   // 버블과 텍스트 크기를 조정하기 위한 상태
@@ -39,10 +30,10 @@ const BubbleChart = () => {
   useEffect(() => {
     const scaledBubbles = keywords.map((keyword, index) => ({
       id: index,
-      x: 500 + 5 * (index / 8) * dy[index % 8], // 500 (SVG 중앙) 근처의 작은 범위로 무작위 배치
-      y: 300 + 5 * (index / 8) * dx[index % 8], // 400 (SVG 중앙) 근처의 작은 범위로 무작위 배치
-      vx: 0, // x 방향의 초기 속도
-      vy: 0, // y 방향의 초기 속도
+      x: 500 + 5 * (index / 8) * dy[index % 8], // 500 (SVG 중앙) 근처 배치
+      y: 300 + 5 * (index / 8) * dx[index % 8], // 300 (SVG 중앙) 근처 배치
+      vx: 0,
+      vy: 0,
       r: 10 + Math.sqrt(keyword.count) * 10,
       name: keyword.name,
     }))
@@ -83,11 +74,7 @@ const BubbleChart = () => {
             r={selectedBubbleId === bubble.id ? bubble.r * 1.1 : bubble.r}
             fill={getColorForCount(Math.pow((bubble.r - 10) / 10, 2))}
           />
-          <b.KeywordBox
-            radius={bubble.r}
-            x={-bubble.r} // 버블 반지름의 음수 값을 x 위치로 설정
-            y={-bubble.r} // 버블 반지름의 음수 값을 y 위치로 설정
-          >
+          <b.KeywordBox radius={bubble.r} x={-bubble.r} y={-bubble.r}>
             <b.Keyword radius={bubble.r}>{bubble.name}</b.Keyword>
           </b.KeywordBox>
         </b.Graph>

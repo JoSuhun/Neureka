@@ -32,7 +32,7 @@ type CategoryBoxProps = {
   show: boolean
 }
 
-export const CategoryBox = styled.div<CategoryBoxProps>`
+export const CategoryContainer = styled.div<CategoryBoxProps>`
   margin-top: -1px;
   display: flex;
   flex-wrap: wrap;
@@ -60,12 +60,3 @@ export const ChartBox = styled.div`
   min-height: 500px;
   width: 90%;
 `
-
-export const NewsBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  height: 300px;
-  width: 90%;
-`
-
-export const NewsCard = styled.div``

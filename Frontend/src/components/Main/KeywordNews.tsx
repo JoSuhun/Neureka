@@ -1,10 +1,12 @@
-import { selectedKeywordAtom } from '@src/components/Main/BubbleNews'
 import * as k from '@src/components/styles/Main/KeywordNews'
 import { useAtom } from 'jotai'
 import NewsCard from '@src/components/Main/NewsCard'
+import { selectedKeywordAtom } from '@src/stores/mainAtom'
+
 const KeywordNews = () => {
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const arr = [1, 2, 3, 4]
+
   return (
     <>
       <k.container>
