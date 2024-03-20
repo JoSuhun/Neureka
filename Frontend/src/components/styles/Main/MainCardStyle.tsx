@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+
 export const Wrapper = styled.div`
   height: 80vh;
   width: 100%;
@@ -19,6 +21,7 @@ export const Box = styled.div<{ bgimage: string }>`
   flex-direction: column;
   z-index: 2;
   background-image: url(${props => props.bgimage});
+
   background-position: center;
   background-size: cover;
   /* justify-content: center; */
@@ -29,6 +32,21 @@ export const Box = styled.div<{ bgimage: string }>`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+  // 스크롤 바 색상
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var(--color-lightgrey);
+  }
+  // 스크롤 바 배경 색상
+  &::-webkit-scrollbar-track {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    background: var(--color-dark);
+  }
+  // 스크롤 바 너비
+  &::-webkit-scrollbar {
+    width: 8px;
   }
 
   &::before {
@@ -52,7 +70,6 @@ export const Box = styled.div<{ bgimage: string }>`
 `
 
 export const Title = styled.div`
-  /* background-color: red; */
   margin-left: 3%;
   padding-top: 25%;
   margin-bottom: 20px;
@@ -65,7 +82,7 @@ export const Title = styled.div`
 `
 
 export const Info = styled.p`
-  width: max-content;
+  width: 45%;
   font-size: 1.7rem;
   color: var(--color-lightgrey);
   margin-left: 3%;
@@ -94,16 +111,26 @@ export const Info = styled.p`
   }
 `
 
-export const Cursor = styled.div`
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(3px);
-  background: rgba(255, 255, 255, 0.05);
-  position: fixed;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  z-index: 9;
-  width: 60px;
-  cursor: none;
+export const Arrow = styled(ArrowBackIosIcon)`
+  position: absolute;
+  bottom: 3%;
+  left: 49%;
+  font-size: 2rem !important;
+  transform: rotate(-90deg);
+  @keyframes blink-effect {
+    50% {
+      opacity: 0.2;
+    }
+  }
+  animation: blink-effect 1300ms linear infinite;
+  &.none {
+    display: none;
+  }
+`
+
+export const Line = styled.img`
+  position: absolute;
+  bottom: -5%;
+  align-self: center;
+  width: 22px;
 `

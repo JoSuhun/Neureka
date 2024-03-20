@@ -29,7 +29,19 @@ const LeftSearchSection = ({ data }: Props) => {
           word.title.includes(question) || word.content.includes(question),
       )
       if (filteredWords) {
-        SetWords(filteredWords)
+        const regex = new RegExp(question, 'g')
+        const highlightedWords = filteredWords.map(word => ({
+          ...word,
+          title: word.title.replace(
+            regex,
+            "<span class='highlight'>" + question + '</span>',
+          ),
+          content: word.content.replace(
+            regex,
+            "<span class='highlight'>" + question + '</span>',
+          ),
+        }))
+        SetWords(highlightedWords)
       }
     } else {
       SetWords(originalWords)

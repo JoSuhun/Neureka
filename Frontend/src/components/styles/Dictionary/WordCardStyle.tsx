@@ -14,17 +14,25 @@ export const CardBox = styled.div`
 `
 
 export const Title = styled.p`
+  font-family: 'Galmuri11', sans-serif;
   color: var(--color-dark);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
+  .highlight {
+    box-shadow: inset 0 -20px 0 #bfffa1;
+  }
 `
 
 export const Content = styled.div`
-  font-family: 'Pretendard-Thin';
-  color: var(--color-dark);
+  color: var(--color-grey);
   padding-top: 10px;
-  line-height: 1.3;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  .highlight {
+    color: black;
+    font-weight: 700;
+  }
 `
 export const saveBtn = styled.img`
   width: 30px;

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import * as m from '@src/components/styles/Main/MainCardStyle'
 import wrapperbgimage from '/image/bg-image4.jpg'
+import line from '/image/Line.png'
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
@@ -9,7 +10,6 @@ type Props = {}
 const MainCard = (props: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const boxRef = useRef<HTMLDivElement>(null)
-  const cursorRef = useRef<HTMLDivElement>(null)
 
   const updateScroll = useCallback(() => {
     if (boxRef.current) {
@@ -31,22 +31,10 @@ const MainCard = (props: Props) => {
     }
   }, [updateScroll])
 
-  // const animateCursor = useCallback((e: any) => {
-  //   if (cursorRef.current) {
-  //     cursorRef.current.style.left = `${e.pageX}px`
-  //     cursorRef.current.style.top = `${e.pageY}px`
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   window.addEventListener('mousemove', animateCursor)
-  // }, [animateCursor])
-
   return (
     <>
       <m.Wrapper>
         <m.Box ref={boxRef} bgimage={wrapperbgimage}>
-          <m.Cursor ref={cursorRef} />
           <m.Title className={scrollPosition > 30 ? `changed` : ''}>
             NEúrēka
           </m.Title>
@@ -68,7 +56,9 @@ const MainCard = (props: Props) => {
               <MoreHorizIcon />
             </span>
           </m.Info>
+          <m.Arrow className={scrollPosition > 30 ? `none` : ``} />
         </m.Box>
+        <m.Line src={line} />
       </m.Wrapper>
     </>
   )

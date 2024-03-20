@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
+      
       @font-face {
         font-family: "Giants-Inline";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2")
@@ -55,6 +56,7 @@ const GlobalStyle = createGlobalStyle`
           /* font-weight: 700; */
           font-style: normal;
       }
+
       margin: 0;
       font-family: 'Pretendard-Regular';
 
