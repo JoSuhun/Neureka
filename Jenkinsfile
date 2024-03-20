@@ -6,33 +6,41 @@ pipeline {
     }
 
     stages {
-        stage('Build and Push Docker Images') { // 단일 단계로 변경됨
+        stage('Build Docker Images') { // 이미지 빌드 단계
             steps {
                 // Git pull
                 checkout scm
 
-                // Build and push Docker images for all Dockerfiles in Frontend, Backend, Python folders
+                // Build Docker images for all Dockerfiles in Frontend, Backend, Python folders
                 script {
-                    def folders = ['Frontend', 'Backend', 'Python'] // 변경된 부분: 세 폴더 추가
+                    def folders = ['Frontend', 'Backend', 'Python']
 
                     folders.each { folder ->
-                        def dockerFiles = sh(script: "find ${folder} -name 'Dockerfile'", returnStdout: true).trim().split('\n') // 변경된 부분: 폴더 내 모든 Dockerfile 찾기
+                        def dockerFiles = sh(script: "find ${folder} -name 'Dockerfile'", returnStdout: true).trim().split('\n')
 
                         dockerFiles.each { dockerFile ->
-                            def imageName = dockerFile.tokenize('/')[0] // 변경된 부분: Dockerfile이 위치한 폴더명을 이미지 이름으로 사용
+                            def imageName = dockerFile.tokenize('/')[0]
                             sh "${DOCKER_HOME}/docker build -t ${imageName} ${dockerFile}"
-                            sh "${DOCKER_HOME}/docker push ${imageName}" // 변경된 부분: 이미지를 바로 푸시(push)
                         }
                     }
                 }
             }
         }
 
-        stage('Run Docker Compose') {
+        stage('Push Docker Images to Docker Hub') { // 도커 허브 푸시 단계
             steps {
-                // Run Docker Compose
+                // Push Docker images to Docker Hub
                 script {
-                    sh 'docker-compose -f docker-compose.yml up -d'
+                    def folders = ['Frontend', 'Backend', 'Python']
+
+                    folders.each { folder ->
+                        def dockerFiles = sh(script: "find ${folder} -name 'Dockerfile'", returnStdout: true).trim().split('\n')
+
+                        dockerFiles.each { dockerFile ->
+                            def imageName = dockerFile.tokenize('/')[0]
+                            sh "${DOCKER_HOME}/docker push ${imageName}"
+                        }
+                    }
                 }
             }
         }
