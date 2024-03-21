@@ -21,6 +21,7 @@ const BubbleCategory = () => {
         <bc.CategoryWrapper show={categoryToggle}>
           {Categories.map((element, key) => (
             <Category
+              key={key}
               name={element.name}
               image={element.image}
               show={categoryToggle}
@@ -31,6 +32,7 @@ const BubbleCategory = () => {
         <bc.CategoryWrapper show={categoryToggle}>
           {selectedCategories.map((element, key) => (
             <Category
+              key={key}
               name={element.name}
               image={element.image}
               show={categoryToggle}
