@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useAtom } from 'jotai'
-import { StockType } from '@src/types/stockType'
-import { selectedStockAtom } from '@src/stores/stockAtom'
+import { CompanyType } from '@src/types/CompanyType'
+import { selectedCompanyAtom } from '@src/stores/stockAtom'
 import * as s from '@src/components/styles/Stocks/SearchStocksSectionStyle'
 
-const SearchStocksSection = () => {
-  const [kospi200List, setKospi200List] = useState<StockType[]>([]) // 종목 전체 리스트
+const SearchStocksSection = (props: { data: CompanyType[] }) => {
+  const { data } = props // 종목 전체 리스트
+
   const [searchBy, setSearchBy] = useState<string>('name') // select 분류
   const [searchTerm, setSearchTerm] = useState<string>('') // 검색어 입력
   const [showDropdown, setShowDropdown] = useState<boolean>(false) // 필터링 결과 드롭다운 여부
-  const [selectedStock, setSelectedStock] = useAtom(selectedStockAtom) // select 한 종목
+  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
   const handleSearchByChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -24,32 +25,17 @@ const SearchStocksSection = () => {
     setShowDropdown(true)
   }
 
-  const handleSelectStock = (stock: StockType) => {
+  const handleSelectStock = (stock: CompanyType) => {
     setSelectedStock(stock)
-    setSearchTerm(stock.name)
+    setSearchTerm(stock.companyName)
     setShowDropdown(false)
   }
 
-  const filteredStocks = kospi200List.filter(stock =>
+  const filteredStocks = data.filter(stock =>
     searchBy === 'name'
-      ? stock.name.toLowerCase().includes(searchTerm.toLowerCase())
-      : stock.code.toLowerCase().includes(searchTerm.toLowerCase()),
+      ? stock.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+      : String(stock.code).includes(searchTerm.toLowerCase()),
   )
-
-  useEffect(() => {
-    const dummyData: StockType[] = [
-      { code: '282330', name: 'BGF리테일' },
-      { code: '138930', name: 'BNK금융지주' },
-      { code: '1040', name: 'CJ' },
-      { code: '120', name: 'CJ대한통운' },
-      { code: '97950', name: 'CJ제일제당' },
-      { code: '5830', name: 'DB손해보험' },
-      { code: '990', name: 'DB하이텍' },
-      { code: '139130', name: 'DGB금융지주' },
-    ]
-
-    setKospi200List(dummyData)
-  }, [])
 
   return (
     <s.Container>
@@ -76,7 +62,7 @@ const SearchStocksSection = () => {
                 onClick={() => handleSelectStock(stock)}
               >
                 <span>
-                  {stock.name} ({stock.code})
+                  {stock.companyName} ({stock.code})
                 </span>
                 <s.ArrowIcon />
               </s.ResultItem>
