@@ -6,6 +6,7 @@ import kakao from '/image/kakaotalk.png'
 import google from '/image/google.png'
 import { useAtom } from 'jotai'
 import { modalOpenAtom } from '@src/stores/authModalAtom'
+import { isLoginAtom } from '@src/stores/authAtom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -88,9 +89,11 @@ const Navbar = () => {
             Eúrēka
           </n.NavTitle>
           <n.NavButton className="button-section">
-            <n.LoginBtn className="login-btn" onClick={openModal}>
-              LOGIN
-            </n.LoginBtn>
+            {isLoginAtom ? null : (
+              <n.LoginBtn className="login-btn" onClick={openModal}>
+                LOGIN
+              </n.LoginBtn>
+            )}
             <n.MenuBtn onClick={navtoggle}>MENU</n.MenuBtn>
           </n.NavButton>
         </n.Nav>
