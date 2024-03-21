@@ -19,12 +19,12 @@ export const Box = styled.div<{ bgimage: string }>`
 
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  /* z-index: 2; */
   background-image: url(${props => props.bgimage});
 
   background-position: center;
   background-size: cover;
-  /* justify-content: center; */
+  justify-content: center;
 
   color: white;
 
@@ -51,7 +51,7 @@ export const Box = styled.div<{ bgimage: string }>`
 
   &::before {
     position: absolute;
-    z-index: 1;
+    /* z-index: 1; */
     content: '';
     border-radius: 30px;
     box-shadow: var(--shadow);

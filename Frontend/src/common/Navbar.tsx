@@ -4,12 +4,19 @@ import { useNavigate } from 'react-router-dom'
 
 import kakao from '/image/kakaotalk.png'
 import google from '/image/google.png'
+import { useAtom } from 'jotai'
+import { modalOpenAtom } from '@src/stores/authModalAtom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [isOpen, setIsOpen] = useAtom(modalOpenAtom)
   const navigate = useNavigate()
+
+  const openModal = () => {
+    setIsOpen(true)
+  }
 
   const navtoggle = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -54,6 +61,7 @@ const Navbar = () => {
     navtoggle()
   }
 
+  // 로그인 url
   const google_url = 'http://localhost:8080/oauth2/authorization/google'
 
   const login = (url: string) => {
@@ -80,7 +88,7 @@ const Navbar = () => {
             Eúrēka
           </n.NavTitle>
           <n.NavButton className="button-section">
-            <n.LoginBtn className="login-btn" onClick={logintoggle}>
+            <n.LoginBtn className="login-btn" onClick={openModal}>
               LOGIN
             </n.LoginBtn>
             <n.MenuBtn onClick={navtoggle}>MENU</n.MenuBtn>
