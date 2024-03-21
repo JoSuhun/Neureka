@@ -22,11 +22,16 @@ const Category = ({ name, image, show }: CategoryProps) => {
         return prev.filter(category => category.name !== selectedCategory.name)
       } else {
         // 존재하지 않는 경우, 카테고리 추가
-        const sortedSelectedCategories = [...prev, selectedCategory].sort(
-          (a, b) => {
-            return Categories.indexOf(a) - Categories.indexOf(b)
-          },
-        )
+        if (prev.length >= 3) {
+          return prev
+        }
+        const updatedCategories = [...prev, selectedCategory]
+        const categoryNames = Categories.map(category => category.name) // 카테고리 이름만 추출
+        const sortedSelectedCategories = updatedCategories.sort((a, b) => {
+          const indexA = categoryNames.indexOf(a.name)
+          const indexB = categoryNames.indexOf(b.name)
+          return indexA - indexB
+        })
         return sortedSelectedCategories
       }
     })

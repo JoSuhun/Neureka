@@ -33,9 +33,13 @@ export type KeywordCount = {
 }
 
 export type Bubble = d3.SimulationNodeDatum & {
-  id: number
-  x: number
-  y: number
-  r: number
-  name: string
+  id: number;
+  x: number;
+  y: number;
+  r: number;
+  name: string;
+}
+
+export type CategoryBoxProps = {
+  show: boolean
 }

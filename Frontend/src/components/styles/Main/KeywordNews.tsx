@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const container = styled.div`
   display: flex;
-  width: 90%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -24,8 +24,8 @@ export const SelectedKeyword = styled.div`
   position: absolute;
   z-index: 10;
   // 가운데 원의 스타일 지정
-  width: 10vw; // 실제 크기에 맞게 조정
-  height: 10vw; // 실제 크기에 맞게 조정
+  width: 12vw; // 실제 크기에 맞게 조정
+  height: 12vw; // 실제 크기에 맞게 조정
   border-radius: 50%;
   background-color: #b5c9f0; // 색상은 실제로 원하는 것에 맞게 조정
   color: black;
@@ -34,7 +34,7 @@ export const SelectedKeyword = styled.div`
   align-items: center;
   text-align: center; // 텍스트 중앙 정렬
   font-weight: bold;
-  font-size: 1.8vw;
+  font-size: 2vw;
 `
 
 export const NewsGrid = styled.div`
