@@ -52,7 +52,7 @@ public class CompanyServiceImpl implements  CompanyService {
     public List<UserCompanyEntity> findUserLIkeCompany(String email) {
         UserEntity user = userRepository.findByEmail(email);
         List<UserCompanyEntity> userCompanyList = userCompanyRepository.findByUser(user);
-        
+
         return userCompanyList;
     }
 }
