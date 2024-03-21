@@ -16,16 +16,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Docker Compose') {
-            steps {
-                script {
-                    // Docker Compose를 사용하여 배포
-                    sh 'docker compose down'
-                    sh 'docker compose pull'
-                    sh 'docker compose up -d'
-                }
-            }
-        }
+        
         stage('Deploy with Docker') {
             steps {
                 script {
