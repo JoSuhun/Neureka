@@ -13,6 +13,7 @@ const Navbar = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isOpen, setIsOpen] = useAtom(modalOpenAtom)
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom)
   const navigate = useNavigate()
 
   const openModal = () => {
@@ -25,11 +26,9 @@ const Navbar = () => {
       setIsLoginOpen(false)
     }
   }
-  const logintoggle = () => {
-    setIsLoginOpen(!isLoginOpen)
-    if (isMenuOpen) {
-      setIsMenuOpen(false)
-    }
+
+  const logout = () => {
+    setIsLogin(false)
   }
 
   const goHome = () => {
@@ -89,7 +88,11 @@ const Navbar = () => {
             Eúrēka
           </n.NavTitle>
           <n.NavButton className="button-section">
-            {isLoginAtom ? null : (
+            {isLogin ? (
+              <n.LoginBtn className="login-btn" onClick={logout}>
+                LOGOUT
+              </n.LoginBtn>
+            ) : (
               <n.LoginBtn className="login-btn" onClick={openModal}>
                 LOGIN
               </n.LoginBtn>
