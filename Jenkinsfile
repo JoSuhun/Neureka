@@ -18,9 +18,11 @@ pipeline {
         }
         stage('Deploy with Docker Compose') {
             steps {
-                // Docker Compose를 사용하여 배포
-                sh 'docker-compose pull'
-                sh 'docker-compose up -d'
+                script {
+                    // Docker Compose를 사용하여 배포
+                    sh 'docker-compose pull'
+                    sh 'docker-compose up -d'
+                }
             }
         }
     }
