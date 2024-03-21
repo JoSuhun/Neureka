@@ -4,4 +4,9 @@ interface Word {
   content: string
 }
 
-export type { Word }
+interface MarkWord {
+  email: string
+  title: string
+}
+
+export type { Word, MarkWord }
