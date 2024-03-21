@@ -1,7 +1,11 @@
 from django.http import JsonResponse, HttpResponse
-import pandas as pd
+from rest_framework import status
+from rest_framework.response import Response
 import FinanceDataReader as fdr
 import json
+from rest_framework.decorators import api_view
+from .stock_news import crawling_news
+from .serializers import KeywordSerializer
 
 
 def fetch_and_save_krx_data(request):
@@ -12,12 +16,10 @@ def fetch_and_save_krx_data(request):
     if not stock_code:
         return HttpResponse("Stock code is required. 코드 제대로 주라고 아.", status=400)
 
-    stock_code = str(stock_code).zfill(6)
-
     # KRX 데이터를 DataFrame으로 가져옵니다.
     df_krx = fdr.DataReader(stock_code)
 
-    
+
     # DataFrame 컬럼 이름을 모두 소문자로 변경
     df_krx.columns = [col.lower() for col in df_krx.columns]
 
@@ -34,3 +36,14 @@ def fetch_and_save_krx_data(request):
 
     # 포맷팅된 JSON 문자열을 HttpResponse 객체를 사용하여 반환
     return HttpResponse(formatted_json_data, content_type="application/json; charset=utf-8")
+
+
+@api_view(["POST"])
+def stock_news(request):
+    serializer = KeywordSerializer(data=request.data)
+    if serializer.is_valid():
+        keyword = serializer.validated_data.get('keyword')
+        news_data = crawling_news(keyword)
+        return Response(news_data, status=status.HTTP_200_OK)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
