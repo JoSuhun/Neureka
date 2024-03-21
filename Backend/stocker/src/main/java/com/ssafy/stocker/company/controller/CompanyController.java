@@ -28,7 +28,7 @@ public class CompanyController {
     @Operation(summary = "주식 최근 10년간 가격을 조회합니다." )
     @GetMapping("/stock/price")
     public ResponseEntity<String> getDataFromDjango(@RequestParam String code) {
-        String url = "/finance/fetch-krx/?code=" + code;
+        String url = "/finance/fetch_krx/?code=" + code;
 
         String response = webClient.get()
                 .uri(url)
