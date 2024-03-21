@@ -1,7 +1,8 @@
 import { atom } from 'jotai'
-import { StockType } from '@src/types/stockType'
+import { CompanyType } from '@src/types/CompanyType'
 
-export const selectedStockAtom = atom<StockType>({
-  code: '',
-  name: '',
+export const selectedCompanyAtom = atom<CompanyType>({
+  companyId: 0,
+  code: 0,
+  companyName: '',
 })
