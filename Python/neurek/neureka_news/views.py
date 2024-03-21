@@ -45,7 +45,8 @@ def load_keyword_data():
 # 뉴스 요약 정보 전체 전송
 def news_api(request):
     news_data = load_news_data()
-    return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
+
+    return HttpResponse(json.dumps(news_data[:100], ensure_ascii=False, indent=4),
                         content_type="application/json; charset=utf-8")
 
 
