@@ -8,8 +8,11 @@ import save from '/image/save.png'
 import notsave from '/image/notsave.png'
 
 import { useMutation } from 'react-query'
-import { fetchMarkWord } from '@src/apis/DictionaryApi'
+import { fetchMarkWord, fetchMarkedWords } from '@src/apis/DictionaryApi'
 import { MarkWord } from '@src/types/WordType'
+
+import { useAtom } from 'jotai'
+import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 
 type Props = {
   word: Word | null
@@ -17,6 +20,7 @@ type Props = {
 
 const WordCard = ({ word }: Props) => {
   const [isSave, SetIsSave] = useState(false)
+  const [mark, setMark] = useAtom(toggleMarkingAtom)
 
   // useMutation 기본 사용법
   const { mutate } = useMutation((data: MarkWord) => fetchMarkWord(data), {
@@ -30,6 +34,7 @@ const WordCard = ({ word }: Props) => {
 
   const ToggleSave = () => {
     SetIsSave(!isSave)
+    setMark(!mark)
     mutate({
       email: 'dbtks2759@gmail.com',
       title: word?.title as string,
