@@ -1,5 +1,5 @@
 import { pythonRequest } from "@src/hooks/pythonMethod";
-import { Category } from "@src/types/MainType";
+import { Category, KeywordCount } from "@src/types/MainType";
 
 export const fetchKeywords = async (categories: Category[]) => {
   // const params = new URLSearchParams();

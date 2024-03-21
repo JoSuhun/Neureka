@@ -18,7 +18,6 @@ export const Categories = [
   { name: '유가증권', image: stock },
   { name: '정치', image: politics },
   { name: '해외토픽', image: global },
-  { name: '기타', image: etc },
 ]
 
 export type Category = {
@@ -27,8 +26,9 @@ export type Category = {
 }
 
 export type KeywordCount = {
-  name: string
+  keyword: string
   count: number
+  links: string[]
 }
 
 export type Bubble = d3.SimulationNodeDatum & {

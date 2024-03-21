@@ -22,9 +22,11 @@ const BubbleChart = () => {
     if (count <= 40) return '#EE8273'
     return '#B5C9F0' // 40 이상
   }
+
   const handleSelectKeyword = (keyword: string) => {
     setSelectedKeyword(keyword)
   }
+
   const simulationRef = useRef<d3.Simulation<Bubble, undefined> | null>(null)
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const BubbleChart = () => {
       x: width / 2 + 5 * (index / 8) * dy[index % 8], // 500 (SVG 중앙) 근처 배치
       y: 300 + 5 * (index / 8) * dx[index % 8], // 300 (SVG 중앙) 근처 배치
       r: 10 + Math.sqrt(keyword.count) * 10,
-      name: keyword.name,
+      name: keyword.keyword,
     }))
 
     simulationRef.current = d3
