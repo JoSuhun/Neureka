@@ -75,10 +75,10 @@ public class CompanyController {
 
             return new ResponseEntity<List<UserCompanyEntity>>(userCompanyList, HttpStatus.OK);
         }catch (Exception e){
-
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return null;
+
     }
 
 

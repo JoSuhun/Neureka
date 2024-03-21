@@ -10,7 +10,7 @@ import lombok.ToString;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "user")
 @Getter
 @Setter
 @ToString
