@@ -65,14 +65,14 @@ public class DictionaryController {
     }
 
     @Operation(summary = "유저가 관심있는 용어를 삭제합니다.")
-    @DeleteMapping("/like")
+    @PostMapping("/like/delete")
     public ResponseEntity<?> deleteLikeDictionary(@RequestParam String email , @RequestParam String title){
         try {
             log.info(email + " " + title );
 
             dictinaryService.deleteLikeDictionary(email, title);
 
-            return null;
+            return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
