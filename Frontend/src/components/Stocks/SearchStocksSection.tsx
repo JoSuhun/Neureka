@@ -34,7 +34,7 @@ const SearchStocksSection = (props: { data: CompanyType[] }) => {
   const filteredStocks = data.filter(stock =>
     searchBy === 'name'
       ? stock.companyName.toLowerCase().includes(searchTerm.toLowerCase())
-      : String(stock.code).includes(searchTerm.toLowerCase()),
+      : stock.code.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
   return (

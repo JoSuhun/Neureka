@@ -3,6 +3,6 @@ import { CompanyType } from '@src/types/CompanyType'
 
 export const selectedCompanyAtom = atom<CompanyType>({
   companyId: 0,
-  code: 0,
+  code: '',
   companyName: '',
 })
