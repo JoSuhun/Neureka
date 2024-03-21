@@ -38,7 +38,7 @@ public class DictionaryController {
         }
     }
 
-    @GetMapping()
+    @GetMapping("/get")
     @Operation(summary = "경제 용어 상세 항목을 조회합니다" )
     public ResponseEntity<?> find(@RequestParam String title){
         try {
