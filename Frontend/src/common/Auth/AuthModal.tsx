@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAtom } from 'jotai'
 import { modalOpenAtom } from '@src/stores/authModalAtom'
 import Modal from 'react-modal'
@@ -10,14 +10,16 @@ type Props = {}
 
 const AuthModal = (props: Props) => {
   const [isOpen, setIsOpen] = useAtom(modalOpenAtom)
+  const [isLoginSection, SetIsLoginSection] = useState(true)
 
-  const openModal = () => {
-    setIsOpen(true)
-  }
   const closeModal = () => {
     setIsOpen(false)
   }
   const afterOpenModal = () => {}
+
+  const ToggleSection = () => {
+    SetIsLoginSection(!isLoginSection)
+  }
 
   return (
     <>
@@ -30,11 +32,15 @@ const AuthModal = (props: Props) => {
       >
         <m.Wrapper>
           <m.CloseBtn onClick={closeModal} />
-          <LoginSection />
+          {isLoginSection ? <LoginSection /> : <SignupSection />}
 
-          <m.GoSignup>아직 회원이 아니신가요?</m.GoSignup>
-
-          <SignupSection />
+          <m.OptionBtn>
+            <m.ToggleBtn onClick={ToggleSection}>
+              {isLoginSection
+                ? `아직 회원이 아니신가요?`
+                : `이미 회원이신가요?`}
+            </m.ToggleBtn>
+          </m.OptionBtn>
         </m.Wrapper>
       </m.MyModal>
     </>

@@ -3,13 +3,14 @@ import React from 'react'
 import { useAtom } from 'jotai'
 import { isLoginAtom } from '@src/stores/authAtom'
 
-import * as l from '@src/common/styles/Auth/LoginSectionStyle'
+import * as l from '@src/common/styles/Auth/SectionStyle'
 import kakao from '/image/kakao.png'
 import google from '/image/google.png'
 type Props = {}
 
 const LoginSection = (props: Props) => {
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+
   // 구글 로그인 url
   const google_url = 'http://localhost:8080/oauth2/authorization/google'
 
@@ -20,17 +21,17 @@ const LoginSection = (props: Props) => {
 
   return (
     <>
-      <l.LoginTitle>로그인</l.LoginTitle>
-      <l.Logincontent>
-        <l.LoginSelect className="kakao">
-          <l.LoginIcon src={kakao} />
-          <l.LoginMsg>카카오로 간편 로그인</l.LoginMsg>
-        </l.LoginSelect>
-        <l.LoginSelect className="google" onClick={() => login(google_url)}>
-          <l.LoginIcon src={google} />
-          <l.LoginMsg>구글로 간편 로그인</l.LoginMsg>
-        </l.LoginSelect>
-      </l.Logincontent>
+      <l.Title>로그인</l.Title>
+      <l.Content>
+        <l.Select className="kakao">
+          <l.Icon src={kakao} />
+          <l.Msg>카카오로 간편 로그인</l.Msg>
+        </l.Select>
+        <l.Select className="google" onClick={() => login(google_url)}>
+          <l.Icon src={google} />
+          <l.Msg>구글로 간편 로그인</l.Msg>
+        </l.Select>
+      </l.Content>
     </>
   )
 }
