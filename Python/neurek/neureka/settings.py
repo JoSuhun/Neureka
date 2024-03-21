@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'neureka_news',
-    'pymongo'
+    'pymongo',
+    'drf_yasg', #drf_yasg
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # cors에러 설정
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+# 특정 도메인만 허용
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8080",
 ]
 
 ROOT_URLCONF = 'neureka.urls'

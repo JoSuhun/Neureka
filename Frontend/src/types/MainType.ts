@@ -10,13 +10,12 @@ import finance from '/category/finance.png'
 import management from '/category/management.png'
 
 export const Categories = [
-  { name: '경영', image: management },
+  { name: '반도체', image: semiconductor },
   { name: '금융', image: finance },
   { name: '기술', image: technology },
-  { name: '반도체', image: semiconductor },
+  { name: '경영', image: management },
   { name: '가상화폐', image: cryptocurrency },
   { name: '유가증권', image: stock },
-  { name: '부동산', image: realEstate },
   { name: '정치', image: politics },
   { name: '해외토픽', image: global },
   { name: '기타', image: etc },
