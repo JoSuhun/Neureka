@@ -53,14 +53,18 @@ export const CloseBtn = styled(CloseIcon)`
   color: var(--color-grey);
   cursor: pointer;
 `
-
-export const GoSignup = styled.p`
+export const OptionBtn = styled.div`
   padding-top: 5%;
   margin-top: 5%;
   width: 70%;
+
+  border-top: 1px solid black;
+  text-align: center;
+`
+
+export const ToggleBtn = styled.span`
   font-size: 0.8rem;
   color: var(--color-grey);
-  border-top: 1px solid black;
   text-align: center;
   cursor: pointer;
 `

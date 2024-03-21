@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-export const LoginTitle = styled.p`
+export const Title = styled.p`
   font-size: 1.2rem;
 `
 
-export const Logincontent = styled.div`
+export const Content = styled.div`
   width: 70%;
   margin: 5% 0;
   display: flex;
@@ -12,7 +12,7 @@ export const Logincontent = styled.div`
   align-items: center;
 `
 
-export const LoginSelect = styled.p`
+export const Select = styled.p`
   width: 90%;
   height: 25px;
   background-color: white;
@@ -34,12 +34,12 @@ export const LoginSelect = styled.p`
   }
 `
 
-export const LoginMsg = styled.span`
+export const Msg = styled.span`
   font-size: 0.8rem;
   color: var(--color-dark);
 `
 
-export const LoginIcon = styled.img`
+export const Icon = styled.img`
   height: 100%;
   margin-right: 3%;
   justify-self: start;
