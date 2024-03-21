@@ -41,7 +41,6 @@ public class CompanyController {
 
 
     @Operation(summary = "주식 목록 리스트를 조회합니다." )
-
     @GetMapping("/list")
     public ResponseEntity<?> findList() {
         try {
@@ -55,10 +54,10 @@ public class CompanyController {
 
     @Operation(summary = "유저가 관심있는 회사를 추가합니다" )
     @PostMapping("/like")
-    public ResponseEntity<?> addLikeCompany(@RequestParam String email , @RequestParam Integer codeId){
+    public ResponseEntity<?> addLikeCompany(@RequestParam String email , @RequestParam String code){
         try {
-            log.info(email + " " + codeId);
-            companyService.addLikeCompany(email , codeId);
+            log.info(email + " " + code);
+            companyService.addLikeCompany(email , code);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();

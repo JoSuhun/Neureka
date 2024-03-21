@@ -10,7 +10,7 @@ public interface CompanyService {
 
 
 
-    void addLikeCompany(String email, Integer companyId);
+    void addLikeCompany(String email, String code);
 
     List<UserCompanyEntity> findUserLIkeCompany(String email);
 }

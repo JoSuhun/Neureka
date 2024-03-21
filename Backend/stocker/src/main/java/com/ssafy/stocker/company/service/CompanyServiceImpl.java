@@ -35,7 +35,7 @@ public class CompanyServiceImpl implements  CompanyService {
 
 
     @Override
-    public void addLikeCompany(String email, Integer code) {
+    public void addLikeCompany(String email, String code) {
 
         UserEntity user = userRepository.findByEmail(email);
         CompanyEntity company = companyRepository.findByCode(code);
