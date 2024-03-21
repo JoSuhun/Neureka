@@ -2,12 +2,12 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
-from .serializers import SummaryArticleSerializer, LinksSerializer
+from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer
 import json
 from django.http import HttpResponse, JsonResponse
 import os
 from django.conf import settings
-from .models import db
+from .models import db, DetailsArticle
 from .news_cluster import kmeans_cluster
 
 
@@ -86,3 +86,17 @@ class news_keywords_article(APIView):
             return Response({'message': 'Links processed successfully', 'data': search_list})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["POST"])
+def news_details(request):
+    serializer = UrlSerializer(data=request.data)
+    if serializer.is_valid():
+        url = serializer.validated_data.get('link')
+        article = DetailsArticle.find_by_url(url)
+        if article:
+            # article이 dict 형태로 반환될 경우 바로 Response에 넣을 수 있습니다.
+            return Response(article)
+        else:
+            return Response({"message": "Article not found 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

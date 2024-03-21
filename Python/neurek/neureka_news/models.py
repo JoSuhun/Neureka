@@ -68,3 +68,10 @@ class DetailsArticle:
     def find_by_title(cls, title):
         """제목으로 문서 조회"""
         return cls.collection.find_one({"detail_title": title})
+
+    @classmethod
+    def find_by_url(cls, url):
+        """URL로 문서 조회하며 '_id' 필드 제외"""
+        # '_id' 필드를 제외하고 나머지 데이터만 조회
+        document = cls.collection.find_one({"detail_url": url}, {'_id': False})
+        return document
