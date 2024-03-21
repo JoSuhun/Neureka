@@ -13,3 +13,6 @@ class SummaryArticleSerializer(serializers.Serializer):
 
 class LinksSerializer(serializers.Serializer):
     links = serializers.ListField(child=serializers.URLField())
+
+class UrlSerializer(serializers.Serializer):
+    link = serializers.URLField(max_length=200)
