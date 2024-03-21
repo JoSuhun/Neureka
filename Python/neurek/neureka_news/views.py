@@ -1,6 +1,5 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer
 import json
@@ -55,6 +54,10 @@ def news_bubble(request):
     keyword_data = load_keyword_data()
     requested_keywords = request.GET.getlist('keywords')
 
+    # requested_keywords가 비어있으면 기본 키워드 리스트를 할당
+    if not requested_keywords:
+        requested_keywords = ["반도체", "금융", "기술", "경영", "가상화폐", "유가증권", "정치", "해외토픽"]
+
     combined_data = []
     for keyword in requested_keywords:
         if keyword in keyword_data:
@@ -75,17 +78,18 @@ def news_bubble(request):
     return JsonResponse(top_30_data, safe=False, json_dumps_params={'ensure_ascii': False, 'indent': 4})
 
 
-class news_keywords_article(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = LinksSerializer(data=request.data)
-        if serializer.is_valid():
-            links = serializer.validated_data['links']
-            search_list = kmeans_cluster(links)  # kmeans_cluster 함수 호출
+@api_view(['POST'])
+def news_keywords_article(request):
+    serializer = LinksSerializer(data=request.data)
+    if serializer.is_valid():
+        links = serializer.validated_data['links']
+        search_list = kmeans_cluster(links)  # kmeans_cluster 함수 호출
 
-            # kmeans_cluster의 결과를 응답 데이터로 사용
-            return Response({'message': 'Links processed successfully', 'data': search_list})
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # kmeans_cluster의 결과를 응답 데이터로 사용
+        return Response({'message': 'Links processed successfully', 'data': search_list})
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(["POST"])
 def news_details(request):
@@ -94,7 +98,6 @@ def news_details(request):
         url = serializer.validated_data.get('link')
         article = DetailsArticle.find_by_url(url)
         if article:
-            # article이 dict 형태로 반환될 경우 바로 Response에 넣을 수 있습니다.
             return Response(article)
         else:
             return Response({"message": "Article not found 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_404_NOT_FOUND)

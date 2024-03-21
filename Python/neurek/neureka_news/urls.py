@@ -9,7 +9,7 @@ router.register(r'base', views.SummaryArticleViewSet, basename='base')
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/today/', news_api, name='news_api'),
-    path('api/buble/', news_bubble, name='news_bubble'),
-    path('api/keyword_article/', news_keywords_article.as_view(), name='news_keywords_article'),
+    path('api/bubble/', news_bubble, name='news_bubble'),
+    path('api/keyword_article/', news_keywords_article, name='news_keywords_article'),
     path('api/news_details', news_details, name='news_details'),
 ]

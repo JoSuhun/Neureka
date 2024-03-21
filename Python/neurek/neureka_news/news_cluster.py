@@ -33,26 +33,40 @@ def keyword_nouns(text):
 
 
 def kmeans_cluster(link_list):
+    # 링크 리스트가 비었을 경우 빈 리스트 반환
+    if not link_list:
+        return []
 
+    # 링크 리스트의 길이가 4 미만이면 클러스터링 없이 바로 결과 반환
+    if len(link_list) < 4:
+        file_path = os.path.join(settings.BASE_DIR, 'neureka_news', 'news_data.json')
+        with open(file_path, 'r', encoding='utf-8') as file:
+            news_data = json.load(file)
+
+        search_result = []
+        for article_link in link_list:
+            for article in news_data:
+                if article["article_link"] == article_link:
+                    search_result.append(article)
+                    break
+        return search_result
+
+    # 링크 리스트의 길이가 4 이상일 때는 아래의 로직을 실행
     nouns_list = []
-
     for link in link_list:
         response = requests.get(link)
         soup = BeautifulSoup(response.content, "html.parser")
         article_text = soup.find("article").get_text(strip=True)
-
         nouns_list.append(keyword_nouns(article_text))
 
     # 텍스트 벡터화
     tfidf_vectorizer = TfidfVectorizer()
-    # tfidf_matrix = tfidf_vectorizer.fit_transform([article['nouns'] for article in news_data.get(keyword)])
     tfidf_matrix = tfidf_vectorizer.fit_transform(nouns_list)
 
     # KMeans 클러스터링
     kmeans = KMeans(n_clusters=4, random_state=42).fit(tfidf_matrix)
 
-    # 클러스터링 결과에 따라 각 그룹의 대표 기사를 선택합니다.
-    # 여기서는 각 클러스터의 중심에 가장 가까운 기사를 대표 기사로 선택합니다.
+    # 클러스터의 중심에 가장 가까운 기사를 선택
     closest, _ = pairwise_distances_argmin_min(kmeans.cluster_centers_, tfidf_matrix)
     representative_articles = [link_list[idx] for idx in closest]
 
@@ -60,14 +74,8 @@ def kmeans_cluster(link_list):
     with open(file_path, 'r', encoding='utf-8') as file:
         news_data = json.load(file)
 
-    # 특정 article_title을 검색하는 예시
-
-    # 검색 결과를 담을 변수 초기화
     search_result = []
-
-    # 5. 결과 출력
     for article_link in representative_articles:
-        # news_data를 순회하면서 article_title이 일치하는 항목을 찾기
         for article in news_data:
             if article["article_link"] == article_link:
                 search_result.append(article)

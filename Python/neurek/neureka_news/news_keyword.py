@@ -121,16 +121,16 @@ def process_article(article, stop_words):
     article["keywords"] = keywords
     article["topic"] = topic
 
-    original_article = DetailsArticle(
-        detail_url=url,
-        detail_text=extract_content_from_url(url),
-        detail_title=article["article_title"],
-        detail_topic=topic,
-        detail_press=article["press"],
-        detail_date=article["date_time"]
-    )
+    if topic != "기타":
+        original_article = DetailsArticle(
+            detail_url=url,
+            detail_text=extract_content_from_url(url),
+            detail_title=article["article_title"],
+            detail_press=article["press"],
+            detail_date=article["date_time"]
+        )
 
-    original_article.save()
+        original_article.save()
 
     return article
 
@@ -175,7 +175,6 @@ if __name__ == "__main__":
         "유가증권": {},
         "정치": {},
         "해외토픽": {},
-        "기타": {}
     }
 
     # 모든 기사 처리 완료 후 keyword_news 업데이트

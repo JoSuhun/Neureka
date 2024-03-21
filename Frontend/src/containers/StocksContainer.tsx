@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
+import { useAtom } from 'jotai'
 import { useQuery } from 'react-query'
 import { fetchCompanyList, fetchCompanyPrice } from '@src/apis/StockApi'
+import { selectedCompanyAtom } from '@src/stores/stockAtom'
 import SearchStocksSection from '@src/components/Stocks/SearchStocksSection'
 import MyStocksSection from '@src/components/Stocks/MyStocksSection'
 import LatestStocksSection from '@src/components/Stocks/LatestStocksSection'
@@ -12,6 +14,8 @@ import CorpInfoSection from '@src/components/Stocks/CorpInfoSection'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
+  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -23,10 +27,9 @@ const StocksContainer = () => {
 
   const { data: companyPrice } = useQuery({
     queryKey: ['CompanyPrice'],
-    queryFn: () => fetchCompanyPrice('000120'),
+    queryFn: () => fetchCompanyPrice(selectedStock.code),
   })
 
-  console.log(companyPrice)
   return (
     <s.Container>
       <s.SidebarWrap>

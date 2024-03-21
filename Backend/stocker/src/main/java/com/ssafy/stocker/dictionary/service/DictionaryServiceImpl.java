@@ -60,5 +60,18 @@ public class DictionaryServiceImpl implements DictionaryService{
         return userDictionaryList;
     }
 
+    @Override
+    public void deleteLikeDictionary(String email, String title) {
+        UserEntity user = userRepository.findByEmail(email);
+        DictionaryEntity dictionary = dictinaryRepository.findByTitle(title);
+
+        UserDictionaryEntity userDictionary = new UserDictionaryEntity();
+
+        userDictionary.setDictionary(dictionary);
+        userDictionary.setUser(user);
+
+        userDictionaryRepository.deleteByUserAndDictionary(user, dictionary);
+    }
+
 
 }

@@ -67,6 +67,9 @@ public class CompanyController {
 
     }
 
+
+
+    @Operation(summary = "유저가 관심있는 회사 리스트를 조회합니다.")
     @GetMapping("/like/list")
     public ResponseEntity<?> userLikeCompanyFind(String email){
         try {
