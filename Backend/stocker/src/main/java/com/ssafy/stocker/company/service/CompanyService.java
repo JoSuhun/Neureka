@@ -1,6 +1,7 @@
 package com.ssafy.stocker.company.service;
 
 import com.ssafy.stocker.company.entity.CompanyEntity;
+import com.ssafy.stocker.company.entity.UserCompanyEntity;
 
 import java.util.List;
 
@@ -9,5 +10,7 @@ public interface CompanyService {
 
 
 
-    void addLikeCompany(String userId, Integer companyId);
+    void addLikeCompany(String email, Integer companyId);
+
+    List<UserCompanyEntity> findUserLIkeCompany(String email);
 }
