@@ -1,4 +1,17 @@
 # jdk17 Image Start
+FROM openjdk:17 AS builder
+
+# Gradle wrapper 복사
+COPY stocker/gradlew ./
+COPY stocker/gradle ./gradle
+RUN chmod +x ./gradlew
+
+# 프로젝트 의존성 빌드
+COPY stocker/build.gradle stocker/settings.gradle ./
+COPY stocker/src ./src
+RUN ./gradlew build --no-daemon
+
+# 기본 이미지 선택
 FROM openjdk:17
 
 # 인자 설정 - JAR_File
