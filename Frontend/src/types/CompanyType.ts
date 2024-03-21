@@ -1,5 +1,5 @@
 export type CompanyType = {
   companyId: number
-  code: number
+  code: string
   companyName: string
 }
