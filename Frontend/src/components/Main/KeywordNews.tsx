@@ -6,6 +6,7 @@ import { selectedKeywordAtom } from '@src/stores/mainAtom'
 const KeywordNews = () => {
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const arr = [1, 2, 3, 4]
+  // 만약 4개 이하라면 없음 카드 추가하기
 
   return (
     <>

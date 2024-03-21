@@ -1,7 +1,12 @@
+import { style } from 'd3'
 import styled from 'styled-components'
 
+export const Container = styled.div`
+  width: 100%;
+`
+
 export const Svg = styled.svg`
-  width: 1000px;
+  width: 100%;
   height: 600px;
   border: 1px solid black;
 `
