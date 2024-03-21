@@ -1,0 +1,34 @@
+# Gradle 8.5을 기본 이미지로 사용
+FROM gradle:8.5-jdk17 AS builder
+
+# 작업 디렉토리를 /app으로 설정합니다.
+WORKDIR /app
+
+# COPY . .
+
+# Gradle wrapper 복사
+COPY stocker/gradlew ./
+COPY stocker/gradle ./gradle
+RUN chmod +x ./gradlew
+
+# 프로젝트 의존성 빌드
+COPY stocker/build.gradle stocker/settings.gradle ./
+COPY stocker/src ./src
+
+# Gradle Wrapper를 사용하여 프로젝트를 빌드합니다.
+RUN ./gradlew build --no-daemon
+
+# 실행 가능한 JAR 파일을 생성합니다.
+RUN ./gradlew bootJar
+
+# 최종 이미지를 준비하기 위해 두 번째 단계로 이동합니다.
+FROM openjdk:17
+
+# 작업 디렉토리를 /app으로 설정합니다.
+WORKDIR /app
+
+# 빌더 스테이지에서 생성된 실행 가능한 JAR 파일을 복사합니다.
+COPY --from=builder /app/stocker/build/libs/*.jar app.jar
+
+# Spring Boot 애플리케이션을 실행합니다.
+CMD ["java", "-jar", "app.jar"]
