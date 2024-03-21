@@ -1,6 +1,7 @@
 package com.ssafy.stocker.user.entity;
 
 //import com.ssafy.stocker.company.entity.UserCompanyEntity;
+//import com.ssafy.stocker.company.entity.UserCompanyEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,8 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
     private String username;
     private String name;

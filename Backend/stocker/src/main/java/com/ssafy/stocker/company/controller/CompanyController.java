@@ -2,6 +2,7 @@ package com.ssafy.stocker.company.controller;
 
 
 import com.ssafy.stocker.company.entity.CompanyEntity;
+import com.ssafy.stocker.company.entity.UserCompanyEntity;
 import com.ssafy.stocker.company.service.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -52,10 +53,11 @@ public class CompanyController {
         }
     }
 
-    @Operation(summary = "~ing" )
-    @PostMapping("like")
+    @Operation(summary = "유저가 관심있는 회사를 추가합니다" )
+    @PostMapping("/like")
     public ResponseEntity<?> addLikeCompany(@RequestParam String email , @RequestParam Integer codeId){
         try {
+            log.info(email + " " + codeId);
             companyService.addLikeCompany(email , codeId);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e){
@@ -65,5 +67,19 @@ public class CompanyController {
 
 
     }
+
+    @GetMapping("/like/list")
+    public ResponseEntity<?> userLikeCompanyFind(String email){
+        try {
+             List<UserCompanyEntity> userCompanyList=  companyService.findUserLIkeCompany(email);
+
+            return new ResponseEntity<List<UserCompanyEntity>>(userCompanyList, HttpStatus.OK);
+        }catch (Exception e){
+
+        }
+
+        return null;
+    }
+
 
 }
