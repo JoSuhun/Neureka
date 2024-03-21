@@ -11,7 +11,7 @@ pipeline {
                 script {
                     // 각 프로젝트 폴더에서 Docker 이미지를 빌드하고 Docker Hub에 푸시
                     buildAndPushImage('Frontend', DOCKER_CREDENTIALS)
-                    // buildAndPushImage('Backend', DOCKER_CREDENTIALS)
+                    buildAndPushImage('Backend/stocker', DOCKER_CREDENTIALS)
                     buildAndPushImage('Python', DOCKER_CREDENTIALS)
                 }
             }
