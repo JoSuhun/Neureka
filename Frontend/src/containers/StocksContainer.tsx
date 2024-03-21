@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { fetchCompanyList } from '@src/apis/StockApi'
+import { fetchCompanyList, fetchCompanyPrice } from '@src/apis/StockApi'
 import SearchStocksSection from '@src/components/Stocks/SearchStocksSection'
 import MyStocksSection from '@src/components/Stocks/MyStocksSection'
 import LatestStocksSection from '@src/components/Stocks/LatestStocksSection'
@@ -16,15 +16,25 @@ const StocksContainer = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const { data } = useQuery({
-    queryKey: ['GetCompanyList'],
+  const { data: companyList } = useQuery({
+    queryKey: ['CompanyList'],
     queryFn: fetchCompanyList,
   })
 
+  const { data: companyPrice } = useQuery({
+    queryKey: ['CompanyPrice'],
+    queryFn: () => fetchCompanyPrice('000120'),
+  })
+
+  console.log(companyPrice)
   return (
     <s.Container>
       <s.SidebarWrap>
-        {data ? <SearchStocksSection data={data} /> : <div>Loading!</div>}
+        {companyList ? (
+          <SearchStocksSection data={companyList} />
+        ) : (
+          <div>Loading!</div>
+        )}
         <MyStocksSection />
         <LatestStocksSection />
       </s.SidebarWrap>
