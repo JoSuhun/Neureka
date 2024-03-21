@@ -21,8 +21,8 @@ last_page_selector = "#contentarea_left > table > tbody > tr > td.pgRR"
 day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
-# 불러올 기사의 최소 수
-article_count = 500
+# 불러올 최소 기사의 수
+article_count = 2000
 
 while True:
     if len(article_list) >= article_count:
@@ -72,7 +72,8 @@ while True:
 
                 # 날짜 및 시간 정보 확인
                 date_time_tag = article_summary.find('span', class_='wdate')
-                article_dict['date_time'] = date_time_tag.text.strip() if date_time_tag else None
+                date_time = date_time_tag.text.strip() if date_time_tag else None
+                article_dict['date_time'] = date_time[:-3]
 
             if article_dict.get('article_link'):
                 article_list.append(article_dict)
