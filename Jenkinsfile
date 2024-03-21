@@ -20,8 +20,7 @@ pipeline {
             steps {
                 script {
                     // Docker Compose를 사용하여 배포
-                    sh 'docker-compose pull'
-                    sh 'docker-compose up -d'
+                    sh 'docker compose up -d'
                 }
             }
         }
