@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import ClearIcon from '@mui/icons-material/Clear'
 
 export const Card = styled.div`
   border-radius: 10px;
@@ -11,6 +12,7 @@ export const Card = styled.div`
 
 export const CardBox = styled.div`
   padding: 20px;
+  position: relative;
 `
 
 export const Title = styled.p`
@@ -41,4 +43,11 @@ export const saveBtn = styled.img`
   &:hover {
     transform: rotate(10deg);
   }
+`
+export const deleteBtn = styled(ClearIcon)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--color-grey);
+  cursor: pointer;
 `

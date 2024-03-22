@@ -13,7 +13,7 @@ export const fetchMarkWord = async (data: MarkWord) => {
 }
 
 export const fetchUnmarkWord = async (data: MarkWord) => {
-  return await publicRequest.delete('dictionary/like', {
+  return await publicRequest.delete('dictionary/like/delete', {
     params: data,
   })
 }
