@@ -5,8 +5,12 @@ import * as b from '@src/components/styles/Main/BubbleChart'
 import { Bubble, KeywordCount } from '@src/types/MainType'
 import { keywordsAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 
-const BubbleChart = () => {
-  const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
+export type BubbleChartProps = {
+  keywords: KeywordCount[]
+}
+
+const BubbleChart = ({ keywords }: BubbleChartProps) => {
+  // const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
   const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [bubbles, setBubbles] = useState<Bubble[]>([])
   const [selectedBubbleId, setSelectedBubbleId] = useState<number | null>(null)
