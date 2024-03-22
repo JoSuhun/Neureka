@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 import { useAtom } from 'jotai'
 import { useQuery } from 'react-query'
-import { fetchCompanyList, fetchCompanyPrice } from '@src/apis/StockApi'
+import {
+  fetchCompanyList,
+  fetchCompanyPrice,
+  fetchCompanyLikeList,
+} from '@src/apis/StockApi'
 import { selectedCompanyAtom } from '@src/stores/stockAtom'
 import SearchStocksSection from '@src/components/Stocks/SearchStocksSection'
 import MyStocksSection from '@src/components/Stocks/MyStocksSection'
@@ -16,6 +20,14 @@ import * as s from '@src/containers/styles/StocksContainerStyle'
 const StocksContainer = () => {
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
+  const user = {
+    user_id: 1,
+    email: 'dbtks2759@gmail.com',
+    name: '김유산',
+    role: 'ROLE_USER',
+    username: 'google 117226197043183171022',
+  }
+
   // 기업 전체 조회
   const { data: companyList } = useQuery({
     queryKey: ['CompanyList'],
@@ -29,6 +41,12 @@ const StocksContainer = () => {
       queryFn: () => fetchCompanyPrice(selectedStock.code),
     },
   )
+
+  // 관심 종목 조회
+  const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
+    queryKey: ['CompanyLikeList'],
+    queryFn: () => fetchCompanyLikeList(user.email),
+  })
 
   useEffect(() => {
     refetchCompanyPriceList()
@@ -46,7 +64,7 @@ const StocksContainer = () => {
         ) : (
           <div>Loading!</div>
         )}
-        <MyStocksSection />
+        <MyStocksSection data={companyLikeList} />
         <LatestStocksSection />
       </s.SidebarWrap>
       <s.MainWrap>

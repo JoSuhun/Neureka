@@ -17,3 +17,17 @@ export type CompanyPriceType = {
   bullPower?: number
   bearPower?: number
 }
+
+export type UserType = {
+  userId: number
+  username: string
+  name: string
+  email: string
+  role: string
+}
+
+export type CompanyLikeType = {
+  id: number
+  company: CompanyType
+  user: UserType
+}
