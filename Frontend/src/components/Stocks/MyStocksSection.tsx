@@ -1,8 +1,15 @@
-import { CompanyLikeType } from '@src/types/CompanyType'
+import { useAtom } from 'jotai'
+import { selectedCompanyAtom } from '@src/stores/stockAtom'
+import { CompanyType, CompanyLikeType } from '@src/types/CompanyType'
 import * as m from '@src/components/styles/Stocks/MyStocksSectionStyle'
 
 const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
   const { data } = props
+  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+
+  const handleClick = (item: CompanyType) => {
+    setSelectedStock(item)
+  }
 
   return (
     <m.Container>
@@ -10,7 +17,10 @@ const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
       {data ? (
         <m.Wrap>
           {data.map(item => (
-            <m.Item key={item.company.companyId}>
+            <m.Item
+              key={item.company.companyId}
+              onClick={() => handleClick(item.company)}
+            >
               {item.company.companyName} ({item.company.code})
             </m.Item>
           ))}
