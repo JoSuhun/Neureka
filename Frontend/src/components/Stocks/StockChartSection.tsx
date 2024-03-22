@@ -25,23 +25,11 @@ import {
   withDeviceRatio,
   withSize,
 } from 'react-financial-charts'
-import { initialData } from '@src/components/Stocks/test_stock_data_2'
+import { CompanyPriceType } from '@src/types/CompanyType'
 
-interface StockData {
-  sate: string
-  open: number
-  high: number
-  low: number
-  close: number
-  volume: number
-  change: number | null
-  ema12?: number
-  ema26?: number
-  bullPower?: number
-  bearPower?: number
-}
+const ChartPage = (props: { initialData: CompanyPriceType[] }) => {
+  const { initialData } = props
 
-const ChartPage = () => {
   const height = 500
   const width = 900
   const margin = { left: 0, right: 60, top: 0, bottom: 24 }
@@ -57,18 +45,18 @@ const ChartPage = () => {
   const ema12 = ema()
     .id(1)
     .options({ windowSize: 12 })
-    .merge((d: StockData, c: number) => {
+    .merge((d: CompanyPriceType, c: number) => {
       d.ema12 = c
     })
-    .accessor((d: StockData) => d.ema12)
+    .accessor((d: CompanyPriceType) => d.ema12)
 
   const ema26 = ema()
     .id(1)
     .options({ windowSize: 26 })
-    .merge((d: StockData, c: number) => {
+    .merge((d: CompanyPriceType, c: number) => {
       d.ema26 = c
     })
-    .accessor((d: StockData) => d.ema26)
+    .accessor((d: CompanyPriceType) => d.ema26)
 
   // Elder Ray 계산
   const elder = elderRay()
@@ -94,33 +82,33 @@ const ChartPage = () => {
     h - barChartHeight - elderRayHeight,
   ]
 
-  const yExtents = (data: StockData) => {
+  const yExtents = (data: CompanyPriceType) => {
     return [data.high, data.low]
   }
 
-  const barChartExtents = (data: StockData) => {
+  const barChartExtents = (data: CompanyPriceType) => {
     return data.volume
   }
 
-  const candleChartExtents = (data: StockData) => {
+  const candleChartExtents = (data: CompanyPriceType) => {
     return [data.high, data.low]
   }
 
-  const yEdgeIndicator = (data: StockData) => {
+  const yEdgeIndicator = (data: CompanyPriceType) => {
     return data.close
   }
 
-  const volumeColor = (data: StockData) => {
+  const volumeColor = (data: CompanyPriceType) => {
     return data.close > data.open
       ? 'rgba(38, 166, 154, 0.3)'
       : 'rgba(239, 83, 80, 0.3)'
   }
 
-  const volumeSeries = (data: StockData) => {
+  const volumeSeries = (data: CompanyPriceType) => {
     return data.volume
   }
 
-  const openCloseColor = (data: StockData) => {
+  const openCloseColor = (data: CompanyPriceType) => {
     return data.close > data.open ? '#26a69a' : '#ef5350'
   }
 
