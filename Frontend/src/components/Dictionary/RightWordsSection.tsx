@@ -12,7 +12,8 @@ type Props = {
 }
 
 const RightWordsSection = ({ data }: Props) => {
-  const [markedWords, SetMarkedWrods] = useAtom(markedWordsAtom)
+  // const [markedWords, SetMarkedWrods] = useAtom(markedWordsAtom)
+  const [markedWords, SetMarkedWrods] = useState<any>(null)
 
   useEffect(() => {
     SetMarkedWrods(data)
@@ -25,7 +26,7 @@ const RightWordsSection = ({ data }: Props) => {
         {markedWords?.length ? (
           <r.Box>
             {markedWords?.map((word: any, idx: number) => (
-              <WordCard key={idx} word={word?.dictionary} />
+              <WordCard key={idx} word={word?.dictionary} marked={true} />
             ))}
           </r.Box>
         ) : (
