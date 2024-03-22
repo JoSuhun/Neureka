@@ -63,7 +63,9 @@ const LeftSearchSection = ({ data }: Props) => {
 
           <l.Words>
             {words
-              ? words.map((word, idx) => <WordCard word={word} key={idx} />)
+              ? words.map((word, idx) => (
+                  <WordCard word={word} key={idx} marked={false} />
+                ))
               : null}
           </l.Words>
         </l.Box>
