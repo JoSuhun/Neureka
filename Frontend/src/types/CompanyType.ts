@@ -31,3 +31,8 @@ export type CompanyLikeType = {
   company: CompanyType
   user: UserType
 }
+
+export type CompanyLikeParmasType = {
+  email: string
+  code: string
+}
