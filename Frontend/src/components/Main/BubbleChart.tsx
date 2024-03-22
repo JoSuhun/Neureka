@@ -24,7 +24,12 @@ const BubbleChart = () => {
   }
 
   const handleSelectKeyword = (keyword: string) => {
-    setSelectedKeyword(keyword)
+    const keywordInfo = keywords.find(k => k.keyword === keyword)
+    if (keywordInfo === undefined) {
+      setSelectedKeyword({ keyword: '', count: 0, links: [] })
+    } else {
+      setSelectedKeyword(keywordInfo)
+    }
   }
 
   const simulationRef = useRef<d3.Simulation<Bubble, undefined> | null>(null)

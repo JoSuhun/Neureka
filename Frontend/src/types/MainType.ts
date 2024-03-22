@@ -40,5 +40,18 @@ export type Bubble = d3.SimulationNodeDatum & {
 }
 
 export type CategoryBoxProps = {
-  show: boolean
+  $show: boolean; // boolean에서 string으로 변경
+}
+
+export type KeywordArticles = {
+  message: string
+  thumbnail_url: string
+  article_title: string
+  article_link: string
+  article_summary: string
+  press: string
+  date_time: string
+  keyword: string[]
+  topic: string
+
 }

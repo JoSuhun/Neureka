@@ -18,7 +18,7 @@ const BubbleCategory = () => {
           </bc.CategoryToggle>
         </bc.ToggleWrapper>
 
-        <bc.CategoryWrapper show={categoryToggle}>
+        <bc.CategoryWrapper $show={categoryToggle}>
           {Categories.map((element, key) => (
             <Category
               key={key}
@@ -29,7 +29,7 @@ const BubbleCategory = () => {
           ))}
         </bc.CategoryWrapper>
 
-        <bc.CategoryWrapper show={categoryToggle}>
+        <bc.CategoryWrapper $show={categoryToggle}>
           {selectedCategories.map((element, key) => (
             <Category
               key={key}

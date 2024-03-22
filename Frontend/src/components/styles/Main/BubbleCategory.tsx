@@ -27,9 +27,9 @@ export const CategoryWrapper = styled.div<CategoryBoxProps>`
   margin-bottom: -1px;
   display: flex;
   flex-wrap: wrap;
-  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
   width: 100%;
-  height: ${({ show }) => (show ? '150px' : '0')};
+  height: ${({ $show }) => ($show ? '150px' : '0')};
   transition: all 0.3s;
   gap: 10px; /* 각 Category 사이의 간격 */
   justify-content: center;
@@ -40,6 +40,6 @@ export const CategoryWrapper = styled.div<CategoryBoxProps>`
 export const Category = styled.button<CategoryBoxProps>`
   width: 18%;
   height: 50px;
-  opacity: ${({ show }) => (show ? '1' : '0')};
+  opacity: ${({ $show }) => ($show ? '1' : '0')};
   transition: opacity 0.3s ease;
 `

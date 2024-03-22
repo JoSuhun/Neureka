@@ -14,24 +14,20 @@ export type CategoryProps = {
 const Category = ({ name, image, show }: CategoryProps) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
   const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
-  // useEffect(() => {
-  //   const { data } = useQuery('fetchKeywords', () => fetchKeywords(categories))
-  //   console.log(data)
-  // }, [categories])
 
   const { data, refetch } = useQuery(
     ['fetchKeywords', categories],
     () => fetchKeywords(categories),
     {
-      enabled: false, // 이 옵션은 쿼리를 수동으로 실행하기 위해 false로 설정됩니다.
+      enabled: false,
       onSuccess: data => {
-        setKeywords(data.data) // Update the state here
+        setKeywords(data.data)
       },
     },
   )
 
   useEffect(() => {
-    refetch() // categories가 변경될 때마다 refetch 함수를 호출하여 쿼리를 다시 실행합니다.
+    refetch()
   }, [categories, refetch])
 
   const handleCategories = (selectedCategory: Category) => {

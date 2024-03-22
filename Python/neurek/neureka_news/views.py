@@ -51,6 +51,7 @@ def news_api(request):
 
 
 # 뉴스들의 키워드 개수 전체 전송
+@api_view(['GET'])
 def news_bubble(request):
     keyword_data = load_keyword_data()
     requested_keywords = request.GET.getlist('keywords')
@@ -85,7 +86,6 @@ def news_keywords_article(request):
     if serializer.is_valid():
         links = serializer.validated_data['links']
         search_list = kmeans_cluster(links)  # kmeans_cluster 함수 호출
-
         # kmeans_cluster의 결과를 응답 데이터로 사용
         return Response({'message': 'Links processed successfully', 'data': search_list})
     else:
