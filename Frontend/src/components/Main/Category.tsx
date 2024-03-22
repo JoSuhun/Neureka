@@ -1,10 +1,8 @@
-import { fetchKeywords } from '@src/apis/MainApi'
 import * as c from '@src/components/styles/Main/Category'
-import { categoriesAtom, keywordsAtom } from '@src/stores/mainAtom'
-import { Categories, Category, KeywordCount } from '@src/types/MainType'
+import { categoriesAtom } from '@src/stores/mainAtom'
+import { Categories, Category } from '@src/types/MainType'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
-import { useQuery } from 'react-query'
+
 export type CategoryProps = {
   name: string
   image: string
@@ -13,22 +11,6 @@ export type CategoryProps = {
 
 const Category = ({ name, image, show }: CategoryProps) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
-  const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
-
-  const { data, refetch } = useQuery(
-    ['fetchKeywords', categories],
-    () => fetchKeywords(categories),
-    {
-      enabled: false,
-      onSuccess: data => {
-        setKeywords(data.data)
-      },
-    },
-  )
-
-  useEffect(() => {
-    refetch()
-  }, [categories, refetch])
 
   const handleCategories = (selectedCategory: Category) => {
     setCategories(prev => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import SlideBar from '@src/components/Main/SlideBar'
 import MainCard from '@src/components/Main/MainCard'
 import * as m from '@src/containers/styles/MainContainer'
@@ -9,57 +9,53 @@ import { useAtom } from 'jotai'
 import {
   categoriesAtom,
   keywordArticlesAtom,
-  keywordsAtom,
   selectedKeywordAtom,
 } from '@src/stores/mainAtom'
 import { useQuery } from 'react-query'
 import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
-import { KeywordCount } from '@src/types/MainType'
 
 type Props = {}
 
 const MainContainer = (props: Props) => {
-  // const [selectedKeyword] = useAtom(selectedKeywordAtom)
-  // const [categories] = useAtom(categoriesAtom)
-  // const [keywordArticles, setKeywordArticles] = useAtom(keywordArticlesAtom)
-  // const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
-  // // // 키워드 데이터 요청
-  // const { data: keywordsData, refetch: refetchKeywords } = useQuery(
-  //   ['fetchKeywords', categories],
-  //   () => fetchKeywords(categories),
-  //   {
-  //     enabled: false,
-  //     onSuccess: data => {
-  //       setKeywords(data.data)
-  //     },
-  //   },
-  // )
+  const [selectedKeyword] = useAtom(selectedKeywordAtom)
+  const [categories] = useAtom(categoriesAtom)
+  const [keywordArticles, setKeywordArticles] = useAtom(keywordArticlesAtom)
 
-  // // 키워드 뉴스 데이터 요청
-  // const {
-  //   data: keuwordNewsData,
-  //   refetch: refetchKeywordNews,
-  //   isLoading: keywordArticlesLoading,
-  // } = useQuery(
-  //   ['fetchKeywordArticles', selectedKeyword],
-  //   () => fetchKeywordArticles(selectedKeyword.links),
-  //   {
-  //     enabled: false,
-  //     onSuccess: data => {
-  //       setKeywordArticles(data.data.data)
-  //     },
-  //   },
-  // )
+  // 키워드 데이터 요청
+  const { data: keywordsData, refetch: refetchKeywords } = useQuery(
+    ['fetchKeywords', categories],
+    () => fetchKeywords(categories),
+    {
+      enabled: false,
+      // onSuccess: keywordsData => {
+      //   setKeywords(keywordsData.data)
+      // },
+    },
+  )
 
-  // useEffect(() => {
-  //   // 필요한 API 요청을 시작합니다.
-  //   refetchKeywords()
-  // }, [categories, refetchKeywords])
+  useEffect(() => {
+    refetchKeywords()
+  }, [categories, refetchKeywords])
 
-  // useEffect(() => {
-  //   // 필요한 API 요청을 시작합니다.
-  //   refetchKeywordNews()
-  // }, [selectedKeyword, refetchKeywordNews])
+  // 키워드 뉴스 데이터 요청
+  const {
+    data: keuwordNewsData,
+    refetch: refetchKeywordNews,
+    isLoading: keywordArticlesLoading,
+  } = useQuery(
+    ['fetchKeywordArticles', selectedKeyword],
+    () => fetchKeywordArticles(selectedKeyword.links),
+    {
+      enabled: false,
+      onSuccess: data => {
+        setKeywordArticles(data.data.data)
+      },
+    },
+  )
+
+  useEffect(() => {
+    refetchKeywordNews()
+  }, [selectedKeyword, refetchKeywordNews])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -77,11 +73,15 @@ const MainContainer = (props: Props) => {
         </m.BubbleCategoryWrapper>
 
         <m.BubbleChartWrapper>
-          <BubbleChart />
+          {keywordsData && keywordsData.data ? (
+            <BubbleChart keywords={keywordsData.data} />
+          ) : (
+            <div>데이터를 불러오는 중...</div>
+          )}
         </m.BubbleChartWrapper>
 
         <m.NewsWrapper>
-          <KeywordNews />
+          <KeywordNews isLoading={keywordArticlesLoading} />
         </m.NewsWrapper>
       </m.container>
     </>

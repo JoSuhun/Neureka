@@ -2,30 +2,13 @@ import * as k from '@src/components/styles/Main/KeywordNews'
 import { useAtom } from 'jotai'
 import NewsCard from '@src/components/Main/NewsCard'
 import { keywordArticlesAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
-import { useQuery } from 'react-query'
-import { fetchKeywordArticles } from '@src/apis/MainApi'
-import { useEffect } from 'react'
 import loading from '/image/loading.gif'
-
-const KeywordNews = () => {
+export type KeywordNewsProps = {
+  isLoading: boolean
+}
+const KeywordNews = ({ isLoading }: KeywordNewsProps) => {
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const [keywordArticles, setKeywordArticles] = useAtom(keywordArticlesAtom)
-
-  const { data, refetch, isLoading } = useQuery(
-    ['fetchKeywordArticles', selectedKeyword],
-    () => fetchKeywordArticles(selectedKeyword.links),
-    {
-      enabled: false,
-      onSuccess: data => {
-        setKeywordArticles(data.data.data)
-      },
-    },
-  )
-
-  useEffect(() => {
-    refetch()
-    console.log(selectedKeyword)
-  }, [selectedKeyword, refetch])
 
   // 만약 4개 이하라면 없음 카드 추가하기
 
