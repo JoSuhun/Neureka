@@ -5,6 +5,7 @@ import com.ssafy.stocker.company.entity.CompanyEntity;
 import com.ssafy.stocker.company.entity.UserCompanyEntity;
 import com.ssafy.stocker.company.service.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ public class CompanyController {
 
     @Operation(summary = "주식 최근 10년간 가격을 조회합니다." )
     @GetMapping("/stock/price")
-    public ResponseEntity<String> getDataFromDjango(@RequestParam String code) {
-        String url = "/finance/fetch-krx/?code=" + code;
+    public ResponseEntity<String> getDataFromDjango(@RequestParam @Parameter String code) {
+        String url = "/finance/fetch_krx/?code=" + code;
 
         String response = webClient.get()
                 .uri(url)
