@@ -14,21 +14,29 @@ import CorpInfoSection from '@src/components/Stocks/CorpInfoSection'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
-  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+  const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
+  // 기업 전체 조회
   const { data: companyList } = useQuery({
     queryKey: ['CompanyList'],
     queryFn: fetchCompanyList,
   })
 
-  const { data: companyPrice } = useQuery({
-    queryKey: ['CompanyPrice'],
-    queryFn: () => fetchCompanyPrice(selectedStock.code),
-  })
+  // 선택 기업 차트 데이터 조회
+  const { data: companyPriceList, refetch: refetchCompanyPriceList } = useQuery(
+    {
+      queryKey: ['CompanyPriceList'],
+      queryFn: () => fetchCompanyPrice(selectedStock.code),
+    },
+  )
+
+  useEffect(() => {
+    refetchCompanyPriceList()
+  }, [selectedStock, refetchCompanyPriceList])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <s.Container>
@@ -45,7 +53,11 @@ const StocksContainer = () => {
         <MainTopSection />
         <StockNewsSection />
         <StockPriceSection />
-        <StockChartSection />
+        {companyPriceList ? (
+          <StockChartSection initialData={companyPriceList} />
+        ) : (
+          <div>Loading!</div>
+        )}
         <CorpInfoSection />
       </s.MainWrap>
     </s.Container>
