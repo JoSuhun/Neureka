@@ -4,8 +4,8 @@ import * as c from '@src/components/styles/Dictionary/WordCardStyle'
 
 import { Word } from '@src/types/WordType'
 
-import save from '/image/save.png'
-import notsave from '/image/notsave.png'
+import saved from '/image/save.png'
+import notsaved from '/image/notsave.png'
 
 import { useMutation } from 'react-query'
 import { fetchMarkWord, fetchUnmarkWord } from '@src/apis/DictionaryApi'
@@ -28,11 +28,11 @@ const WordCard = ({ word, marked }: Props) => {
     (data: MarkWord) => fetchMarkWord(data),
     {
       onSuccess: () => {
-        console.log('오예!')
+        console.log('추가성공!')
         setMark(!mark)
       },
-      onError: () => {
-        console.log('추가하기 error')
+      onError: err => {
+        console.log('추가에러! : ' + err)
       },
     },
   )
@@ -45,25 +45,28 @@ const WordCard = ({ word, marked }: Props) => {
         console.log('삭제성공!')
         setMark(!mark)
       },
-      onError: () => {
-        console.log('삭제하기 error!!')
+      onError: err => {
+        console.log('삭제에러! : ' + err)
       },
     },
   )
 
-  const ToggleSave = () => {
-    SetIsSave(!isSave)
-    if (isSave) {
-      unmarkMutate({
-        email: 'dbtks2759@gmail.com',
-        title: word?.title as string,
-      })
-    } else {
-      markMutate({
-        email: 'dbtks2759@gmail.com',
-        title: word?.title as string,
-      })
-    }
+  // 즐겨찾기 버튼 클릭 이벤트
+  const handleMark = () => {
+    SetIsSave(true)
+    markMutate({
+      email: 'dbtks2759@gmail.com',
+      title: word?.title as string,
+    })
+  }
+
+  // 즐겨찾기 해제 버튼 클릭 이벤트
+  const handleUnmark = () => {
+    SetIsSave(false)
+    unmarkMutate({
+      email: 'dbtks2759@gmail.com',
+      title: word?.title as string,
+    })
   }
 
   return (
@@ -72,10 +75,12 @@ const WordCard = ({ word, marked }: Props) => {
         <c.CardBox>
           <c.Title>
             <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
-            {isSave || marked ? (
-              <c.saveBtn src={save} onClick={ToggleSave} />
+            {marked ? (
+              <c.deleteBtn onClick={handleUnmark} />
+            ) : isSave ? (
+              <c.saveBtn src={saved} />
             ) : (
-              <c.saveBtn src={notsave} onClick={ToggleSave} />
+              <c.saveBtn src={notsaved} onClick={handleMark} />
             )}
           </c.Title>
           <c.Content>
