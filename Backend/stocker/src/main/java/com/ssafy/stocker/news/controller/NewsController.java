@@ -44,7 +44,7 @@ public class NewsController {
                 .block();
 
         // 응답 처리
-        log.info("Response from Django server: " + response);
+//        log.info("Response from Django server: " + response);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -67,7 +67,7 @@ public class NewsController {
                 .block();
 
         // 응답 처리
-        log.info("Response from Django server: " + response);
+//        log.info("Response from Django server: " + response);
 
 
         return new ResponseEntity<>(response, HttpStatus.OK);
