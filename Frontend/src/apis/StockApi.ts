@@ -1,4 +1,6 @@
 import { publicRequest } from '@src/hooks/requestMethod'
+import queryString from 'query-string'
+import { CompanyLikeParmasType } from '@src/types/CompanyType'
 
 // 기업 전체 조회
 export const fetchCompanyList = async () => {
@@ -25,3 +27,10 @@ export const fetchCompanyLikeList = async (email: string) => {
 }
 
 // 관심 종목 등록
+
+export const fetchCompanyLike = async (params: CompanyLikeParmasType) => {
+  return await publicRequest
+    .post(`company/like?${queryString.stringify(params)}`)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
