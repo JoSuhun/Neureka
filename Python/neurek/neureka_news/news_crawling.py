@@ -45,7 +45,7 @@ while True:
         soup = BeautifulSoup(html, 'html.parser')
 
         # 페이지의 뉴스 항목을 크롤링
-        for idx in range(1, 11):  # 한 페이지당 최대 10개의 기사가 있으므로 범위를 1부터 10까지
+        for idx in range(1, 21):  # 한 페이지당 최대 20개의 기사가 있으므로 범위를 1부터 10까지
             article_dict = {}
             flag = True
             # Thumbnail URL 가져오기

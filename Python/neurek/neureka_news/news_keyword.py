@@ -160,7 +160,7 @@ if __name__ == "__main__":
         news_data = json.load(file)
 
     # ThreadPoolExecutor를 사용한 병렬 처리
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
         # process_article 함수 호출 시 stop_words 전달을 위한 functools.partial 사용
         from functools import partial
         process_with_stop_words = partial(process_article, stop_words=stop_words)

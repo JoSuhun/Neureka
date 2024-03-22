@@ -11,3 +11,11 @@ export const fetchMarkWord = async (data: MarkWord) => {
     params: data,
   })
 }
+
+export const fetchMarkedWords = async (userEmail: string) => {
+  return await publicRequest.get('dictionary/like/list', {
+    params: {
+      email: userEmail,
+    },
+  })
+}
