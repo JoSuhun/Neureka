@@ -35,17 +35,23 @@ public class NewsController {
     @GetMapping()
     @Operation(summary = "기사 전체조회")
     public ResponseEntity<?> getAllArticle(){
-        String url = "/news/api";
+        String url = "/news/api/today/";
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        String response = webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        // 응답 처리
+        log.info("Response from Django server: " + response);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/newsdetail")
     @Operation(summary = "기사 상세조회. newsId 는 news의 url입니다.")
     public ResponseEntity<?> getArticleDetail(@RequestParam String newsId){
-        System.out.println("===================");
-        System.out.println(newsId);
-        System.out.println("===================");
         String url = "/news/api/news_details/";
 
         Map<String, String> requestData = new HashMap<>();
@@ -64,7 +70,7 @@ public class NewsController {
         log.info("Response from Django server: " + response);
 
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/keyword/{keyword}")
