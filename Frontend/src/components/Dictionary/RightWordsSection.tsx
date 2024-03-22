@@ -3,30 +3,37 @@ import React, { useEffect, useState } from 'react'
 import * as r from '@src/components/styles/Dictionary/RightWordsSectionStyle'
 import WordCard from './WordCard'
 
-import { Word } from '@src/types/WordType'
+import { Word, UserWord } from '@src/types/WordType'
 import { useAtom } from 'jotai'
 import { markedWordsAtom } from '@src/stores/dictionaryAtom'
 
 type Props = {
-  data: Word[]
+  data: UserWord[]
 }
 
 const RightWordsSection = ({ data }: Props) => {
   // const [markedWords, SetMarkedWrods] = useAtom(markedWordsAtom)
-  const [markedWords, SetMarkedWrods] = useState<any>(null)
+  const [markedWords, SetMarkedWords] = useAtom(markedWordsAtom)
 
   useEffect(() => {
-    SetMarkedWrods(data)
+    const filtered: Word[] = []
+    data.forEach(word => filtered.push(word.dictionary))
+    SetMarkedWords(filtered)
   }, [data])
 
   return (
     <>
       <r.Wrapper>
         <r.Title>MARK</r.Title>
-        {markedWords?.length ? (
+        {data?.length ? (
           <r.Box>
-            {markedWords?.map((word: any, idx: number) => (
-              <WordCard key={idx} word={word?.dictionary} marked={true} />
+            {data?.map((word: any, idx: number) => (
+              <WordCard
+                key={idx}
+                word={word?.dictionary}
+                marked={true}
+                side="right"
+              />
             ))}
           </r.Box>
         ) : (

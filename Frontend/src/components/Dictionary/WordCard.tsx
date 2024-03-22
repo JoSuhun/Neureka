@@ -17,9 +17,10 @@ import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 type Props = {
   word: Word | null
   marked: boolean
+  side: string
 }
 
-const WordCard = ({ word, marked }: Props) => {
+const WordCard = ({ word, marked, side }: Props) => {
   const [isSave, SetIsSave] = useState(false)
   const [mark, setMark] = useAtom(toggleMarkingAtom)
 
@@ -75,9 +76,9 @@ const WordCard = ({ word, marked }: Props) => {
         <c.CardBox>
           <c.Title>
             <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
-            {marked ? (
+            {marked && side == 'right' ? (
               <c.deleteBtn onClick={handleUnmark} />
-            ) : isSave ? (
+            ) : marked ? (
               <c.saveBtn src={saved} />
             ) : (
               <c.saveBtn src={notsaved} onClick={handleMark} />
