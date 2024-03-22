@@ -41,6 +41,8 @@ export const SelectedKeyword = styled.div`
 export const NewsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  justify-content: center;
   gap: 20px;
   width: 100%;
   padding: 0 20px; // 컨테이너 양쪽 패딩
