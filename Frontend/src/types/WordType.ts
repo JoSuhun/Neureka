@@ -9,4 +9,18 @@ interface MarkWord {
   title: string
 }
 
-export type { Word, MarkWord }
+interface User {
+  email: string
+  name: string
+  role: string
+  userId: number
+  username: string
+}
+
+interface UserWord {
+  dictionary: Word
+  user: User
+  userDicId: number
+}
+
+export type { Word, MarkWord, UserWord }
