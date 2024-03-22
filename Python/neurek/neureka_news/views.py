@@ -94,6 +94,7 @@ def news_keywords_article(request):
 
 @api_view(["POST"])
 def news_details(request):
+    print(request.data)
     serializer = UrlSerializer(data=request.data)
     if serializer.is_valid():
         url = serializer.validated_data.get('link')
