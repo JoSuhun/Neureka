@@ -48,5 +48,5 @@ export const Item = styled.div`
 export const NoneItem = styled.p`
   font-size: 0.8rem;
   font-weight: 500;
-  color: blue;
+  color: #000;
 `
