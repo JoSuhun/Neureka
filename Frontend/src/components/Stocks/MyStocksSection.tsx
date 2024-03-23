@@ -14,20 +14,20 @@ const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
   return (
     <m.Container>
       <m.Title>MY STOCK</m.Title>
-      {data ? (
-        <m.Wrap>
-          {data.map(item => (
+      <m.Wrap>
+        {data && data.length > 0 ? (
+          data.map(item => (
             <m.Item
               key={item.company.companyId}
               onClick={() => handleClick(item.company)}
             >
               {item.company.companyName} ({item.company.code})
             </m.Item>
-          ))}
-        </m.Wrap>
-      ) : (
-        <m.NoneItem>관심 기업을 등록하세요!</m.NoneItem>
-      )}
+          ))
+        ) : (
+          <m.NoneItem>관심 기업을 등록하세요!</m.NoneItem>
+        )}
+      </m.Wrap>
     </m.Container>
   )
 }
