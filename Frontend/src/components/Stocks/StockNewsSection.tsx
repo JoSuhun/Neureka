@@ -82,6 +82,10 @@ const StockNewsSection = () => {
           stockNewsList.map((news, index) => (
             <s.Item key={index}>
               <s.ItemBox>
+                <s.ItemInfo>
+                  <s.ItemPublisher>{news.press}</s.ItemPublisher>
+                  <s.ItemDate>{news.date}</s.ItemDate>
+                </s.ItemInfo>
                 <s.ItemTitle>{news.title}</s.ItemTitle>
                 <s.ItemContent>{news.summary}</s.ItemContent>
               </s.ItemBox>
