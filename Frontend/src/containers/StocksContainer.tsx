@@ -1,12 +1,17 @@
 import { useEffect } from 'react'
 import { useAtom } from 'jotai'
-import { useQuery } from 'react-query'
+import { useQuery, useMutation } from 'react-query'
 import {
   fetchCompanyList,
   fetchCompanyPrice,
   fetchCompanyLikeList,
+  fetchCompanyLike,
 } from '@src/apis/StockApi'
-import { selectedCompanyAtom } from '@src/stores/stockAtom'
+
+import {
+  selectedCompanyAtom,
+  LikedCompanyListAtom,
+} from '@src/stores/stockAtom'
 import SearchStocksSection from '@src/components/Stocks/SearchStocksSection'
 import MyStocksSection from '@src/components/Stocks/MyStocksSection'
 import LatestStocksSection from '@src/components/Stocks/LatestStocksSection'
@@ -18,7 +23,12 @@ import CorpInfoSection from '@src/components/Stocks/CorpInfoSection'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
-  const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
+  const [likedCompanyList, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
 
   const user = {
     user_id: 1,
@@ -42,19 +52,36 @@ const StocksContainer = () => {
     },
   )
 
-  // 관심 종목 조회
+  // 관심 기업 조회
   const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
     queryKey: ['CompanyLikeList'],
     queryFn: () => fetchCompanyLikeList(user.email),
+    onSuccess: data => {
+      setLikedCompanyList(data) // 관심 기업 업데이트
+    },
   })
+
+  // 관심 기업 등록
+  const { mutate: likeCompany } = useMutation({
+    mutationKey: ['LikeCompany'],
+    mutationFn: fetchCompanyLike,
+    onSuccess: () => refetchCompanyLikeList(),
+  })
+
+  const handleAddMyStock = () => {
+    const email = 'dbtks2759@gmail.com'
+    const params = {
+      email,
+      code: selectedStock.code,
+    }
+    likeCompany(params)
+  }
+
+  console.log(likedCompanyList)
 
   useEffect(() => {
     refetchCompanyPriceList()
   }, [selectedStock, refetchCompanyPriceList])
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   return (
     <s.Container>
@@ -68,7 +95,7 @@ const StocksContainer = () => {
         <LatestStocksSection />
       </s.SidebarWrap>
       <s.MainWrap>
-        <MainTopSection />
+        <MainTopSection handleAddMyStock={handleAddMyStock} />
         <StockNewsSection />
         <StockPriceSection />
         {companyPriceList ? (
