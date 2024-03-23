@@ -36,3 +36,7 @@ export type CompanyLikeParmasType = {
   email: string
   code: string
 }
+
+export type MainTopSectionProps = {
+  handleAddMyStock: () => void
+}
