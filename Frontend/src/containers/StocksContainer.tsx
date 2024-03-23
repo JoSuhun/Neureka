@@ -7,7 +7,6 @@ import {
   fetchCompanyLikeList,
   fetchCompanyLike,
 } from '@src/apis/StockApi'
-
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
@@ -65,7 +64,7 @@ const StocksContainer = () => {
   const { mutate: likeCompany } = useMutation({
     mutationKey: ['LikeCompany'],
     mutationFn: fetchCompanyLike,
-    onSuccess: () => refetchCompanyLikeList(),
+    onSuccess: () => refetchCompanyLikeList(), // 관심 기업 조회 refetch
   })
 
   const handleAddMyStock = () => {
@@ -76,8 +75,6 @@ const StocksContainer = () => {
     }
     likeCompany(params)
   }
-
-  console.log(likedCompanyList)
 
   useEffect(() => {
     refetchCompanyPriceList()
