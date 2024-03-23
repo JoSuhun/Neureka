@@ -100,7 +100,6 @@ const StocksContainer = () => {
         ) : (
           <div>Loading!</div>
         )}
-        <CorpInfoSection />
       </s.MainWrap>
     </s.Container>
   )
