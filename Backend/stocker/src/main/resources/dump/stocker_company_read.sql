@@ -26,8 +26,9 @@ CREATE TABLE `company_read` (
   `cr_id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `company_code` varchar(6) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`cr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +37,7 @@ CREATE TABLE `company_read` (
 
 LOCK TABLES `company_read` WRITE;
 /*!40000 ALTER TABLE `company_read` DISABLE KEYS */;
-INSERT INTO `company_read` VALUES (1,'543','3'),(2,'rladbtks','012'),(3,'rladbtks','0123'),(4,'rladbtks','01234'),(5,'rladbtks','012345');
+INSERT INTO `company_read` VALUES (1,'543','3',NULL),(2,'rladbtks','012',NULL),(3,'rladbtks','0123',NULL),(4,'rladbtks','01234',NULL),(5,'rladbtks','012345',NULL),(6,'rrr','111','1111');
 /*!40000 ALTER TABLE `company_read` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25 15:31:06
+-- Dump completed on 2024-03-25 16:39:31
