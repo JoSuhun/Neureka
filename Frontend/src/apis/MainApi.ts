@@ -8,5 +8,5 @@ export const fetchKeywords = async (categories: Category[]) => {
 }
 
 export const fetchKeywordArticles = async (links: string[]) => {
-  return await pythonRequest.post('news/api/keyword_article/', {"links":links})
+  return await publicRequest.post('news/keyword', {"links":links})
 };

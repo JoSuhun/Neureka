@@ -10,6 +10,7 @@ import { useAtom } from 'jotai'
 import { categoriesAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 import { useQuery } from 'react-query'
 import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
+import MainTutorial from '@src/tutorials/MainTutorial'
 
 type Props = {}
 
@@ -54,6 +55,8 @@ const MainContainer = (props: Props) => {
   return (
     <>
       <m.container>
+        {/* <m.GlobalStyle /> */}
+        <MainTutorial />
         <SlideBar />
         <MainCard />
         <div style={{ height: '50px' }}></div>
