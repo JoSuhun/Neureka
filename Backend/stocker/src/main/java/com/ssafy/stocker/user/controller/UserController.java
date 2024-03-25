@@ -72,4 +72,21 @@ public class UserController {
     }
 
 
+    @PostMapping("/{group}")
+    @Operation(summary = "온보딩 화면에서 선택한 그룹을 DB에 저장" )
+    public ResponseEntity<?> userOnboardingSave(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){
+        try {
+
+
+            return new ResponseEntity<>(HttpStatus.OK);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST) ;
+        }
+    }
+
+
 }
