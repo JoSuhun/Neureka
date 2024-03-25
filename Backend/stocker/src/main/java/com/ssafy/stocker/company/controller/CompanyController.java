@@ -104,7 +104,7 @@ public class CompanyController {
 
     @Operation(summary = "유저가 관심있는 회사 리스트를 조회합니다.")
     @GetMapping("/like/list")
-    public ResponseEntity<?> userLikeCompanyFind(String email){
+    public ResponseEntity<?> userLikeCompanyFind(@RequestParam(value = "사용자 이메일") String email){
         try {
              List<UserCompanyEntity> userCompanyList=  companyService.findUserLIkeCompany(email);
 
@@ -118,7 +118,7 @@ public class CompanyController {
 
     @Operation(summary = "유저가 관심을 추가했던 회사를 삭제합니다" )
     @DeleteMapping("/like")
-    public ResponseEntity<?> deleteLikeCompany(@RequestParam String email , @RequestParam String code){
+    public ResponseEntity<?> deleteLikeCompany(@RequestParam(value = "사용자 이메일") String email , @RequestParam(value = "회사코드(company테이블 참조)") String code){
         try {
             log.info(email + " " + code);
             companyService.deleteLikeCompany(email , code);
@@ -132,7 +132,7 @@ public class CompanyController {
 
     @Operation(summary = "해당 기업의 관련 최근 뉴스를 5개 조회합니다." )
     @GetMapping("/newsfive")
-    public  ResponseEntity<?> getNewsFive(@RequestParam("company") String company){
+    public  ResponseEntity<?> getNewsFive(@RequestParam(value = "회사 이름") String company){
         try {
 //            System.out.println(company);
             String url = "/finance/stock_news/";
