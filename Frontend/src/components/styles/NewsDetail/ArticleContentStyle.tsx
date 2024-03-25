@@ -70,4 +70,12 @@ export const Content = styled.article`
   line-height: 2.2;
   font-size: 1.1rem;
   white-space: pre-wrap;
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
+  img {
+    width: 70%;
+    align-self: center;
+  }
 `
