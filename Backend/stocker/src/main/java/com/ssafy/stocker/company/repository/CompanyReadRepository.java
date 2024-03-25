@@ -8,4 +8,6 @@ import java.util.List;
 public interface CompanyReadRepository extends JpaRepository<CompanyReadEntity,Long> {
 
     List<CompanyReadEntity> findByEmail(String email);
+
+    Boolean existsByEmailAndCompanyCode(String email , String companyCode);
 }
