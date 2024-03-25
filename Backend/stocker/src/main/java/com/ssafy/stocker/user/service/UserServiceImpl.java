@@ -25,10 +25,8 @@ public class UserServiceImpl implements UserService{
     public void modifyUserInfo(UserInfoEntity userInfoEntity) {
         String email  = userInfoEntity.getEmail();
 
-        UserInfoEntity userInfo = userInfoRepository.findByEmail(email);
-
         if(userInfoRepository.existsByEmail(email)) {
-            userInfoEntity.setUserInfoId(userInfo.getUserInfoId());
+            userInfoEntity.setUserInfoId(userInfoRepository.findByEmail(email).getUserInfoId());
         }
         userInfoRepository.save(userInfoEntity);
 
