@@ -42,12 +42,14 @@ export type MainTopSectionProps = {
 }
 
 export type CompanyLatestParamsType = {
-  code: string
   email: string
+  code: string
+  companyName: string
 }
 
 export type CompanyLatestType = {
   companyCode: string
   crId: number
   email: string
+  companyName: string
 }
