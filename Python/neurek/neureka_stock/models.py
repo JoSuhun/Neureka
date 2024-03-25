@@ -12,12 +12,13 @@ if __name__ == '__main__':
 class DetailsArticle:
     collection = db['details_article_collection']
 
-    def __init__(self, detail_url, detail_title, detail_text, detail_press, detail_date):
+    def __init__(self, detail_url, detail_title, detail_text, detail_press, detail_date, detail_topic):
         self.detail_url = detail_url
         self.detail_title = detail_title
         self.detail_text = detail_text
         self.detail_press = detail_press
         self.detail_date = detail_date
+        self.detail_topic = detail_topic
 
     def save(self):
         """문서 저장. detail_url이 기존에 없을 경우에만 저장 (업서트 사용)."""

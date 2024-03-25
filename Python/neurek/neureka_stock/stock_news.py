@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
-from .models import DetailsArticle
-
+from neurek.neureka_stock.models import DetailsArticle
+import time
+from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 
 def process_element(element):
     content = ''
@@ -46,6 +47,25 @@ def date_extraction(url):
     return None
 
 
+def keyword_extraction(url):
+    response = requests.get(url)
+    time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # `soup.find("article")`의 결과가 None인 경우를 처리
+    article = soup.find("article")
+    if article:
+        article_text = article.get_text(strip=True)
+        # article_text가 있는 경우에만 이미지 태그를 찾음
+        img_tag = soup.select_one('#img1')
+        img_src = img_tag['data-src'] if img_tag else None
+    else:
+        # article_text가 없는 경우, img_src도 None으로 설정
+        article_text = "No article text found"
+        img_src = None
+
+    return article_text, img_src
+
 # 날짜 포메팅 변경
 def convert_date_format(input_str):
     from datetime import datetime
@@ -83,12 +103,9 @@ def crawling_news(keyword):
             press_element = news_item.select_one('.info.press')
             summary_element = news_item.select_one('.api_txt_lines.dsc_txt_wrap')
 
-            thumbnail_element = news_item.select_one('.dsc_thumb img')
-            # 'data-lazysrc' 속성이 있으면 사용하고, 그렇지 않으면 'src' 속성 사용
-            thumbnail_url = thumbnail_element.get('data-lazysrc', thumbnail_element.get('src')) if thumbnail_element else None
-
-            newspaper_element = news_item.select_one('#sp_nws1 > div > div > div.news_info > div.info_group > a.info.press > span > img')
-            newspaper_url = newspaper_element.get('')
+            # thumbnail_element = news_item.select_one('.dsc_thumb img')
+            # # 'data-lazysrc' 속성이 있으면 사용하고, 그렇지 않으면 'src' 속성 사용
+            # thumbnail_url = thumbnail_element.get('data-lazysrc', thumbnail_element.get('src')) if thumbnail_element else None
 
             # info_group 내의 모든 a 태그 찾기
             info_group_links = news_item.select('.info_group a')
@@ -97,6 +114,10 @@ def crawling_news(keyword):
             title = title_element.text.strip() if title_element else None
             press = press_element.text.strip() if press_element else None
             summary = summary_element.text.strip() if summary_element else None
+
+            # 토픽 뽑기
+            text, thumbnail_url = keyword_extraction(naver_news_link)
+            topic = text_through_LDA_probability(text)
 
             # link는 뒤에 카테고리 코드를 떼고 저장
             news_data = {
@@ -107,27 +128,23 @@ def crawling_news(keyword):
                 'thumbnail_url': thumbnail_url
             }
 
-            detailAticle = DetailsArticle(
+            detail_article = DetailsArticle(
                 detail_url=naver_news_link[:-8],
                 detail_title=title,
                 detail_press=press,
                 detail_text=extract_content_from_url(naver_news_link),
-                detail_date=convert_date_format(date_extraction(naver_news_link))
+                detail_date=convert_date_format(date_extraction(naver_news_link)),
+                detail_topic=topic
             )
-            detailAticle.save()
+            detail_article.save()
 
             news_list.append(news_data)
 
     return news_list
 
-def keyword_extraction(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    article_text = soup.find("article").get_text(strip=True)
-
-    return article_text
 
 
+# # 확인용
 # import pprint
 # if __name__ == "__main__":
 #     pprint.pprint(crawling_news("삼성전자"))

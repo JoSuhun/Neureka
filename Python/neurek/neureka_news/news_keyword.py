@@ -15,7 +15,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
-import os
+from neurek.neureka_news.models import KeywordArticle
+
 
 # 바른AI를 사용해 형태소 분석을 진행
 # https://bareun.ai/docs
@@ -188,7 +189,9 @@ if __name__ == "__main__":
     with open('news_data.json', 'w', encoding='utf-8') as file:
         json.dump(news_data, file, ensure_ascii=False, indent=4)
 
-    with open('keyword_data.json', 'w', encoding='utf-8') as file:
-        json.dump(keyword_dict, file, ensure_ascii=False, indent=4)
+    KeywordArticle.save_keywords(keyword_dict)
+
+    # with open('keyword_data.json', 'w', encoding='utf-8') as file:
+    #     json.dump(keyword_dict, file, ensure_ascii=False, indent=4)
 
 
