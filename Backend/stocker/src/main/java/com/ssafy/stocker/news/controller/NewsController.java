@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -73,10 +74,25 @@ public class NewsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/keyword/{keyword}")
+    @PostMapping("/keyword")
     @Operation(summary = "메인페이지 - 맞춤형 뉴스 추천" )
-    public ResponseEntity<?> viewKeyword(@PathVariable String keyword){
-        String url = "/news/api/?code=" + keyword;
+    public ResponseEntity<?> viewKeyword(@RequestBody Map<String, Objects> keyword){
+        String url = "/news/api/keyword_article";
+
+        log.info(keyword.toString());
+        Map<String, Objects> requestData = keyword;
+
+        // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
+        String response = webClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(requestData))
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+//         응답 처리
+        log.info("Response from Django server: " + response);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
