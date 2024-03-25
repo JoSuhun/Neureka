@@ -42,10 +42,20 @@ export const Title = styled.div`
   font-weight: 700;
   margin-bottom: 10px;
 `
-export const Date = styled.div`
-  color: var(--color-grey);
-  margin-left: 10px;
+
+export const Info = styled.p`
+  display: flex;
+  /* justify-content: space-between; */
 `
+export const Press = styled.span`
+  color: var(--color-blue);
+  font-weight: 700;
+  margin-right: 10px;
+`
+export const Date = styled.span`
+  color: var(--color-grey);
+`
+
 export const Image = styled.img`
   width: 70%;
   aspect-ratio: 2;

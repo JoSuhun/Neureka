@@ -26,7 +26,7 @@ const NewsDetailContainer = ({ newsUrl }: Props) => {
     refetch,
   } = useQuery({
     queryKey: 'get-news-detail',
-    // queryFn: () => fetchNewsDetail(newsUrl),  // mongoDB 업데이트 필요함
+    // queryFn: () => fetchNewsDetail(newsUrl), // mongoDB 업데이트 필요함
     queryFn: () =>
       fetchNewsDetail('https://n.news.naver.com/mnews/article/011/0004316543'), // 일단은 mongoDB 더미데이터 사용 ..
   })
