@@ -2,6 +2,7 @@ package com.ssafy.stocker.company.controller;
 
 
 import com.ssafy.stocker.company.entity.CompanyEntity;
+import com.ssafy.stocker.company.entity.CompanyReadEntity;
 import com.ssafy.stocker.company.entity.UserCompanyEntity;
 import com.ssafy.stocker.company.service.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,12 +30,28 @@ public class CompanyController {
     @PostMapping("/read")
     public ResponseEntity<?> companyReadAdd(@RequestParam String code , @RequestParam String email){
         try {
+            companyService.addCompanyRead(code , email);
+
+            return new ResponseEntity<>(HttpStatus.OK);
 
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>()
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return  null;
+    }
+
+
+    @GetMapping("/read")
+    public ResponseEntity<?> companyReadList( @RequestParam String email){
+        try {
+            List<CompanyReadEntity> companyRead = companyService.listCompanyRead( email);
+
+            return new ResponseEntity<List<CompanyReadEntity>>(companyRead ,HttpStatus.OK);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "주식 최근 10년간 가격을 조회합니다." )

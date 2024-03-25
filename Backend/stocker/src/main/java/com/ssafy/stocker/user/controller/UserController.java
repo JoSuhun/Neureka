@@ -1,5 +1,6 @@
 package com.ssafy.stocker.user.controller;
 
+import com.ssafy.stocker.user.dto.UserInfoEntity;
 import com.ssafy.stocker.user.entity.UserEntity;
 import com.ssafy.stocker.user.service.UserService;
 
@@ -9,10 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
@@ -36,11 +34,9 @@ public class UserController {
     public ResponseEntity<?> userDetails(@RequestParam @Parameter String email){
         try {
             log.info("user/mypage 시작 param email : " + email );
-            UserEntity userEntity;
-            userEntity = userService.findUser(email);
-
-            if(userEntity != null){
-                return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
+            UserInfoEntity userInfoEntity= userService.findUser(email);
+            if(userInfoEntity != null){
+                return new ResponseEntity<UserInfoEntity>(userInfoEntity, HttpStatus.OK);
             }else {
                 log.info("회원 정보 조회 실패");
                 return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST) ;
@@ -53,6 +49,31 @@ public class UserController {
         }
 
     }
+
+
+//    @PostMapping("/mypage")
+//    @Operation(summary = "회원정보를 변경합니다" )
+//    public ResponseEntity<?> userInfoModify(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){
+//
+//        UserInfoEntity userInfo = new UserInfoEntity() ;
+//        userInfo.setEmail(email);
+//        userInfo.setBirth(birth);
+//        userInfo.setPhone(phone);
+//        userInfo.setBirth(birth);
+//        userInfo.setGender(gender);
+//        try {
+//            userService.modifyUserInfo(userInfo);
+//
+//            return new ResponseEntity<>(HttpStatus.OK);
+//
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//
+//            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST) ;
+//        }
+//
+//    }
 
 
 }
