@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as s from '../styles/News/HeaderStyle'
 import SearchInput from '@src/common/SearchInput'
+import { useAtom } from 'jotai'
+import { questionAtom } from '@src/stores/newsAtom'
 
 type Props = {}
 
 const Search = (props: Props) => {
   const [search, setSearch] = useState(false)
+  const [question, setQuestion] = useAtom(questionAtom)
 
   const hotkeywords = [
     '김유산',
@@ -41,7 +44,12 @@ const Search = (props: Props) => {
     <>
       <s.Wrapper className="header-wrapper">
         <s.SearchBar className="search-box">
-          <SearchInput search={search} setSearch={setSearch} />
+          <SearchInput
+            search={search}
+            setSearch={setSearch}
+            question={question}
+            setQuestion={setQuestion}
+          />
         </s.SearchBar>
 
         <s.HotKeyword className="hot-keyword">

@@ -20,13 +20,9 @@ const NewsContainer = (props: Props) => {
     data: newsData,
     isError: isNewsListError,
     error: newsListError,
-    refetch,
   } = useQuery({
     queryKey: 'get-news',
     queryFn: fetchNewsList,
-    // onSuccess: () => {
-    //   console.log(newsData)
-    // },
   })
 
   if (isNewsListLoading) {
