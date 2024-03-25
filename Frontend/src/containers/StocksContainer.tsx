@@ -94,14 +94,15 @@ const StocksContainer = () => {
   const handleAddLatestCompany = () => {
     const email = 'dbtks2759@gmail.com'
     const params = {
-      code: selectedStock.code,
       email,
+      code: selectedStock.code,
+      companyName: selectedStock.companyName,
     }
     latestCompany(params)
   }
 
   useEffect(() => {
-    refetchCompanyPriceList() // 선택 기업 변경 시, 차트데이터 refetch
+    refetchCompanyPriceList() // 선택 기업 변경 시, 차트 데이터 refetch
     handleAddLatestCompany() // 선택 기업 변경 시, 최근 조회 기업 등록 refetch
   }, [selectedStock, refetchCompanyPriceList])
 
