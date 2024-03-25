@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
 import * as l from '@src/components/styles/Dictionary/LeftSearchSectionStyle'
@@ -20,11 +20,12 @@ type Props = {
 const LeftSearchSection = ({ data }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useState<null | string>(null)
-
   const [words, SetWords] = useState<null | Word[]>(data)
   const [originalWords, SetOriginalWords] = useState<null | Word[]>(data)
 
   const [markedWords, SetMarkedWords] = useAtom(markedWordsAtom)
+
+  const boxRef = useRef<HTMLDivElement>(null)
 
   // 키워드 검색 시 제목 또는 내용에 포함된 카드만 조회 (검색 내용이 없을 시 전체 단어 보여줌)
   useEffect(() => {
@@ -51,6 +52,10 @@ const LeftSearchSection = ({ data }: Props) => {
     } else {
       SetWords(originalWords)
     }
+
+    if (boxRef.current) {
+      boxRef.current.scrollTo(0, 0)
+    }
   }, [question])
 
   return (
@@ -66,7 +71,7 @@ const LeftSearchSection = ({ data }: Props) => {
             />
           </l.SearchBar>
 
-          <l.Words>
+          <l.Words ref={boxRef}>
             {words
               ? words.map((word, idx) =>
                   markedWords?.some(markedWord => markedWord.id === word.id) ? (
