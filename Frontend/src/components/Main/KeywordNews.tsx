@@ -34,7 +34,7 @@ const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
 
   return (
     <>
-      <k.container>
+      <k.container className="KeywordNews">
         {selectedKeyword.keyword !== '' ? (
           <>
             <k.KeywordTitle>Keyword News</k.KeywordTitle>

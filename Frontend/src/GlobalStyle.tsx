@@ -81,6 +81,9 @@ const GlobalStyle = createGlobalStyle`
     p {
       margin: 0;
     }
+    .react-joyride__spotlight {
+    background-color: rgba(255, 255, 255, 0.5) !important; /* 황색 반투명 */
+  }
 `
 
 export default GlobalStyle
