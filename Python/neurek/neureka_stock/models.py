@@ -36,9 +36,9 @@ class DetailsArticle:
             return False
 
     @classmethod
-    def find_by_title(cls, title):
-        """제목으로 문서 조회"""
-        return cls.collection.find_one({"detail_title": title})
+    def find_by_link(cls, link):
+        """링크로 문서 조회"""
+        return cls.collection.find_one({"article_link": link})
 
     @classmethod
     def find_by_url(cls, url):

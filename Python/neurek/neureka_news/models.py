@@ -31,9 +31,15 @@ class SummaryArticle:
     @classmethod
     def find_all(cls):
         """컬렉션의 모든 문서 조회"""
-        documents_cursor = cls.collection.find({})
+        documents_cursor = cls.collection.find({}, {'_id': False})
         documents_list = list(documents_cursor)
+        # TODO nouns 뺴고 보내 줄지 생각.
         return documents_list
+
+    @classmethod
+    def find_by_link(cls, link):
+        """링크로 문서 조회"""
+        return cls.collection.find_one({"article_link": link})
 
     @classmethod
     def delete_all(cls):

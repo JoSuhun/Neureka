@@ -29,6 +29,7 @@ def load_news_data():
     return data
 
 # 뉴스 요약 정보 전체 전송
+@api_view(['GET'])
 def news_api(request):
     news_data = load_news_data()
 
