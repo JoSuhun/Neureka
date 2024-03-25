@@ -10,7 +10,9 @@ const LatestStocksSection = (props: { data: CompanyLatestType[] }) => {
       <l.Wrap>
         {data && data.length > 0 ? (
           data.map(item => (
-            <l.Item key={item.crId}>({item.companyCode})</l.Item>
+            <l.Item key={item.crId}>
+              {item.companyName} ({item.companyCode})
+            </l.Item>
           ))
         ) : (
           <l.NoneItem>최근 조회한 기업이 없습니다.</l.NoneItem>
