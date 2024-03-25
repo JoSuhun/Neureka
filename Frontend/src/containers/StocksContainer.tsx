@@ -6,6 +6,8 @@ import {
   fetchCompanyPrice,
   fetchCompanyLikeList,
   fetchCompanyLike,
+  fetchCompanyLatestList,
+  fetchCompanyLatest,
 } from '@src/apis/StockApi'
 import {
   selectedCompanyAtom,
@@ -18,7 +20,6 @@ import MainTopSection from '@src/components/Stocks/MainTopSection'
 import StockNewsSection from '@src/components/Stocks/StockNewsSection'
 import StockPriceSection from '@src/components/Stocks/StockPriceSection'
 import StockChartSection from '@src/components/Stocks/StockChartSection'
-import CorpInfoSection from '@src/components/Stocks/CorpInfoSection'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
@@ -76,8 +77,32 @@ const StocksContainer = () => {
     likeCompany(params)
   }
 
+  // 최근 조회 기업 조회
+  const { data: companyLatestList, refetch: refetchCompanyLatestList } =
+    useQuery({
+      queryKey: ['CompanyLatestList'],
+      queryFn: () => fetchCompanyLatestList(user.email),
+    })
+
+  // 최근 조회 기업 등록
+  const { mutate: latestCompany } = useMutation({
+    mutationKey: ['LatestCompany'],
+    mutationFn: fetchCompanyLatest,
+    onSuccess: () => refetchCompanyLatestList(), // 최근 조회 기업 조회 refetch
+  })
+
+  const handleAddLatestCompany = () => {
+    const email = 'dbtks2759@gmail.com'
+    const params = {
+      code: selectedStock.code,
+      email,
+    }
+    latestCompany(params)
+  }
+
   useEffect(() => {
-    refetchCompanyPriceList()
+    refetchCompanyPriceList() // 선택 기업 변경 시, 차트데이터 refetch
+    handleAddLatestCompany() // 선택 기업 변경 시, 최근 조회 기업 등록 refetch
   }, [selectedStock, refetchCompanyPriceList])
 
   return (
@@ -89,7 +114,7 @@ const StocksContainer = () => {
           <div>Loading!</div>
         )}
         <MyStocksSection data={companyLikeList} />
-        <LatestStocksSection />
+        <LatestStocksSection data={companyLatestList} />
       </s.SidebarWrap>
       <s.MainWrap>
         <MainTopSection handleAddMyStock={handleAddMyStock} />
