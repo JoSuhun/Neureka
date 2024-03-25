@@ -8,6 +8,7 @@ import SimilarArticle from '@src/components/NewsDetail/SimilarArticle'
 import BackBtn from '@src/components/NewsDetail/BackBtn'
 import { useQuery } from 'react-query'
 import { fetchNewsDetail } from '@src/apis/NewsApi'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   newsUrl: string
@@ -17,6 +18,10 @@ const NewsDetailContainer = ({ newsUrl }: Props) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  const navigate = useNavigate()
+
+  const goSearch = () => navigate('/dictionary')
 
   const {
     isLoading: isNewsListLoading,
@@ -39,6 +44,9 @@ const NewsDetailContainer = ({ newsUrl }: Props) => {
     <>
       <n.HeaderImage bgimage={bgimage} />
       <n.Container>
+        <n.GoDictionaryBtn onClick={goSearch}>
+          <n.Search />
+        </n.GoDictionaryBtn>
         <ArticleContent newsData={newsData?.data} />
         <ArticleGrade />
         <SimilarArticle />

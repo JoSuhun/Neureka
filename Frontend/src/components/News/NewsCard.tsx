@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import * as n from '../styles/News/NewsListStyle'
 import image from '/image/thumbnail-sample3.png'
 import { NewsSummary } from '@src/types/NewsType'
+import { NoMeals } from '@mui/icons-material'
 
 type Props = {
   news: NewsSummary
@@ -27,6 +28,9 @@ const NewsCard = ({ news }: Props) => {
           <n.NewsContent className="card-content">
             {news.article_summary}
           </n.NewsContent>
+          <n.NewsInfo className="press-title">
+            <n.Press>{news.press}</n.Press>
+          </n.NewsInfo>
         </n.News>
       </n.NewCardBox>
     </>
