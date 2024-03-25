@@ -23,7 +23,7 @@ export const KeywordCircle = styled.div`
 `
 export const SelectedKeyword = styled.div`
   position: absolute;
-  z-index: 10;
+  /* z-index: 10; */
   // 가운데 원의 스타일 지정
   width: 12vw; // 실제 크기에 맞게 조정
   height: 12vw; // 실제 크기에 맞게 조정

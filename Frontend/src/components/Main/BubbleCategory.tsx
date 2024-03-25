@@ -14,41 +14,16 @@ const BubbleCategory = () => {
   return (
     <bc.Container>
       <bc.ToggleWrapper>
-        <bc.CategoryToggle onClick={handleToggleCategory}>
+        <bc.CategoryToggle
+          className="CategoryToggle"
+          onClick={handleToggleCategory}
+        >
           카테고리 선택
         </bc.CategoryToggle>
       </bc.ToggleWrapper>
-
-      {/* <bc.CategoryWrapper $show={categoryToggle}>
-        {Categories.map((element, key) => (
-          <Category
-            key={key}
-            name={element.name}
-            image={element.image}
-            show={categoryToggle}
-          />
-        ))}
-      </bc.CategoryWrapper>
-
-      <bc.CategoryWrapper $show={categoryToggle}>
-        {selectedCategories.map((element, key) => (
-          <Category
-            key={key}
-            name={element.name}
-            image={element.image}
-            show={categoryToggle}
-          />
-        ))}
-      </bc.CategoryWrapper>
-
-      {!isLogin && (
-        <bc.IsLoginContaier>
-          서비스를 이용하기 위해서 로그인이 필요합니다.
-        </bc.IsLoginContaier>
-      )} */}
       {/* 로그인 상태에 따라 IsLoginContainer를 조건부로 보여줍니다 */}
       <bc.CategoryBlocker $isLogin={isLogin}>
-        <bc.CategoryWrapper $show={categoryToggle}>
+        <bc.CategoryWrapper className="CategoryList" $show={categoryToggle}>
           {Categories.map((element, key) => (
             <Category
               key={key}
@@ -59,7 +34,10 @@ const BubbleCategory = () => {
           ))}
         </bc.CategoryWrapper>
 
-        <bc.CategoryWrapper $show={categoryToggle}>
+        <bc.CategoryWrapper
+          className="SelectedCategories"
+          $show={categoryToggle}
+        >
           {selectedCategories.map((element, key) => (
             <Category
               key={key}
