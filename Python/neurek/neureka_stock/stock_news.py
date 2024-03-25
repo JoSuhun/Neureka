@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
-from neurek.neureka_stock.models import DetailsArticle
+from neurek.neureka_news.models import DetailsArticle, SummaryArticle
 import time
 from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 
@@ -134,7 +134,8 @@ def crawling_news(keyword):
                 detail_press=press,
                 detail_text=extract_content_from_url(naver_news_link),
                 detail_date=convert_date_format(date_extraction(naver_news_link)),
-                detail_topic=topic
+                detail_topic=topic,
+                detail_keywords=summary_article['keywords']
             )
             detail_article.save()
 
@@ -144,7 +145,7 @@ def crawling_news(keyword):
 
 
 
-# # 확인용
-# import pprint
-# if __name__ == "__main__":
-#     pprint.pprint(crawling_news("삼성전자"))
+# 확인용
+import pprint
+if __name__ == "__main__":
+    pprint.pprint(crawling_news("삼성전자"))

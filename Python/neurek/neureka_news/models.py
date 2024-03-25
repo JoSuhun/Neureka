@@ -20,7 +20,7 @@ class SummaryArticle:
         self.press = press
         self.date_time = date_time
         self.nouns = nouns
-        self.topic=topic
+        self.topic = topic
         self.keywords = json.dumps(keywords, ensure_ascii=False)
 
     def save(self):
@@ -57,13 +57,16 @@ class SummaryArticle:
 class DetailsArticle:
     collection = db['details_article_collection']
 
-    def __init__(self, detail_url, detail_title, detail_text, detail_press, detail_date, detail_topic):
+    def __init__(self, detail_url, detail_title, detail_text, detail_press, detail_date,
+                 detail_topic, detail_keywords):
         self.detail_url = detail_url
         self.detail_title = detail_title
         self.detail_text = detail_text
         self.detail_press = detail_press
         self.detail_date = detail_date
         self.detail_topic = detail_topic
+        self.detail_keywords = json.dumps(detail_keywords, ensure_ascii=False)
+
 
     def save(self):
         """문서 저장. detail_url이 기존에 없을 경우에만 저장 (업서트 사용)."""
@@ -87,6 +90,49 @@ class DetailsArticle:
         document = cls.collection.find_one({"detail_url": url}, {'_id': False})
         return document
 
+    @classmethod
+    def update_rating(cls, url, user_rating):
+        """detail_url에 해당하는 문서의 평점 업데이트"""
+        document = cls.collection.find_one({"detail_url": url})
+
+        if document:
+            # 기존에 평점 정보가 있는 경우, 새로운 평점을 기존 값에 더하고 카운트 증가
+            new_rate = document.get('detail_rate', 0) + user_rating
+            new_rate_count = document.get('detail_rate_count', 0) + 1
+            update_result = cls.collection.update_one(
+                {"detail_url": url},
+                {"$set": {"detail_rate": new_rate, "detail_rate_count": new_rate_count}}
+            )
+            return update_result.modified_count > 0  # 수정된 문서가 있는지 여부 반환
+        else:
+            # 문서가 없는 경우, False 반환
+            return False
+
+    @classmethod
+    def find_urls_by_keywords_sorted_by_average_rating(cls, keywords):
+        """주어진 키워드를 포함하고, 평균 점수로 정렬한 후, 상위 30개의 detail_url만 추출하여 반환"""
+        pipeline = [
+            {"$match": {"detail_keywords": {"$in": keywords}}},  # 키워드 포함 필터링
+            {"$addFields": {
+                "average_rating": {
+                    "$cond": {
+                        "if": {"$eq": ["$detail_rate_count", 0]},  # 평가 횟수가 0인 경우
+                        "then": 0,  # 평균 점수를 0으로 설정
+                        "else": {"$divide": [{"$toDouble": "$detail_rate"}, "$detail_rate_count"]}  # 평균 점수 계산
+                    }
+                }
+            }},
+            {"$sort": {"average_rating": -1, "detail_date": -1}},  # 평균 점수 높은 순, 최신순으로 정렬
+            {"$project": {"_id": 0, "detail_url": 1}}  # detail_url 필드만 포함
+        ]
+
+        documents = cls.collection.aggregate(pipeline)
+
+        # 조회 결과에서 detail_url만 추출하여 리스트로 변환하여 반환
+        urls = [doc['detail_url'] for doc in documents if 'detail_url' in doc]
+
+        # 상위 30개만 선택하여 반환
+        return urls[:30]
 
 class KeywordArticle:
     collection = db['keyword_article_collection']
