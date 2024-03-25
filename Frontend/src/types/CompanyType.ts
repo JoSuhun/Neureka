@@ -53,3 +53,11 @@ export type CompanyLatestType = {
   email: string
   companyName: string
 }
+
+export type CompanyNewsType = {
+  link: string
+  press: string
+  summary: string
+  thumbnail_url: string
+  title: string
+}

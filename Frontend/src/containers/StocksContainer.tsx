@@ -8,6 +8,7 @@ import {
   fetchCompanyLike,
   fetchCompanyLatestList,
   fetchCompanyLatest,
+  fetchCompanyNewsList,
 } from '@src/apis/StockApi'
 import {
   selectedCompanyAtom,
@@ -101,10 +102,17 @@ const StocksContainer = () => {
     latestCompany(params)
   }
 
+  // 선택 기업 최근 뉴스 조회
+  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
+    queryKey: ['CompanyNewsList'],
+    queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
+  })
+
   useEffect(() => {
     refetchCompanyPriceList() // 선택 기업 변경 시, 차트 데이터 refetch
     handleAddLatestCompany() // 선택 기업 변경 시, 최근 조회 기업 등록 refetch
-  }, [selectedStock, refetchCompanyPriceList])
+    refetchCompanyNewsList() // 선택 기업 변경 시, 최근 뉴스 조회 refetch
+  }, [selectedStock])
 
   return (
     <s.Container>
@@ -119,13 +127,13 @@ const StocksContainer = () => {
       </s.SidebarWrap>
       <s.MainWrap>
         <MainTopSection handleAddMyStock={handleAddMyStock} />
-        <StockNewsSection />
         <StockPriceSection />
         {companyPriceList ? (
           <StockChartSection initialData={companyPriceList} />
         ) : (
           <div>Loading!</div>
         )}
+        <StockNewsSection data={companyNewsList} />
       </s.MainWrap>
     </s.Container>
   )

@@ -52,3 +52,11 @@ export const fetchCompanyLatest = async (params: CompanyLatestParamsType) => {
     .then(res => res.data)
     .catch(err => console.log(err))
 }
+
+// 선택 기업 최근 뉴스 조회
+export const fetchCompanyNewsList = async (company: string) => {
+  return await publicRequest
+    .get(`company/newsfive?company=${company}`)
+    .then(res => res.data)
+    .catch(err => console.log(err))
+}
