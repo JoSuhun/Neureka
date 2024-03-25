@@ -14,7 +14,10 @@ const ArticleContent = ({ newsData }: Props) => {
     <>
       <n.Wrapper>
         <n.Title className="article-title">{newsData.detail_title}</n.Title>
-        <n.Date className="article-date">2024. 05. 04. 오전 11:80</n.Date>
+        <n.Info>
+          <n.Press>{newsData.detail_press}</n.Press>
+          <n.Date className="article-date">{newsData.detail_date}</n.Date>
+        </n.Info>
         {/* <n.Image className="article-thumbnail" src={sample} /> */}
         <n.Content className="article-content">
           <div
