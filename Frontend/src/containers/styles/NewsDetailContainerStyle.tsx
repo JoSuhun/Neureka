@@ -14,6 +14,17 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `
+
+export const PlusBtn = styled.span`
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  position: fixed;
+  right: 3%;
+  bottom: 5%;
+  background-color: var(--color-grey);
+`
+
 export const GoDictionaryBtn = styled.span`
   width: 50px;
   aspect-ratio: 1;
@@ -35,6 +46,7 @@ export const GoDictionaryBtn = styled.span`
     cursor: pointer;
   }
 `
+
 export const Search = styled(SearchIcon)`
   color: var(--color-lightblue);
   font-size: 2.3rem !important;
