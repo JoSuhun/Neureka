@@ -26,6 +26,17 @@ public class CompanyController {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
+    @PostMapping("/read")
+    public ResponseEntity<?> companyReadAdd(@RequestParam String code , @RequestParam String email){
+        try {
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>()
+        }
+        return  null;
+    }
+
     @Operation(summary = "주식 최근 10년간 가격을 조회합니다." )
     @GetMapping("/stock/price")
     public ResponseEntity<String> getDataFromDjango(@RequestParam @Parameter String code) {
