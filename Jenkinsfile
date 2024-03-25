@@ -22,7 +22,6 @@ pipeline {
                 script {
                     // 0. 컨테이너 뭐 돌아가는지좀 봐야겠다
                     sh 'docker ps -a'
-                    sh 'sudo docker ps -a'
 
                     // 1. 기존 작동중인 컨테이너 삭제 및 중지
                     sh 'docker stop Frontend Backend Python || true' // 기존 컨테이너 중지

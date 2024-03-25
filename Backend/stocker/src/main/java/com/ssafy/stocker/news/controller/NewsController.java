@@ -95,4 +95,12 @@ public class NewsController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
+    @PostMapping("/hot")
+    @Operation(summary = "실시간 조회수 높은 기사 5개 조회(미완성)" )
+    public ResponseEntity<?> hotNews(@RequestBody Map<String, String[]> keyword){
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

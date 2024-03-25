@@ -12,7 +12,7 @@ public interface CompanyService {
 
 
     void addLikeCompany(String email, String code);
-
+    void deleteLikeCompany(String email, String code);
     List<UserCompanyEntity> findUserLIkeCompany(String email);
 
     void addCompanyRead(String code,String companyName ,String email);
