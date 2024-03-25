@@ -10,17 +10,37 @@ import Stack from '@mui/material/Stack'
 
 import { NewsSummary } from '@src/types/NewsType'
 
+import { useAtom } from 'jotai'
+import { questionAtom } from '@src/stores/newsAtom'
+
 type Props = {
   newsData: NewsSummary[]
 }
 
 const NewsList = ({ newsData }: Props) => {
+  const [question, setQuestion] = useAtom(questionAtom)
+
   const boxRef = useRef<HTMLDivElement>(null)
 
+  const [last, setLast] = useState(Math.ceil(newsData.length / 15))
   const [page, setPage] = useState(1)
   const [data, setData] = useState(newsData)
+  const [news, setNews] = useState(newsData)
 
-  const last = Math.ceil(newsData.length / 15)
+  useEffect(() => {
+    if (question) {
+      const filteredData = newsData.filter(news =>
+        news.article_title.includes(question),
+      )
+      setNews(filteredData)
+      setLast(Math.ceil(filteredData.length / 15))
+      setPage(1)
+    } else {
+      setNews(newsData)
+      setLast(Math.ceil(newsData.length / 15))
+      setPage(1)
+    }
+  }, [question])
 
   const handlePage = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page)
@@ -28,14 +48,17 @@ const NewsList = ({ newsData }: Props) => {
 
   useEffect(() => {
     if (page === last) {
-      setData(newsData.slice(15 * (page - 1)))
+      setData(news.slice(15 * (page - 1)))
     } else {
-      setData(newsData.slice(15 * (page - 1), 15 * page))
+      setData(news.slice(15 * (page - 1), 15 * page))
     }
-    if (boxRef.current) {
+
+    if (boxRef.current && page > 1) {
       boxRef.current.scrollIntoView()
+    } else if (page == 1) {
+      window.scrollTo(0, 0)
     }
-  }, [page])
+  }, [page, news])
 
   return (
     <>
