@@ -1,15 +1,15 @@
-interface Word {
+export type Word = {
   id: number
   title: string
   content: string
 }
 
-interface MarkWord {
+export type MarkWord = {
   email: string
   title: string
 }
 
-interface User {
+export type User = {
   email: string
   name: string
   role: string
@@ -17,10 +17,8 @@ interface User {
   username: string
 }
 
-interface UserWord {
+export type UserWord = {
   dictionary: Word
   user: User
   userDicId: number
 }
-
-export type { Word, MarkWord, UserWord }

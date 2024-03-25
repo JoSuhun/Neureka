@@ -8,34 +8,29 @@ import NewsCard from './NewsCard'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 
-type Props = {}
+import { NewsSummary } from '@src/types/NewsType'
 
-const NewsList = (props: Props) => {
+type Props = {
+  newsData: NewsSummary[]
+}
+
+const NewsList = ({ newsData }: Props) => {
   const boxRef = useRef<HTMLDivElement>(null)
-  const news = Array.from({ length: 50 }, (_, idx) => idx)
 
   const [page, setPage] = useState(1)
-  const [data, setData] = useState(news)
+  const [data, setData] = useState(newsData)
 
-  const last = Math.ceil(news.length / 15)
+  const last = Math.ceil(newsData.length / 15)
 
   const handlePage = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page)
   }
 
-  // 뉴스 조회 api
-  useEffect(() => {
-    // axios
-    //   .get('http://127.0.0.1:8000/news/api/today/')
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err))
-  }, [])
-
   useEffect(() => {
     if (page === last) {
-      setData(news.slice(15 * (page - 1)))
+      setData(newsData.slice(15 * (page - 1)))
     } else {
-      setData(news.slice(15 * (page - 1), 15 * page))
+      setData(newsData.slice(15 * (page - 1), 15 * page))
     }
     if (boxRef.current) {
       boxRef.current.scrollIntoView()
@@ -46,8 +41,8 @@ const NewsList = (props: Props) => {
     <>
       <n.Wrapper ref={boxRef}>
         <n.NewsBox className="news-box">
-          {data.map((it, idx) => (
-            <NewsCard />
+          {data.map((news, idx) => (
+            <NewsCard news={news} />
           ))}
         </n.NewsBox>
         <n.PageStack>
