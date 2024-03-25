@@ -16,30 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `company_read`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `company_read`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `company_read` (
+  `cr_id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `company_code` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`cr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `company_read`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'dbtks2759@gmail.com','김유산','ROLE_USER','google 117226197043183171022');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `company_read` WRITE;
+/*!40000 ALTER TABLE `company_read` DISABLE KEYS */;
+INSERT INTO `company_read` VALUES (1,'543','3'),(2,'rladbtks','012'),(3,'rladbtks','0123'),(4,'rladbtks','01234'),(5,'rladbtks','012345');
+/*!40000 ALTER TABLE `company_read` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
