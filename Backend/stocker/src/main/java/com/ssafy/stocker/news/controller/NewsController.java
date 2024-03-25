@@ -76,11 +76,10 @@ public class NewsController {
 
     @PostMapping("/keyword")
     @Operation(summary = "메인페이지 - 맞춤형 뉴스 추천" )
-    public ResponseEntity<?> viewKeyword(@RequestBody Map<String, Objects> keyword){
-        String url = "/news/api/keyword_article";
+    public ResponseEntity<?> viewKeyword(@RequestBody Map<String, String[]> keyword){
+        String url = "/news/api/keyword_article/";
 
-        log.info(keyword.toString());
-        Map<String, Objects> requestData = keyword;
+        Map<String, String[]> requestData = keyword;
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
@@ -94,6 +93,6 @@ public class NewsController {
 //         응답 처리
         log.info("Response from Django server: " + response);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
