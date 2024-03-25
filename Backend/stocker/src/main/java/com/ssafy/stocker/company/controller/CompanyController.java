@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -27,6 +29,7 @@ public class CompanyController {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
+    @Operation(summary = "사용자가 최근 조회한 기업을 리스트에 추가합니다." )
     @PostMapping("/read")
     public ResponseEntity<?> companyReadAdd( @RequestParam String email ,@RequestParam String code , @RequestParam String companyName){
         try {
@@ -41,6 +44,7 @@ public class CompanyController {
     }
 
 
+    @Operation(summary = "사용자가 최근 조회한 기업 리스트를 조회해 옵니다" )
     @GetMapping("/read")
     public ResponseEntity<?> companyReadList( @RequestParam String email){
         try {
@@ -110,6 +114,45 @@ public class CompanyController {
         }
 
 
+    }
+
+    @Operation(summary = "유저가 관심을 추가했던 회사를 삭제합니다" )
+    @DeleteMapping("/like")
+    public ResponseEntity<?> deleteLikeCompany(@RequestParam String email , @RequestParam String code){
+        try {
+            log.info(email + " " + code);
+            companyService.deleteLikeCompany(email , code);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @Operation(summary = "해당 기업의 관련 최근 뉴스를 5개 조회합니다." )
+    @GetMapping("/newsfive")
+    public  ResponseEntity<?> getNewsFive(@RequestParam("company") String company){
+        try {
+//            System.out.println(company);
+            String url = "/finance/stock_news/";
+
+            Map<String, String> requestData = new HashMap<>();
+            requestData.put("keyword", company);
+
+            String response = webClient.post()
+                    .uri(url)
+                    .bodyValue(requestData)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 

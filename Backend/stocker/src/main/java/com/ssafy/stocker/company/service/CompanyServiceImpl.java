@@ -54,6 +54,17 @@ public class CompanyServiceImpl implements  CompanyService {
     }
 
     @Override
+    public void deleteLikeCompany(String email, String code) {
+
+        UserEntity user = userRepository.findByEmail(email);
+        CompanyEntity company = companyRepository.findByCode(code);
+
+        UserCompanyEntity userLikeCompany = userCompanyRepository.findByUserAndCompany(user, company);
+
+        userCompanyRepository.delete(userLikeCompany);
+    }
+
+    @Override
     public List<UserCompanyEntity> findUserLIkeCompany(String email) {
         UserEntity user = userRepository.findByEmail(email);
         List<UserCompanyEntity> userCompanyList = userCompanyRepository.findByUser(user);
