@@ -74,7 +74,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         response.setHeader("Authorization" , "Bearer " +access);
         response.addCookie(createCookie("refresh", refresh));
-//        response.sendRedirect("http://localhost:5173/");
+        response.sendRedirect("http://localhost:5173/");
     }
 
     private Cookie createCookie(String key, String value) {
@@ -83,7 +83,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         cookie.setMaxAge(60*60*60*60);
         //cookie.setSecure(true);
         cookie.setPath("/");
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(false);
 
         return cookie;
     }
