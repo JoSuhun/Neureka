@@ -33,7 +33,15 @@ export const fetchCompanyLikeList = async (email: string) => {
 export const fetchCompanyLike = async (params: CompanyLikeParmasType) => {
   return await publicRequest
     .post(`company/like?${queryString.stringify(params)}`)
-    .then(res => console.log(res))
+    .then(res => res.data)
+    .catch(err => console.log(err))
+}
+
+// 관심 종목 등록 취소
+export const fetchCompanyUnLike = async (params: CompanyLikeParmasType) => {
+  return await publicRequest
+    .delete(`company/like?${queryString.stringify(params)}`)
+    .then(res => res.data)
     .catch(err => console.log(err))
 }
 

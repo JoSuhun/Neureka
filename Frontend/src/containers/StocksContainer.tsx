@@ -6,6 +6,7 @@ import {
   fetchCompanyPrice,
   fetchCompanyLikeList,
   fetchCompanyLike,
+  fetchCompanyUnLike,
   fetchCompanyLatestList,
   fetchCompanyLatest,
   fetchCompanyNewsList,
@@ -78,6 +79,22 @@ const StocksContainer = () => {
     likeCompany(params)
   }
 
+  // 관심 기업 등록 취소
+  const { mutate: unLikeCompany } = useMutation({
+    mutationKey: ['UnLikeCompany'],
+    mutationFn: fetchCompanyUnLike,
+    onSuccess: () => refetchCompanyLikeList(), // 관심 기업 조회 refetch
+  })
+
+  const handleRemoveMyStock = () => {
+    const email = 'dbtks2759@gmail.com'
+    const params = {
+      email,
+      code: selectedStock.code,
+    }
+    unLikeCompany(params)
+  }
+
   // 최근 조회 기업 조회
   const { data: companyLatestList, refetch: refetchCompanyLatestList } =
     useQuery({
@@ -126,7 +143,10 @@ const StocksContainer = () => {
         <LatestStocksSection data={companyLatestList} />
       </s.SidebarWrap>
       <s.MainWrap>
-        <MainTopSection handleAddMyStock={handleAddMyStock} />
+        <MainTopSection
+          handleAddMyStock={handleAddMyStock}
+          handleRemoveMyStock={handleRemoveMyStock}
+        />
         <StockPriceSection />
         {companyPriceList ? (
           <StockChartSection initialData={companyPriceList} />
