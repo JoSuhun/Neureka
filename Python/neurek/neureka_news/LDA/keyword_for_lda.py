@@ -107,7 +107,6 @@ def text_through_LDA_probability(text):
     # LDA 모델이 저장된 경로
     # today_folder_path = f"model/{date.today()}"
 
-    # news_keyword.py 기준으로 경로를 지정해야함
     # today_folder_path = "/model/main_model"
     # today_folder_path = "LDA/model/main_model"
 

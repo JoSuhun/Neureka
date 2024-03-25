@@ -107,10 +107,6 @@ def crawling_news(keyword):
             press_element = news_item.select_one('.info.press')
             summary_element = news_item.select_one('.api_txt_lines.dsc_txt_wrap')
 
-            # thumbnail_element = news_item.select_one('.dsc_thumb img')
-            # # 'data-lazysrc' 속성이 있으면 사용하고, 그렇지 않으면 'src' 속성 사용
-            # thumbnail_url = thumbnail_element.get('data-lazysrc', thumbnail_element.get('src')) if thumbnail_element else None
-
             # info_group 내의 모든 a 태그 찾기
             info_group_links = news_item.select('.info_group a')
             # 두 번째 a 태그의 href 속성 값이 네이버 뉴스 링크임
