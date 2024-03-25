@@ -79,7 +79,7 @@ const BubbleChart = ({ keywords }: BubbleChartProps) => {
 
   return (
     <>
-      <b.Container>
+      <b.Container className="BubbleChart">
         <b.Svg>
           {bubbles.map(bubble => (
             <b.Graph
