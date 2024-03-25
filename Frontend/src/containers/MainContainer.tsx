@@ -5,12 +5,9 @@ import * as m from '@src/containers/styles/MainContainer'
 import KeywordNews from '@src/components/Main/KeywordNews'
 import BubbleCategory from '@src/components/Main/BubbleCategory'
 import BubbleChart from '@src/components/Main/BubbleChart'
+import loading from '/image/loading.gif'
 import { useAtom } from 'jotai'
-import {
-  categoriesAtom,
-  keywordArticlesAtom,
-  selectedKeywordAtom,
-} from '@src/stores/mainAtom'
+import { categoriesAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 import { useQuery } from 'react-query'
 import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
 
@@ -19,7 +16,6 @@ type Props = {}
 const MainContainer = (props: Props) => {
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
-  const [keywordArticles, setKeywordArticles] = useAtom(keywordArticlesAtom)
 
   // 키워드 데이터 요청
   const { data: keywordsData, refetch: refetchKeywords } = useQuery(
@@ -27,9 +23,6 @@ const MainContainer = (props: Props) => {
     () => fetchKeywords(categories),
     {
       enabled: false,
-      // onSuccess: keywordsData => {
-      //   setKeywords(keywordsData.data)
-      // },
     },
   )
 
@@ -39,7 +32,7 @@ const MainContainer = (props: Props) => {
 
   // 키워드 뉴스 데이터 요청
   const {
-    data: keuwordNewsData,
+    data: keywordNewsData,
     refetch: refetchKeywordNews,
     isLoading: keywordArticlesLoading,
   } = useQuery(
@@ -47,9 +40,6 @@ const MainContainer = (props: Props) => {
     () => fetchKeywordArticles(selectedKeyword.links),
     {
       enabled: false,
-      onSuccess: data => {
-        setKeywordArticles(data.data.data)
-      },
     },
   )
 
@@ -81,7 +71,14 @@ const MainContainer = (props: Props) => {
         </m.BubbleChartWrapper>
 
         <m.NewsWrapper>
-          <KeywordNews isLoading={keywordArticlesLoading} />
+          {keywordArticlesLoading ? (
+            <div>
+              <h1>기사 받는 중</h1>
+              <img src={loading}></img>
+            </div>
+          ) : (
+            <KeywordNews keywordNews={keywordNewsData?.data.data} />
+          )}
         </m.NewsWrapper>
       </m.container>
     </>
