@@ -11,7 +11,7 @@ export const container = styled.div`
 export const KeywordTitle = styled.h2`
   font-size: 3rem;
   margin-bottom: 1rem;
-  margin: 100px 0;
+  margin: 50px 0;
 `
 
 export const KeywordCircle = styled.div`
