@@ -35,12 +35,8 @@ public class UserController {
         try {
             log.info("user/mypage 시작 param email : " + email );
             UserInfoEntity userInfoEntity= userService.findUser(email);
-            if(userInfoEntity != null){
+
                 return new ResponseEntity<UserInfoEntity>(userInfoEntity, HttpStatus.OK);
-            }else {
-                log.info("회원 정보 조회 실패");
-                return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST) ;
-            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -51,29 +47,29 @@ public class UserController {
     }
 
 
-//    @PostMapping("/mypage")
-//    @Operation(summary = "회원정보를 변경합니다" )
-//    public ResponseEntity<?> userInfoModify(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){
-//
-//        UserInfoEntity userInfo = new UserInfoEntity() ;
-//        userInfo.setEmail(email);
-//        userInfo.setBirth(birth);
-//        userInfo.setPhone(phone);
-//        userInfo.setBirth(birth);
-//        userInfo.setGender(gender);
-//        try {
-//            userService.modifyUserInfo(userInfo);
-//
-//            return new ResponseEntity<>(HttpStatus.OK);
-//
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//
-//            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST) ;
-//        }
-//
-//    }
+    @PostMapping("/mypage")
+    @Operation(summary = "회원정보를 변경합니다 gender 남자 true 여자  false " )
+    public ResponseEntity<?> userInfoModify(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){
+
+        UserInfoEntity userInfo = new UserInfoEntity() ;
+        userInfo.setEmail(email);
+        userInfo.setBirth(birth);
+        userInfo.setPhone(phone);
+        userInfo.setBirth(birth);
+        userInfo.setGender(gender);
+        try {
+            userService.modifyUserInfo(userInfo);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST) ;
+        }
+
+    }
 
 
 }
