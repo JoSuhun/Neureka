@@ -81,12 +81,12 @@ def load_stop_words(file_path):
 
 
 def recommend_news(url):
-    # 2. 해당 URL에 해당하는 기사의 데이터를 DetailsArticle에서 탐색
+    # 해당 URL에 해당하는 기사
     article_data = DetailsArticle.find_by_url(url)
 
-    # 3. 불러온 내용이 있는지 확인
+    # 불러온 내용이 있는지 확인
     if article_data:
-        # 4. 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
+        # 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
         if DetailsArticle.is_topic_empty_for_url(url):
 
             stop_words_path = "LDA/stop_words.txt"
@@ -108,7 +108,7 @@ def recommend_news(url):
             new_keywords = article_data['detail_keywords']
             print("Article already has a topic.")
 
-            # 5. 비슷한 기사를 불러오기
+            # 비슷한 기사를 불러오기
         similar_urls = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
         return similar_urls
 
