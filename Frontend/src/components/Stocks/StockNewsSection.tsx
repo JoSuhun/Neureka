@@ -19,7 +19,9 @@ const StockNewsSection = (props: { data: CompanyNewsType[] }) => {
                 <s.ItemTitle>{item.title}</s.ItemTitle>
                 <s.ItemContent>{item.summary}</s.ItemContent>
               </s.ItemBox>
-              <s.ItemImage src={item.thumbnail_url} alt="Image" />
+              {item.thumbnail_url && (
+                <s.ItemImage src={item.thumbnail_url} alt="Image" />
+              )}
             </s.Item>
           ))}
       </s.Wrap>
