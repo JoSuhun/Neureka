@@ -31,9 +31,9 @@ public class CompanyController {
 
     @Operation(summary = "사용자가 최근 조회한 기업을 리스트에 추가합니다." )
     @PostMapping("/read")
-    public ResponseEntity<?> companyReadAdd( @RequestParam String email ,@RequestParam String code , @RequestParam String companyName){
+    public ResponseEntity<?> companyReadAdd( @RequestParam String email ,@RequestParam String code){
         try {
-            companyService.addCompanyRead(code ,companyName, email);
+            companyService.addCompanyRead(code , email);
 
             return new ResponseEntity<>(HttpStatus.OK);
 

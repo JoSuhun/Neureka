@@ -16,11 +16,10 @@ public class CompanyReadEntity {
 
     private String email ;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyEntity company;
 
-    @Column(name = "company_name")
-    private String companyName;
-    @Column(name = "company_code")
-    private String companyCode;
 }
 
 
