@@ -27,7 +27,7 @@ import {
 } from 'react-financial-charts'
 import { CompanyPriceType } from '@src/types/CompanyType'
 
-const ChartPage = (props: { initialData: CompanyPriceType[] }) => {
+const StockChartSection = (props: { initialData: CompanyPriceType[] }) => {
   const { initialData } = props
 
   const height = 500
@@ -113,7 +113,7 @@ const ChartPage = (props: { initialData: CompanyPriceType[] }) => {
   }
 
   return (
-    <div style={{ margin: '10px', padding: '5px' }}>
+    <div style={{ padding: '10px', margin: '5px' }}>
       <ChartCanvas
         height={height}
         ratio={3}
@@ -227,4 +227,4 @@ const ChartPage = (props: { initialData: CompanyPriceType[] }) => {
   )
 }
 
-export default ChartPage
+export default StockChartSection
