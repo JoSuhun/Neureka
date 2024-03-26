@@ -54,6 +54,12 @@ const StocksContainer = () => {
     },
   )
 
+  // 선택 기업 최근 뉴스 조회
+  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
+    queryKey: ['CompanyNewsList'],
+    queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
+  })
+
   // 관심 기업 조회
   const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
     queryKey: ['CompanyLikeList'],
@@ -118,12 +124,6 @@ const StocksContainer = () => {
     }
     latestCompany(params)
   }
-
-  // 선택 기업 최근 뉴스 조회
-  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
-    queryKey: ['CompanyNewsList'],
-    queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
-  })
 
   useEffect(() => {
     refetchCompanyPriceList() // 선택 기업 변경 시, 차트 데이터 refetch

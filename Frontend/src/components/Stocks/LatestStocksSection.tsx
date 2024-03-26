@@ -1,8 +1,16 @@
-import { CompanyLatestType } from '@src/types/CompanyType'
+import { useAtom } from 'jotai'
+import { selectedCompanyAtom } from '@src/stores/stockAtom'
+import { CompanyType, CompanyLatestType } from '@src/types/CompanyType'
 import * as l from '@src/components/styles/Stocks/LatestStocksSectionStyle'
 
 const LatestStocksSection = (props: { data: CompanyLatestType[] }) => {
   const { data } = props
+
+  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+
+  const handleClick = (item: CompanyType) => {
+    setSelectedStock(item)
+  }
 
   return (
     <l.Container>
@@ -10,8 +18,8 @@ const LatestStocksSection = (props: { data: CompanyLatestType[] }) => {
       <l.Wrap>
         {data && data.length > 0 ? (
           data.map(item => (
-            <l.Item key={item.crId}>
-              {item.companyName} ({item.companyCode})
+            <l.Item key={item.crId} onClick={() => handleClick(item.company)}>
+              {item.company.companyName} ({item.company.code})
             </l.Item>
           ))
         ) : (
