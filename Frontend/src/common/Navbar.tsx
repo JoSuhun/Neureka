@@ -65,7 +65,8 @@ const Navbar = () => {
   }
 
   // 로그인 url
-  const google_url = 'http://localhost:8080/oauth2/authorization/google'
+  // const google_url = 'http://localhost:8080/oauth2/authorization/google'
+  const google_url = 'http://j10c105.p.ssafy.io:8080/oauth2/authorization/google'
 
   const login = (url: string) => {
     window.location.href = url
