@@ -97,8 +97,42 @@ public class NewsController {
     }
 
 
-    @PostMapping("/hot")
-    @Operation(summary = "실시간 조회수 높은 기사 5개 조회(미완성)" )
+    @PostMapping("/{newsid}")
+    @Operation(summary = "(미완성) 해당 뉴스의 평가를 DB에 저장")
+    public ResponseEntity<?> saveNewsRating(@PathVariable String newsid, @RequestParam String grade){
+        String url = "/news/api/{url작성하기}/";
+
+        // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
+        String response = webClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(grade))
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/other/{newsid}")
+    @Operation(summary = "(미완성) 해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
+    public ResponseEntity<?> recommThreeNews(@PathVariable String newsid){
+        String url = "/news/api/{url작성하기}/";
+
+        // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
+        String response = webClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(""))
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/hot")
+    @Operation(summary = "(미완성) 실시간 조회수 높은 기사 5개 조회" )
     public ResponseEntity<?> hotNews(@RequestBody Map<String, String[]> keyword){
 
         return new ResponseEntity<>(HttpStatus.OK);
