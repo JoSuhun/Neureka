@@ -21,9 +21,33 @@ export const Title = styled.p`
 `
 
 export const Wrap = styled.div`
-  background-color: #f9f9f9;
   width: 100%;
   flex: 1; /* 나머지 공간을 채우기 위해 Flexbox 속성 사용 */
   border-radius: 20px;
-  box-shadow: inset 0.5px 0.5px 2px 0.5px #e2e2e2;
+  display: flex;
+  flex-direction: column;
+`
+
+export const Item = styled.div`
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+`
+
+export const NoneItem = styled.p`
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #000;
 `

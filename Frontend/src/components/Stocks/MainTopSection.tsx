@@ -1,23 +1,35 @@
+import { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
-import { selectedCompanyAtom } from '@src/stores/stockAtom'
+import {
+  selectedCompanyAtom,
+  LikedCompanyListAtom,
+} from '@src/stores/stockAtom'
 import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
 
-const MainTopSection = () => {
+const MainTopSection = (props: {
+  handleAddMyStock: () => void
+  handleRemoveMyStock: () => void
+}) => {
+  const { handleAddMyStock, handleRemoveMyStock } = props
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
-  // seletedStock 이 빈문자열 -> 상태 초기값 설정 필요
+  const [likedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
+  const [isLiked, setIsLiked] = useState(false) // 관심 기업 여부
 
-  // usemutation 사용 -> 등록 필요
-  const handleAddMyStock = () => {}
+  useEffect(() => {
+    setIsLiked(
+      likedCompanyList.some(item => item.company.code === selectedStock.code),
+    )
+  }, [likedCompanyList, selectedStock])
 
   return (
     <s.Container>
       <s.Title>{selectedStock.companyName}</s.Title>
       <s.CodeNumber>({selectedStock.code})</s.CodeNumber>
-      <s.AddButton
-        onClick={() => {
-          handleAddMyStock()
-        }}
-      />
+      {isLiked ? (
+        <s.RemoveButton onClick={handleRemoveMyStock} />
+      ) : (
+        <s.AddButton onClick={handleAddMyStock} />
+      )}
     </s.Container>
   )
 }

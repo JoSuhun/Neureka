@@ -65,7 +65,7 @@ public class DictionaryController {
     }
 
     @Operation(summary = "유저가 관심있는 용어를 삭제합니다.")
-    @PostMapping("/like/delete")
+    @DeleteMapping("/like/delete")
     public ResponseEntity<?> deleteLikeDictionary(@RequestParam String email , @RequestParam String title){
         try {
             log.info(email + " " + title );

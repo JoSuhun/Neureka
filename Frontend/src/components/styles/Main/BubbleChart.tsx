@@ -1,4 +1,3 @@
-import { style } from 'd3'
 import styled from 'styled-components'
 
 export const Container = styled.div`

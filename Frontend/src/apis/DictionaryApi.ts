@@ -12,6 +12,12 @@ export const fetchMarkWord = async (data: MarkWord) => {
   })
 }
 
+export const fetchUnmarkWord = async (data: MarkWord) => {
+  return await publicRequest.delete('dictionary/like/delete', {
+    params: data,
+  })
+}
+
 export const fetchMarkedWords = async (userEmail: string) => {
   return await publicRequest.get('dictionary/like/list', {
     params: {

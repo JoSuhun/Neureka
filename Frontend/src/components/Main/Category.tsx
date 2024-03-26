@@ -1,10 +1,8 @@
-import { fetchKeywords } from '@src/apis/MainApi'
 import * as c from '@src/components/styles/Main/Category'
-import { categoriesAtom, keywordsAtom } from '@src/stores/mainAtom'
-import { Categories, Category, KeywordCount } from '@src/types/MainType'
+import { categoriesAtom } from '@src/stores/mainAtom'
+import { Categories, Category } from '@src/types/MainType'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
-import { useQuery } from 'react-query'
+
 export type CategoryProps = {
   name: string
   image: string
@@ -13,26 +11,6 @@ export type CategoryProps = {
 
 const Category = ({ name, image, show }: CategoryProps) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
-  const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
-  // useEffect(() => {
-  //   const { data } = useQuery('fetchKeywords', () => fetchKeywords(categories))
-  //   console.log(data)
-  // }, [categories])
-
-  const { data, refetch } = useQuery(
-    ['fetchKeywords', categories],
-    () => fetchKeywords(categories),
-    {
-      enabled: false, // 이 옵션은 쿼리를 수동으로 실행하기 위해 false로 설정됩니다.
-      onSuccess: data => {
-        setKeywords(data.data) // Update the state here
-      },
-    },
-  )
-
-  useEffect(() => {
-    refetch() // categories가 변경될 때마다 refetch 함수를 호출하여 쿼리를 다시 실행합니다.
-  }, [categories, refetch])
 
   const handleCategories = (selectedCategory: Category) => {
     setCategories(prev => {

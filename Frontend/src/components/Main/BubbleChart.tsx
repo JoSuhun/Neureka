@@ -5,8 +5,12 @@ import * as b from '@src/components/styles/Main/BubbleChart'
 import { Bubble, KeywordCount } from '@src/types/MainType'
 import { keywordsAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 
-const BubbleChart = () => {
-  const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
+export type BubbleChartProps = {
+  keywords: KeywordCount[]
+}
+
+const BubbleChart = ({ keywords }: BubbleChartProps) => {
+  // const [keywords, setKeywords] = useAtom<KeywordCount[]>(keywordsAtom)
   const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [bubbles, setBubbles] = useState<Bubble[]>([])
   const [selectedBubbleId, setSelectedBubbleId] = useState<number | null>(null)
@@ -24,7 +28,12 @@ const BubbleChart = () => {
   }
 
   const handleSelectKeyword = (keyword: string) => {
-    setSelectedKeyword(keyword)
+    const keywordInfo = keywords.find(k => k.keyword === keyword)
+    if (keywordInfo === undefined) {
+      setSelectedKeyword({ keyword: '', count: 0, links: [] })
+    } else {
+      setSelectedKeyword(keywordInfo)
+    }
   }
 
   const simulationRef = useRef<d3.Simulation<Bubble, undefined> | null>(null)
@@ -70,7 +79,7 @@ const BubbleChart = () => {
 
   return (
     <>
-      <b.Container>
+      <b.Container className="BubbleChart">
         <b.Svg>
           {bubbles.map(bubble => (
             <b.Graph

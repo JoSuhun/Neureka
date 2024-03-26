@@ -1,7 +1,12 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
-from .models import DetailsArticle
-
+import time
+from neurek.neureka_news.models import DetailsArticle, SummaryArticle
+from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 
 def process_element(element):
     content = ''
@@ -46,6 +51,25 @@ def date_extraction(url):
     return None
 
 
+def keyword_extraction(url):
+    response = requests.get(url)
+    time.sleep(0.1)  # 서버에 과부하를 주지 않기 위해 잠시 대기
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # `soup.find("article")`의 결과가 None인 경우를 처리
+    article = soup.find("article")
+    if article:
+        article_text = article.get_text(strip=True)
+        # article_text가 있는 경우에만 이미지 태그를 찾음
+        img_tag = soup.select_one('#img1')
+        img_src = img_tag['data-src'] if img_tag and img_tag.get('data-src') else None
+    else:
+        # article_text가 없는 경우, img_src도 None으로 설정
+        article_text = "No article text found"
+        img_src = None
+
+    return article_text, img_src
+
 # 날짜 포메팅 변경
 def convert_date_format(input_str):
     from datetime import datetime
@@ -65,69 +89,80 @@ def convert_date_format(input_str):
     return output_str
 
 
+# 개별 뉴스 항목 처리를 위한 함수
+def process_news_item(i, soup):
+    news_item = soup.select_one(f'#sp_nws{i}')
+    if news_item:
+        title_element = news_item.select_one('.news_tit')
+        press_element = news_item.select_one('.info.press')
+        summary_element = news_item.select_one('.api_txt_lines.dsc_txt_wrap')
+
+        info_group_links = news_item.select('.info_group a')
+        naver_news_link = info_group_links[1]['href'] if len(info_group_links) > 1 else None
+        title = title_element.text.strip() if title_element else None
+        press = press_element.text.strip() if press_element else None
+        summary = summary_element.text.strip() if summary_element else None
+
+        # 다른 함수 호출 및 처리
+        text, thumbnail_url = keyword_extraction(naver_news_link)
+        # topic = text_through_LDA_probability(text)
+
+
+        news_data = {
+            'link': naver_news_link[:-8],
+            'title': title,
+            'press': press,
+            'summary': summary,
+            'thumbnail_url': thumbnail_url
+        }
+
+        detail_article = DetailsArticle(
+            detail_url=naver_news_link[:-8],
+            detail_title=title,
+            detail_press=press,
+            detail_text=extract_content_from_url(naver_news_link),
+            detail_date=convert_date_format(date_extraction(naver_news_link)),
+            detail_topic="",
+            detail_keywords=""
+        )
+        detail_article.save()
+
+        return news_data
+    else:
+        # news_item이 없을 경우의 예외 처리
+        return {"error": "일시적인 오류입니다"}
+
+
 def crawling_news(keyword):
-    url = ("https://search.naver.com/search.naver?where=news&query="+ keyword +
-           "&sm=tab_opt&sort=1&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0" +
-           "&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0" +
+    url = (f"https://search.naver.com/search.naver?where=news&query={keyword}"
+           "&sm=tab_opt&sort=1&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0"
+           "&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0"
            "&office_category=0&service_area=1")
 
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
 
     news_list = []
-
-    for i in range(1, 6):
-        news_item = soup.select_one(f'#sp_nws{i}')
-        if news_item:
-            title_element = news_item.select_one('.news_tit')
-            press_element = news_item.select_one('.info.press')
-            summary_element = news_item.select_one('.api_txt_lines.dsc_txt_wrap')
-
-            thumbnail_element = news_item.select_one('.dsc_thumb img')
-            # 'data-lazysrc' 속성이 있으면 사용하고, 그렇지 않으면 'src' 속성 사용
-            thumbnail_url = thumbnail_element.get('data-lazysrc', thumbnail_element.get('src')) if thumbnail_element else None
-
-            newspaper_element = news_item.select_one('#sp_nws1 > div > div > div.news_info > div.info_group > a.info.press > span > img')
-            newspaper_url = newspaper_element.get('')
-
-            # info_group 내의 모든 a 태그 찾기
-            info_group_links = news_item.select('.info_group a')
-            # 두 번째 a 태그의 href 속성 값이 네이버 뉴스 링크임
-            naver_news_link = info_group_links[1]['href'] if len(info_group_links) > 1 else None
-            title = title_element.text.strip() if title_element else None
-            press = press_element.text.strip() if press_element else None
-            summary = summary_element.text.strip() if summary_element else None
-
-            # link는 뒤에 카테고리 코드를 떼고 저장
-            news_data = {
-                'link': naver_news_link[:-8],
-                'title': title,
-                'press': press,
-                'summary': summary,
-                'thumbnail_url': thumbnail_url
-            }
-
-            detailAticle = DetailsArticle(
-                detail_url=naver_news_link[:-8],
-                detail_title=title,
-                detail_press=press,
-                detail_text=extract_content_from_url(naver_news_link),
-                detail_date=convert_date_format(date_extraction(naver_news_link))
-            )
-            detailAticle.save()
-
-            news_list.append(news_data)
+    # ThreadPoolExecutor를 사용하여 병렬 처리
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        # 각 뉴스 항목에 대한 작업 생성
+        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 6)]
+        for future in as_completed(futures):
+            news_data = future.result()
+            if news_data:
+                news_list.append(news_data)
 
     return news_list
 
-def keyword_extraction(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    article_text = soup.find("article").get_text(strip=True)
 
-    return article_text
-
-
+# 확인용
 # import pprint
 # if __name__ == "__main__":
+#     start_time = time.time()
+#
 #     pprint.pprint(crawling_news("삼성전자"))
+#
+#     end_time = time.time()  # 종료 시간 저장
+#     elapsed_time = end_time - start_time  # 경과 시간 계산
+#
+#     print(f"Execution time: {elapsed_time} seconds")
