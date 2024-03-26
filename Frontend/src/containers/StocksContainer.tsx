@@ -19,9 +19,9 @@ import SearchStocksSection from '@src/components/Stocks/SearchStocksSection'
 import MyStocksSection from '@src/components/Stocks/MyStocksSection'
 import LatestStocksSection from '@src/components/Stocks/LatestStocksSection'
 import MainTopSection from '@src/components/Stocks/MainTopSection'
-import StockNewsSection from '@src/components/Stocks/StockNewsSection'
 import StockPriceSection from '@src/components/Stocks/StockPriceSection'
 import StockChartSection from '@src/components/Stocks/StockChartSection'
+import StockNewsSection from '@src/components/Stocks/StockNewsSection'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
