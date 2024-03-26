@@ -18,7 +18,6 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 
-
 # 페이지 소스 가져오기
 driver = webdriver.Chrome()
 article_list = []
