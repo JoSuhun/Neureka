@@ -60,9 +60,9 @@ const LeftSearchSection = ({ data }: Props) => {
 
   return (
     <>
-      <l.Wrapper>
+      <l.Wrapper className="searchSection">
         <l.Box>
-          <l.SearchBar>
+          <l.SearchBar className="searchBar">
             <SearchInput
               search={search}
               setSearch={setSearch}
