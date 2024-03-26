@@ -14,13 +14,13 @@ const StockNewsSection = (props: { data: CompanyNewsType[] }) => {
               <s.ItemBox>
                 <s.ItemInfo>
                   <s.ItemPublisher>{item.press}</s.ItemPublisher>
-                  {/* <s.ItemDate>{item.date}</s.ItemDate> */}
+                  <s.ItemDate>{item.article_date}</s.ItemDate>
                 </s.ItemInfo>
                 <s.ItemTitle>{item.title}</s.ItemTitle>
                 <s.ItemContent>{item.summary}</s.ItemContent>
               </s.ItemBox>
               {item.thumbnail_url && (
-                <s.ItemImage src={item.thumbnail_url} alt="Image" />
+                <s.ItemImage src={item.thumbnail_url} alt="image" />
               )}
             </s.Item>
           ))}
