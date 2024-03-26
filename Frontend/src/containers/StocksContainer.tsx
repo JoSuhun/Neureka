@@ -147,7 +147,11 @@ const StocksContainer = () => {
           handleAddMyStock={handleAddMyStock}
           handleRemoveMyStock={handleRemoveMyStock}
         />
-        <StockPriceSection />
+        {companyPriceList ? (
+          <StockPriceSection data={companyPriceList} />
+        ) : (
+          <div>Loading!</div>
+        )}
         {companyPriceList ? (
           <StockChartSection initialData={companyPriceList} />
         ) : (
