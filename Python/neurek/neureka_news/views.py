@@ -7,6 +7,7 @@ from .models import db, DetailsArticle, SummaryArticle, KeywordArticle
 from .news_cluster import kmeans_cluster
 from .news_recommend import recommend_news
 from .news_summary import news_summary_url
+from .news_headline import load_headline_news
 from rest_framework.decorators import api_view
 
 
@@ -145,3 +146,12 @@ def update_rating(request):
             return Response({"message": "평점 등록에 실패 했어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# HEADLINE 뉴스 5개
+@api_view(["GET"])
+def get_headlines(request):
+    news_data = load_headline_news()
+
+    return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
+                        content_type="application/json; charset=utf-8")

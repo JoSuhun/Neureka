@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from . import views
 from .views import (news_api, news_bubble, news_keywords_article,
-                    news_details, news_recommend, news_summary, update_rating)
+                    news_details, news_recommend, news_summary, update_rating, get_headlines)
 
 router = DefaultRouter()
 router.register(r'base', views.SummaryArticleViewSet, basename='base')
@@ -15,5 +15,6 @@ urlpatterns = [
     path('api/news_details/', news_details, name='news_details'),
     path('api/recomand/', news_recommend, name='news_recommend'),
     path('api/news_summary', news_summary, name='news_summary'),
-    path('api/update_rate', update_rating, name='update_rate')
+    path('api/update_rate', update_rating, name='update_rate'),
+    path('api/headlines', get_headlines, name='get_headlines'),
 ]

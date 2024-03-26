@@ -30,10 +30,10 @@ class SummaryArticle:
 
     @classmethod
     def find_all(cls):
-        """컬렉션의 모든 문서 조회"""
-        documents_cursor = cls.collection.find({}, {'_id': False})
+        """컬렉션의 모든 문서 조회, _id와 nouns 필드 제외"""
+        documents_cursor = cls.collection.find({}, {'_id': False, 'nouns': False})
         documents_list = list(documents_cursor)
-        # TODO nouns 뺴고 보내 줄지 생각.
+
         return documents_list
 
     @classmethod
