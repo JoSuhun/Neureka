@@ -15,7 +15,7 @@ public interface CompanyService {
 
     List<UserCompanyEntity> findUserLIkeCompany(String email);
 
-    void addCompanyRead(String code,String companyName ,String email);
+    void addCompanyRead(String code ,String email);
 
     List<CompanyReadEntity> listCompanyRead( String email);
 }

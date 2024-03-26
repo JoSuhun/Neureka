@@ -62,16 +62,12 @@ public class CompanyServiceImpl implements  CompanyService {
     }
 
     @Override
-    public void addCompanyRead(String code,String companyName, String email) {
+    public void addCompanyRead(String code ,String email) {
         CompanyReadEntity companyRead = new CompanyReadEntity();
 
-        if(companyReadRepository.existsByEmailAndCompanyCode(email,code)){
-            return;
-        }
-
-        companyRead.setCompanyCode(code);
+        companyRead.setCompany(companyRepository.findByCode(code));
         companyRead.setEmail(email);
-        companyRead.setCompanyName(companyName);
+        
         companyReadRepository.save(companyRead);
     }
 

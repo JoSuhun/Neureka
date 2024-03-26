@@ -28,9 +28,9 @@ public class CompanyController {
     }
 
     @PostMapping("/read")
-    public ResponseEntity<?> companyReadAdd( @RequestParam String email ,@RequestParam String code , @RequestParam String companyName){
+    public ResponseEntity<?> companyReadAdd( @RequestParam String email ,@RequestParam String code){
         try {
-            companyService.addCompanyRead(code ,companyName, email);
+            companyService.addCompanyRead(code , email);
 
             return new ResponseEntity<>(HttpStatus.OK);
 
