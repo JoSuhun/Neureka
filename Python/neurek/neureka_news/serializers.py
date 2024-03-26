@@ -16,3 +16,7 @@ class LinksSerializer(serializers.Serializer):
 
 class UrlSerializer(serializers.Serializer):
     link = serializers.URLField(max_length=200)
+
+class RateSerializer(serializers.Serializer):
+    link = serializers.URLField(max_length=200)
+    rating = serializers.IntegerField(min_value=0, max_value=5)

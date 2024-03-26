@@ -2,8 +2,9 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
+
 from neurek.neureka_news.models import DetailsArticle
-from LDA.keyword_for_lda import text_through_LDA_probability
+from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 import requests
 import numpy as np
 from bs4 import BeautifulSoup
@@ -35,7 +36,7 @@ def keyword_extraction(url):
     if article:
         article_text = article.get_text(strip=True)
     else:
-        article_text = {"error" : "뭔가 잘못된것 같아요"}
+        article_text = {"error": "뭔가 잘못된것 같아요"}
 
     return article_text
 
@@ -117,13 +118,14 @@ def recommend_news(url):
         return []
 
 
-import pprint
-if __name__ == "__main__":
-    start_time = time.time()
-
-    recommend_news_list = []
-    pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/015/0004964493"))
-    end_time = time.time()  # 종료 시간 저장
-    elapsed_time = end_time - start_time  # 경과 시간 계산
-
-    print(f"Execution time: {elapsed_time} seconds")
+# #확인용
+# import pprint
+# if __name__ == "__main__":
+#     start_time = time.time()
+#
+#     recommend_news_list = []
+#     pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/366/0000980751"))
+#     end_time = time.time()  # 종료 시간 저장
+#     elapsed_time = end_time - start_time  # 경과 시간 계산
+#
+#     print(f"Execution time: {elapsed_time} seconds")
