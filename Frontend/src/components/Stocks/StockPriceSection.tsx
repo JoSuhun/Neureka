@@ -12,7 +12,7 @@ const StockPriceSection = () => {
 
   return (
     <s.Container>
-      <s.Title>실시간 시세</s.Title>
+      <s.Title>오늘의 시세</s.Title>
       <s.InfoWrap>
         <s.LeftWrap>
           <s.LeftTopWrap>74,100</s.LeftTopWrap>

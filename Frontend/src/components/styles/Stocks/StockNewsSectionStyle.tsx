@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2vh;
+  margin-top: 5%;
 `
 
 export const Title = styled.div`
