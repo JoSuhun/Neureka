@@ -18,7 +18,6 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 
-
 # 페이지 소스 가져오기
 driver = webdriver.Chrome()
 article_list = []
@@ -239,7 +238,8 @@ def process_article(article, stop_words):
             detail_title=article["article_title"],
             detail_press=article["press"],
             detail_date=article["date_time"],
-            detail_topic=topic
+            detail_topic=topic,
+            detail_keywords=keywords
         )
 
         original_article.save()

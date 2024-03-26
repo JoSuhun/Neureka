@@ -7,6 +7,7 @@ from .models import db, DetailsArticle, SummaryArticle, KeywordArticle
 from .news_cluster import kmeans_cluster
 from rest_framework.decorators import api_view
 
+
 class SummaryArticleViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = SummaryArticleSerializer
 
@@ -47,7 +48,6 @@ def news_bubble(request):
         requested_keywords = ["반도체", "금융", "기술", "경영", "가상화폐", "유가증권", "정치", "해외토픽"]
 
     # MongoDB에서 주어진 키워드 리스트에 해당하는 데이터를 조회
-    # KeywordArticle.find_by_keywords 메소드를 적절히 수정하거나 다른 메소드를 사용해야 할 수 있음
     keyword_data = KeywordArticle.find_by_keywords(requested_keywords)
 
     if not keyword_data:
