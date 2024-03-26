@@ -25,14 +25,19 @@ tagger = Tagger(API_KEY, 'localhost', 5757)
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 
 
-def extract_content_from_url(url):
+def keyword_extraction(url):
     response = requests.get(url)
-    html = response.text
+    time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
+    soup = BeautifulSoup(response.content, "html.parser")
 
-    soup = BeautifulSoup(html, 'html.parser')
-    article = soup.find('article', id='dic_area')
+    # `soup.find("article")`의 결과가 None인 경우를 처리
+    article = soup.find("article")
+    if article:
+        article_text = article.get_text(strip=True)
+    else:
+        article_text = {"error" : "뭔가 잘못된것 같아요"}
 
-    return article
+    return article_text
 
 def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
     word_doc_similarity = cosine_similarity(candidate_embeddings, doc_embedding.reshape(1, -1))
@@ -77,7 +82,6 @@ def load_stop_words(file_path):
 def recommend_news(url):
     # 2. 해당 URL에 해당하는 기사의 데이터를 DetailsArticle에서 탐색
     article_data = DetailsArticle.find_by_url(url)
-    flag = False
 
     # 3. 불러온 내용이 있는지 확인
     if article_data:
@@ -87,37 +91,38 @@ def recommend_news(url):
             stop_words_path = "LDA/stop_words.txt"
             stop_words = load_stop_words(stop_words_path)
 
-            article_text = extract_content_from_url(url)
+            article_text = keyword_extraction(url)
 
             new_topic = text_through_LDA_probability(article_text)
             new_keywords = keyword_ext(article_text, stop_words)
 
             update_success = DetailsArticle.update_topic_and_keywords(url, new_topic, new_keywords)
+
+
             if update_success:
                 print("Topic and keywords were successfully updated.")
             else:
                 print("Failed to update topic and keywords.")
-
-            flag = True
         else:
+            new_keywords = article_data['detail_keywords']
             print("Article already has a topic.")
 
-        if flag:
             # 5. 비슷한 기사를 불러오기
-            similar_urls = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
-            return similar_urls
-        else:
-            return {"error": "추천 기사를 받는데 오류입니다."}
+        similar_urls = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
+        return similar_urls
+
 
     else:
-        print("No article data found for the given URL.")
+        print("추천 기사를 받는데 오류입니다.")
         return []
 
 
 import pprint
 if __name__ == "__main__":
     start_time = time.time()
-    pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/018/0005699412"))
+
+    recommend_news_list = []
+    pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/015/0004964493"))
     end_time = time.time()  # 종료 시간 저장
     elapsed_time = end_time - start_time  # 경과 시간 계산
 

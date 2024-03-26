@@ -112,6 +112,7 @@ def process_news_item(i, soup):
         # 다른 함수 호출 및 처리
         text, thumbnail_url = keyword_extraction(naver_news_link)
         # topic = text_through_LDA_probability(text)
+        article_date = convert_date_format(date_extraction(naver_news_link))
 
 
         news_data = {
@@ -119,7 +120,8 @@ def process_news_item(i, soup):
             'title': title,
             'press': press,
             'summary': summary,
-            'thumbnail_url': thumbnail_url
+            'thumbnail_url': thumbnail_url,
+            'article_date': article_date
         }
 
         detail_article = DetailsArticle(
@@ -127,7 +129,7 @@ def process_news_item(i, soup):
             detail_title=title,
             detail_press=press,
             detail_text=extract_content_from_url(naver_news_link),
-            detail_date=convert_date_format(date_extraction(naver_news_link)),
+            detail_date=article_date,
             detail_topic="",
             detail_keywords=""
         )
