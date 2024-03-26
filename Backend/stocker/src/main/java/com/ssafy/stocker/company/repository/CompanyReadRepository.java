@@ -1,5 +1,6 @@
 package com.ssafy.stocker.company.repository;
 
+import com.ssafy.stocker.company.entity.CompanyEntity;
 import com.ssafy.stocker.company.entity.CompanyReadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,5 +10,5 @@ public interface CompanyReadRepository extends JpaRepository<CompanyReadEntity,L
 
     List<CompanyReadEntity> findByEmail(String email);
 
-    Boolean existsByEmailAndCompanyCode(String email , String companyCode);
+    Boolean existsByEmailAndCompany(String email, CompanyEntity company);
 }

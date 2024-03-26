@@ -134,6 +134,33 @@ class DetailsArticle:
         # 상위 30개만 선택하여 반환
         return urls[:30]
 
+    @classmethod
+    def is_topic_empty_for_url(cls, detail_url):
+        """주어진 detail_url에 해당하는 문서의 detail_topic이 빈 문자열인지 확인"""
+        document = cls.collection.find_one({"detail_url": detail_url})
+        if document:
+            # 문서를 찾았고, detail_topic 필드가 존재하며 빈 문자열인 경우 True 반환
+            if document.get("detail_topic") == "":
+                return True
+        # 문서를 찾지 못하거나 detail_topic 필드가 존재하지 않는 경우 False 반환
+        return False
+
+    @classmethod
+    def update_topic_and_keywords(cls, detail_url, new_detail_topic, new_detail_keywords):
+        """주어진 detail_url에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
+        # new_detail_keywords는 리스트 형태이므로 JSON 문자열로 변환
+        new_detail_keywords_json = json.dumps(new_detail_keywords, ensure_ascii=False)
+        # 업데이트를 위한 쿼리 작성
+        update_result = cls.collection.update_one(
+            {"detail_url": detail_url},
+            {"$set": {"detail_topic": new_detail_topic, "detail_keywords": new_detail_keywords_json}}
+        )
+
+        # 업데이트된 문서의 수를 반환 (업데이트 성공 여부 확인용)
+        return update_result.modified_count > 0
+
+
+
 class KeywordArticle:
     collection = db['keyword_article_collection']
 
