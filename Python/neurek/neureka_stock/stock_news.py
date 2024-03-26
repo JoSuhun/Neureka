@@ -45,6 +45,9 @@ def date_extraction(url):
     soup = BeautifulSoup(response.content, "html.parser")
     date_element = soup.select_one('#ct > div.media_end_head.go_trans > div.media_end_head_info.nv_notrans > div.media_end_head_info_datestamp > div > span')
 
+    if date_element:
+        date_element = soup.select_one('#content > div > div.content > div > div.news_headline > div > span:nth-child(1)')
+
     # date_element가 존재하면 그 내용을 문자열로 변환하여 반환
     if date_element:
         return date_element.get_text(strip=True)
@@ -73,6 +76,9 @@ def keyword_extraction(url):
 # 날짜 포메팅 변경
 def convert_date_format(input_str):
     from datetime import datetime
+
+    if input_str is None:
+        return datetime.now().strftime("%Y-%m-%d %H:%M")
 
     # '오후'와 '오전'을 AM, PM으로 변환하기 위한 사전 작업
     if "오후" in input_str:
@@ -156,13 +162,13 @@ def crawling_news(keyword):
 
 
 # 확인용
-# import pprint
-# if __name__ == "__main__":
-#     start_time = time.time()
-#
-#     pprint.pprint(crawling_news("삼성전자"))
-#
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+import pprint
+if __name__ == "__main__":
+    start_time = time.time()
+
+    pprint.pprint(crawling_news("스포츠"))
+
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")
