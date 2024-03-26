@@ -43,7 +43,7 @@ export const SearchBox = styled.div`
 `
 
 export const SearchInput = styled.input`
-  background-color: var(--color-lightblue);
+  background-color: #f8f9ff;
   flex: 1;
   padding: 5px;
   border: none;
