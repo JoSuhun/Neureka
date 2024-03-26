@@ -1,13 +1,17 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
-from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer
+from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer, RateSerializer
 import json
 from django.http import HttpResponse, JsonResponse
 from .models import db, DetailsArticle, SummaryArticle, KeywordArticle
 from .news_cluster import kmeans_cluster
+from .news_recommend import recommend_news
+from .news_summary import news_summary_url
+from .news_headline import load_headline_news
 from rest_framework.decorators import api_view
 
 
+# 베이스
 class SummaryArticleViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = SummaryArticleSerializer
 
@@ -25,11 +29,12 @@ class SummaryArticleViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         return Response(serializer.data)
 
 
+# 요약기사 불러오기
 def load_news_data():
     data = SummaryArticle.find_all()
     return data
 
-# 뉴스 요약 정보 전체 전송
+# 뉴스 요약 정보 전체 전송(기사 전체보기)
 @api_view(['GET'])
 def news_api(request):
     news_data = load_news_data()
@@ -38,7 +43,7 @@ def news_api(request):
                         content_type="application/json; charset=utf-8")
 
 
-# 뉴스들의 키워드 개수 전체 전송
+# 뉴스들의 키워드 개수 전체 전송(버블 띄우기)
 @api_view(['GET'])
 def news_bubble(request):
     requested_keywords = request.GET.getlist('keywords')
@@ -72,7 +77,7 @@ def news_bubble(request):
     return JsonResponse(top_30_data, safe=False, json_dumps_params={'ensure_ascii': False, 'indent': 4})
 
 
-
+# 4개의 '엄선' 된 기사
 @api_view(['POST'])
 def news_keywords_article(request):
     serializer = LinksSerializer(data=request.data)
@@ -84,7 +89,7 @@ def news_keywords_article(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+# 뉴스 상세보기
 @api_view(["POST"])
 def news_details(request):
     serializer = UrlSerializer(data=request.data)
@@ -94,6 +99,59 @@ def news_details(request):
         if article:
             return Response(article)
         else:
-            return Response({"message": "Article not found 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "Article not found 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# 뉴스 상세 보기에서 '이와 비슷한 기사'
+@api_view(["POST"])
+def news_recommend(request):
+    serializer = UrlSerializer(data=request.data)
+    if serializer.is_valid():
+        url = serializer.validated_data.get('link')
+        recommend_list = recommend_news(url)
+        if recommend_list:
+            return Response(recommend_list)
+        else:
+            return Response({"message": "추천해줄만한 기사가 없습니다."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# 뉴스 요약(메일 발송용도)
+@api_view(["POST"])
+def news_summary(request):
+    serializer = UrlSerializer(data=request.data)
+    if serializer.is_valid():
+        url = serializer.validated_data.get('link')
+        summary_text = news_summary_url(url)
+        if summary_text:
+            return Response(summary_text)
+        else:
+            return Response({"message": "요약에 실패 했어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# 평점 수정해주기
+@api_view(["POST"])
+def update_rating(request):
+    serializer = RateSerializer(data=request.data)
+    if serializer.is_valid():
+        url = serializer.validated_data.get('link')
+        rating = serializer.validated_data.get('rating')
+
+        if DetailsArticle.update_rating(url, rating):
+            return Response({"message": "평점 등록 성공"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "평점 등록에 실패 했어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# HEADLINE 뉴스 5개
+@api_view(["GET"])
+def get_headlines(request):
+    news_data = load_headline_news()
+
+    return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
+                        content_type="application/json; charset=utf-8")

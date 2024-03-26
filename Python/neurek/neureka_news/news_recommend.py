@@ -2,8 +2,9 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
+
 from neurek.neureka_news.models import DetailsArticle
-from LDA.keyword_for_lda import text_through_LDA_probability
+from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 import requests
 import numpy as np
 from bs4 import BeautifulSoup
@@ -35,7 +36,7 @@ def keyword_extraction(url):
     if article:
         article_text = article.get_text(strip=True)
     else:
-        article_text = {"error" : "뭔가 잘못된것 같아요"}
+        article_text = {"error": "뭔가 잘못된것 같아요"}
 
     return article_text
 
@@ -80,12 +81,12 @@ def load_stop_words(file_path):
 
 
 def recommend_news(url):
-    # 2. 해당 URL에 해당하는 기사의 데이터를 DetailsArticle에서 탐색
+    # 해당 URL에 해당하는 기사
     article_data = DetailsArticle.find_by_url(url)
 
-    # 3. 불러온 내용이 있는지 확인
+    # 불러온 내용이 있는지 확인
     if article_data:
-        # 4. 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
+        # 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
         if DetailsArticle.is_topic_empty_for_url(url):
 
             stop_words_path = "LDA/stop_words.txt"
@@ -107,7 +108,7 @@ def recommend_news(url):
             new_keywords = article_data['detail_keywords']
             print("Article already has a topic.")
 
-            # 5. 비슷한 기사를 불러오기
+            # 비슷한 기사를 불러오기
         similar_urls = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
         return similar_urls
 
@@ -117,13 +118,14 @@ def recommend_news(url):
         return []
 
 
-import pprint
-if __name__ == "__main__":
-    start_time = time.time()
-
-    recommend_news_list = []
-    pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/015/0004964493"))
-    end_time = time.time()  # 종료 시간 저장
-    elapsed_time = end_time - start_time  # 경과 시간 계산
-
-    print(f"Execution time: {elapsed_time} seconds")
+# #확인용
+# import pprint
+# if __name__ == "__main__":
+#     start_time = time.time()
+#
+#     recommend_news_list = []
+#     pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/366/0000980751"))
+#     end_time = time.time()  # 종료 시간 저장
+#     elapsed_time = end_time - start_time  # 경과 시간 계산
+#
+#     print(f"Execution time: {elapsed_time} seconds")

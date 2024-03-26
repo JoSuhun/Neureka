@@ -21,7 +21,7 @@ class SummaryArticle:
         self.date_time = date_time
         self.nouns = nouns
         self.topic = topic
-        self.keywords = json.dumps(keywords, ensure_ascii=False)
+        self.keywords = keywords
 
     def save(self):
         """문서 저장"""
@@ -30,10 +30,10 @@ class SummaryArticle:
 
     @classmethod
     def find_all(cls):
-        """컬렉션의 모든 문서 조회"""
-        documents_cursor = cls.collection.find({}, {'_id': False})
+        """컬렉션의 모든 문서 조회, _id와 nouns 필드 제외"""
+        documents_cursor = cls.collection.find({}, {'_id': False, 'nouns': False})
         documents_list = list(documents_cursor)
-        # TODO nouns 뺴고 보내 줄지 생각.
+
         return documents_list
 
     @classmethod
@@ -65,7 +65,7 @@ class DetailsArticle:
         self.detail_press = detail_press
         self.detail_date = detail_date
         self.detail_topic = detail_topic
-        self.detail_keywords = json.dumps(detail_keywords, ensure_ascii=False)
+        self.detail_keywords = detail_keywords
 
 
     def save(self):
@@ -122,7 +122,7 @@ class DetailsArticle:
                     }
                 }
             }},
-            {"$sort": {"average_rating": -1, "detail_date": -1}},  # 평균 점수 높은 순, 최신순으로 정렬
+            {"$sort": {"detail_date": -1, "average_rating": -1}},  # 최신순, 평균 점수 높은 순으로 정렬
             {"$project": {"_id": 0, "detail_url": 1}}  # detail_url 필드만 포함
         ]
 
@@ -146,19 +146,17 @@ class DetailsArticle:
         return False
 
     @classmethod
+    @classmethod
     def update_topic_and_keywords(cls, detail_url, new_detail_topic, new_detail_keywords):
         """주어진 detail_url에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
-        # new_detail_keywords는 리스트 형태이므로 JSON 문자열로 변환
-        new_detail_keywords_json = json.dumps(new_detail_keywords, ensure_ascii=False)
         # 업데이트를 위한 쿼리 작성
         update_result = cls.collection.update_one(
             {"detail_url": detail_url},
-            {"$set": {"detail_topic": new_detail_topic, "detail_keywords": new_detail_keywords_json}}
+            {"$set": {"detail_topic": new_detail_topic, "detail_keywords": new_detail_keywords}}  # 직접 리스트 할당
         )
 
         # 업데이트된 문서의 수를 반환 (업데이트 성공 여부 확인용)
         return update_result.modified_count > 0
-
 
 
 class KeywordArticle:

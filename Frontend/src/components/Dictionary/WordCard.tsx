@@ -81,15 +81,19 @@ const WordCard = ({ word, marked, side }: Props) => {
   return (
     <>
       <c.Card>
-        <c.CardBox>
+        <c.CardBox className="cardBox">
           <c.Title>
             <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
             {marked && side == 'right' ? (
-              <c.deleteBtn onClick={handleUnmark} />
+              <c.deleteBtn className="deleteBtn" onClick={handleUnmark} />
             ) : marked ? (
-              <c.saveBtn src={saved} />
+              <c.saveBtn className="saveBtn" src={saved} />
             ) : (
-              <c.saveBtn src={notsaved} onClick={handleMark} />
+              <c.saveBtn
+                className="saveBtn"
+                src={notsaved}
+                onClick={handleMark}
+              />
             )}
           </c.Title>
           <c.Content>

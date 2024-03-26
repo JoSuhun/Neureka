@@ -30,7 +30,7 @@ const StocksContainer = () => {
   }, [])
 
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
-  const [likedCompanyList, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
+  const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
 
   const user = {
     user_id: 1,
@@ -147,7 +147,11 @@ const StocksContainer = () => {
           handleAddMyStock={handleAddMyStock}
           handleRemoveMyStock={handleRemoveMyStock}
         />
-        <StockPriceSection />
+        {companyPriceList ? (
+          <StockPriceSection data={companyPriceList} />
+        ) : (
+          <div>Loading!</div>
+        )}
         {companyPriceList ? (
           <StockChartSection initialData={companyPriceList} />
         ) : (

@@ -10,6 +10,7 @@ import { Word } from '@src/types/WordType'
 
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 import { useAtom } from 'jotai'
+import DictionaryTutorial from '@src/tutorials/DIctionaryTutorial'
 
 type Props = {}
 
@@ -52,7 +53,8 @@ const DictionaryContainer = (props: Props) => {
   return (
     <>
       <d.Wrapper>
-        <d.Box>
+        <DictionaryTutorial />
+        <d.Box className="dictionaryPage">
           <LeftSearchSection data={wordsData?.data} />
           <RightWordsSection data={markedWords?.data} />
         </d.Box>
