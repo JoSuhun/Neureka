@@ -26,6 +26,7 @@ import {
   withSize,
 } from 'react-financial-charts'
 import { CompanyPriceType } from '@src/types/CompanyType'
+import * as c from '@src/components/styles/Stocks/StockChartSectionStyle'
 
 const StockChartSection = (props: { initialData: CompanyPriceType[] }) => {
   const { initialData } = props
@@ -113,7 +114,7 @@ const StockChartSection = (props: { initialData: CompanyPriceType[] }) => {
   }
 
   return (
-    <div style={{ padding: '10px', margin: '5px' }}>
+    <c.Container>
       <ChartCanvas
         height={height}
         ratio={3}
@@ -223,7 +224,7 @@ const StockChartSection = (props: { initialData: CompanyPriceType[] }) => {
         </Chart>
         <CrossHairCursor />
       </ChartCanvas>
-    </div>
+    </c.Container>
   )
 }
 

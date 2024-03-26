@@ -14,25 +14,22 @@ export const Title = styled.div`
 export const InfoWrap = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: white;
-  width: 100%;
-  height: 15vh;
-  padding: 3% 0;
-  border: 2px solid #000;
+  height: 10vh;
+  padding: 3%;
+  border: 2px solid #ccc;
 `
 
 export const LeftWrap = styled.div`
-  flex: 3;
+  flex: 2;
   display: flex;
   flex-direction: column;
-  margin-left: 3%;
 `
 
 export const LeftTopWrap = styled.div`
   flex: 3;
   display: flex;
   align-items: center;
-  font-size: 1.7rem;
+  font-size: 2rem;
 `
 
 export const LeftBottomWrap = styled.div`
@@ -40,30 +37,19 @@ export const LeftBottomWrap = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-`
-
-export const Divider = styled.span`
-  border-left: 1px solid #ccc;
-  height: 100%;
-  margin: 0 1%;
+  margin-top: 2%;
 `
 
 export const RightWrap = styled.div`
   flex: 5;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 2%;
+`
+
+export const RightItem = styled.div`
+  display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-right: 3%;
-`
-
-export const RightTopWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`
-
-export const RightBottomWrap = styled.div`
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `
