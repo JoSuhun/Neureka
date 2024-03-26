@@ -23,7 +23,7 @@ const RightWordsSection = ({ data }: Props) => {
 
   return (
     <>
-      <r.Wrapper>
+      <r.Wrapper className="wordsSection">
         <r.Title>MARK</r.Title>
         {data?.length ? (
           <r.Box>

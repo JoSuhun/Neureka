@@ -55,7 +55,6 @@ const MainContainer = (props: Props) => {
   return (
     <>
       <m.container>
-        {/* <m.GlobalStyle /> */}
         <MainTutorial />
         <SlideBar />
         <MainCard />
