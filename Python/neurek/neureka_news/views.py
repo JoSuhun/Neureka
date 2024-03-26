@@ -1,13 +1,11 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer
 import json
 from django.http import HttpResponse, JsonResponse
-import os
-from django.conf import settings
-from .models import db, DetailsArticle
+from .models import db, DetailsArticle, SummaryArticle, KeywordArticle
 from .news_cluster import kmeans_cluster
+from rest_framework.decorators import api_view
 
 
 class SummaryArticleViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -28,21 +26,11 @@ class SummaryArticleViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 
 def load_news_data():
-    file_path = os.path.join(settings.BASE_DIR, 'neureka_news', 'news_data.json')
-    with open(file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-
-    return data
-
-
-def load_keyword_data():
-    file_path = os.path.join(settings.BASE_DIR, 'neureka_news', 'keyword_data.json')
-    with open(file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-
+    data = SummaryArticle.find_all()
     return data
 
 # 뉴스 요약 정보 전체 전송
+@api_view(['GET'])
 def news_api(request):
     news_data = load_news_data()
 
@@ -53,22 +41,26 @@ def news_api(request):
 # 뉴스들의 키워드 개수 전체 전송
 @api_view(['GET'])
 def news_bubble(request):
-    keyword_data = load_keyword_data()
     requested_keywords = request.GET.getlist('keywords')
 
     # requested_keywords가 비어있으면 기본 키워드 리스트를 할당
     if not requested_keywords:
         requested_keywords = ["반도체", "금융", "기술", "경영", "가상화폐", "유가증권", "정치", "해외토픽"]
 
+    # MongoDB에서 주어진 키워드 리스트에 해당하는 데이터를 조회
+    keyword_data = KeywordArticle.find_by_keywords(requested_keywords)
+
+    if not keyword_data:
+        return JsonResponse({"error": "No data found for the provided keywords"}, status=404)
+
     combined_data = []
-    for keyword in requested_keywords:
-        if keyword in keyword_data:
-            for sub_keyword, details in keyword_data[keyword].items():
-                combined_data.append({
-                    "keyword": sub_keyword,
-                    "count": details["count"],
-                    "links": details["links"]
-                })
+    for sub_keyword, details in keyword_data.items():
+        unique_links = list(set(details["links"]))  # 중복 링크 제거
+        combined_data.append({
+            "keyword": sub_keyword,
+            "count": details["count"],
+            "links": unique_links
+        })
 
     # combined_data를 count 기준으로 내림차순 정렬
     sorted_combined_data = sorted(combined_data, key=lambda x: x['count'], reverse=True)
@@ -78,6 +70,7 @@ def news_bubble(request):
 
     # 상위 30개 항목을 JSON 응답으로 반환
     return JsonResponse(top_30_data, safe=False, json_dumps_params={'ensure_ascii': False, 'indent': 4})
+
 
 
 @api_view(['POST'])
@@ -94,7 +87,6 @@ def news_keywords_article(request):
 
 @api_view(["POST"])
 def news_details(request):
-    print(request.data)
     serializer = UrlSerializer(data=request.data)
     if serializer.is_valid():
         url = serializer.validated_data.get('link')

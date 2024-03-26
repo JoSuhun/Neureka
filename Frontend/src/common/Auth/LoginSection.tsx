@@ -17,7 +17,6 @@ const LoginSection = (props: Props) => {
   const login = (url: string) => {
     window.location.href = url
     setIsLogin(true)
-    console.log()
   }
 
   return (
@@ -38,5 +37,3 @@ const LoginSection = (props: Props) => {
 }
 
 export default LoginSection
-
-

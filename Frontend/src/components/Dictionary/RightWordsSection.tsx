@@ -17,7 +17,7 @@ const RightWordsSection = ({ data }: Props) => {
 
   useEffect(() => {
     const filtered: Word[] = []
-    data.forEach(word => filtered.push(word.dictionary))
+    data?.forEach(word => filtered.push(word.dictionary))
     SetMarkedWords(filtered)
   }, [data])
 
