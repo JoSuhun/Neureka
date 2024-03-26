@@ -11,8 +11,7 @@ from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
-# tagger = Tagger(API_KEY, 'localhost', 5757)  # KPF에서 제공하는 바른 형태소분석기
-tagger = Tagger(API_KEY, 'j10c105.p.ssafy.io', 5757)  # KPF에서 제공하는 바른 형태소분석기
+tagger = Tagger(API_KEY, 'localhost', 5757)  # KPF에서 제공하는 바른 형태소분석기
 
 # 불용어
 # 현재 스크립트 파일의 경로를 가져옵니다.

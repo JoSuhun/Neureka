@@ -119,8 +119,7 @@ print("[+] crawling done")
 # https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
 # API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
-# tagger = Tagger(API_KEY, 'localhost', 5757)
-tagger = Tagger(API_KEY, 'j10c105.p.ssafy.io', 5757)
+tagger = Tagger(API_KEY, 'localhost', 5757)
 
 # Sentence Transformer 모델 로드
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')

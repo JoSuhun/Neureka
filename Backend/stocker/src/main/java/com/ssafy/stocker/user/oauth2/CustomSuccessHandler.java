@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Slf4j
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    @Value("${production.hostname}")
-    private String productionHostname;
 
     private final JWTUtil jwtUtil;
     private final RedisService redisService;
@@ -76,7 +74,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         response.setHeader("Authorization" , "Bearer " +access);
         response.addCookie(createCookie("refresh", refresh));
-        response.sendRedirect("http://"+productionHostname+":5173");
+        response.sendRedirect("http://localhost:5173");
     }
 
     private Cookie createCookie(String key, String value) {
