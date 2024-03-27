@@ -12,7 +12,7 @@ const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
   }
 
   return (
-    <m.Container>
+    <m.Container className="myStock">
       <m.Title>MY STOCK</m.Title>
       <m.Wrap>
         {data && data.length > 0 ? (
