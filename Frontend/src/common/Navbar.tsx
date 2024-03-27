@@ -6,7 +6,12 @@ import kakao from '/image/kakaotalk.png'
 import google from '/image/google.png'
 import { useAtom } from 'jotai'
 import { modalOpenAtom } from '@src/stores/authModalAtom'
-import { isLoginAtom } from '@src/stores/authAtom'
+import {
+  isLoginAtom,
+  isAccessTokenAtom,
+  isRefreshTokenAtom,
+  isExpireTimeAtom,
+} from '@src/stores/authAtom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -17,6 +22,10 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useAtom(modalOpenAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
+  const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
+  const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
+
   const navigate = useNavigate()
 
   const openModal = () => {
@@ -31,6 +40,9 @@ const Navbar = () => {
   }
 
   const logout = () => {
+    setAccessToken('')
+    setRefreshToken('')
+    setExpireTime(0)
     setIsLogin(false)
   }
 
