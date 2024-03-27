@@ -22,6 +22,7 @@ import MainTopSection from '@src/components/Stocks/MainTopSection'
 import StockPriceSection from '@src/components/Stocks/StockPriceSection'
 import StockChartSection from '@src/components/Stocks/StockChartSection'
 import StockNewsSection from '@src/components/Stocks/StockNewsSection'
+import Loading from '@src/common/Loading'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
@@ -134,11 +135,7 @@ const StocksContainer = () => {
   return (
     <s.Container>
       <s.SidebarWrap>
-        {companyList ? (
-          <SearchStocksSection data={companyList} />
-        ) : (
-          <div>Loading!</div>
-        )}
+        {companyList ? <SearchStocksSection data={companyList} /> : <Loading />}
         <MyStocksSection data={companyLikeList} />
         <LatestStocksSection data={companyLatestList} />
       </s.SidebarWrap>
@@ -150,12 +147,12 @@ const StocksContainer = () => {
         {companyPriceList ? (
           <StockPriceSection data={companyPriceList} />
         ) : (
-          <div>Loading!</div>
+          <Loading />
         )}
         {companyPriceList ? (
           <StockChartSection initialData={companyPriceList} />
         ) : (
-          <div>Loading!</div>
+          <Loading />
         )}
         <StockNewsSection data={companyNewsList} />
       </s.MainWrap>
