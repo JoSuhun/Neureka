@@ -40,16 +40,16 @@ export const SelectedKeyword = styled.div`
 
 export const NewsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   align-items: center;
   justify-content: center;
   gap: 20px;
   width: 100%;
   padding: 0 20px; // 컨테이너 양쪽 패딩
   .odd {
-    grid-column: 1 / 6; // 1번부터 5번 열까지 차지
+    grid-column: 2 / 5; // 1번부터 5번 열까지 차지
   }
   .even {
-    grid-column: 8 / 13; // 8번부터 12번 열까지 차지
+    grid-column: 7 / 10; // 8번부터 12번 열까지 차지
   }
 `

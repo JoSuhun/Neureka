@@ -9,61 +9,65 @@ const StockPriceSection = (props: { data: CompanyPriceType[] }) => {
 
   return (
     <s.Container>
-      <s.Title>오늘의 시세</s.Title>
       <s.InfoWrap>
         <s.LeftWrap>
           <s.LeftTopWrap isPositiveChange={isPositiveChange}>
-            {lastItem.close}
+            {lastItem.close.toLocaleString()}
           </s.LeftTopWrap>
           <s.LeftBottomWrap>
-            <s.LeftBottomTitle>전일대비</s.LeftBottomTitle>
+            <s.ItemTitle>전일대비</s.ItemTitle>
+            {isPositiveChange ? (
+              <s.Icon src="/image/redvector.png" />
+            ) : (
+              <s.Icon src="/image/bluevector.png" />
+            )}
             <s.LeftBottomNumber isPositiveChange={isPositiveChange}>
-              {lastItem.close - data[data.length - 2].close}
+              {(lastItem.close - data[data.length - 2].close).toLocaleString()}
             </s.LeftBottomNumber>
-            <s.LeftBottomNumber isPositiveChange={isPositiveChange}>
+            <s.ItemPercentage isPositiveChange={isPositiveChange}>
               {changePercentage}%
-            </s.LeftBottomNumber>
+            </s.ItemPercentage>
           </s.LeftBottomWrap>
         </s.LeftWrap>
         <s.RightWrap>
           <s.RightInnerWrap>
             <s.RightItem>
-              <s.RightItemTitle>전일</s.RightItemTitle>
-              <s.RightItemNumber>
-                {data[data.length - 2].close}
-              </s.RightItemNumber>
+              <s.ItemTitle>전일</s.ItemTitle>
+              <s.ItemNumber>
+                {data[data.length - 2].close.toLocaleString()}
+              </s.ItemNumber>
             </s.RightItem>
             <s.RightItem>
-              <s.RightItemTitle>시가</s.RightItemTitle>
-              <s.RightItemColorNumber isPositiveChange={isPositiveChange}>
-                {lastItem.open}
-              </s.RightItemColorNumber>
-            </s.RightItem>
-          </s.RightInnerWrap>
-          <s.RightInnerWrap>
-            <s.RightItem>
-              <s.RightItemTitle>고가</s.RightItemTitle>
-              <s.RightItemColorNumber isPositiveChange={isPositiveChange}>
-                {lastItem.high}
-              </s.RightItemColorNumber>
-            </s.RightItem>
-            <s.RightItem>
-              <s.RightItemTitle>저가</s.RightItemTitle>
-              <s.RightItemColorNumber isPositiveChange={isPositiveChange}>
-                {lastItem.low}
-              </s.RightItemColorNumber>
+              <s.ItemTitle>시가</s.ItemTitle>
+              <s.ColorNumber isPositiveChange={isPositiveChange}>
+                {lastItem.open.toLocaleString()}
+              </s.ColorNumber>
             </s.RightItem>
           </s.RightInnerWrap>
           <s.RightInnerWrap>
             <s.RightItem>
-              <s.RightItemTitle>거래량</s.RightItemTitle>
-              <s.RightItemNumber>{lastItem.volume}</s.RightItemNumber>
+              <s.ItemTitle>고가</s.ItemTitle>
+              <s.ColorNumber isPositiveChange={isPositiveChange}>
+                {lastItem.high.toLocaleString()}
+              </s.ColorNumber>
             </s.RightItem>
             <s.RightItem>
-              <s.RightItemTitle>거래대금</s.RightItemTitle>
-              <s.RightItemNumber>
-                {lastItem.volume * lastItem.close}
-              </s.RightItemNumber>
+              <s.ItemTitle>저가</s.ItemTitle>
+              <s.ColorNumber isPositiveChange={isPositiveChange}>
+                {lastItem.low.toLocaleString()}
+              </s.ColorNumber>
+            </s.RightItem>
+          </s.RightInnerWrap>
+          <s.RightInnerWrap>
+            <s.RightItem>
+              <s.ItemTitle>거래량</s.ItemTitle>
+              <s.ItemNumber>{lastItem.volume.toLocaleString()}</s.ItemNumber>
+            </s.RightItem>
+            <s.RightItem>
+              <s.ItemTitle>거래대금</s.ItemTitle>
+              <s.ItemNumber>
+                {(lastItem.volume * lastItem.close).toLocaleString()}
+              </s.ItemNumber>
             </s.RightItem>
           </s.RightInnerWrap>
         </s.RightWrap>
