@@ -13,7 +13,8 @@ import {
   isRefreshTokenAtom,
   isExpireTimeAtom,
 } from '@src/stores/authAtom'
-import { setClientHeaders } from '@src/hooks/requestMethod'
+import { publicRequest } from '@src/hooks/requestMethod'
+import base64 from 'base-64'
 
 type Props = {}
 
@@ -23,6 +24,15 @@ const AuthModal = (props: Props) => {
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
 
+  const parseJwt = (token: string) => {
+    let payload = token.substring(
+      token.indexOf('.') + 1,
+      token.lastIndexOf('.'),
+    )
+    let decodingInfo = base64.decode(payload)
+    return JSON.parse(decodingInfo)
+  }
+
   useEffect(() => {
     if (getCookie('Authorization')) {
       setAccessToken('Bearer ' + getCookie('Authorization'))
@@ -31,6 +41,7 @@ const AuthModal = (props: Props) => {
       setIsLogin(true)
       const now = new Date().getTime()
       setExpireTime(now)
+      console.log(parseJwt(getCookie('Authorization')))
     }
   }, [])
 
