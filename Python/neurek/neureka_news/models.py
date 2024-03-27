@@ -1,4 +1,3 @@
-from django.conf import settings
 from pymongo import MongoClient
 import json
 
@@ -13,8 +12,7 @@ if __name__ == '__main__':
 class SummaryArticle:
     collection = db['summary_article_collection']
 
-    def __init__(self, thumbnail_url, article_title, article_link,
-                 article_summary, press, date_time, nouns, topic, keywords, sentiment):
+    def __init__(self, thumbnail_url, article_title, article_link, article_summary, press, date_time, nouns, topic, keywords):
         self.thumbnail_url = thumbnail_url
         self.article_title = article_title
         self.article_link = article_link
@@ -24,7 +22,6 @@ class SummaryArticle:
         self.nouns = nouns
         self.topic = topic
         self.keywords = keywords
-        self.sentiment = sentiment
 
     def save(self):
         """문서 저장"""
@@ -146,10 +143,9 @@ class DetailsArticle:
             if document.get("detail_topic") == "":
                 return True
         # 문서를 찾지 못하거나 detail_topic 필드가 존재하지 않는 경우 False 반환
-        # TODO 여기를 다시 생각하기. detail_article에 없는 기사 링크를 넣어도 FALSE이기 때문에
-        # TODO 이에 대한 예외를 처리해주어야 하는지 생각하기
         return False
 
+    @classmethod
     @classmethod
     def update_topic_and_keywords(cls, detail_url, new_detail_topic, new_detail_keywords):
         """주어진 detail_url에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
