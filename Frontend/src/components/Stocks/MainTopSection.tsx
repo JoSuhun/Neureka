@@ -25,14 +25,14 @@ const MainTopSection = (props: {
     <s.Container>
       <s.Title>{selectedStock.companyName}</s.Title>
       <s.CodeNumber>({selectedStock.code})</s.CodeNumber>
-      {isLiked ? (
-        <s.RemoveButton
-          className="addRemoveBtn"
-          onClick={handleRemoveMyStock}
-        />
-      ) : (
-        <s.AddButton className="addRemoveBtn" onClick={handleAddMyStock} />
-      )}
+      <s.ButtonWrap>
+        <s.AlarmButton />
+        {isLiked ? (
+          <s.RemoveButton onClick={handleRemoveMyStock} />
+        ) : (
+          <s.AddButton onClick={handleAddMyStock} />
+        )}
+      </s.ButtonWrap>
     </s.Container>
   )
 }

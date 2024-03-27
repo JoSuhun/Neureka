@@ -22,7 +22,9 @@ const StockPriceSection = (props: { data: CompanyPriceType[] }) => {
               <s.Icon src="/image/bluevector.png" />
             )}
             <s.LeftBottomNumber isPositiveChange={isPositiveChange}>
-              {(lastItem.close - data[data.length - 2].close).toLocaleString()}
+              {Math.abs(
+                lastItem.close - data[data.length - 2].close,
+              ).toLocaleString()}
             </s.LeftBottomNumber>
             <s.ItemPercentage isPositiveChange={isPositiveChange}>
               {changePercentage}%
