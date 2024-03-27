@@ -21,6 +21,9 @@ export const InfoWrap = styled.div`
   height: 10vh;
   padding: 3%;
   border: 2px solid #ccc;
+  /* border-top: 2px solid #000;
+  border-left: 2px solid #ccc;
+  border-right: 2px solid #ccc; */
 `
 
 export const LeftWrap = styled.div`
@@ -33,7 +36,7 @@ export const LeftTopWrap = styled.div<ColorProps>`
   flex: 3;
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 2.3rem;
   color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
 `
 
@@ -42,17 +45,8 @@ export const LeftBottomWrap = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 0.9rem;
   margin-top: 2%;
   gap: 5px;
-`
-export const LeftBottomTitle = styled.div`
-  font-size: 0.8rem;
-`
-
-export const LeftBottomNumber = styled.div<ColorProps>`
-  font-size: 1.1rem;
-  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
 `
 
 export const RightWrap = styled.div`
@@ -73,18 +67,31 @@ export const RightItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 `
 
-export const RightItemTitle = styled.div`
-  font-size: 0.9rem;
+export const ItemTitle = styled.span`
+  font-size: 0.8rem;
+`
+export const ItemNumber = styled.span`
+  font-size: 1.3rem;
+`
+export const ItemPercentage = styled.span<ColorProps>`
+  font-size: 0.8rem;
+  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
 `
 
-export const RightItemNumber = styled.div`
-  font-size: 1.1rem;
+export const Icon = styled.img`
+  width: 13px;
+  height: 13px;
 `
 
-export const RightItemColorNumber = styled.div<ColorProps>`
-  font-size: 1.1rem;
+export const LeftBottomNumber = styled.span<ColorProps>`
+  font-size: 1.2rem;
+  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
+`
+
+export const ColorNumber = styled.span<ColorProps>`
+  font-size: 1.3rem;
   color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
 `
