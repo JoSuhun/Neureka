@@ -1,4 +1,4 @@
-package com.ssafy.stocker.user.jwt;
+package com.ssafy.stocker.setting.jwt;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

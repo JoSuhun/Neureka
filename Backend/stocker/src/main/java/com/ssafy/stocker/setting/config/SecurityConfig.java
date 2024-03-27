@@ -1,7 +1,7 @@
-package com.ssafy.stocker.user.config;
+package com.ssafy.stocker.setting.config;
 
-import com.ssafy.stocker.user.jwt.JWTFilter;
-import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.setting.jwt.JWTFilter;
+import com.ssafy.stocker.setting.jwt.JWTUtil;
 import com.ssafy.stocker.user.oauth2.CustomSuccessHandler;
 import com.ssafy.stocker.user.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,7 +58,10 @@ public class SecurityConfig {
 
                         configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
                         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-                        configuration.addExposedHeader("Authorization");
+//                        configuration.addExposedHeader("Authorization");
+
+//                        configuration.setExposedHeaders(Arrays.asList("Authorization", "refreshToken"));
+
                         return configuration;
                     }
                 }));

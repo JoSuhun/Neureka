@@ -1,4 +1,4 @@
-package com.ssafy.stocker.user.config;
+package com.ssafy.stocker.setting.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,6 +12,9 @@ public class CorsMvcConfig implements WebMvcConfigurer {
 
         corsRegistry.addMapping("/**")
                 .exposedHeaders("Set-Cookie")
-                .allowedOrigins("http://localhost:5173" ,"http://192.168.100.134:3000" , "http://192.168.100.134:5173");
+                .exposedHeaders("Authorization")
+                .allowedOrigins("http://localhost:5173" ,"http://192.168.100.134:3000" , "http://192.168.100.134:5173")
+                .allowCredentials(true);
+
     }
 }

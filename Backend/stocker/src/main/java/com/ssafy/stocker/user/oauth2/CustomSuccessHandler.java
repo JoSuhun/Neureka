@@ -1,7 +1,7 @@
 package com.ssafy.stocker.user.oauth2;
 
 import com.ssafy.stocker.user.dto.CustomOAuth2User;
-import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.setting.jwt.JWTUtil;
 import com.ssafy.stocker.user.service.RedisService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
@@ -72,8 +69,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         redisService.setValues(username, refresh, refreshExpireMs );
 
 
-        response.setHeader("Authorization" , "Bearer " +access);
+//       response.addHeader("Authorization" , "Bearer " +access);
         response.addCookie(createCookie("refresh", refresh));
+        response.addCookie(createCookie("Authorization", access));
+//        response.addHeader("Authorization" , "Bearer " +access);
+        log.info("response " + response.getHeader("Authorization"));
         response.sendRedirect("http://localhost:5173");
     }
 

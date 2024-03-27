@@ -1,4 +1,4 @@
-package com.ssafy.stocker.user.config;
+package com.ssafy.stocker.setting.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
