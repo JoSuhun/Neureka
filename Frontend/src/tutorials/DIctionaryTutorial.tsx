@@ -1,40 +1,33 @@
 import React, { useState } from 'react'
-import Joyride, { CallBackProps, STATUS } from 'react-joyride'
+import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride'
 
 const DictionaryTutorial = () => {
   const [run, setRun] = useState(true)
-  const [steps, setSteps] = useState([
+  const [steps, setSteps] = useState<Step[]>([
     {
-      target: '.dictionaryPage',
-      content: '경제용어 사전페이지 입니다.',
-    },
-    {
+      disableBeacon: true,
       target: '.searchSection',
-      content: '가능한 카테고리 목록입니다. 원하는 카테고리를 선택해보세요.',
+      content: '경제용어 사전입니다.',
     },
     {
       target: '.searchBar',
-      content: '선택된 카테고리가 여기에 표시됩니다.',
+      content: '궁금한 단어를 검색할 수 있습니다.',
     },
     {
       target: '.cardBox',
-      content: '경제용어 설명입니다.',
+      content: '각 경제용어에 대한 설명입니다.',
     },
     {
       target: '.saveBtn',
-      content: '클릭한 버블들에 대한 최신 기사를 확인하세요.',
+      content: '클릭을 통해 해당 단어를 저장할 수 있습니다.',
     },
     {
-      target: '.KeywordNews',
-      content: '클릭한 버블들에 대한 최신 기사를 확인하세요.',
+      target: '.wordsSection',
+      content: '저장한 경제용어입니다.',
     },
     {
-      target: '.KeywordNews',
-      content: '클릭한 버블들에 대한 최신 기사를 확인하세요.',
-    },
-    {
-      target: '.KeywordNews',
-      content: '클릭한 버블들에 대한 최신 기사를 확인하세요.',
+      target: '.deleteBtn',
+      content: '클릭을 통해 저장을 취소할 수 있습니다.',
     },
     // 기타 등등 스텝 추가 가능
   ])
