@@ -13,6 +13,7 @@ import {
   isExpireTimeAtom,
 } from '@src/stores/authAtom'
 import { removeCookie } from '@src/utils/loginCookie'
+import { setClientHeaders } from '@src/hooks/requestMethod'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -47,6 +48,7 @@ const Navbar = () => {
     setIsLogin(false)
     removeCookie('Authorization')
     removeCookie('refresh')
+    setClientHeaders(null)
   }
 
   const goHome = () => {

@@ -13,6 +13,7 @@ import {
   isRefreshTokenAtom,
   isExpireTimeAtom,
 } from '@src/stores/authAtom'
+import { setClientHeaders } from '@src/hooks/requestMethod'
 
 type Props = {}
 
