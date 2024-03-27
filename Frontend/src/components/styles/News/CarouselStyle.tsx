@@ -37,7 +37,7 @@ export const Wrapper = styled.div`
 `
 
 export const Container = styled.div`
-  height: 60vh;
+  height: 70vh;
   width: 100vw;
 `
 
@@ -98,7 +98,7 @@ export const CarouselCard = styled.div<{ bgimage: string }>`
   z-index: 0;
   cursor: pointer;
 
-  &::before {
+  /* &::before {
     background-color: #000000;
     opacity: 0.5;
     width: 100%;
@@ -109,7 +109,7 @@ export const CarouselCard = styled.div<{ bgimage: string }>`
     bottom: 0;
     right: 0;
     left: 0;
-  }
+  } */
   p {
     z-index: 5;
     padding: 1% 3%;
@@ -118,10 +118,26 @@ export const CarouselCard = styled.div<{ bgimage: string }>`
 `
 
 export const HeadLine = styled.p`
-  background-color: var(--color-orange);
+  background-color: var(--color-navy);
   position: absolute;
   color: white;
-  top: 65%;
+  top: 70%;
   left: 0;
   font-size: 2rem;
+`
+export const Info = styled.p`
+  font-size: 1.3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background-color: #00000094;
+`
+export const Date = styled.span`
+  color: white;
+`
+export const Press = styled.span`
+  color: var(--color-blue);
+  font-weight: 700;
+  margin-left: 20px;
 `

@@ -16,3 +16,12 @@ export type NewsDetail = {
   detail_title: string
   detail_url: string
 }
+
+export type HotNews = {
+  headline_date: string
+  headline_press: string
+  headline_summary: string
+  headline_thumbnail_url: string
+  headline_title: string
+  headline_url: string
+}

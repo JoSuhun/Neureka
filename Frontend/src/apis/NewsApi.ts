@@ -11,3 +11,7 @@ export const fetchNewsDetail = async (url: string) => {
     },
   })
 }
+
+export const fetchHotNews = async () => {
+  return await publicRequest.get('news/hot')
+}
