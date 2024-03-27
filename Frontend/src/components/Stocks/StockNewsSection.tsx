@@ -11,7 +11,7 @@ const StockNewsSection = (props: { data: CompanyNewsType[] }) => {
   }
 
   return (
-    <s.Container>
+    <s.Container className="stockNews">
       <s.Title>최근 뉴스</s.Title>
       <s.Wrap>
         {data &&

@@ -13,7 +13,7 @@ const LatestStocksSection = (props: { data: CompanyLatestType[] }) => {
   }
 
   return (
-    <l.Container>
+    <l.Container className="latestStocks">
       <l.Title>최근 조회</l.Title>
       <l.Wrap>
         {data && data.length > 0 ? (

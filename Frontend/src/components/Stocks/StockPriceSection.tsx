@@ -9,7 +9,7 @@ const StockPriceSection = (props: { data: CompanyPriceType[] }) => {
 
   return (
     <s.Container>
-      <s.InfoWrap>
+      <s.InfoWrap className="stockInfo">
         <s.LeftWrap>
           <s.LeftTopWrap isPositiveChange={isPositiveChange}>
             {lastItem.close.toLocaleString()}
