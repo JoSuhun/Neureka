@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride'
 import {
   AddButton,
   RemoveButton,
 } from '@src/components/styles/Stocks/MainTopSectionStyle'
+
 const StockTutorial = () => {
   const [run, setRun] = useState(true)
   const [steps, setSteps] = useState<Step[]>([

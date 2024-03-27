@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { useQuery, useMutation } from 'react-query'
 import {
@@ -26,6 +26,9 @@ import * as s from '@src/containers/styles/StocksContainerStyle'
 import StockTutorial from '@src/tutorials/StockTutorial'
 
 const StocksContainer = () => {
+  // 데이터 로딩 상태를 관리하는 상태 변수 추가
+  const [isTutorialReady, setIsTutorialReady] = useState(false)
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -132,9 +135,17 @@ const StocksContainer = () => {
     refetchCompanyNewsList() // 선택 기업 변경 시, 최근 뉴스 조회 refetch
   }, [selectedStock])
 
+  // 데이터 로딩 관련 상태 업데이트
+  useEffect(() => {
+    if (companyList && companyNewsList) {
+      setIsTutorialReady(true) // 모든 데이터가 로딩되었다면 true로 설정
+      console.log(1111)
+    }
+  }, [companyList, companyNewsList])
+
   return (
     <s.Container>
-      <StockTutorial />
+      {isTutorialReady ? <StockTutorial /> : null}
       <s.SidebarWrap>
         {companyList ? (
           <SearchStocksSection data={companyList} />
