@@ -145,7 +145,7 @@ def load_headline_news():
 
     return result_list
 
-# # 테스트
-# import pprint
-# if __name__ == "__main__":
-#     pprint.pprint(load_headline_news())
+# 테스트
+import pprint
+if __name__ == "__main__":
+    pprint.pprint(load_headline_news())
