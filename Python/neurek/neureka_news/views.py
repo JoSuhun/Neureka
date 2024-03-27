@@ -151,6 +151,7 @@ def update_rating(request):
 # HEADLINE 뉴스 5개
 @api_view(["GET"])
 def get_headlines(request):
+    print("hello?")
     news_data = load_headline_news()
 
     return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
