@@ -13,7 +13,6 @@ import {
   isRefreshTokenAtom,
   isExpireTimeAtom,
 } from '@src/stores/authAtom'
-import { publicRequest } from '@src/hooks/requestMethod'
 import base64 from 'base-64'
 
 type Props = {}

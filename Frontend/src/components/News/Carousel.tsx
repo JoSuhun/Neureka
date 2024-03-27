@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import * as c from '../styles/News/CarouselStyle'
 import CarouselItem from './CarouselItem'
+import { HotNews } from '@src/types/NewsType'
 
-const Carousel = () => {
+type Props = {
+  hotNewsData: HotNews[]
+}
+const Carousel = ({ hotNewsData }: Props) => {
   const [counter, setCounter] = useState(0)
-  const cards = ['1', '2', '3']
+  const cards = new Array(5).fill(0)
   const handleNext = () => {
     if (counter >= cards.length - 1) {
       setCounter(0)
@@ -36,9 +40,9 @@ const Carousel = () => {
       <c.PrevButton onClick={handlePrev} />
       <c.Container className="carousel">
         <c.Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
-          {cards.map((card, index) => (
+          {hotNewsData.map((news, index) => (
             <c.Slide key={index}>
-              <CarouselItem type={card} />
+              <CarouselItem news={news} />
             </c.Slide>
           ))}
         </c.Slides>
@@ -47,7 +51,10 @@ const Carousel = () => {
 
       <c.IndexBox>
         {cards.map((card, index) => (
-          <c.CardIndex className={index === counter ? 'focused_card' : ''} />
+          <c.CardIndex
+            key={index}
+            className={index === counter ? 'focused_card' : ''}
+          />
         ))}
       </c.IndexBox>
     </c.Wrapper>
