@@ -37,7 +37,6 @@ def fetch_and_save_krx_data(request):
     # 포맷팅된 JSON 문자열을 HttpResponse 객체를 사용하여 반환
     return HttpResponse(formatted_json_data, content_type="application/json; charset=utf-8")
 
-
 @api_view(["POST"])
 def stock_news(request):
     serializer = KeywordSerializer(data=request.data)

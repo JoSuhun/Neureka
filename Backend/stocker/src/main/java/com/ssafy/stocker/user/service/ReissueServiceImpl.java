@@ -1,7 +1,7 @@
 package com.ssafy.stocker.user.service;
 
 
-import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.setting.jwt.JWTUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 
 import jakarta.servlet.http.Cookie;
