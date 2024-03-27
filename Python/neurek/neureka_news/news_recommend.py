@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
+from django.conf import settings
 
 from neurek.neureka_news.models import DetailsArticle
 from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
@@ -19,12 +16,10 @@ import time
 # 바른AI를 사용해 형태소 분석을 진행
 # https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
-# API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
 tagger = Tagger(API_KEY, 'localhost', 5757)
 
 # Sentence Transformer 모델 로드
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
-
 
 def keyword_extraction(url):
     response = requests.get(url)
@@ -74,11 +69,6 @@ def keyword_ext(text, stop_words):
 
     return mmr(doc_embedding, candidate_embeddings, candidates, top_n=3, diversity=0.3)
 
-def load_stop_words(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        stop_words = set(line.strip() for line in file)
-    return stop_words
-
 
 def recommend_news(url):
     # 해당 URL에 해당하는 기사
@@ -89,8 +79,8 @@ def recommend_news(url):
         # 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
         if DetailsArticle.is_topic_empty_for_url(url):
 
-            stop_words_path = "LDA/stop_words.txt"
-            stop_words = load_stop_words(stop_words_path)
+            with open(settings.STOP_WORDS_FILE, 'r', encoding='utf-8') as file:
+                stop_words = set(line.strip() for line in file)
 
             article_text = keyword_extraction(url)
 
@@ -118,14 +108,14 @@ def recommend_news(url):
         return []
 
 
-# #확인용
-# import pprint
-# if __name__ == "__main__":
-#     start_time = time.time()
-#
-#     recommend_news_list = []
-#     pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/366/0000980751"))
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+#확인용
+import pprint
+if __name__ == "__main__":
+    start_time = time.time()
+
+    recommend_news_list = []
+    pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/011/0004318625"))
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")

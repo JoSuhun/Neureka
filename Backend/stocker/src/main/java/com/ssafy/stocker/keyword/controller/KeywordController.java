@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,12 +22,14 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/keyword", produces = "application/json")
 public class KeywordController {
 
+    @Value("${releaseHostName}")
+    String hostname;
     private final KeywordService keywordService ;
     private final WebClient webClient ;
 
     public KeywordController(KeywordService keywordService, WebClient.Builder webClientBuilder){
         this.keywordService = keywordService;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build();
+        this.webClient = webClientBuilder.baseUrl("http://"+hostname+":8000").build();
     }
 
 

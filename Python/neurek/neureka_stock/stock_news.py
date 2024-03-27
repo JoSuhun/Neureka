@@ -5,8 +5,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 import time
-from neurek.neureka_news.models import DetailsArticle, SummaryArticle
-from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
+from neurek.neureka_news.models import DetailsArticle
+from datetime import datetime
+
 
 def process_element(element):
     content = ''
@@ -39,21 +40,6 @@ def extract_content_from_url(url):
     return process_element(article)
 
 
-# 해당 페이지에서 날짜만 불러오는 코드
-def date_extraction(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    date_element = soup.select_one('#ct > div.media_end_head.go_trans > div.media_end_head_info.nv_notrans > div.media_end_head_info_datestamp > div > span')
-
-    if date_element:
-        date_element = soup.select_one('#content > div > div.content > div > div.news_headline > div > span:nth-child(1)')
-
-    # date_element가 존재하면 그 내용을 문자열로 변환하여 반환
-    if date_element:
-        return date_element.get_text(strip=True)
-    return None
-
-
 def keyword_extraction(url):
     response = requests.get(url)
     time.sleep(0.1)  # 서버에 과부하를 주지 않기 위해 잠시 대기
@@ -74,25 +60,28 @@ def keyword_extraction(url):
     return article_text, img_src
 
 # 날짜 포메팅 변경
-def convert_date_format(input_str):
-    from datetime import datetime
+def get_date_from_url(url):
+    try:
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, "html.parser")
+        date_element = soup.select_one('[data-date-time]')
 
-    if input_str is None:
-        return datetime.now().strftime("%Y-%m-%d %H:%M")
-
-    # '오후'와 '오전'을 AM, PM으로 변환하기 위한 사전 작업
-    if "오후" in input_str:
-        input_str = input_str.replace("오후", "PM")
-    elif "오전" in input_str:
-        input_str = input_str.replace("오전", "AM")
-
-    # 입력 문자열을 datetime 객체로 변환
-    datetime_obj = datetime.strptime(input_str, "%Y.%m.%d. %p %I:%M")
-
-    # datetime 객체를 원하는 형식의 문자열로 변환
-    output_str = datetime_obj.strftime("%Y-%m-%d %H:%M")
-
-    return output_str
+        if date_element:
+            date_time_str = date_element['data-date-time']
+            # 여러 날짜 형식을 시도
+            date_formats = ['%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M:%S']
+            for fmt in date_formats:
+                try:
+                    date_time = datetime.strptime(date_time_str, fmt)
+                    return date_time.strftime('%Y-%m-%d %H:%M')
+                except ValueError:
+                    continue  # 현재 형식이 맞지 않으면 다음 형식으로 시도
+            # 모든 형식이 맞지 않는 경우 현재 날짜 반환
+            return datetime.now().strftime('%Y-%m-%d %H:%M')
+        else:
+            return datetime.now().strftime('%Y-%m-%d %H:%M')
+    except Exception as e:
+        return datetime.now().strftime('%Y-%m-%d %H:%M')
 
 
 # 개별 뉴스 항목 처리를 위한 함수
@@ -104,16 +93,22 @@ def process_news_item(i, soup):
         summary_element = news_item.select_one('.api_txt_lines.dsc_txt_wrap')
 
         info_group_links = news_item.select('.info_group a')
-        naver_news_link = info_group_links[1]['href'] if len(info_group_links) > 1 else None
+        naver_news_link = None
+        for link in info_group_links:
+            if 'https://n.news.naver.com/mnews' in link['href']:
+                naver_news_link = link['href']
+                break
+
+        if not naver_news_link:
+            return None  # 조건을 만족하지 않는 링크는 제외
+
         title = title_element.text.strip() if title_element else None
         press = press_element.text.strip() if press_element else None
         summary = summary_element.text.strip() if summary_element else None
 
-        # 다른 함수 호출 및 처리
+        # 다른 함수 호출 및 처리...
         text, thumbnail_url = keyword_extraction(naver_news_link)
-        # topic = text_through_LDA_probability(text)
-        article_date = convert_date_format(date_extraction(naver_news_link))
-
+        article_date = get_date_from_url(naver_news_link)
 
         news_data = {
             'link': naver_news_link[:-8],
@@ -135,10 +130,8 @@ def process_news_item(i, soup):
         )
         detail_article.save()
 
+
         return news_data
-    else:
-        # news_item이 없을 경우의 예외 처리
-        return {"error": "일시적인 오류입니다"}
 
 
 def crawling_news(keyword):
@@ -150,27 +143,36 @@ def crawling_news(keyword):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
 
+    # 뉴스 항목 리스트 초기화
     news_list = []
-    # ThreadPoolExecutor를 사용하여 병렬 처리
+
+    # 임시로 모든 뉴스 항목 저장
+    temp_news_list = []
+
     with ThreadPoolExecutor(max_workers=10) as executor:
-        # 각 뉴스 항목에 대한 작업 생성
-        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 6)]
+        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 40)]
         for future in as_completed(futures):
             news_data = future.result()
             if news_data:
-                news_list.append(news_data)
+                temp_news_list.append(news_data)
+
+    # 'https://n.news.naver.com/mnews'로 시작하는 링크를 가진 기사만 선택
+    filtered_news_list = [news for news in temp_news_list if news and 'https://n.news.naver.com/mnews' in news['link']]
+
+    # 필터링된 뉴스 리스트에서 상위 5개 선택
+    news_list = filtered_news_list[:5]
 
     return news_list
 
 
-# # 확인용
-# import pprint
-# if __name__ == "__main__":
-#     start_time = time.time()
-#
-#     pprint.pprint(crawling_news("스포츠"))
-#
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+# 확인용
+import pprint
+if __name__ == "__main__":
+    start_time = time.time()
+
+    pprint.pprint(crawling_news("스포츠"))
+
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")
