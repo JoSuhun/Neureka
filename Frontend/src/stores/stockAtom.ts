@@ -1,5 +1,9 @@
 import { atom } from 'jotai'
-import { CompanyType, CompanyLikeType } from '@src/types/CompanyType'
+import {
+  CompanyType,
+  CompanyLikeType,
+  CompanyNewsType,
+} from '@src/types/CompanyType'
 
 export const selectedCompanyAtom = atom<CompanyType>({
   companyId: 1,
@@ -8,3 +12,5 @@ export const selectedCompanyAtom = atom<CompanyType>({
 })
 
 export const LikedCompanyListAtom = atom<CompanyLikeType[]>([])
+
+export const selectedNewsListAtom = atom<CompanyNewsType[]>([])
