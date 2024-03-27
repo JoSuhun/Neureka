@@ -3,12 +3,14 @@ import axios from 'axios'
 const BASE_URL = 'http://localhost:8080/api/v1/'
 
 axios.defaults.withCredentials = true
+const accessToken = localStorage.getItem('accessToken')
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    Authorization: accessToken,
+  },
 })
-
-const accessToken = localStorage.getItem('accessToken')
 
 // publicRequest.interceptors.request.use(
 //   config => {

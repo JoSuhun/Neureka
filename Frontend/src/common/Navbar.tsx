@@ -40,7 +40,7 @@ const Navbar = () => {
   }
 
   const logout = () => {
-    setAccessToken('')
+    setAccessToken(null)
     setRefreshToken('')
     setExpireTime(0)
     setIsLogin(false)
