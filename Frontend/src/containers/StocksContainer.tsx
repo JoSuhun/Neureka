@@ -23,6 +23,7 @@ import StockPriceSection from '@src/components/Stocks/StockPriceSection'
 import StockChartSection from '@src/components/Stocks/StockChartSection'
 import StockNewsSection from '@src/components/Stocks/StockNewsSection'
 import * as s from '@src/containers/styles/StocksContainerStyle'
+import StockTutorial from '@src/tutorials/StockTutorial'
 
 const StocksContainer = () => {
   useEffect(() => {
@@ -133,6 +134,7 @@ const StocksContainer = () => {
 
   return (
     <s.Container>
+      <StockTutorial />
       <s.SidebarWrap>
         {companyList ? (
           <SearchStocksSection data={companyList} />

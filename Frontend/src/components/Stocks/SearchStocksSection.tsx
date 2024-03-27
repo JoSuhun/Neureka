@@ -41,11 +41,15 @@ const SearchStocksSection = (props: { data: CompanyType[] }) => {
     <s.Container>
       <s.Title>Search</s.Title>
       <s.Wrap>
-        <s.SelectBox value={searchBy} onChange={handleSearchByChange}>
+        <s.SelectBox
+          className="selectNorm"
+          value={searchBy}
+          onChange={handleSearchByChange}
+        >
           <option value="name">종목명</option>
           <option value="code">종목코드</option>
         </s.SelectBox>
-        <s.SearchBox>
+        <s.SearchBox className="search">
           <s.SearchInput
             type="text"
             placeholder="검색어를 입력하세요"
