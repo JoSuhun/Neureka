@@ -8,22 +8,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2vh;
-`
-
-export const Title = styled.div`
-  font-size: 1.2rem;
-  font-weight: bold;
+  align-items: center;
 `
 
 export const InfoWrap = styled.div`
   display: flex;
   flex-direction: row;
-  height: 10vh;
-  padding: 3%;
+  width: 90%;
+  height: 15vh;
+  padding: 2% 3%;
   border: 2px solid #ccc;
-  /* border-top: 2px solid #000;
-  border-left: 2px solid #ccc;
-  border-right: 2px solid #ccc; */
 `
 
 export const LeftWrap = styled.div`
