@@ -23,10 +23,10 @@ const AuthModal = (props: Props) => {
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
 
   useEffect(() => {
-    setAccessToken('Bearer ' + getCookie('Authorization'))
-    setRefreshToken(getCookie('refresh'))
-
     if (getCookie('Authorization')) {
+      setAccessToken('Bearer ' + getCookie('Authorization'))
+      setRefreshToken(getCookie('refresh'))
+
       setIsLogin(true)
       const now = new Date().getTime()
       setExpireTime(now)

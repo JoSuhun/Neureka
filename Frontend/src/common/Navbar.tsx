@@ -12,6 +12,7 @@ import {
   isRefreshTokenAtom,
   isExpireTimeAtom,
 } from '@src/stores/authAtom'
+import { removeCookie } from '@src/utils/loginCookie'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -44,6 +45,8 @@ const Navbar = () => {
     setRefreshToken('')
     setExpireTime(0)
     setIsLogin(false)
+    removeCookie('Authorization')
+    removeCookie('refresh')
   }
 
   const goHome = () => {
