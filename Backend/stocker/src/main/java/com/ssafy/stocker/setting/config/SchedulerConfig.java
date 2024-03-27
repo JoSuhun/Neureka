@@ -16,8 +16,8 @@ public class SchedulerConfig {
     }
 
 
-    @Scheduled(initialDelay = 0 , fixedDelay = Long.MAX_VALUE)
-    public void sendMail() {
-        sendMailService.sendMail();
-    }
+//    @Scheduled(initialDelay = 0 , fixedDelay = Long.MAX_VALUE)
+//    public void sendMail() {
+//        sendMailService.sendMail();
+//    }
 }

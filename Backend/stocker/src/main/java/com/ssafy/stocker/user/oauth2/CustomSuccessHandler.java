@@ -2,6 +2,7 @@ package com.ssafy.stocker.user.oauth2;
 
 import com.ssafy.stocker.user.dto.CustomOAuth2User;
 import com.ssafy.stocker.setting.jwt.JWTUtil;
+import com.ssafy.stocker.user.repository.UserRepository;
 import com.ssafy.stocker.user.service.RedisService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -24,16 +25,18 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final JWTUtil jwtUtil;
     private final RedisService redisService;
+    private final UserRepository userRepository;
 
     @Value("${access.token.expiration.time}")
     private Long accessExpireMs ;
 
     @Value("${refresh.token.expiration.time}")
     private Long refreshExpireMs ;
-    public CustomSuccessHandler(JWTUtil jwtUtil, RedisService redisService) {
+    public CustomSuccessHandler(JWTUtil jwtUtil, RedisService redisService, UserRepository userRepository) {
 
         this.jwtUtil = jwtUtil;
         this.redisService = redisService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -43,8 +46,9 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         CustomOAuth2User customUserDetails = (CustomOAuth2User) authentication.getPrincipal();
 
         String username = customUserDetails.getUsername();
+        String email = userRepository.findByUsername(username).getEmail();
 
-
+        log.info("success핸들러 " + email);
 
         // 권한을 찾아서 권한 설정해줌
         // authentication.getAuthorities()를 호출하여
@@ -57,8 +61,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
 
 
-        String access = jwtUtil.createJwt("access", username, role, accessExpireMs);
-        String refresh = jwtUtil.createJwt("refresh", username, role, refreshExpireMs);
+        String access = jwtUtil.createJwt("access",email, username, role, accessExpireMs);
+        String refresh = jwtUtil.createJwt("refresh",email, username, role, refreshExpireMs);
 
         log.info("accesstoken : " + access);
         log.info("refreshtoken" + refresh);
