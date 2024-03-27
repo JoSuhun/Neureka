@@ -29,17 +29,17 @@ const StockTutorial = () => {
       target: '.latestStocks',
       content: '최근 조회한 종목을 볼 수 있습니다.',
     },
-    {
-      title: (
-        <>
-          <span>관심 종목 추가/제거 </span>
-          <AddButton />
-          <RemoveButton />
-        </>
-      ),
-      target: '.addRemoveBtn',
-      content: '관심 종목을 추가하거나 제거할 수 있습니다.',
-    },
+    // {
+    //   title: (
+    //     <>
+    //       <span>관심 종목 추가/제거 </span>
+    //       <AddButton />
+    //       <RemoveButton />
+    //     </>
+    //   ),
+    //   target: '.addRemoveBtn',
+    //   content: '관심 종목을 추가하거나 제거할 수 있습니다.',
+    // },
     {
       title: '주식 정보',
       target: '.stockInfo',

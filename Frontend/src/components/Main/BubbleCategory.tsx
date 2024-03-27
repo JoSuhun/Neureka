@@ -1,8 +1,8 @@
 import Category from '@src/components/Main/Category'
+import CategoryCarousel from '@src/components/Main/CategoryCarousel'
 import * as bc from '@src/components/styles/Main/BubbleCategory'
 import { isLoginAtom } from '@src/stores/authAtom'
 import { categoriesAtom, categoryToggleAtom } from '@src/stores/mainAtom'
-import { Categories } from '@src/types/MainType'
 import { useAtom } from 'jotai'
 
 const BubbleCategory = () => {
@@ -21,17 +21,9 @@ const BubbleCategory = () => {
           카테고리 선택
         </bc.CategoryToggle>
       </bc.ToggleWrapper>
-      {/* 로그인 상태에 따라 IsLoginContainer를 조건부로 보여줍니다 */}
       <bc.CategoryBlocker $isLogin={isLogin}>
         <bc.CategoryWrapper className="CategoryList" $show={categoryToggle}>
-          {Categories.map((element, key) => (
-            <Category
-              key={key}
-              name={element.name}
-              image={element.image}
-              show={categoryToggle}
-            />
-          ))}
+          <CategoryCarousel show={categoryToggle} />
         </bc.CategoryWrapper>
 
         <bc.CategoryWrapper

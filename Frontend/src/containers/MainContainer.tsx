@@ -102,7 +102,6 @@ const MainContainer = (props: Props) => {
             <KeywordNews keywordNews={keywordNewsData?.data.data} />
           )}
         </m.NewsWrapper>
-        <m.TutorialWrapper></m.TutorialWrapper>
       </m.container>
     </>
   )
