@@ -44,10 +44,9 @@ export type CompanyLatestParamsType = {
 }
 
 export type CompanyLatestType = {
-  companyCode: string
   crId: number
   email: string
-  companyName: string
+  company: CompanyType
 }
 
 export type CompanyNewsType = {
@@ -56,4 +55,5 @@ export type CompanyNewsType = {
   summary: string
   thumbnail_url: string
   title: string
+  article_date: string
 }

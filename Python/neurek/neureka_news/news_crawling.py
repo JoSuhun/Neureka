@@ -30,7 +30,7 @@ day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
 # 불러올 최소 기사의 수
-article_count = 1000
+article_count = 2000
 
 while True:
     if len(article_list) >= article_count:
@@ -303,8 +303,6 @@ if __name__ == "__main__":
     }
 
     # 모든 기사 처리 완료 후 keyword_news 업데이트
-    keyword_news = update_keyword_dict(article_list, keyword_dict)
-
     # 기사의 키워드별 카운트를 db에 저장
     # 기사의 키워드별 카운트를 저장하는 db는 저장하기 전에 전체 삭제하도록 해둠
-    KeywordArticle.save_keywords(keyword_dict)
+    KeywordArticle.save_keywords(update_keyword_dict(article_list, keyword_dict))

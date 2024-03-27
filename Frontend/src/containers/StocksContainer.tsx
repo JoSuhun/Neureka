@@ -30,7 +30,7 @@ const StocksContainer = () => {
   }, [])
 
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
-  const [likedCompanyList, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
+  const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
 
   const user = {
     user_id: 1,
@@ -53,6 +53,12 @@ const StocksContainer = () => {
       queryFn: () => fetchCompanyPrice(selectedStock.code),
     },
   )
+
+  // 선택 기업 최근 뉴스 조회
+  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
+    queryKey: ['CompanyNewsList'],
+    queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
+  })
 
   // 관심 기업 조회
   const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
@@ -119,12 +125,6 @@ const StocksContainer = () => {
     latestCompany(params)
   }
 
-  // 선택 기업 최근 뉴스 조회
-  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
-    queryKey: ['CompanyNewsList'],
-    queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
-  })
-
   useEffect(() => {
     refetchCompanyPriceList() // 선택 기업 변경 시, 차트 데이터 refetch
     handleAddLatestCompany() // 선택 기업 변경 시, 최근 조회 기업 등록 refetch
@@ -147,7 +147,11 @@ const StocksContainer = () => {
           handleAddMyStock={handleAddMyStock}
           handleRemoveMyStock={handleRemoveMyStock}
         />
-        <StockPriceSection />
+        {companyPriceList ? (
+          <StockPriceSection data={companyPriceList} />
+        ) : (
+          <div>Loading!</div>
+        )}
         {companyPriceList ? (
           <StockChartSection initialData={companyPriceList} />
         ) : (
