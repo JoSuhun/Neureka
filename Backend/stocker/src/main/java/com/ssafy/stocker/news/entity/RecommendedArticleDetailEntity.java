@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity(name = "recommended_article_detail")
 @Getter
 @Setter
-public class RecommendedArticleDetail {
+public class RecommendedArticleDetailEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
