@@ -14,6 +14,7 @@ import {
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
+  selectedNewsListAtom,
 } from '@src/stores/stockAtom'
 import SearchStocksSection from '@src/components/Stocks/SearchStocksSection'
 import MyStocksSection from '@src/components/Stocks/MyStocksSection'
@@ -33,6 +34,7 @@ const StocksContainer = () => {
 
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
   const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
+  const [, setSelectedNewsList] = useAtom(selectedNewsListAtom) // 기업 뉴스 리스트
 
   const user = {
     user_id: 1,
@@ -43,27 +45,39 @@ const StocksContainer = () => {
   }
 
   // 기업 전체 조회
-  const { data: companyList } = useQuery({
+  const { data: companyList, isLoading: isLoadingCompanyList } = useQuery({
     queryKey: ['CompanyList'],
     queryFn: fetchCompanyList,
   })
 
   // 선택 기업 차트 데이터 조회
-  const { data: companyPriceList, refetch: refetchCompanyPriceList } = useQuery(
-    {
-      queryKey: ['CompanyPriceList'],
-      queryFn: () => fetchCompanyPrice(selectedStock.code),
-    },
-  )
+  const {
+    data: companyPriceList,
+    refetch: refetchCompanyPriceList,
+    isLoading: isLoadingCompanyPriceList,
+  } = useQuery({
+    queryKey: ['CompanyPriceList'],
+    queryFn: () => fetchCompanyPrice(selectedStock.code),
+  })
 
   // 선택 기업 최근 뉴스 조회
-  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
+  const {
+    refetch: refetchCompanyNewsList,
+    isLoading: isLoadingCompanyNewsList,
+  } = useQuery({
     queryKey: ['CompanyNewsList'],
     queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
+    onSuccess: data => {
+      setSelectedNewsList(data) // 최근 뉴스 업데이트
+    },
   })
 
   // 관심 기업 조회
-  const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
+  const {
+    data: companyLikeList,
+    refetch: refetchCompanyLikeList,
+    isLoading: isLoadingCompanyLikeList,
+  } = useQuery({
     queryKey: ['CompanyLikeList'],
     queryFn: () => fetchCompanyLikeList(user.email),
     onSuccess: data => {
@@ -104,11 +118,14 @@ const StocksContainer = () => {
   }
 
   // 최근 조회 기업 조회
-  const { data: companyLatestList, refetch: refetchCompanyLatestList } =
-    useQuery({
-      queryKey: ['CompanyLatestList'],
-      queryFn: () => fetchCompanyLatestList(user.email),
-    })
+  const {
+    data: companyLatestList,
+    refetch: refetchCompanyLatestList,
+    isLoading: isLoadingCompanyLatestList,
+  } = useQuery({
+    queryKey: ['CompanyLatestList'],
+    queryFn: () => fetchCompanyLatestList(user.email),
+  })
 
   // 최근 조회 기업 등록
   const { mutate: latestCompany } = useMutation({
@@ -128,6 +145,7 @@ const StocksContainer = () => {
   }
 
   useEffect(() => {
+    setSelectedNewsList([]) // 선택 기업 변경 시, 최근 뉴스 데이터 초기회
     refetchCompanyPriceList() // 선택 기업 변경 시, 차트 데이터 refetch
     handleAddLatestCompany() // 선택 기업 변경 시, 최근 조회 기업 등록 refetch
     refetchCompanyNewsList() // 선택 기업 변경 시, 최근 뉴스 조회 refetch
@@ -137,24 +155,36 @@ const StocksContainer = () => {
     <s.Container>
       <StockTutorial />
       <s.SidebarWrap>
-        {companyList ? <SearchStocksSection data={companyList} /> : <Loading />}
-        <MyStocksSection data={companyLikeList} />
-        <LatestStocksSection data={companyLatestList} />
+        {isLoadingCompanyList ? (
+          <Loading />
+        ) : (
+          <SearchStocksSection data={companyList} />
+        )}
+        {isLoadingCompanyLikeList ? (
+          <Loading />
+        ) : (
+          <MyStocksSection data={companyLikeList} />
+        )}
+        {isLoadingCompanyLatestList ? (
+          <Loading />
+        ) : (
+          <LatestStocksSection data={companyLatestList} />
+        )}
       </s.SidebarWrap>
       <s.MainWrap>
         <MainTopSection
           handleAddMyStock={handleAddMyStock}
           handleRemoveMyStock={handleRemoveMyStock}
         />
-        {companyPriceList ? (
+        {isLoadingCompanyPriceList ? (
+          <Loading />
+        ) : (
           <>
             <StockPriceSection data={companyPriceList} />
             <StockChartSection initialData={companyPriceList} />
           </>
-        ) : (
-          <Loading />
         )}
-        <StockNewsSection data={companyNewsList} />
+        {isLoadingCompanyNewsList ? <Loading /> : <StockNewsSection />}
       </s.MainWrap>
     </s.Container>
   )
