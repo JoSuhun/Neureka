@@ -8,7 +8,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -48,6 +50,20 @@ public class SendMailServiceImpl implements SendMailService {
 
         // }
     }
+
+//    public String
+//    String url = "/finance/stock_news/";
+//
+//    Map<String, String> requestData = new HashMap<>();
+//            requestData.put("keyword", company);
+//
+//    String response = webClient.post()
+//            .uri(url)
+//            .bodyValue(requestData)
+//            .retrieve()
+//            .bodyToMono(String.class)
+//            .block();
+
 
     @Override
     public boolean sendUser(UserCompanyEntity userCompany) {
