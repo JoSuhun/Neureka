@@ -30,6 +30,10 @@ public class JWTUtil {
 
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
     }
+
+    public String getEmail(String token){
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("email", String.class);
+    }
 //    토큰 만료 여부 체크하기
     public Boolean isExpired(String token) {
 
@@ -43,10 +47,11 @@ public class JWTUtil {
     }
 
 //    JWT 토큰발급
-    public String createJwt(String category , String username, String role, Long expiredMs) {
+    public String createJwt(String category ,String email, String username, String role, Long expiredMs) {
 
         return Jwts.builder()
                 .claim("category", category)
+                .claim("email", email)
                 .claim("username", username)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))

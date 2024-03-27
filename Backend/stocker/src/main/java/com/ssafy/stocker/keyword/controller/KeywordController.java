@@ -34,7 +34,7 @@ public class KeywordController {
 
     @GetMapping()
     @Operation(summary = "메인화면에 띄울 키워드들을 조회합니다" )
-    public ResponseEntity<?> keywordList(@RequestParam(value = "keywords", required = false) List<String> keywords){
+    public ResponseEntity<?> keywordList(@RequestParam(value = "keywords") List<String> keywords){
         try {
             if(keywords == null){
                 keywords =  keywordService.findKeyword();
