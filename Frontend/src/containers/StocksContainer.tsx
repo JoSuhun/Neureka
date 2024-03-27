@@ -65,6 +65,7 @@ const StocksContainer = () => {
 
   // 선택 기업 최근 뉴스 조회
   const {
+    data: companyNewsList,
     refetch: refetchCompanyNewsList,
     isLoading: isLoadingCompanyNewsList,
   } = useQuery({
