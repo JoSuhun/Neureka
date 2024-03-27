@@ -25,8 +25,6 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTUtil jwtUtil;
-    @Value("${releaseHostName}")
-    String hostname;
 
     //swagger 설정
     private static final String[] AUTH_WHITELIST = {
@@ -58,7 +56,7 @@ public class SecurityConfig {
 
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Collections.singletonList("http://"+hostname+":5173"));
+                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
                         configuration.setAllowedHeaders(Collections.singletonList("*"));

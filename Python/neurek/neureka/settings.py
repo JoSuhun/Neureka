@@ -14,16 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-LDA_DIR = BASE_DIR / 'neureka_news' / 'LDA'
-STOP_WORDS_FILE = LDA_DIR / 'stop_words.txt'
 
-# 개발 True / 실서버 False
-ENV_MODE = True
-
-if ENV_MODE:
-    MONGO_URI = 'mongodb://localhost:27017/'
-else:
-    MONGO_URI = ''
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -32,7 +23,7 @@ else:
 SECRET_KEY = 'django-insecure-n*!_j^rp$_nd+4upqsp+*2v&+qp_y%_+xcf=098%ve&0%5%zfi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     # 개발 환경 설정

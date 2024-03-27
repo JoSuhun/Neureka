@@ -22,8 +22,6 @@ import java.util.*;
 @Tag(name = "News", description = "NewsAPI")
 public class NewsController {
 
-    @Value("${releaseHostName}")
-    String hostname;
 
     private final NewsService newsService;
     private final WebClient webClient ;
@@ -31,7 +29,7 @@ public class NewsController {
     public NewsController(NewsService newsService, WebClient.Builder webClientBuilder) {
 
         this.newsService = newsService;
-        this.webClient = webClientBuilder.baseUrl("http://"+hostname+":8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
 

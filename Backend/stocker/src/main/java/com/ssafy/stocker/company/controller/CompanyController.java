@@ -24,14 +24,11 @@ import java.util.Map;
 public class CompanyController {
 
 
-    @Value("${releaseHostName}")
-    String hostname;
-
     private final CompanyService companyService;
     private final WebClient webClient ;
     public CompanyController(CompanyService companyService, WebClient.Builder webClientBuilder){
         this.companyService = companyService;
-        this.webClient = webClientBuilder.baseUrl("http://"+hostname+":8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
     @Operation(summary = "사용자가 최근 조회한 기업을 리스트에 추가합니다." )

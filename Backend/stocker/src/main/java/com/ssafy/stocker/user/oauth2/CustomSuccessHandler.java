@@ -23,8 +23,6 @@ import java.util.Iterator;
 @Slf4j
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Value("${releaseHostName}")
-    String hostname;
     private final JWTUtil jwtUtil;
     private final RedisService redisService;
     private final UserRepository userRepository;
@@ -80,7 +78,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         response.addCookie(createCookie("Authorization", access));
 //        response.addHeader("Authorization" , "Bearer " +access);
         log.info("response " + response.getHeader("Authorization"));
-        response.sendRedirect("http://"+hostname+":5173");
+        response.sendRedirect("http://localhost:5173");
     }
 
     private Cookie createCookie(String key, String value) {
