@@ -15,6 +15,10 @@ export const NewsWrapper = styled.div`
   min-height: 200px;
 `
 
+export const TutorialWrapper = styled.div`
+  width: 100%;
+`
+
 export const BubbleCategoryWrapper = styled.div`
   width: 95%;
   display: flex;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SlideBar from '@src/components/Main/SlideBar'
 import MainCard from '@src/components/Main/MainCard'
 import * as m from '@src/containers/styles/MainContainer'
@@ -15,6 +15,8 @@ import MainTutorial from '@src/tutorials/MainTutorial'
 type Props = {}
 
 const MainContainer = (props: Props) => {
+  const [runTutorial, setRunTutorial] = useState(false)
+  const tutorialStartRef = useRef<HTMLDivElement | null>(null)
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
 
@@ -50,21 +52,39 @@ const MainContainer = (props: Props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    const checkScroll = () => {
+      if (tutorialStartRef.current) {
+        const rect = tutorialStartRef.current.getBoundingClientRect()
+        // 화면에 특정 컴포넌트가 보이기 시작하면 튜토리얼 시작
+        if (rect.top <= window.innerHeight) {
+          setRunTutorial(true)
+          // 스크롤 이벤트 리스너 제거
+          window.removeEventListener('scroll', checkScroll)
+        }
+      }
+    }
+
+    // 스크롤 이벤트 리스너 추가
+    window.addEventListener('scroll', checkScroll)
+
+    // 컴포넌트 언마운트 시 리스너 제거
+    return () => {
+      window.removeEventListener('scroll', checkScroll)
+    }
   }, [])
 
   return (
     <>
       <m.container>
-        <MainTutorial />
+        <MainTutorial run={runTutorial} />
         <SlideBar />
         <MainCard />
         <div style={{ height: '50px' }}></div>
-
         <m.BubbleCategoryWrapper>
           <BubbleCategory />
         </m.BubbleCategoryWrapper>
 
-        <m.BubbleChartWrapper>
+        <m.BubbleChartWrapper ref={tutorialStartRef}>
           {keywordsData && keywordsData.data ? (
             <BubbleChart keywords={keywordsData.data} />
           ) : (
@@ -82,6 +102,7 @@ const MainContainer = (props: Props) => {
             <KeywordNews keywordNews={keywordNewsData?.data.data} />
           )}
         </m.NewsWrapper>
+        <m.TutorialWrapper></m.TutorialWrapper>
       </m.container>
     </>
   )

@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import Joyride, { CallBackProps, STATUS } from 'react-joyride'
+import { useState } from 'react'
+import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride'
 
-const MainTutorial = () => {
-  const [run, setRun] = useState(true)
-  const [steps, setSteps] = useState([
+type MainTutorialProps = {
+  run: boolean
+}
+
+const MainTutorial = ({ run }: MainTutorialProps) => {
+  const [steps, setSteps] = useState<Step[]>([
     {
+      disableBeacon: true,
       target: '.CategoryToggle',
       content: '카테고리 목록 토글할 수 있습니다.',
     },
@@ -31,7 +35,6 @@ const MainTutorial = () => {
     const { status } = data
     const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED]
     if (finishedStatuses.includes(status)) {
-      setRun(false)
     }
   }
 
