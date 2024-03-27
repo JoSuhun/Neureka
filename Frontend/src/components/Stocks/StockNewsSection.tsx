@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom'
-import { CompanyNewsType } from '@src/types/CompanyType'
+import { useAtom } from 'jotai'
+import { selectedNewsListAtom } from '@src/stores/stockAtom'
+import Loading from '@src/common/Loading'
 import * as s from '@src/components/styles/Stocks/StockNewsSectionStyle'
 
-const StockNewsSection = (props: { data: CompanyNewsType[] }) => {
-  const { data } = props
+const StockNewsSection = () => {
+  const [selectedNewsList] = useAtom(selectedNewsListAtom) // 기업 뉴스 리스트
 
   const navigate = useNavigate()
   const handleNewsDetail = (link: string) => {
@@ -14,8 +16,8 @@ const StockNewsSection = (props: { data: CompanyNewsType[] }) => {
     <s.Container className="stockNews">
       <s.Title>최근 뉴스</s.Title>
       <s.Wrap>
-        {data &&
-          data.map((item, index) => (
+        {selectedNewsList.length > 0 ? (
+          selectedNewsList.map((item, index) => (
             <s.Item key={index} onClick={() => handleNewsDetail(item.link)}>
               <s.ItemBox>
                 <s.ItemInfo>
@@ -29,7 +31,10 @@ const StockNewsSection = (props: { data: CompanyNewsType[] }) => {
                 <s.ItemImage src={item.thumbnail_url} alt="image" />
               )}
             </s.Item>
-          ))}
+          ))
+        ) : (
+          <Loading />
+        )}
       </s.Wrap>
     </s.Container>
   )
