@@ -1,4 +1,5 @@
 import NewsDetailContainer from '@src/containers/NewsDetailContainer'
+import TokenChecker from '@src/utils/TokenChecker'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ const NewsDetailPage = ({}: Props) => {
 
   return (
     <>
+      <TokenChecker />
       <NewsDetailContainer newsUrl={url as string} />
     </>
   )

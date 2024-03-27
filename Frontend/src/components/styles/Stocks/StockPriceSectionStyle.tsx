@@ -1,69 +1,91 @@
 import styled from 'styled-components'
 
+interface ColorProps {
+  isPositiveChange: boolean
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2vh;
-`
-
-export const Title = styled.div`
-  font-size: 1.2rem;
-  font-weight: bold;
+  align-items: center;
 `
 
 export const InfoWrap = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: white;
-  width: 100%;
+  width: 90%;
   height: 15vh;
-  padding: 3% 0;
-  border: 2px solid #000;
+  padding: 2% 3%;
+  border: 2px solid #ccc;
 `
 
 export const LeftWrap = styled.div`
-  flex: 3;
+  flex: 2;
   display: flex;
   flex-direction: column;
-  margin-left: 3%;
 `
 
-export const LeftTopWrap = styled.div`
+export const LeftTopWrap = styled.div<ColorProps>`
   flex: 3;
   display: flex;
   align-items: center;
-  font-size: 1.7rem;
+  font-size: 2.3rem;
+  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
 `
 
 export const LeftBottomWrap = styled.div`
   flex: 1;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  font-size: 0.9rem;
-`
-
-export const Divider = styled.span`
-  border-left: 1px solid #ccc;
-  height: 100%;
-  margin: 0 1%;
+  margin-top: 2%;
+  gap: 5px;
 `
 
 export const RightWrap = styled.div`
   flex: 5;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 2%;
+`
+
+export const RightInnerWrap = styled.div`
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 3%;
 `
 
-export const RightTopWrap = styled.div`
+export const RightItem = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 `
 
-export const RightBottomWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+export const ItemTitle = styled.span`
+  font-size: 0.8rem;
+`
+export const ItemNumber = styled.span`
+  font-size: 1.3rem;
+`
+export const ItemPercentage = styled.span<ColorProps>`
+  font-size: 0.8rem;
+  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
+`
+
+export const Icon = styled.img`
+  width: 13px;
+  height: 13px;
+`
+
+export const LeftBottomNumber = styled.span<ColorProps>`
+  font-size: 1.2rem;
+  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
+`
+
+export const ColorNumber = styled.span<ColorProps>`
+  font-size: 1.3rem;
+  color: ${({ isPositiveChange }) => (isPositiveChange ? 'red' : 'blue')};
 `

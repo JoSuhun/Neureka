@@ -1,23 +1,34 @@
 import React, { useEffect } from 'react'
 
 import { useAtom } from 'jotai'
-import { isLoginAtom } from '@src/stores/authAtom'
+import {
+  isLoginAtom,
+  isAccessTokenAtom,
+  isRefreshTokenAtom,
+} from '@src/stores/authAtom'
 
 import * as l from '@src/common/styles/Auth/SectionStyle'
 import kakao from '/image/kakao.png'
 import google from '/image/google.png'
+
+import { getCookie } from '@src/utils/loginCookie'
+
 type Props = {}
 
 const LoginSection = (props: Props) => {
-  const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  // const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  // const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
+  // const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
 
   // 구글 로그인 url
-  // const google_url = 'http://localhost:8080/oauth2/authorization/google'
-  const google_url = 'http://j10c105.p.ssafy.io:8080/oauth2/authorization/google'
+  const google_url = 'http://localhost:8080/oauth2/authorization/google'
+
+  const googleLogin = () => {
+    login(google_url)
+  }
 
   const login = (url: string) => {
     window.location.href = url
-    setIsLogin(true)
   }
 
   return (
@@ -28,7 +39,7 @@ const LoginSection = (props: Props) => {
           <l.Icon src={kakao} />
           <l.Msg>카카오로 간편 로그인</l.Msg>
         </l.Select>
-        <l.Select className="google" onClick={() => login(google_url)}>
+        <l.Select className="google" onClick={googleLogin}>
           <l.Icon src={google} />
           <l.Msg>구글로 간편 로그인</l.Msg>
         </l.Select>

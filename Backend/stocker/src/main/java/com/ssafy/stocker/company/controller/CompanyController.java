@@ -8,7 +8,6 @@ import com.ssafy.stocker.company.service.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +21,12 @@ import java.util.Map;
 @Slf4j
 @RequestMapping(value = "/api/v1/company" , produces = "application/json")
 public class CompanyController {
-    @Value("${production.hostname}")
-    private String productionHostname;
 
     private final CompanyService companyService;
     private final WebClient webClient ;
     public CompanyController(CompanyService companyService, WebClient.Builder webClientBuilder){
         this.companyService = companyService;
-        this.webClient = webClientBuilder.baseUrl("http://"+productionHostname+":8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
     @Operation(summary = "사용자가 최근 조회한 기업을 리스트에 추가합니다." )

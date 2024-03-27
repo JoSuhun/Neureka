@@ -1,11 +1,10 @@
-package com.ssafy.stocker.user.jwt;
+package com.ssafy.stocker.setting.jwt;
 
 import com.ssafy.stocker.user.dto.CustomOAuth2User;
 import com.ssafy.stocker.user.dto.UserDTO;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;

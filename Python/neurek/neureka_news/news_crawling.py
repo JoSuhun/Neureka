@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -30,7 +33,7 @@ day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
 # 불러올 최소 기사의 수
-article_count = 2000
+article_count = 100
 
 while True:
     if len(article_list) >= article_count:
@@ -119,8 +122,7 @@ print("[+] crawling done")
 # https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
 # API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
-# tagger = Tagger(API_KEY, 'localhost', 5757)
-tagger = Tagger(API_KEY, 'j10c105.p.ssafy.io', 5757)
+tagger = Tagger(API_KEY, 'localhost', 5757)
 
 # Sentence Transformer 모델 로드
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
@@ -304,8 +306,6 @@ if __name__ == "__main__":
     }
 
     # 모든 기사 처리 완료 후 keyword_news 업데이트
-    keyword_news = update_keyword_dict(article_list, keyword_dict)
-
     # 기사의 키워드별 카운트를 db에 저장
     # 기사의 키워드별 카운트를 저장하는 db는 저장하기 전에 전체 삭제하도록 해둠
-    KeywordArticle.save_keywords(keyword_dict)
+    KeywordArticle.save_keywords(update_keyword_dict(article_list, keyword_dict))

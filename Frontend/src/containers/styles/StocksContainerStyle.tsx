@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  margin: 0 5%;
+  margin: 0 2%;
   display: flex;
   flex-direction: row;
   gap: 2%;
 `
 
 export const SidebarWrap = styled.div`
-  background-color: var(--color-lightblue);
+  background-color: #f8f9ff;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ export const SidebarWrap = styled.div`
 
 export const MainWrap = styled.div`
   background-color: var(--color-lightgrey);
-  flex: 3;
+  flex: 4;
   display: flex;
   flex-direction: column;
   height: 100%;

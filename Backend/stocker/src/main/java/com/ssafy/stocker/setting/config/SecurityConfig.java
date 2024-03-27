@@ -1,11 +1,10 @@
-package com.ssafy.stocker.user.config;
+package com.ssafy.stocker.setting.config;
 
-import com.ssafy.stocker.user.jwt.JWTFilter;
-import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.setting.jwt.JWTFilter;
+import com.ssafy.stocker.setting.jwt.JWTUtil;
 import com.ssafy.stocker.user.oauth2.CustomSuccessHandler;
 import com.ssafy.stocker.user.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,8 +20,6 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Value("${production.hostname}")
-    private String productionHostname;
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
@@ -53,7 +50,7 @@ public class SecurityConfig {
 
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Collections.singletonList("http://"+productionHostname+":5173"));
+                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
                         configuration.setAllowedHeaders(Collections.singletonList("*"));
@@ -61,7 +58,10 @@ public class SecurityConfig {
 
                         configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
                         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-                        configuration.addExposedHeader("Authorization");
+//                        configuration.addExposedHeader("Authorization");
+
+//                        configuration.setExposedHeaders(Arrays.asList("Authorization", "refreshToken"));
+
                         return configuration;
                     }
                 }));

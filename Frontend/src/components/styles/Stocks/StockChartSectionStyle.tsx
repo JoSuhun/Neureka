@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background-color: aliceblue;
-  height: 80vh;
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  margin: 1%;
 `
