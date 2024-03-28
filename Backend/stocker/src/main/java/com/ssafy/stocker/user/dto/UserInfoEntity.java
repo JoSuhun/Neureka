@@ -22,6 +22,8 @@ public class UserInfoEntity {
 
     private String birth;
     private Boolean gender ;
+
+    private String name;
 }
 
 //

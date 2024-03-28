@@ -34,6 +34,10 @@ public class NewsController {
         this.webClient = webClientBuilder.baseUrl("http://"+hostname+":8000").build() ;
     }
 
+//    @PostMapping("/word/search")
+//    @Operation("뉴스 키워드 검색")
+//    public ResponseEntity<?>
+
 
     @GetMapping()
     @Operation(summary = "기사 전체조회")

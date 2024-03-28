@@ -22,7 +22,11 @@ const LoginSection = (props: Props) => {
 
   // 구글 로그인 url
   const google_url = 'http://localhost:8080/oauth2/authorization/google'
+  const kakao_url = 'http://localhost:8080/oauth2/authorization/kakao'
 
+  const kakaoLogin = () => { 
+    login(kakao_url)
+  }
   const googleLogin = () => {
     login(google_url)
   }
@@ -35,7 +39,7 @@ const LoginSection = (props: Props) => {
     <>
       <l.Title>로그인</l.Title>
       <l.Content>
-        <l.Select className="kakao">
+        <l.Select className="kakao" onClick={kakaoLogin}>
           <l.Icon src={kakao} />
           <l.Msg>카카오로 간편 로그인</l.Msg>
         </l.Select>

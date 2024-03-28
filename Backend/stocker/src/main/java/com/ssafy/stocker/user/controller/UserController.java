@@ -51,14 +51,10 @@ public class UserController {
 
     @PostMapping("/mypage")
     @Operation(summary = "회원정보를 변경합니다 gender 남자 true 여자  false " )
-    public ResponseEntity<?> userInfoModify(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){
+//    public ResponseEntity<?> userInfoModify(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){    public ResponseEntity<?> userInfoModify(@RequestParam String email , @RequestParam String phone ,@RequestParam String nickname , @RequestParam String birth ,  @RequestParam Boolean gender){
+    public ResponseEntity<?> userInfoModify(@RequestBody UserInfoEntity userInfo){
 
-        UserInfoEntity userInfo = new UserInfoEntity() ;
-        userInfo.setEmail(email);
-        userInfo.setBirth(birth);
-        userInfo.setPhone(phone);
-        userInfo.setBirth(birth);
-        userInfo.setGender(gender);
+
         try {
             userService.modifyUserInfo(userInfo);
 
