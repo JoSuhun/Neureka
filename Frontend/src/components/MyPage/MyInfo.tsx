@@ -6,14 +6,18 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useAtom, useAtomValue } from 'jotai'
 import { isUserAtom } from '@src/stores/authAtom'
 import { selectAtom } from 'jotai/utils'
+import { useMutation } from 'react-query'
+import { fetchChangeUserInfo } from '@src/apis/AuthApi'
+import { User } from '@src/types/UserType'
 
 type Props = {}
 
 const MyInfo = (props: Props) => {
   const [edit, SetEdit] = useState(false)
   const [user, setUser] = useAtom(isUserAtom)
-
+  const [id, setId] = useState(0)
   const [nickname, setNickname] = useState('')
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [birth, setBirth] = useState('')
@@ -22,6 +26,8 @@ const MyInfo = (props: Props) => {
   const goSave = () => {
     SetEdit(!edit)
     setUser({
+      userInfoId: id,
+      name: name,
       nickname: nickname,
       email: email,
       phone: phone,
@@ -31,11 +37,14 @@ const MyInfo = (props: Props) => {
   }
 
   useEffect(() => {
+    setId(user.userInfoId as number)
     setNickname(user.nickname as string)
     setEmail(user.email as string)
     setPhone(user.phone as string)
     setBirth(user.birth as string)
     setGender(user.gender as boolean)
+    setName(user.name as string)
+    userInfoMutate(user)
   }, [user])
 
   const phoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,14 +59,27 @@ const MyInfo = (props: Props) => {
     }
   }, [phone])
 
+  // 유저 정보 수정
+  const { mutate: userInfoMutate } = useMutation(
+    (data: User) => fetchChangeUserInfo(data),
+    {
+      onSuccess: () => {
+        console.log('변경성공!')
+      },
+      onError: err => {
+        console.log('변경에러! : ' + err)
+      },
+    },
+  )
+
   return (
     <m.InfoBox>
       <m.Category>
         <m.Title>이름</m.Title>
         <m.Content
-          value={nickname}
+          value={name}
           onChange={event => {
-            setNickname(event.target.value as string)
+            setName(event.target.value as string)
           }}
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
