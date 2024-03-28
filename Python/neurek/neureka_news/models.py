@@ -1,9 +1,12 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 import json
 
 # MongoDB 클라이언트 설정
 client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
-db = client['article_database']
+db = client['S10P23C105']
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client['article_database']
 
 if __name__ == '__main__':
     print("is neureka new model")
@@ -12,7 +15,8 @@ if __name__ == '__main__':
 class SummaryArticle:
     collection = db['summary_article_collection']
 
-    def __init__(self, thumbnail_url, article_title, article_link, article_summary, press, date_time, nouns, topic, keywords):
+    def __init__(self, _id, thumbnail_url, article_title, article_link, article_summary, press, date_time, nouns, topic, keywords):
+        self._id = ObjectId(_id)
         self.thumbnail_url = thumbnail_url
         self.article_title = article_title
         self.article_link = article_link
@@ -30,10 +34,13 @@ class SummaryArticle:
 
     @classmethod
     def find_all(cls):
-        """컬렉션의 모든 문서 조회, _id와 nouns 필드 제외"""
-        documents_cursor = cls.collection.find({}, {'_id': False, 'nouns': False})
-        documents_list = list(documents_cursor)
-
+        """컬렉션의 모든 문서 조회"""
+        documents_cursor = cls.collection.find({})
+        documents_list = []
+        for doc in documents_cursor:
+            # ObjectId를 문자열로 변환하여 '_id' 값을 업데이트
+            doc['_id'] = str(doc['_id'])
+            documents_list.append(doc)
         return documents_list
 
     @classmethod
@@ -41,11 +48,19 @@ class SummaryArticle:
         """링크로 문서 조회"""
         return cls.collection.find_one({"article_link": link})
 
+    # TODO link -> id
+    @classmethod
+    def find_by_id(cls, _id):
+        """_id로 문서 조회"""
+        # 문자열 id를 ObjectId로 변환
+        object_id = ObjectId(_id)
+        return cls.collection.find_one({"_id": object_id})
+
+
     @classmethod
     def delete_all(cls):
         # 컬렉션의 모든 문서 삭제
         cls.collection.delete_many({})
-
 
     def set_keywords(self, keywords):
         self.keywords = json.dumps(keywords)
@@ -83,29 +98,55 @@ class DetailsArticle:
             print(f"Error saving document: {e}")
             return False
 
+    # TODO
     @classmethod
     def find_by_url(cls, url):
         """URL로 문서 조회하며 '_id' 필드 제외"""
         # '_id' 필드를 제외하고 나머지 데이터만 조회
-        document = cls.collection.find_one({"detail_url": url}, {'_id': False})
+        document = cls.collection.find_one({"detail_url": url})
         return document
 
     @classmethod
-    def update_rating(cls, url, user_rating):
-        """detail_url에 해당하는 문서의 평점 업데이트"""
-        document = cls.collection.find_one({"detail_url": url})
+    def find_by_id(cls, _id):
+        """_id로 문서 조회"""
+        document = cls.collection.find_one({'_id': ObjectId(_id)})
+        if document:
+            document['_id'] = str(document['_id'])  # ObjectId를 문자열로 변환
+        return document
+
+
+    # @classmethod
+    # def update_rating(cls, url, user_rating):
+    #     """detail_url에 해당하는 문서의 평점 업데이트"""
+    #     document = cls.collection.find_one({"detail_url": url})
+    #
+    #     if document:
+    #         # 기존에 평점 정보가 있는 경우, 새로운 평점을 기존 값에 더하고 카운트 증가
+    #         new_rate = document.get('detail_rate', 0) + user_rating
+    #         new_rate_count = document.get('detail_rate_count', 0) + 1
+    #         update_result = cls.collection.update_one(
+    #             {"detail_url": url},
+    #             {"$set": {"detail_rate": new_rate, "detail_rate_count": new_rate_count}}
+    #         )
+    #         return update_result.modified_count > 0  # 수정된 문서가 있는지 여부 반환
+    #     else:
+    #         # 문서가 없는 경우, False 반환
+    #         return False
+
+    @classmethod
+    def update_rating(cls, _id, user_rating):
+        """_id에 해당하는 문서의 평점 업데이트"""
+        document = cls.collection.find_one({"_id": ObjectId(_id)})
 
         if document:
-            # 기존에 평점 정보가 있는 경우, 새로운 평점을 기존 값에 더하고 카운트 증가
             new_rate = document.get('detail_rate', 0) + user_rating
             new_rate_count = document.get('detail_rate_count', 0) + 1
             update_result = cls.collection.update_one(
-                {"detail_url": url},
+                {"_id": ObjectId(_id)},
                 {"$set": {"detail_rate": new_rate, "detail_rate_count": new_rate_count}}
             )
-            return update_result.modified_count > 0  # 수정된 문서가 있는지 여부 반환
+            return update_result.modified_count > 0
         else:
-            # 문서가 없는 경우, False 반환
             return False
 
     @classmethod
@@ -123,13 +164,13 @@ class DetailsArticle:
                 }
             }},
             {"$sort": {"detail_date": -1, "average_rating": -1}},  # 최신순, 평균 점수 높은 순으로 정렬
-            {"$project": {"_id": 0, "detail_url": 1}}  # detail_url 필드만 포함
+            {"$project": {"_id": 1}}  # detail_url 필드만 포함
         ]
 
         documents = cls.collection.aggregate(pipeline)
 
         # 조회 결과에서 detail_url만 추출하여 리스트로 변환하여 반환
-        urls = [doc['detail_url'] for doc in documents if 'detail_url' in doc]
+        urls = [str(doc['_id']) for doc in documents if '_id' in doc]
 
         # 상위 30개만 선택하여 반환
         return urls[:30]
@@ -146,6 +187,11 @@ class DetailsArticle:
         return False
 
     @classmethod
+    def is_topic_empty_for_id(cls, _id):
+        """주어진 _id에 해당하는 문서의 detail_topic이 빈 문자열인지 확인"""
+        document = cls.collection.find_one({"_id": ObjectId(_id)})
+        return document and document.get("detail_topic") == ""
+
     @classmethod
     def update_topic_and_keywords(cls, detail_url, new_detail_topic, new_detail_keywords):
         """주어진 detail_url에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
@@ -158,6 +204,14 @@ class DetailsArticle:
         # 업데이트된 문서의 수를 반환 (업데이트 성공 여부 확인용)
         return update_result.modified_count > 0
 
+    def update_topic_and_keywords(cls, _id, new_detail_topic, new_detail_keywords):
+        """주어진 _id에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
+        update_result = cls.collection.update_one(
+            {"_id": ObjectId(_id)},
+            {"$set": {"detail_topic": new_detail_topic, "detail_keywords": new_detail_keywords}}
+        )
+        return update_result.modified_count > 0
+
 
 class KeywordArticle:
     collection = db['keyword_article_collection']
@@ -167,8 +221,6 @@ class KeywordArticle:
         """기존 데이터를 삭제하고 새로운 키워드 딕셔너리 저장"""
         # 컬렉션의 모든 문서 삭제
         cls.collection.delete_many({})
-
-        # 새로운 문서 삽입
         document = {"keywords": keyword_dict}
         result = cls.collection.insert_one(document)
         return result.inserted_id
@@ -176,27 +228,24 @@ class KeywordArticle:
     @classmethod
     def find_by_keywords(cls, keywords):
         """주어진 키워드 리스트에 해당하는 데이터 조회 및 더하기"""
-        # MongoDB에서 주어진 키워드 리스트 중 하나라도 포함하는 모든 문서 조회
-        # 이 예제에서는 키워드별로 분리된 문서가 아니라 하나의 문서에 모든 키워드가 저장된다고 가정
         result = cls.collection.find_one({})
         if not result or 'keywords' not in result:
             return None
 
-        # 조회된 문서 내에서 주어진 키워드 리스트에 해당하는 값들을 더함
         total = {}
         for keyword in keywords:
             if keyword in result['keywords']:
-                # 해당 키워드에 대한 데이터를 더함
                 keyword_data = result['keywords'][keyword]
                 for sub_keyword, details in keyword_data.items():
-                    if sub_keyword in total:
-                        # 이미 존재하는 경우, count와 links를 더함
-                        total[sub_keyword]['count'] += details['count']
-                        total[sub_keyword]['links'] += details['links']  # 중복 링크 제거 필요시 여기서 처리
-                    else:
-                        # 새로운 경우, 해당 데이터를 추가
-                        total[sub_keyword] = details
-                        # 링크 중복 제거를 원할 경우 여기에서 처리 가능
-                        total[sub_keyword]['links'] = list(set(details['links']))
+                    if sub_keyword not in total:
+                        total[sub_keyword] = {"count": 0, "ids": []}
+                    total[sub_keyword]['count'] += details['count']
+
+                    # 중복 제거 처리
+                    total[sub_keyword]['ids'] = list(set(total[sub_keyword]['ids'] + details['_ids']))
 
         return total
+
+
+if __name__ == '__main__':
+    KeywordArticle.find_by_keywords(["반도체"])
