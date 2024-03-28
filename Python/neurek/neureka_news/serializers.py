@@ -11,16 +11,6 @@ class SummaryArticleSerializer(serializers.Serializer):
     keywords = serializers.JSONField()
 
 
-class LinksSerializer(serializers.Serializer):
-    links = serializers.ListField(child=serializers.URLField())
-
-class UrlSerializer(serializers.Serializer):
-    link = serializers.URLField(max_length=200)
-
-class RateSerializer(serializers.Serializer):
-    link = serializers.URLField(max_length=200)
-    rating = serializers.IntegerField(min_value=0, max_value=5)
-
 class IdsSerializer(serializers.Serializer):
     ids = serializers.ListField(child=serializers.CharField(max_length=24))
 

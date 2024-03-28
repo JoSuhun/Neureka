@@ -40,7 +40,9 @@ def kmeans_cluster(id_list):
         search_result = []
         for article_id in id_list:
             article = SummaryArticle.find_by_id(article_id)
+
             if article:
+                article['_id'] = str(article['_id'])
                 search_result.append(article)
         return search_result
 
@@ -69,6 +71,7 @@ def kmeans_cluster(id_list):
         for article_id in representative_ids:
             article = SummaryArticle.find_by_id(article_id)
             if article:
+                article['_id'] = str(article['_id'])
                 search_result.append(article)
 
         return search_result

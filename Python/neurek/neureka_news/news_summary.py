@@ -37,7 +37,7 @@ example_text = """
 
 def news_summary_id(_id):
     article_data = DetailsArticle.find_by_id(_id)
-    url = article_data['details_url']
+    url = article_data['detail_url']
 
     response = requests.get(url)
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기

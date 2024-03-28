@@ -110,15 +110,6 @@ def process_news_item(i, soup):
         text, thumbnail_url = keyword_extraction(naver_news_link)
         article_date = get_date_from_url(naver_news_link)
 
-        news_data = {
-            'link': naver_news_link[:-8],
-            'title': title,
-            'press': press,
-            'summary': summary,
-            'thumbnail_url': thumbnail_url,
-            'article_date': article_date
-        }
-
         detail_article = DetailsArticle(
             detail_url=naver_news_link[:-8],
             detail_title=title,
@@ -130,6 +121,15 @@ def process_news_item(i, soup):
         )
         detail_article.save()
 
+        news_data = {
+            'link': naver_news_link[:-8],
+            '_id': str(DetailsArticle.find_by_url(naver_news_link[:-8])['_id']),
+            'title': title,
+            'press': press,
+            'summary': summary,
+            'thumbnail_url': thumbnail_url,
+            'article_date': article_date
+        }
 
         return news_data
 
