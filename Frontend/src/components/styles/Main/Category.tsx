@@ -7,6 +7,11 @@ export const categoryWrapper = styled.div`
   width: 100px;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease; // 변환(확대) 애니메이션
+
+  &:hover {
+    transform: scale(1.2); // 마우스 호버 시 아이콘 확대
+  }
 `
 
 export const Icon = styled.img`
