@@ -5,8 +5,6 @@ import json
 # MongoDB 클라이언트 설정
 client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
 db = client['S10P23C105']
-# client = MongoClient('mongodb://localhost:27017/')
-# db = client['article_database']
 
 if __name__ == '__main__':
     print("is neureka new model")
@@ -42,11 +40,6 @@ class SummaryArticle:
             doc['_id'] = str(doc['_id'])
             documents_list.append(doc)
         return documents_list
-
-    @classmethod
-    def find_by_link(cls, link):
-        """링크로 문서 조회"""
-        return cls.collection.find_one({"article_link": link})
 
     # TODO link -> id
     @classmethod

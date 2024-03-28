@@ -16,32 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user_info`
+-- Table structure for table `recommended_article_detail`
 --
 
-DROP TABLE IF EXISTS `user_info`;
+DROP TABLE IF EXISTS `recommended_article_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_info` (
-  `user_info_id` bigint NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `nickname` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `birth` varchar(255) DEFAULT NULL,
-  `gender` bit(1) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `recommended_article_detail` (
+  `rad_id` bigint NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`rad_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_info`
+-- Dumping data for table `recommended_article_detail`
 --
 
-LOCK TABLES `user_info` WRITE;
-/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,'rladbtks@nv',NULL,NULL,NULL,NULL,NULL),(2,'33',NULL,NULL,NULL,_binary '\0',NULL),(3,'rladbtks@naver.com',NULL,'010-6848-2507','971015',_binary '\0',NULL),(4,'dbtks2759@gmail.com','바보','01232456','12345',_binary '','이ㄴ녕보바보'),(5,'dbtks2507@gmail.com',NULL,NULL,NULL,NULL,'김유산');
-/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+LOCK TABLES `recommended_article_detail` WRITE;
+/*!40000 ALTER TABLE `recommended_article_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `recommended_article_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

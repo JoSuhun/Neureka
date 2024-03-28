@@ -19,6 +19,10 @@ export const CarouselWrapper = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    transition: transform 0.3s ease; // 변환(확대) 애니메이션
+    &:hover {
+      transform: scale(1.2); // 마우스 호버 시 아이콘 확대
+    }
   }
   .swiper-horizontal {
     width: 100%;

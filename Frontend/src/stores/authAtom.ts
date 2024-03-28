@@ -14,10 +14,14 @@ export const isRefreshTokenAtom = atomWithStorage<string | null>(
 )
 export const isExpireTimeAtom = atomWithStorage<number>('tokenExpireTime', 0)
 
+export const isUserEmailAtom = atomWithStorage<string>('useremail', '')
+
 export const isUserAtom = atomWithStorage<User>('userInfo', {
-  nickname: null,
+  userInfoId: null,
   email: null,
+  nickname: null,
   phone: null,
   birth: null,
   gender: null,
+  name: null,
 })

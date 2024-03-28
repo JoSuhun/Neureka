@@ -1,6 +1,8 @@
 package com.ssafy.stocker.news.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.stocker.news.dto.HotWordDTO;
+import com.ssafy.stocker.news.entity.SearchedWordEntity;
 import com.ssafy.stocker.news.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,11 +34,38 @@ public class NewsController {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
+    @PostMapping("/search/word")
+    @Operation(summary =  "뉴스 키워드 검색 db저장 ")
+    public ResponseEntity<?> searchWordAdd(@RequestBody SearchedWordEntity searchedWord){
+        try {
+
+            newsService.addSearchWord(searchedWord);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping("/hot/word")
+    @Operation(summary = "인기검색어를 불러옵니다")
+    public ResponseEntity<?> hotWordList(){
+        try {
+            List<HotWordDTO> hotWordList = newsService.findHotWord();
+            return new ResponseEntity<List<HotWordDTO>>( hotWordList, HttpStatus.OK);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @GetMapping()
     @Operation(summary = "기사 전체조회")
     public ResponseEntity<?> getAllArticle(){
-        String url = "/news/api/today/";
+        String url = "/data/news/api/today/";
 
         String response = webClient.get()
                 .uri(url)
@@ -54,7 +83,7 @@ public class NewsController {
     @Operation(summary = "기사 상세조회. newsId 는 news의 url입니다.")
     public ResponseEntity<?> getArticleDetail(@RequestParam(value = "사용자 이메일", required = false) String email,
                                               @RequestParam(value = "뉴스기사 url") String newsId){
-        String url = "/news/api/news_details/";
+        String url = "/data/news/api/news_details/";
 
         Map<String, String> requestData = new HashMap<>();
         requestData.put("link", newsId);
@@ -82,7 +111,7 @@ public class NewsController {
     @PostMapping("/keyword")
     @Operation(summary = "메인페이지 - 맞춤형 뉴스 추천" )
     public ResponseEntity<?> viewKeyword(@RequestBody Map<String, String[]> keyword){
-        String url = "/news/api/keyword_article/";
+        String url = "/data/news/api/keyword_article/";
 
         Map<String, String[]> requestData = keyword;
 
@@ -108,7 +137,7 @@ public class NewsController {
 //                                            @RequestParam(value = "사용자 이메일") String email,
                                             @RequestParam String newsId,
                                             @RequestParam String grade){
-        String url = "/news/api/update_rate/";
+        String url = "/data/news/api/update_rate/";
 
 
         Map<String, Object> jsonData = new HashMap<>();
@@ -131,7 +160,7 @@ public class NewsController {
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
     public ResponseEntity<?> recommThreeNews(@RequestParam(value = "사용자 이메일", required = false) String email,
                                              @RequestParam(value = "뉴스기사 url") String newsId){
-        String url = "/news/api/recomand/";
+        String url = "/data/news/api/recomand/";
 
         Map<String, String> reqData = new HashMap<>();
         reqData.put("link", newsId);
@@ -180,7 +209,7 @@ public class NewsController {
     @GetMapping("/hot")
     @Operation(summary = "실시간 조회수 높은 기사 5개 조회" )
     public ResponseEntity<?> hotNews(){
-        String url = "/news/api/headlines/";
+        String url = "/data/news/api/headlines/";
 
         String response = webClient.get()
                 .uri(url)

@@ -1,3 +1,5 @@
+import { Sentiment } from "@src/types/MainType"
+
 export type NewsSummary = {
   thumbnail_url: string
   article_title: string
@@ -7,6 +9,7 @@ export type NewsSummary = {
   date_time: string
   keywords: string[]
   topic: string
+  sentiment: Sentiment[]
 }
 
 export type NewsDetail = {

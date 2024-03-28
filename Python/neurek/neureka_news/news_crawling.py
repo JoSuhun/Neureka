@@ -30,7 +30,7 @@ day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
 # 불러올 최소 기사의 수
-article_count = 10
+article_count = 2000
 
 while True:
     if len(article_list) >= article_count:
@@ -242,8 +242,8 @@ def process_article(article, stop_words):
             detail_keywords=keywords
         )
 
-        detail_article = DetailsArticle.find_by_url(url)
         original_article.save()
+        detail_article = DetailsArticle.find_by_url(url)
 
         summary_article = SummaryArticle(
             _id=detail_article['_id'],

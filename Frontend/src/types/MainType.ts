@@ -51,4 +51,10 @@ export type KeywordNews = {
   date_time: string
   keyword: string[]
   topic: string
+  sentiment: Sentiment[]
+}
+
+export type Sentiment = {
+  label: string
+  score: number
 }

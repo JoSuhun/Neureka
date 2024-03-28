@@ -5,8 +5,7 @@ import * as l from '@src/components/styles/Stocks/LatestStocksSectionStyle'
 
 const LatestStocksSection = (props: { data: CompanyLatestType[] }) => {
   const { data } = props
-
-  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+  const [, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
   const handleClick = (item: CompanyType) => {
     setSelectedStock(item)

@@ -40,7 +40,7 @@ public class KeywordController {
                 keywords =  keywordService.findKeyword();
             }
 
-            String url = "/news/api/bubble/";
+            String url = "/data/news/api/bubble/";
 
             // URI에 쿼리 매개변수 추가
             UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url);

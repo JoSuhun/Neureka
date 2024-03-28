@@ -6,11 +6,13 @@ import KeywordNews from '@src/components/Main/KeywordNews'
 import BubbleCategory from '@src/components/Main/BubbleCategory'
 import BubbleChart from '@src/components/Main/BubbleChart'
 import loading from '/image/loading.gif'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { categoriesAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 import { useQuery } from 'react-query'
 import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
 import MainTutorial from '@src/tutorials/MainTutorial'
+import { fetchUserInfo } from '@src/apis/AuthApi'
+import { isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
 
 type Props = {}
 
@@ -19,6 +21,8 @@ const MainContainer = (props: Props) => {
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
+  const userEmail = useAtomValue(isUserEmailAtom)
+  const [userInfo, setUserInfo] = useAtom(isUserAtom)
 
   // 키워드 데이터 요청
   const { data: keywordsData, refetch: refetchKeywords } = useQuery(
@@ -45,6 +49,34 @@ const MainContainer = (props: Props) => {
       enabled: false,
     },
   )
+
+  // 유저 정보 조회하기
+  const {
+    isLoading: isUserInfoLoading,
+    data: userInfoData,
+    isError: isUserInfoError,
+    error: userInfoError,
+    refetch: userInfoRef,
+  } = useQuery({
+    queryKey: 'userInfo',
+    queryFn: () => fetchUserInfo(userEmail as string),
+    onSuccess: res => {
+      console.log(res.data)
+      setUserInfo({
+        birth: res.data.birth,
+        email: res.data.email,
+        gender: res.data.gender,
+        name: res.data.name,
+        nickname: res.data.nickname,
+        phone: res.data.phone,
+        userInfoId: res.data.userInfoId,
+      })
+    },
+  })
+
+  useEffect(() => {
+    userInfoRef()
+  }, [userEmail])
 
   useEffect(() => {
     refetchKeywordNews()
@@ -85,8 +117,8 @@ const MainContainer = (props: Props) => {
         </m.BubbleCategoryWrapper>
 
         <m.BubbleChartWrapper ref={tutorialStartRef}>
-          {keywordsData && keywordsData.data ? (
-            <BubbleChart keywords={keywordsData.data} />
+          {keywordsData && keywordsData?.data ? (
+            <BubbleChart keywords={keywordsData?.data} />
           ) : (
             <div>데이터를 불러오는 중...</div>
           )}
@@ -99,7 +131,7 @@ const MainContainer = (props: Props) => {
               <img src={loading}></img>
             </div>
           ) : (
-            <KeywordNews keywordNews={keywordNewsData?.data.data} />
+            <KeywordNews keywordNews={keywordNewsData?.data?.data} />
           )}
         </m.NewsWrapper>
       </m.container>

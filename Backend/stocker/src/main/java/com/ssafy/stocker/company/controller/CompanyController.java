@@ -8,6 +8,7 @@ import com.ssafy.stocker.company.service.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
+import org.objectweb.asm.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -100,6 +101,20 @@ public class CompanyController {
         }
 
 
+    }
+
+    @Operation(summary = "메일 전송 여부를 변경합니다")
+    @PostMapping("/send/mail/check")
+    public ResponseEntity<?> sendMailModify(@RequestParam String code ,@RequestParam String email, @RequestParam  Boolean isCheck){
+        try {
+
+            companyService.modifySendMail(code, email, isCheck);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 
