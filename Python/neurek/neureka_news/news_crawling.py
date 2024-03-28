@@ -17,6 +17,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
+import os
+from dotenv import load_dotenv
+# .env 파일 로드
+load_dotenv()
+
+# 환경 변수 읽기
+prod_host = os.getenv("PROD_HOST")
+
 
 # 페이지 소스 가져오기
 driver = webdriver.Chrome()
@@ -119,7 +127,7 @@ print("[+] crawling done")
 # https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
 # API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
-tagger = Tagger(API_KEY, 'localhost', 5757)
+tagger = Tagger(API_KEY, prod_host, 5757)
 
 # Sentence Transformer 모델 로드
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')

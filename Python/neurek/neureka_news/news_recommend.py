@@ -16,12 +16,19 @@ import time
 from bson.objectid import ObjectId
 
 
+from dotenv import load_dotenv
+# .env 파일 로드
+load_dotenv()
+
+# 환경 변수 읽기
+prod_host = os.getenv("PROD_HOST")
 
 #### 크롤링 후 처리
 # 바른AI를 사용해 형태소 분석을 진행
 # https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
-tagger = Tagger(API_KEY, 'localhost', 5757)
+# API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
+tagger = Tagger(API_KEY, prod_host, 5757)
 
 # Sentence Transformer 모델 로드
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
