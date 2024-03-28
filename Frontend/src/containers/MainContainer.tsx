@@ -44,9 +44,10 @@ const MainContainer = (props: Props) => {
     isLoading: keywordArticlesLoading,
   } = useQuery(
     ['fetchKeywordArticles', selectedKeyword],
-    () => fetchKeywordArticles(selectedKeyword.links),
+    () => fetchKeywordArticles(selectedKeyword.ids),
     {
-      enabled: false,
+      // selectedKeyword.ids 배열에 항목이 있을 경우에만 요청을 활성화
+      enabled: selectedKeyword.ids.length > 0,
     },
   )
 

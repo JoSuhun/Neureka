@@ -14,6 +14,7 @@ const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
 
   // 더미 뉴스 데이터 생성
   const dummyNews = {
+    _id: '',
     message: '관련 기사가 없습니다',
     thumbnail_url: '',
     article_title: '관련 기사가 없습니다',

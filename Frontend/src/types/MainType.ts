@@ -26,7 +26,7 @@ export type Category = {
 export type KeywordCount = {
   keyword: string
   count: number
-  links: string[]
+  ids: string[]
 }
 
 export type Bubble = d3.SimulationNodeDatum & {
@@ -42,6 +42,7 @@ export type CategoryBoxProps = {
 }
 
 export type KeywordNews = {
+  _id: string
   message: string
   thumbnail_url: string
   article_title: string
