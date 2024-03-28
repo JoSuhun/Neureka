@@ -27,14 +27,16 @@ const RightWordsSection = ({ data }: Props) => {
         <r.Title>MARK</r.Title>
         {data?.length ? (
           <r.Box>
-            {data?.map((word: any, idx: number) => (
-              <WordCard
-                key={idx}
-                word={word?.dictionary}
-                marked={true}
-                side="right"
-              />
-            ))}
+            {data?.map((word: any, idx: number) =>
+              word?.dictionary ? (
+                <WordCard
+                  key={idx}
+                  word={word?.dictionary}
+                  marked={true}
+                  side="right"
+                />
+              ) : null,
+            )}
           </r.Box>
         ) : (
           <r.Empty>북마크 된 단어가 없어요</r.Empty>
