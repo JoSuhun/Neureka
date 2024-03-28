@@ -8,8 +8,10 @@ import {
   isAccessTokenAtom,
   isRefreshTokenAtom,
   isExpireTimeAtom,
+  isUserAtom,
+  isUserEmailAtom,
 } from '@src/stores/authAtom'
-import { getCookie } from './loginCookie'
+import { getCookie, removeCookie } from './loginCookie'
 import { CollectionsBookmarkOutlined } from '@mui/icons-material'
 
 type Props = {}
@@ -19,6 +21,8 @@ const TokenChecker = (props: Props) => {
   const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
+  const [userInfo, setUserInfo] = useAtom(isUserAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const refresh = async () => {
     const res = await axios.post('http://localhost:8080/reissue')
@@ -32,19 +36,31 @@ const TokenChecker = (props: Props) => {
   }
 
   const update = () => {
-    if (expireTime > 0) {
+    if (expireTime) {
       const now = new Date().getTime()
       const loginTime = Math.round((now - expireTime) / 1000 / 60)
 
       console.log('로그인 시간: ' + loginTime + '분')
 
-      if (loginTime < 60) {
+      if (loginTime < 1) {
         refresh()
       } else {
         setIsLogin(false)
-        setExpireTime(0)
+        setExpireTime(null)
         setAccessToken('')
         setRefreshToken('')
+        setUserEmail('')
+        setUserInfo({
+          userInfoId: null,
+          name: null,
+          nickname: null,
+          email: null,
+          phone: null,
+          birth: null,
+          gender: null,
+        })
+        removeCookie('Authorization')
+        removeCookie('refresh')
         console.log('토큰 만료로 로그아웃됨')
       }
     }

@@ -9,17 +9,19 @@ export const publicRequest = axios.create({
   baseURL: BASE_URL,
 })
 
-export const setClientHeaders = (authToken: string | null) => {
-  publicRequest.interceptors.request.use(config => {
-    config.headers['Authorization'] = authToken
-    return config
-  })
-}
+// export const setClientHeaders = (authToken: string | null) => {
+//   publicRequest.interceptors.request.use(config => {
+//     config.headers['Authorization'] = authToken
+//     return config
+//   })
+// }
 
 publicRequest.interceptors.request.use(
   config => {
-    if (!config.headers.Authorization) {
+    if (config.headers.Authorization) {
       config.headers['Authorization'] = accessToken
+    } else {
+      delete config.headers['Authorization'] // 토큰이 없을 때 헤더에서 제거
     }
     return config
   },
