@@ -64,7 +64,7 @@ public class CompanyController {
     @Operation(summary = "주식 최근 10년간 가격을 조회합니다." )
     @GetMapping("/stock/price")
     public ResponseEntity<String> getDataFromDjango(@RequestParam @Parameter String code) {
-        String url = "/finance/fetch_krx/?code=" + code;
+        String url = "/data/finance/fetch_krx/?code=" + code;
 
         String response = webClient.get()
                 .uri(url)
@@ -152,7 +152,7 @@ public class CompanyController {
     public  ResponseEntity<?> getNewsFive(@RequestParam String company){
         try {
 //            System.out.println(company);
-            String url = "/finance/stock_news/";
+            String url = "/data/finance/stock_news/";
 
             Map<String, String> requestData = new HashMap<>();
             requestData.put("keyword", company);
