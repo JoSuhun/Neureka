@@ -30,6 +30,7 @@ export type CompanyLikeType = {
   id: number
   company: CompanyType
   user: UserType
+  isSendmail: boolean
 }
 
 export type CompanyLikeParmasType = {
@@ -56,4 +57,10 @@ export type CompanyNewsType = {
   thumbnail_url: string
   title: string
   article_date: string
+}
+
+export type CompanySubscribeType = {
+  code: string
+  email: string
+  isCheck: boolean
 }

@@ -10,6 +10,7 @@ import {
   fetchCompanyLatestList,
   fetchCompanyLatest,
   fetchCompanyNewsList,
+  fetchCompanySubscribe,
 } from '@src/apis/StockApi'
 import {
   selectedCompanyAtom,
@@ -32,17 +33,16 @@ const StocksContainer = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const [isTutorialReady, setIsTutorialReady] = useState(false) // 데이터 로딩 상태 변수
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
   const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [, setSelectedNewsList] = useAtom(selectedNewsListAtom) // 기업 뉴스 리스트
 
   const user = {
     user_id: 1,
-    email: 'dbtks2759@gmail.com',
-    name: '김유산',
+    email: 'tmdgus1761@gmail.com',
+    name: '이승현',
     role: 'ROLE_USER',
-    username: 'google 117226197043183171022',
+    username: 'google 113694125224268545930',
   }
 
   // 기업 전체 조회
@@ -87,7 +87,7 @@ const StocksContainer = () => {
   })
 
   const handleAddMyStock = () => {
-    const email = 'dbtks2759@gmail.com'
+    const email = 'tmdgus1761@gmail.com'
     const params = {
       email,
       code: selectedStock.code,
@@ -103,7 +103,7 @@ const StocksContainer = () => {
   })
 
   const handleRemoveMyStock = () => {
-    const email = 'dbtks2759@gmail.com'
+    const email = 'tmdgus1761@gmail.com'
     const params = {
       email,
       code: selectedStock.code,
@@ -126,13 +126,43 @@ const StocksContainer = () => {
   })
 
   const handleAddLatestCompany = () => {
-    const email = 'dbtks2759@gmail.com'
+    const email = 'tmdgus1761@gmail.com'
     const params = {
       email,
       code: selectedStock.code,
       companyName: selectedStock.companyName,
     }
     latestCompany(params)
+  }
+
+  // 구독 기업 여부 변경
+  const { mutate: subscribeCompany } = useMutation({
+    mutationKey: ['SubscribeCompany'],
+    mutationFn: fetchCompanySubscribe,
+    onSuccess: () => refetchCompanyLikeList(), // 관심 기업 조회 refetch
+  })
+
+  // 구독
+  const handleSubscribeCompany = () => {
+    console.log(selectedStock)
+    const email = 'tmdgus1761@gmail.com'
+    const params = {
+      code: selectedStock.code,
+      email,
+      isCheck: true,
+    }
+    subscribeCompany(params)
+  }
+
+  // 구독 취소
+  const handleUnSubscribeCompany = () => {
+    const email = 'tmdgus1761@gmail.com'
+    const params = {
+      code: selectedStock.code,
+      email,
+      isCheck: false,
+    }
+    subscribeCompany(params)
   }
 
   // 선택 기업 변경 시
@@ -143,16 +173,9 @@ const StocksContainer = () => {
     refetchCompanyNewsList() // 최근 뉴스 조회 refetch
   }, [selectedStock])
 
-  // 데이터 로딩 관련 상태 업데이트
-  useEffect(() => {
-    if (companyList) {
-      setIsTutorialReady(true) // 모든 데이터가 로딩되었다면 true로 설정
-    }
-  }, [companyList])
-
   return (
     <s.Container>
-      {isTutorialReady ? <StockTutorial /> : null}
+      {companyList ? <StockTutorial /> : null}
       <s.SidebarWrap>
         {companyList && <SearchStocksSection data={companyList} />}
         <MyStocksSection data={companyLikeList} />
@@ -162,6 +185,8 @@ const StocksContainer = () => {
         <MainTopSection
           handleAddMyStock={handleAddMyStock}
           handleRemoveMyStock={handleRemoveMyStock}
+          handleSubscribeCompany={handleSubscribeCompany}
+          handleUnSubscribeCompany={handleUnSubscribeCompany}
         />
         {isLoadingCompanyPriceList ? (
           <Loading />
