@@ -81,8 +81,8 @@ public class NewsController {
 
     @GetMapping("/newsdetail")
     @Operation(summary = "기사 상세조회. newsId 는 news의 url입니다.")
-    public ResponseEntity<?> getArticleDetail(@RequestParam(value = "사용자 이메일", required = false) String email,
-                                              @RequestParam(value = "뉴스기사 고유값") String newsId){
+    public ResponseEntity<?> getArticleDetail(@RequestParam(required = false) String email,
+                                              @RequestParam String newsId){
         String url = "/data/news/api/news_details/";
 
         Map<String, String> requestData = new HashMap<>();
@@ -154,8 +154,8 @@ public class NewsController {
 
     @PostMapping("/other/")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
-    public ResponseEntity<?> recommThreeNews(@RequestParam(value = "사용자 이메일", required = false) String email,
-                                             @RequestParam(value = "뉴스기사 고유값") String newsId){
+    public ResponseEntity<?> recommThreeNews(@RequestParam(required = false) String email,
+                                             @RequestParam String newsId){
         String url = "/data/news/api/recommend/";
 
         Map<String, String> reqData = new HashMap<>();

@@ -42,7 +42,7 @@ const TokenChecker = (props: Props) => {
 
       console.log('로그인 시간: ' + loginTime + '분')
 
-      if (loginTime < 1) {
+      if (loginTime < 60) {
         refresh()
       } else {
         setIsLogin(false)

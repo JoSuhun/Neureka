@@ -11,10 +11,10 @@ import { fetchNewsDetail } from '@src/apis/NewsApi'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {
-  newsUrl: string
+  newsId: string
 }
 
-const NewsDetailContainer = ({ newsUrl }: Props) => {
+const NewsDetailContainer = ({ newsId }: Props) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -31,9 +31,9 @@ const NewsDetailContainer = ({ newsUrl }: Props) => {
     refetch,
   } = useQuery({
     queryKey: 'get-news-detail',
-    // queryFn: () => fetchNewsDetail(newsUrl), // mongoDB 업데이트 필요함
-    queryFn: () =>
-      fetchNewsDetail('https://n.news.naver.com/mnews/article/011/0004316543'), // 일단은 mongoDB 더미데이터 사용 ..
+    queryFn: () => fetchNewsDetail(newsId), // mongoDB 업데이트 필요함
+    // queryFn: () =>
+    //   fetchNewsDetail('https://n.news.naver.com/mnews/article/011/0004316543'), // 일단은 mongoDB 더미데이터 사용 ..
   })
 
   if (isNewsListLoading) {
