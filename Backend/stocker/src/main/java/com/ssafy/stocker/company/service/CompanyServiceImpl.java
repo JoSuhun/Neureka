@@ -89,4 +89,18 @@ public class CompanyServiceImpl implements  CompanyService {
 
         return companyReadRepository.findByEmail(email);
     }
+
+
+    @Override
+    public void modifySendMail(String code,String email, Boolean isCheck) {
+
+        UserEntity user = userRepository.findByEmail(email);
+        CompanyEntity company = companyRepository.findByCode(code);
+
+        UserCompanyEntity userLikeCompany = userCompanyRepository.findByUserAndCompany(user, company);
+        userLikeCompany.setIsSendmail(isCheck);
+        userCompanyRepository.save(userLikeCompany);
+
+
+    }
 }
