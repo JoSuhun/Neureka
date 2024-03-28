@@ -3,6 +3,7 @@ import queryString from 'query-string'
 import {
   CompanyLikeParmasType,
   CompanyLatestParamsType,
+  CompanySubscribeType,
 } from '@src/types/CompanyType'
 
 // 기업 전체 조회
@@ -65,6 +66,14 @@ export const fetchCompanyLatest = async (params: CompanyLatestParamsType) => {
 export const fetchCompanyNewsList = async (company: string) => {
   return await publicRequest
     .get(`company/newsfive?company=${company}`)
+    .then(res => res.data)
+    .catch(err => console.log(err))
+}
+
+// 구독 기업 여부 변경
+export const fetchCompanySubscribe = async (params: CompanySubscribeType) => {
+  return await publicRequest
+    .post(`company/send/mail/check?${queryString.stringify(params)}`)
     .then(res => res.data)
     .catch(err => console.log(err))
 }
