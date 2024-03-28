@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements  CompanyService {
         UserCompanyEntity userCompanyEntity = new UserCompanyEntity();
         userCompanyEntity.setUser(user);
         userCompanyEntity.setCompany(company);
-
+        userCompanyEntity.setIsSendmail(false);
         userCompanyRepository.save(userCompanyEntity);
 
     }
