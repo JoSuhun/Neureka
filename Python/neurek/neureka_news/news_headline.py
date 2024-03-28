@@ -16,9 +16,6 @@ def extract_article_details(url):
         response = requests.get(url)
         soup = BeautifulSoup(response.content, "html.parser")
 
-        # 기사 본문 추출
-        article = soup.find("article")
-        article_text = article.get_text(strip=True) if article else "No article text found"
 
         # 이미지 소스 추출
         img_tag = soup.select_one('#img1')
@@ -37,11 +34,10 @@ def extract_article_details(url):
                 except ValueError:
                     continue  # 현재 형식이 맞지 않으면 다음 형식으로 시도
     except Exception as e:
-        article_text = "No article text found"
         img_src = None
         # formatted_date는 기본값을 유지
 
-    return article_text, img_src, formatted_date
+    return img_src, formatted_date
 
 def process_element(element):
     content = ''
@@ -74,15 +70,44 @@ def extract_content_from_url(url):
     return process_element(article)
 
 
+def fetch_article_data(article_li):
+    # 각 요소에 대한 정보 추출 및 할당
+    link_element = article_li.find('a', class_='sa_thumb_link')
+    title_element = article_li.find('strong', class_='sa_text_strong')
+    press_element = article_li.find('div', class_='sa_text_press')
 
-def fetch_article_data(link_element):
-    # link_element로부터 URL 추출
+    # 링크 URL 확인
     link_url = link_element['href'] if link_element else None
-    # URL이 유효하면, 기사 상세 정보 추출
-    if link_url:
-        article_text, thumbnail, article_date = extract_article_details(link_url)
-        return link_url, article_text, thumbnail, article_date
-    return None, None, None, None
+    if not link_url:
+        return None  # 링크가 없는 경우 None 반환
+
+    # 제목과 언론사 텍스트 추출
+    title_text = title_element.text.strip() if title_element else ""
+    press_text = press_element.text.strip() if press_element else ""
+
+    # 기사 상세 정보 추출
+    thumbnail, article_date = extract_article_details(link_url)
+
+    # 기사 원문에 저장
+    detail_article = DetailsArticle(
+        detail_url=link_url,
+        detail_title=title_text,
+        detail_press=press_text,
+        detail_text=extract_content_from_url(link_url),
+        detail_date=article_date,
+        detail_topic="",
+        detail_keywords=""
+    )
+    detail_article.save()
+
+    return {
+        "headline_url": link_url,
+        "headline_thumbnail_url": thumbnail,
+        "headline_title": title_text, # 요약 대신 전문 사용
+        "headline_press": press_text,
+        "headline_date": article_date
+    }
+
 
 def load_headline_news():
     url = "https://news.naver.com/section/101"
@@ -91,37 +116,17 @@ def load_headline_news():
 
     result_list = []
     list_container = soup.select_one('#newsct > div.section_component.as_section_headline._PERSIST_CONTENT')
-    link_elements = [li.find('a', class_='sa_thumb_link') for li in list_container.find_all('li', class_='sa_item _SECTION_HEADLINE')]
 
-    # ThreadPoolExecutor를 사용하여 각 기사의 상세 정보를 병렬로 추출
+    # 모든 기사 항목(li 태그) 리스트
+    articles_li = list_container.find_all('li', class_='sa_item _SECTION_HEADLINE') if list_container else []
+
     with ThreadPoolExecutor(max_workers=10) as executor:
-        future_to_url = {executor.submit(fetch_article_data, link_element): link_element for link_element in link_elements}
-        for future in future_to_url:
-            link_url, article_text, thumbnail, article_date = future.result()
-            if link_url:  # 유효한 URL인 경우 결과 리스트에 추가
-                headline_dict = {
-                    "headline_url": link_url,
-                    "headline_thumbnail_url": thumbnail,
-                    "headline_title": "",  # 제목 추출 로직 필요
-                    "headline_summary": article_text,  # 본문 전체를 요약으로 사용
-                    "headline_press": "",  # 언론사 추출 로직 필요
-                    "headline_date": article_date
-                }
-                result_list.append(headline_dict)
-
-                # 기사 원문에 저장
-                detail_article = DetailsArticle(
-                    detail_url=link_url,
-                    detail_title=title_text,
-                    detail_press=press_text,
-                    detail_text=extract_content_from_url(link_url),
-                    detail_date=article_date,
-                    detail_topic="",
-                    detail_keywords=""
-                )
-                detail_article.save()
-
-                # 필요에 따라 DetailsArticle 객체 생성 및 저장 로직 추가
+        # 각 기사에 대한 fetch_article_data 함수 실행
+        futures = [executor.submit(fetch_article_data, article_li) for article_li in articles_li]
+        for future in futures:
+            article_data = future.result()
+            if article_data:  # 유효한 데이터인 경우 결과 리스트에 추가
+                result_list.append(article_data)
 
     return result_list
 

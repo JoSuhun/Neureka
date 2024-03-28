@@ -31,7 +31,7 @@ day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
 # 불러올 최소 기사의 수
-article_count = 2000
+article_count = 100
 
 while True:
     if len(article_list) >= article_count:
