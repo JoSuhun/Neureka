@@ -12,7 +12,7 @@ import { useQuery } from 'react-query'
 import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
 import MainTutorial from '@src/tutorials/MainTutorial'
 import { fetchUserInfo } from '@src/apis/AuthApi'
-import { isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
+import { isLoginAtom, isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
 
 type Props = {}
 
@@ -23,6 +23,7 @@ const MainContainer = (props: Props) => {
   const [categories] = useAtom(categoriesAtom)
   const userEmail = useAtomValue(isUserEmailAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom)
 
   // 키워드 데이터 요청
   const { data: keywordsData, refetch: refetchKeywords } = useQuery(
@@ -76,7 +77,9 @@ const MainContainer = (props: Props) => {
   })
 
   useEffect(() => {
-    userInfoRef()
+    if (isLogin) {
+      userInfoRef()
+    }
   }, [userEmail])
 
   useEffect(() => {
