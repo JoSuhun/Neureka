@@ -21,10 +21,10 @@ const LoginSection = (props: Props) => {
   // const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
 
   // 구글 로그인 url
-  const google_url = 'http://localhost:8080/oauth2/authorization/google'
-  const kakao_url = 'http://localhost:8080/oauth2/authorization/kakao'
+  const google_url = `${import.meta.env.VITE_REACT_APP_OAUTH_URL}/google`
+  const kakao_url = `${import.meta.env.VITE_REACT_APP_OAUTH_URL}/kakao`
 
-  const kakaoLogin = () => { 
+  const kakaoLogin = () => {
     login(kakao_url)
   }
   const googleLogin = () => {

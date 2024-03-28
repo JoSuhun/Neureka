@@ -19,7 +19,9 @@ const TokenChecker = (props: Props) => {
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
 
   const refresh = async () => {
-    const res = await axios.post('http://localhost:8080/reissue')
+    const res = await axios.post(
+      `${import.meta.env.VITE_REACT_APP_BASE_URL}/reissue`,
+    )
 
     const now = new Date().getTime()
     setExpireTime(now)
