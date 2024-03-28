@@ -5,6 +5,7 @@ import {
   LikedCompanyListAtom,
 } from '@src/stores/stockAtom'
 import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
+import Tooltip from '@src/common/Tooltip'
 
 const MainTopSection = (props: {
   handleAddMyStock: () => void
@@ -28,14 +29,22 @@ const MainTopSection = (props: {
       <s.CodeNumber>({selectedStock.code})</s.CodeNumber>
       <s.ButtonWrap>
         {isSubscribe ? (
-          <s.SubscribeButton onClick={() => setIsSubscribe(false)} />
+          <Tooltip message={'매일 아침 메일을 받아보세요!'}>
+            <s.SubscribeButton onClick={() => setIsSubscribe(false)} />
+          </Tooltip>
         ) : (
-          <s.SubscribingButton onClick={() => setIsSubscribe(true)} />
+          <Tooltip message={'구독중이에요! 구독을 취소하시겠습니까?'}>
+            <s.SubscribingButton onClick={() => setIsSubscribe(true)} />
+          </Tooltip>
         )}
         {isLiked ? (
-          <s.RemoveButton onClick={handleRemoveMyStock} />
+          <Tooltip message={'관심기업에서 삭제하시겠습니까?'}>
+            <s.RemoveButton onClick={handleRemoveMyStock} />
+          </Tooltip>
         ) : (
-          <s.AddButton onClick={handleAddMyStock} />
+          <Tooltip message={'관심기업으로 등록해보세요!'}>
+            <s.AddButton onClick={handleAddMyStock} />
+          </Tooltip>
         )}
       </s.ButtonWrap>
     </s.Container>
