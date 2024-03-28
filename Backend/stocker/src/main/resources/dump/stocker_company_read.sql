@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `company_read`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `company_read` (
-  `cr_id` int NOT NULL AUTO_INCREMENT,
+  `cr_id` bigint NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `company_id` int DEFAULT NULL,
   PRIMARY KEY (`cr_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `company_read_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `company_read` (
 
 LOCK TABLES `company_read` WRITE;
 /*!40000 ALTER TABLE `company_read` DISABLE KEYS */;
-INSERT INTO `company_read` VALUES (1,'dbtks2759@gmail.com',102);
+INSERT INTO `company_read` VALUES (1,'dbtks2759@gmail.com',102),(2,'dbtks2759@gmail.com',1),(3,'dbtks2759@gmail.com',1);
 /*!40000 ALTER TABLE `company_read` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-26  9:29:37
+-- Dump completed on 2024-03-28 10:02:24
