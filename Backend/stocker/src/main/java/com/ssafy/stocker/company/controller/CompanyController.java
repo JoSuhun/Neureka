@@ -109,6 +109,7 @@ public class CompanyController {
         try {
 
             companyService.modifySendMail(code, email, isCheck);
+
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
