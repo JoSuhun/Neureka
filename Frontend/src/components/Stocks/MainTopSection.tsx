@@ -36,7 +36,7 @@ const MainTopSection = (props: {
     <s.Container>
       <s.Title>{selectedStock.companyName}</s.Title>
       <s.CodeNumber>({selectedStock.code})</s.CodeNumber>
-      <s.ButtonWrap>
+      <s.ButtonWrap className="subscribeBtn">
         {isLiked ? (
           <Tooltip message={'관심기업에서 삭제하시겠습니까?'}>
             <s.RemoveButton onClick={handleRemoveMyStock} />
