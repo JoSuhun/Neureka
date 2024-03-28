@@ -30,30 +30,27 @@ def keyword_nouns(text):
     return tokenized_nouns
 
 
-def kmeans_cluster(link_list):
-    # 링크 리스트가 비었을 경우 빈 리스트 반환
-    if not link_list:
+def kmeans_cluster(id_list):
+    # _id 리스트가 비었을 경우 빈 리스트 반환
+    if not id_list:
         return []
 
-    # 링크 리스트의 길이가 4 미만이면 클러스터링 없이 바로 결과 반환
-    if len(link_list) < 4:
-        news_data = SummaryArticle.find_all()
-
+    # _id 리스트의 길이가 4 미만이면 클러스터링 없이 바로 결과 반환
+    if len(id_list) < 4:
         search_result = []
-        for article_link in link_list:
-            for article in news_data:
-                if article["article_link"] == article_link:
-                    search_result.append(article)
-                    break
+        for article_id in id_list:
+            article = SummaryArticle.find_by_id(article_id)
+            if article:
+                search_result.append(article)
         return search_result
 
-    # 링크 리스트의 길이가 4 이상일 때는 아래의 로직을 실행
+    # _id 리스트의 길이가 4 이상일 때는 아래의 로직을 실행
     nouns_list = []
     # 텍스트 벡터화
     tfidf_vectorizer = TfidfVectorizer()
 
-    for link in link_list:
-        article = SummaryArticle.find_by_link(link)
+    for _id in id_list:
+        article = SummaryArticle.find_by_id(_id)
         if article and 'nouns' in article:
             nouns_list.append(article['nouns'])
 
@@ -66,16 +63,13 @@ def kmeans_cluster(link_list):
 
         # 클러스터의 중심에 가장 가까운 기사를 선택
         closest, _ = pairwise_distances_argmin_min(kmeans.cluster_centers_, tfidf_matrix)
-        representative_articles = [link_list[idx] for idx in closest]
-
-        news_data = SummaryArticle.find_all()
+        representative_ids = [id_list[idx] for idx in closest]
 
         search_result = []
-        for article_link in representative_articles:
-            for article in news_data:
-                if article["article_link"] == article_link:
-                    search_result.append(article)
-                    break
+        for article_id in representative_ids:
+            article = SummaryArticle.find_by_id(article_id)
+            if article:
+                search_result.append(article)
 
         return search_result
     else:

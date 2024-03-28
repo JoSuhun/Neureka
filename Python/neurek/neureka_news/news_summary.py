@@ -5,6 +5,7 @@ from transformers import BartForConditionalGeneration
 import requests
 import time
 from bs4 import BeautifulSoup
+from .models import DetailsArticle
 
 model_type = 2
 if model_type == 1:
@@ -34,7 +35,10 @@ example_text = """
 """
 
 
-def news_summary_url(url):
+def news_summary_id(_id):
+    article_data = DetailsArticle.find_by_id(_id)
+    url = article_data['details_url']
+
     response = requests.get(url)
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
     soup = BeautifulSoup(response.content, "html.parser")
@@ -75,12 +79,13 @@ def news_summary(text):
 
 
 # 테스트 용
-if __name__ == "__main__":
-    start_time = time.time()
-
-    news_summary_url("https://n.news.naver.com/mnews/article/366/0000980751")
-
-    end_time = time.time()  # 종료 시간 저장
-    elapsed_time = end_time - start_time  # 경과 시간 계산
-
-    print(f"Execution time: {elapsed_time} seconds")
+# if __name__ == "__main__":
+#     start_time = time.time()
+#
+#     # _id
+#     news_summary_id("")
+#
+#     end_time = time.time()  # 종료 시간 저장
+#     elapsed_time = end_time - start_time  # 경과 시간 계산
+#
+#     print(f"Execution time: {elapsed_time} seconds")

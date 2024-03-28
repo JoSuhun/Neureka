@@ -20,3 +20,13 @@ class UrlSerializer(serializers.Serializer):
 class RateSerializer(serializers.Serializer):
     link = serializers.URLField(max_length=200)
     rating = serializers.IntegerField(min_value=0, max_value=5)
+
+class IdsSerializer(serializers.Serializer):
+    ids = serializers.ListField(child=serializers.CharField(max_length=24))
+
+class IdSerializer(serializers.Serializer):
+    _id = serializers.CharField(max_length=24)
+
+class RateSerializer(serializers.Serializer):
+    _id = serializers.CharField(max_length=24)
+    rating = serializers.IntegerField(min_value=0, max_value=5)

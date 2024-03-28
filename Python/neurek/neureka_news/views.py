@@ -1,12 +1,13 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer, RateSerializer
+from .serializers import SummaryArticleSerializer, IdsSerializer, IdSerializer, RateSerializer
 import json
 from django.http import HttpResponse, JsonResponse
 from .models import db, DetailsArticle, SummaryArticle, KeywordArticle
 from .news_cluster import kmeans_cluster
 from .news_recommend import recommend_news
-from .news_summary import news_summary_url
+from .news_summary import news_summary_id
 from .news_headline import load_headline_news
 from rest_framework.decorators import api_view
 
@@ -60,11 +61,11 @@ def news_bubble(request):
 
     combined_data = []
     for sub_keyword, details in keyword_data.items():
-        unique_links = list(set(details["links"]))  # 중복 링크 제거
+        unique_ids = list(set(details["ids"]))  # 중복 ID 제거
         combined_data.append({
             "keyword": sub_keyword,
             "count": details["count"],
-            "links": unique_links
+            "ids": unique_ids
         })
 
     # combined_data를 count 기준으로 내림차순 정렬
@@ -80,26 +81,31 @@ def news_bubble(request):
 # 4개의 '엄선' 된 기사
 @api_view(['POST'])
 def news_keywords_article(request):
-    serializer = LinksSerializer(data=request.data)
+    # Serializer에서 '_ids'를 받도록 수정
+    serializer = IdsSerializer(data=request.data)
     if serializer.is_valid():
-        links = serializer.validated_data['links']
-        search_list = kmeans_cluster(links)  # kmeans_cluster 함수 호출
+        # Serializer에서 검증된 '_ids'를 가져옴
+        _ids = serializer.validated_data['_ids']
+        search_list = kmeans_cluster(_ids)  # kmeans_cluster 함수 호출, 여기서 '_ids'를 인자로 전달
         # kmeans_cluster의 결과를 응답 데이터로 사용
-        return Response({'message': 'Links processed successfully', 'data': search_list})
+        return Response({'message': 'IDs processed successfully', 'data': search_list})
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # 뉴스 상세보기
 @api_view(["POST"])
 def news_details(request):
-    serializer = UrlSerializer(data=request.data)
+    serializer = IdSerializer(data=request.data)
     if serializer.is_valid():
-        url = serializer.validated_data.get('link')
-        article = DetailsArticle.find_by_url(url)
-        if article:
-            return Response(article)
-        else:
-            return Response({"message": "Article not found 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        _id = serializer.validated_data.get('_id')
+        try:
+            article = DetailsArticle.find_by_id(_id)
+            if article:
+                return Response(article)
+            else:
+                return Response({"message": "Article not found. 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            return Response({"message": "Invalid ID format. ID 형식이 잘못되었습니다."}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -107,24 +113,28 @@ def news_details(request):
 # 뉴스 상세 보기에서 '이와 비슷한 기사'
 @api_view(["POST"])
 def news_recommend(request):
-    serializer = UrlSerializer(data=request.data)
+    serializer = IdSerializer(data=request.data)
     if serializer.is_valid():
-        url = serializer.validated_data.get('link')
-        recommend_list = recommend_news(url)
-        if recommend_list:
-            return Response(recommend_list)
-        else:
-            return Response({"message": "추천해줄만한 기사가 없습니다."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        _id = serializer.validated_data.get('_id')
+        try:
+            recommend_list = recommend_news(_id)
+            if recommend_list:
+                return Response(recommend_list)
+            else:
+                return Response({"message": "추천해줄만한 기사가 없습니다."}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            return Response({"message": "Invalid ID format. ID 형식이 잘못되었습니다."}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # 뉴스 요약(메일 발송용도)
 @api_view(["POST"])
 def news_summary(request):
-    serializer = UrlSerializer(data=request.data)
+    serializer = IdSerializer(data=request.data)
     if serializer.is_valid():
-        url = serializer.validated_data.get('link')
-        summary_text = news_summary_url(url)
+        id_str = serializer.validated_data.get('_id')
+        summary_text = news_summary_id(id_str)
         if summary_text:
             return Response(summary_text)
         else:
@@ -137,10 +147,10 @@ def news_summary(request):
 def update_rating(request):
     serializer = RateSerializer(data=request.data)
     if serializer.is_valid():
-        url = serializer.validated_data.get('link')
+        _id = serializer.validated_data.get('_id')
         rating = serializer.validated_data.get('rating')
 
-        if DetailsArticle.update_rating(url, rating):
+        if DetailsArticle.update_rating(_id, rating):
             return Response({"message": "평점 등록 성공"}, status=status.HTTP_200_OK)
         else:
             return Response({"message": "평점 등록에 실패 했어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -151,7 +161,6 @@ def update_rating(request):
 # HEADLINE 뉴스 5개
 @api_view(["GET"])
 def get_headlines(request):
-    print("hello?")
     news_data = load_headline_news()
 
     return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
