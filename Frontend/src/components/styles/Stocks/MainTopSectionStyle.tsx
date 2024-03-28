@@ -29,6 +29,7 @@ export const CodeNumber = styled.span`
 
 export const ButtonWrap = styled.div`
   margin-left: auto;
+  margin-right: 1%;
   align-self: flex-end;
   width: 5%;
   display: flex;
