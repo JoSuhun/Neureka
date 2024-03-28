@@ -114,22 +114,14 @@ public class NewsController {
         String url = "/data/news/api/keyword_article/";
 
 
-        Map<String, Object> jsonData = new HashMap<>();
-
-        jsonData.put("_ids", keyword.get("ids"));
-
-
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(jsonData))
+                .body(BodyInserters.fromValue(keyword))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-
-//         응답 처리
-        log.info("Response from Django server: " + response);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
