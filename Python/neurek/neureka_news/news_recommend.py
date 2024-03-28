@@ -13,13 +13,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 import time
+from bson.objectid import ObjectId
+
 
 
 #### 크롤링 후 처리
 # 바른AI를 사용해 형태소 분석을 진행
 # https://bareun.ai/docs
 API_KEY = "koba-E6NTYJA-XRXUDDI-U26NETA-QDNVN2A"
-# API_KEY = "koba-2XBK6DY-HNAE4VY-RYZWFHA-GCGGG2A"
 tagger = Tagger(API_KEY, 'localhost', 5757)
 
 # Sentence Transformer 모델 로드
@@ -80,24 +81,31 @@ def load_stop_words(file_path):
     return stop_words
 
 
-def recommend_news(url):
-    # 해당 URL에 해당하는 기사
-    article_data = DetailsArticle.find_by_url(url)
+def recommend_news(id_str):
+    try:
+        _id = ObjectId(id_str)  # Convert string ID to ObjectId
+    except:
+        print("Invalid ID format.")
+        return []
+
+    # 해당 ID에 해당하는 기사
+    article_data = DetailsArticle.find_by_id(_id)
+
 
     # 불러온 내용이 있는지 확인
     if article_data:
         # 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
-        if DetailsArticle.is_topic_empty_for_url(url):
+        if DetailsArticle.is_topic_empty_for_id(_id):
 
             stop_words_path = "LDA/stop_words.txt"
             stop_words = load_stop_words(stop_words_path)
 
-            article_text = keyword_extraction(url)
+            article_text = keyword_extraction(article_data['detail_url'])
 
             new_topic = text_through_LDA_probability(article_text)
             new_keywords = keyword_ext(article_text, stop_words)
 
-            update_success = DetailsArticle.update_topic_and_keywords(url, new_topic, new_keywords)
+            update_success = DetailsArticle.update_topic_and_keywords(_id, new_topic, new_keywords)
 
 
             if update_success:
@@ -109,8 +117,8 @@ def recommend_news(url):
             print("Article already has a topic.")
 
             # 비슷한 기사를 불러오기
-        similar_urls = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
-        return similar_urls
+        similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
+        return similar_ids
 
 
     else:

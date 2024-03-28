@@ -30,7 +30,7 @@ day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
 # 불러올 최소 기사의 수
-article_count = 100
+article_count = 10
 
 while True:
     if len(article_list) >= article_count:
@@ -242,9 +242,11 @@ def process_article(article, stop_words):
             detail_keywords=keywords
         )
 
+        detail_article = DetailsArticle.find_by_url(url)
         original_article.save()
 
         summary_article = SummaryArticle(
+            _id=detail_article['_id'],
             thumbnail_url=thumbnail_src,
             article_title=article["article_title"],
             article_link=url,
@@ -258,6 +260,8 @@ def process_article(article, stop_words):
 
         summary_article.save()
 
+        article['_id'] = detail_article['_id']
+
     return article
 
 
@@ -268,12 +272,21 @@ def update_keyword_dict(news_data, keyword_dict):
             for keyword in article["keywords"]:
                 # 해당 키워드가 해당 토픽의 키워드 딕셔너리에 없으면 초기화
                 if keyword not in keyword_dict[topic]:
-                    keyword_dict[topic][keyword] = {"count": 0, "links": []}
+                    keyword_dict[topic][keyword] = {"count": 0, "_ids": []}  # 'links'를 '_ids'로 변경
 
-                # 키워드 count 증가 및 링크 추가
+                # 키워드 count 증가 및 _id 추가
                 keyword_dict[topic][keyword]["count"] += 1
-                keyword_dict[topic][keyword]["links"].append(article["article_link"])
+                keyword_dict[topic][keyword]["_ids"].append(str(article["_id"]))
+
+    # 중복 _id 제거
+    for topic, keywords in keyword_dict.items():
+        for key, value in keywords.items():
+            # 중복된 _id 제거
+            unique_ids = list(set(value["_ids"]))
+            keyword_dict[topic][key]["_ids"] = unique_ids
+
     return keyword_dict
+
 
 
 if __name__ == "__main__":
