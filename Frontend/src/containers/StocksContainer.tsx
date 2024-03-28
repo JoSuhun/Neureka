@@ -152,7 +152,7 @@ const StocksContainer = () => {
 
   return (
     <s.Container>
-      {/* {isTutorialReady ? <StockTutorial /> : null} */}
+      {isTutorialReady ? <StockTutorial /> : null}
       <s.SidebarWrap>
         {companyList && <SearchStocksSection data={companyList} />}
         <MyStocksSection data={companyLikeList} />
