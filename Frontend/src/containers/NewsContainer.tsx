@@ -1,5 +1,5 @@
 import Carousel from '@src/components/News/Carousel'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Wrapper } from './styles/NewsContainerStyle'
 import Header from '@src/components/News/Header'
 import CustomizedNews from '@src/components/News/CustomizedNews'
@@ -11,6 +11,13 @@ import { fetchNewsList, fetchHotNews, fetchHotSearch } from '@src/apis/NewsApi'
 type Props = {}
 
 const NewsContainer = (props: Props) => {
+  const [hotKeywordsData, setHotKeywordsData] = useState<
+    | {
+        word: string
+        count: number
+      }[]
+    | null
+  >(null)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -34,7 +41,7 @@ const NewsContainer = (props: Props) => {
     queryKey: 'get-hot-news',
     queryFn: fetchHotNews,
     onSuccess: res => {
-      console.log(res.data)
+      // console.log(res.data)
     },
   })
 
@@ -43,13 +50,18 @@ const NewsContainer = (props: Props) => {
     data: hotKeywordData,
     isError: isHotKeywordError,
     error: hotKeywordError,
+    refetch,
   } = useQuery({
     queryKey: 'hot-keywords',
     queryFn: fetchHotSearch,
     onSuccess: res => {
-      console.log(res.data)
+      setHotKeywordsData(res.data)
     },
   })
+
+  useEffect(() => {
+    refetch()
+  }, [])
 
   if (isNewsListLoading) {
     return <>뉴스 불러오는 중 . . .</>

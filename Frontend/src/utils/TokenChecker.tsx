@@ -9,6 +9,8 @@ import {
   isRefreshTokenAtom,
   isExpireTimeAtom,
 } from '@src/stores/authAtom'
+import { getCookie } from './loginCookie'
+import { CollectionsBookmarkOutlined } from '@mui/icons-material'
 
 type Props = {}
 
@@ -24,7 +26,8 @@ const TokenChecker = (props: Props) => {
     const now = new Date().getTime()
     setExpireTime(now)
     setAccessToken(res.headers.authorization)
-    setRefreshToken(res.headers.refreshtoken)
+    setRefreshToken(getCookie('refresh'))
+
     console.log('토큰 재발행')
   }
 
