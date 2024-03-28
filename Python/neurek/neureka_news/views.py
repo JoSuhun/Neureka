@@ -1,6 +1,5 @@
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
-from .serializers import SummaryArticleSerializer, LinksSerializer, UrlSerializer, RateSerializer
 from .serializers import SummaryArticleSerializer, IdsSerializer, IdSerializer, RateSerializer
 import json
 from django.http import HttpResponse, JsonResponse
@@ -85,7 +84,7 @@ def news_keywords_article(request):
     serializer = IdsSerializer(data=request.data)
     if serializer.is_valid():
         # Serializer에서 검증된 '_ids'를 가져옴
-        _ids = serializer.validated_data['_ids']
+        _ids = serializer.validated_data['ids']
         search_list = kmeans_cluster(_ids)  # kmeans_cluster 함수 호출, 여기서 '_ids'를 인자로 전달
         # kmeans_cluster의 결과를 응답 데이터로 사용
         return Response({'message': 'IDs processed successfully', 'data': search_list})

@@ -41,11 +41,6 @@ class SummaryArticle:
             documents_list.append(doc)
         return documents_list
 
-    @classmethod
-    def find_by_link(cls, link):
-        """링크로 문서 조회"""
-        return cls.collection.find_one({"article_link": link})
-
     # TODO link -> id
     @classmethod
     def find_by_id(cls, _id):
