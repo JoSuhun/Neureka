@@ -13,6 +13,6 @@ import java.util.List;
 public interface SearchedWordRepository extends JpaRepository<SearchedWordEntity , Long> {
 
 
-    @Query("select new com.ssafy.stocker.news.dto.HotWordDTO(s.word, count(s) ) from searched_word  s group by  s.word order by count desc" )
+    @Query("select new com.ssafy.stocker.news.dto.HotWordDTO(s.word, count(s) ) from searched_word  s group by  s.word ORDER BY COUNT(s) desc" )
     List<HotWordDTO> countHotWord();
 }
