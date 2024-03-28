@@ -45,10 +45,11 @@ const CategoryCarousel = ({ show }: Props) => {
       <Swiper
         modules={[Navigation]} // 모듈 활성화
         slidesPerView={9}
+        initialSlide={4} // 초기 슬라이드의 색인 번호입니다
         breakpoints={{
-          360: { slidesPerView: 3 },
-          640: { slidesPerView: 5 },
-          840: { slidesPerView: 7 },
+          360: { slidesPerView: 3, initialSlide: 1 },
+          640: { slidesPerView: 5, initialSlide: 2 },
+          840: { slidesPerView: 7, initialSlide: 3 },
         }}
         navigation={true} // 네비게이션 활성화 수정
         centeredSlides={true}

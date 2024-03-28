@@ -13,9 +13,9 @@ const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
   const safeKeywordNews = Array.isArray(keywordNews) ? keywordNews : []
 
   // 더미 뉴스 데이터 생성
-  const dummyData = {
+  const dummyNews = {
     message: '관련 기사가 없습니다',
-    thumbnail_url: '', // 더미 데이터에는 썸네일 없음
+    thumbnail_url: '',
     article_title: '관련 기사가 없습니다',
     article_link: '',
     article_summary: '',
@@ -23,14 +23,15 @@ const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
     date_time: '',
     keyword: [],
     topic: '',
+    sentiment: [],
   }
 
   // 필요한 더미 데이터 개수 계산
-  const dummyItemsNeeded = Math.max(0, 4 - safeKeywordNews.length)
-  const dummyItems = Array.from({ length: dummyItemsNeeded }, () => dummyData)
+  const neededCount = Math.max(0, 4 - safeKeywordNews.length)
+  const dummyNewsArray = Array.from({ length: neededCount }, () => dummyNews)
 
   // 기존 뉴스 데이터와 더미 데이터 합치기
-  const displayItems = [...safeKeywordNews, ...dummyItems]
+  const resultKeywordNews = [...safeKeywordNews, ...dummyNewsArray]
 
   return (
     <>
@@ -41,10 +42,10 @@ const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
             <k.KeywordCircle>
               <k.SelectedKeyword>{selectedKeyword.keyword}</k.SelectedKeyword>
               <k.NewsGrid>
-                {displayItems.map((article, index) => (
+                {resultKeywordNews.map((news, index) => (
                   <NewsCard
                     key={index}
-                    article={article}
+                    news={news}
                     className={`${index % 2 === 0 ? 'odd' : 'even'}`}
                   />
                 ))}

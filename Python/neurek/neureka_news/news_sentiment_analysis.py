@@ -36,7 +36,7 @@ def predict_sentiment(inputs):
     return sorted_probs
 
 
-# 사용 예시
+# 확인용
 if __name__ == "__main__":
     inputs = "너도 나도 투자 확대…대세로 발돋움하는 '사모대출'"
     sorted_probs = predict_sentiment(inputs)

@@ -76,8 +76,8 @@ export const ItemPercentage = styled.span<ColorProps>`
 `
 
 export const Icon = styled.img`
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 12px;
 `
 
 export const LeftBottomNumber = styled.span<ColorProps>`
