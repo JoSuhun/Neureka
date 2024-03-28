@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import NotificationAddRoundedIcon from '@mui/icons-material/NotificationAddRounded'
+import NotificationAddOutlinedIcon from '@mui/icons-material/NotificationAddOutlined'
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
 
 export const Container = styled.div`
   display: flex;
@@ -57,8 +58,19 @@ export const RemoveButton = styled(RemoveCircleIcon)`
   }
 `
 
-export const AlarmButton = styled(NotificationAddRoundedIcon)`
-  color: black;
+export const SubscribeButton = styled(NotificationAddOutlinedIcon)`
+  color: gray;
+  font-size: 1.5rem !important;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`
+
+export const SubscribingButton = styled(NotificationsActiveIcon)`
+  color: #ffc700;
   font-size: 1.5rem !important;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;

@@ -5,7 +5,7 @@ import * as m from '@src/components/styles/Stocks/MyStocksSectionStyle'
 
 const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
   const { data } = props
-  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+  const [, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
   const handleClick = (item: CompanyType) => {
     setSelectedStock(item)
