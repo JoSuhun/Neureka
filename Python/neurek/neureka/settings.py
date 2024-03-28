@@ -27,10 +27,10 @@ DEBUG = True
 
 if DEBUG:
     # 개발 환경 설정
-    ALLOWED_HOSTS = ['localhost']
+    ALLOWED_HOSTS = ['127.0.0.1','localhost']
 else:
     # 배포 환경 설정
-    ALLOWED_HOSTS = ['your-domain.com']
+    ALLOWED_HOSTS = ['j10c105.p.ssafy.io']
 
 
 # Application definition
