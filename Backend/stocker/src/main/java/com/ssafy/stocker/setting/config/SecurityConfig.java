@@ -1,10 +1,11 @@
-package com.ssafy.stocker.user.config;
+package com.ssafy.stocker.setting.config;
 
-import com.ssafy.stocker.user.jwt.JWTFilter;
-import com.ssafy.stocker.user.jwt.JWTUtil;
+import com.ssafy.stocker.setting.jwt.JWTFilter;
+import com.ssafy.stocker.setting.jwt.JWTUtil;
 import com.ssafy.stocker.user.oauth2.CustomSuccessHandler;
 import com.ssafy.stocker.user.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,6 +41,11 @@ public class SecurityConfig {
     }
 
     @Bean
+    public JWTFilter jwtFilter() {
+        return new JWTFilter(jwtUtil);
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
@@ -58,6 +64,9 @@ public class SecurityConfig {
 
                         configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
                         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+//                        configuration.addExposedHeader("Authorization");
+
+//                        configuration.setExposedHeaders(Arrays.asList("Authorization", "refreshToken"));
 
                         return configuration;
                     }

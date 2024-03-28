@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
   background-color: var(--color-lightgrey);
   padding-bottom: 3%;
   @media screen and (max-width: 1200px) {
+    .press-title {
+      display: none;
+    }
     .card-box {
       height: 250px;
     }
@@ -43,7 +46,7 @@ export const NewsBox = styled.div`
 
 export const NewCardBox = styled.div`
   background-color: white;
-  height: 300px;
+  height: 330px;
   /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -73,6 +76,7 @@ export const NewsThumbnail = styled.img<{ image: string }>`
 
 export const News = styled.div`
   margin: 5%;
+  position: relative;
 `
 
 export const NewsTitle = styled.div`
@@ -96,6 +100,16 @@ export const NewsContent = styled.div`
   -webkit-box-orient: vertical;
   color: var(--color-grey);
 `
+
+export const NewsInfo = styled.p`
+  display: flex;
+  justify-content: end;
+  margin-top: 5px;
+`
+export const Press = styled.span`
+  font-size: 0.8rem;
+`
+
 export const PageStack = styled(Stack)`
   display: flex;
   align-items: center;

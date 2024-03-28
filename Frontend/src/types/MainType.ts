@@ -2,10 +2,8 @@ import politics from '/category/politics.png'
 import cryptocurrency from '/category/cryptocurrency.png'
 import stock from '/category/stock.png'
 import semiconductor from '/category/semiconductor.png'
-import realEstate from '/category/realEstate.png'
 import technology from '/category/technology.png'
 import global from '/category/global.png'
-import etc from '/category/etc.png'
 import finance from '/category/finance.png'
 import management from '/category/management.png'
 
@@ -43,7 +41,7 @@ export type CategoryBoxProps = {
   $show: boolean; // boolean에서 string으로 변경
 }
 
-export type KeywordArticles = {
+export type KeywordNews = {
   message: string
   thumbnail_url: string
   article_title: string
@@ -53,5 +51,4 @@ export type KeywordArticles = {
   date_time: string
   keyword: string[]
   topic: string
-
 }

@@ -11,28 +11,31 @@ import DictionaryPage from './pages/DictionaryPage'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthModal from './common/Auth/AuthModal'
+import { CookiesProvider } from 'react-cookie'
 
 const queryClient = new QueryClient()
 
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Navbar />
-          <AuthModal />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/news/:id" element={<NewsDetailPage />} />
-            <Route path="/stocks" element={<StocksPage />} />
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/dictionary" element={<DictionaryPage />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </QueryClientProvider>
+      <CookiesProvider>
+        <QueryClientProvider client={queryClient}>
+          <GlobalStyle />
+          <BrowserRouter>
+            <Navbar />
+            <AuthModal />
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/news/detail/:url" element={<NewsDetailPage />} />
+              <Route path="/stocks" element={<StocksPage />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/dictionary" element={<DictionaryPage />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </CookiesProvider>
     </>
   )
 }

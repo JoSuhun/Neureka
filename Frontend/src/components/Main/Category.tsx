@@ -11,7 +11,6 @@ export type CategoryProps = {
 
 const Category = ({ name, image, show }: CategoryProps) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
-
   const handleCategories = (selectedCategory: Category) => {
     setCategories(prev => {
       // 선택된 카테고리가 이미 리스트에 있는지 확인

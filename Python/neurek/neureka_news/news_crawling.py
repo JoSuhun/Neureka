@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime, timedelta
 from neurek.neureka_news.models import DetailsArticle, KeywordArticle, SummaryArticle
-from news_sentiment_analysis import predict_sentiment
 from LDA.keyword_for_lda import text_through_LDA_probability
 import requests
 import numpy as np
@@ -244,7 +243,6 @@ def process_article(article, stop_words):
         )
 
         original_article.save()
-        sentiment = predict_sentiment(article["article_summary"])
 
         summary_article = SummaryArticle(
             thumbnail_url=thumbnail_src,
@@ -255,8 +253,7 @@ def process_article(article, stop_words):
             date_time=article["date_time"],
             nouns=nouns,
             topic=topic,
-            keywords=keywords,
-            sentiment=sentiment
+            keywords=keywords
         )
 
         summary_article.save()
@@ -280,9 +277,8 @@ def update_keyword_dict(news_data, keyword_dict):
 
 
 if __name__ == "__main__":
-
-    stop_word_path = "LDA/stop_words.txt"
-    stop_words = load_stop_words(stop_word_path)
+    stop_words_path = "LDA/stop_words.txt"
+    stop_words = load_stop_words(stop_words_path)
 
     # 오늘 요약 기사를 일단 지우고
     SummaryArticle.delete_all()

@@ -8,28 +8,43 @@ import NewsCard from './NewsCard'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 
-type Props = {}
+import { NewsSummary } from '@src/types/NewsType'
 
-const NewsList = (props: Props) => {
+import { useAtom } from 'jotai'
+import { questionAtom } from '@src/stores/newsAtom'
+
+type Props = {
+  newsData: NewsSummary[]
+}
+
+const NewsList = ({ newsData }: Props) => {
+  const [question, setQuestion] = useAtom(questionAtom)
+
   const boxRef = useRef<HTMLDivElement>(null)
-  const news = Array.from({ length: 50 }, (_, idx) => idx)
 
+  const [last, setLast] = useState(Math.ceil(newsData.length / 15))
   const [page, setPage] = useState(1)
-  const [data, setData] = useState(news)
+  const [data, setData] = useState(newsData)
+  const [news, setNews] = useState(newsData)
 
-  const last = Math.ceil(news.length / 15)
+  useEffect(() => {
+    if (question) {
+      const filteredData = newsData.filter(news =>
+        news.article_title.includes(question),
+      )
+      setNews(filteredData)
+      setLast(Math.ceil(filteredData.length / 15))
+      setPage(1)
+    } else {
+      setNews(newsData)
+      setLast(Math.ceil(newsData.length / 15))
+      setPage(1)
+    }
+  }, [question])
 
   const handlePage = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page)
   }
-
-  // 뉴스 조회 api
-  useEffect(() => {
-    // axios
-    //   .get('http://127.0.0.1:8000/news/api/today/')
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err))
-  }, [])
 
   useEffect(() => {
     if (page === last) {
@@ -37,17 +52,20 @@ const NewsList = (props: Props) => {
     } else {
       setData(news.slice(15 * (page - 1), 15 * page))
     }
-    if (boxRef.current) {
+
+    if (boxRef.current && page > 1) {
       boxRef.current.scrollIntoView()
+    } else if (page == 1) {
+      window.scrollTo(0, 0)
     }
-  }, [page])
+  }, [page, news])
 
   return (
     <>
       <n.Wrapper ref={boxRef}>
         <n.NewsBox className="news-box">
-          {data.map((it, idx) => (
-            <NewsCard />
+          {data.map((news, idx) => (
+            <NewsCard news={news} />
           ))}
         </n.NewsBox>
         <n.PageStack>

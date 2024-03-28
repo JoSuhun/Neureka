@@ -37,6 +37,23 @@ export type CompanyLikeParmasType = {
   code: string
 }
 
-export type MainTopSectionProps = {
-  handleAddMyStock: () => void
+export type CompanyLatestParamsType = {
+  email: string
+  code: string
+  companyName: string
+}
+
+export type CompanyLatestType = {
+  crId: number
+  email: string
+  company: CompanyType
+}
+
+export type CompanyNewsType = {
+  link: string
+  press: string
+  summary: string
+  thumbnail_url: string
+  title: string
+  article_date: string
 }

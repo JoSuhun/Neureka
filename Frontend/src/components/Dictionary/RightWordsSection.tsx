@@ -17,13 +17,13 @@ const RightWordsSection = ({ data }: Props) => {
 
   useEffect(() => {
     const filtered: Word[] = []
-    data.forEach(word => filtered.push(word.dictionary))
+    data?.forEach(word => filtered.push(word.dictionary))
     SetMarkedWords(filtered)
   }, [data])
 
   return (
     <>
-      <r.Wrapper>
+      <r.Wrapper className="wordsSection">
         <r.Title>MARK</r.Title>
         {data?.length ? (
           <r.Box>

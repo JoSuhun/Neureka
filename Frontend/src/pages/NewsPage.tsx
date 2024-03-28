@@ -1,4 +1,5 @@
 import NewsContainer from '@src/containers/NewsContainer'
+import TokenChecker from '@src/utils/TokenChecker'
 import React from 'react'
 
 type Props = {}
@@ -6,7 +7,8 @@ type Props = {}
 const NewsPage = (props: Props) => {
   return (
     <>
-    <NewsContainer />
+      <TokenChecker />
+      <NewsContainer />
     </>
   )
 }

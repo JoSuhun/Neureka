@@ -13,6 +13,8 @@ import { MarkWord } from '@src/types/WordType'
 
 import { useAtom } from 'jotai'
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
+import { isLoginAtom } from '@src/stores/authAtom'
+import { modalOpenAtom } from '@src/stores/authModalAtom'
 
 type Props = {
   word: Word | null
@@ -23,6 +25,8 @@ type Props = {
 const WordCard = ({ word, marked, side }: Props) => {
   const [isSave, SetIsSave] = useState(false)
   const [mark, setMark] = useAtom(toggleMarkingAtom)
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  const [openLogin, setOpenLogin] = useAtom(modalOpenAtom)
 
   // 단어 즐겨찾기
   const { mutate: markMutate } = useMutation(
@@ -54,11 +58,15 @@ const WordCard = ({ word, marked, side }: Props) => {
 
   // 즐겨찾기 버튼 클릭 이벤트
   const handleMark = () => {
-    SetIsSave(true)
-    markMutate({
-      email: 'dbtks2759@gmail.com',
-      title: word?.title as string,
-    })
+    if (isLogin) {
+      SetIsSave(true)
+      markMutate({
+        email: 'dbtks2759@gmail.com',
+        title: word?.title as string,
+      })
+    } else {
+      setOpenLogin(true)
+    }
   }
 
   // 즐겨찾기 해제 버튼 클릭 이벤트
@@ -73,15 +81,19 @@ const WordCard = ({ word, marked, side }: Props) => {
   return (
     <>
       <c.Card>
-        <c.CardBox>
+        <c.CardBox className="cardBox">
           <c.Title>
             <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
             {marked && side == 'right' ? (
-              <c.deleteBtn onClick={handleUnmark} />
+              <c.deleteBtn className="deleteBtn" onClick={handleUnmark} />
             ) : marked ? (
-              <c.saveBtn src={saved} />
+              <c.saveBtn className="saveBtn" src={saved} />
             ) : (
-              <c.saveBtn src={notsaved} onClick={handleMark} />
+              <c.saveBtn
+                className="saveBtn"
+                src={notsaved}
+                onClick={handleMark}
+              />
             )}
           </c.Title>
           <c.Content>

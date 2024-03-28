@@ -1,4 +1,4 @@
-package com.ssafy.stocker.user.config;
+package com.ssafy.stocker.setting.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

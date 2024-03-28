@@ -40,7 +40,7 @@ CREATE TABLE `user_like_dic` (
 
 LOCK TABLES `user_like_dic` WRITE;
 /*!40000 ALTER TABLE `user_like_dic` DISABLE KEYS */;
-INSERT INTO `user_like_dic` VALUES (1,1,NULL),(2,1,5);
+INSERT INTO `user_like_dic` VALUES (1,1,NULL);
 /*!40000 ALTER TABLE `user_like_dic` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-21 14:07:05
+-- Dump completed on 2024-03-25 15:31:06
