@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
-from neurek.neureka_news.models import DetailsArticle
+from neurek.neureka_news.models import DetailsArticle, HeadlineNews
 import time
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
@@ -71,43 +71,52 @@ def extract_content_from_url(url):
 
 
 def fetch_article_data(article_li):
-    # 각 요소에 대한 정보 추출 및 할당
-    link_element = article_li.find('a', class_='sa_thumb_link')
-    title_element = article_li.find('strong', class_='sa_text_strong')
-    press_element = article_li.find('div', class_='sa_text_press')
+    try:
+        # 각 요소에 대한 정보 추출 및 할당
+        link_element = article_li.find('a', class_='sa_thumb_link')
+        title_element = article_li.find('strong', class_='sa_text_strong')
+        press_element = article_li.find('div', class_='sa_text_press')
 
-    # 링크 URL 확인
-    link_url = link_element['href'] if link_element else None
-    if not link_url:
-        return None  # 링크가 없는 경우 None 반환
+        # 링크 URL 확인
+        link_url = link_element['href'] if link_element else None
+        if not link_url:
+            return None  # 링크가 없는 경우 None 반환
 
-    # 제목과 언론사 텍스트 추출
-    title_text = title_element.text.strip() if title_element else ""
-    press_text = press_element.text.strip() if press_element else ""
+        # 제목과 언론사 텍스트 추출
+        title_text = title_element.text.strip() if title_element else ""
+        press_text = press_element.text.strip() if press_element else ""
 
-    # 기사 상세 정보 추출
-    thumbnail, article_date = extract_article_details(link_url)
+        # 기사 상세 정보 추출
+        thumbnail, article_date = extract_article_details(link_url)
 
-    # 기사 원문에 저장
-    detail_article = DetailsArticle(
-        detail_url=link_url,
-        detail_title=title_text,
-        detail_press=press_text,
-        detail_text=extract_content_from_url(link_url),
-        detail_date=article_date,
-        detail_topic="",
-        detail_keywords=""
-    )
-    detail_article.save()
+        # 기사 원문에 저장
+        detail_article = DetailsArticle(
+            detail_url=link_url,
+            detail_title=title_text,
+            detail_press=press_text,
+            detail_text=extract_content_from_url(link_url),
+            detail_date=article_date,
+            detail_topic="",
+            detail_keywords=""
+        )
+        detail_article.save()
 
-    return {
-        "headline_url": link_url,
-        "headline_thumbnail_url": thumbnail,
-        "headline_title": title_text,
-        "headline_press": press_text,
-        "headline_date": article_date
-    }
+        id = str(DetailsArticle.find_by_url(link_url)['_id'])
 
+        headline_news = HeadlineNews(
+            _id=id,
+            headline_url=link_url,
+            headline_thumbnail_url=thumbnail,
+            headline_title=title_text,
+            headline_press=press_text,
+            headline_date=article_date
+        )
+
+        headline_news.save()
+
+    except Exception as e:
+        print(f"Error processing article: {e}")
+        return None  # 오류 발생 시 None 반환
 
 def load_headline_news():
     url = "https://news.naver.com/section/101"
@@ -120,6 +129,9 @@ def load_headline_news():
     # 모든 기사 항목(li 태그) 리스트
     articles_li = list_container.find_all('li', class_='sa_item _SECTION_HEADLINE') if list_container else []
 
+    # 새로운 헤드라인 뉴스를 위해 db 삭제
+    HeadlineNews.delete_all()
+
     with ThreadPoolExecutor(max_workers=5) as executor:
         # 각 기사에 대한 fetch_article_data 함수 실행
         futures = [executor.submit(fetch_article_data, article_li) for article_li in articles_li]
@@ -130,13 +142,15 @@ def load_headline_news():
 
     return result_list
 
-# 테스트
-import pprint
-if __name__ == "__main__":
-    start_time = time.time()
-    pprint.pprint(load_headline_news())
 
-    end_time = time.time()  # 종료 시간 저장
-    elapsed_time = end_time - start_time  # 경과 시간 계산
 
-    print(f"Execution time: {elapsed_time} seconds")
+# # 테스트
+# import pprint
+# if __name__ == "__main__":
+#     start_time = time.time()
+#     pprint.pprint(load_headline_news())
+#
+#     end_time = time.time()  # 종료 시간 저장
+#     elapsed_time = end_time - start_time  # 경과 시간 계산
+#
+#     print(f"Execution time: {elapsed_time} seconds")

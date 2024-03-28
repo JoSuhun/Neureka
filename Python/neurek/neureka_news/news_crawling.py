@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime, timedelta
 from neurek.neureka_news.models import DetailsArticle, KeywordArticle, SummaryArticle
+from neurek.neureka_news.news_sentiment_analysis import predict_sentiment
 from LDA.keyword_for_lda import text_through_LDA_probability
 import requests
 import numpy as np
@@ -30,7 +31,7 @@ day_count = 0
 # 현재 날짜와 시간을 가져옴
 today = datetime.now()
 # 불러올 최소 기사의 수
-article_count = 2000
+article_count = 500
 
 while True:
     if len(article_list) >= article_count:
@@ -55,9 +56,6 @@ while True:
         # 페이지의 뉴스 항목을 크롤링
         for idx in range(1, 21):  # 한 페이지당 최대 20개의 기사가 있으므로 범위를 1부터 10까지
             article_dict = {}
-            # Thumbnail URL 가져오기
-            # thumbnail_tag = soup.select_one(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dt > a > img')
-            # article_dict['thumbnail_url'] = thumbnail_tag.get('src') if thumbnail_tag else None
 
             # 기사 제목과 링크 가져오기
             article_subjects = soup.select(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSubject > a')
@@ -246,7 +244,7 @@ def process_article(article, stop_words):
         detail_article = DetailsArticle.find_by_url(url)
 
         summary_article = SummaryArticle(
-            _id=detail_article['_id'],
+            _id=str(detail_article['_id']),
             thumbnail_url=thumbnail_src,
             article_title=article["article_title"],
             article_link=url,
@@ -255,12 +253,13 @@ def process_article(article, stop_words):
             date_time=article["date_time"],
             nouns=nouns,
             topic=topic,
-            keywords=keywords
+            keywords=keywords,
+            sentiment=predict_sentiment(article["article_summary"])
         )
 
         summary_article.save()
 
-        article['_id'] = detail_article['_id']
+        article['_id'] = str(detail_article['_id'])
 
     return article
 
@@ -287,14 +286,9 @@ def update_keyword_dict(news_data, keyword_dict):
 
     return keyword_dict
 
-
-
-if __name__ == "__main__":
+def for_schedule():
     stop_words_path = "LDA/stop_words.txt"
     stop_words = load_stop_words(stop_words_path)
-
-    # 오늘 요약 기사를 일단 지우고
-    SummaryArticle.delete_all()
 
     # ThreadPoolExecutor를 사용한 병렬 처리
     # 다시 하나씩 넣어줌
@@ -302,7 +296,11 @@ if __name__ == "__main__":
         # process_article 함수 호출 시 stop_words 전달을 위한 functools.partial 사용
         from functools import partial
         process_with_stop_words = partial(process_article, stop_words=stop_words)
-        list(tqdm(executor.map(process_with_stop_words, article_list), total=len(article_list), desc="Processing articles"))
+        list(tqdm(executor.map(process_with_stop_words, article_list),
+                  total=len(article_list), desc="Processing articles"))
+
+    # 요약본을 2000개가 넘는다면 오래된것부터 삭제
+    SummaryArticle.trim_collection()
 
     keyword_dict = {
         "반도체": {},
@@ -319,3 +317,7 @@ if __name__ == "__main__":
     # 기사의 키워드별 카운트를 db에 저장
     # 기사의 키워드별 카운트를 저장하는 db는 저장하기 전에 전체 삭제하도록 해둠
     KeywordArticle.save_keywords(update_keyword_dict(article_list, keyword_dict))
+
+
+if __name__ == "__main__":
+    for_schedule()
