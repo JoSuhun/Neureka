@@ -13,7 +13,8 @@ if __name__ == '__main__':
 class SummaryArticle:
     collection = db['summary_article_collection']
 
-    def __init__(self, _id, thumbnail_url, article_title, article_link, article_summary, press, date_time, nouns, topic, keywords):
+    def __init__(self, _id, thumbnail_url, article_title, article_link,
+                 article_summary, press, date_time, nouns, topic, keywords, sentiment):
         self._id = ObjectId(_id)
         self.thumbnail_url = thumbnail_url
         self.article_title = article_title
@@ -24,11 +25,16 @@ class SummaryArticle:
         self.nouns = nouns
         self.topic = topic
         self.keywords = keywords
+        self.sentiment = sentiment
 
     def save(self):
-        """문서 저장"""
-        document = self.__dict__
-        self.collection.insert_one(document)
+        """문서 저장 또는 업데이트"""
+        document = {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
+        self.collection.update_one(
+            {'_id': self._id},
+            {'$set': document},
+            upsert=True
+        )
 
     @classmethod
     def find_all(cls):
@@ -54,6 +60,29 @@ class SummaryArticle:
     def delete_all(cls):
         # 컬렉션의 모든 문서 삭제
         cls.collection.delete_many({})
+
+    @classmethod
+    def trim_collection(cls, max_docs=2000):
+        """
+        컬렉션의 문서 개수가 max_docs를 초과하는 경우,
+        가장 오래된 문서부터 초과분을 삭제합니다.
+        """
+        # 현재 컬렉션의 문서 개수 확인
+        current_count = cls.collection.count_documents({})
+        excess = current_count - max_docs
+
+        if excess > 0:
+            # 가장 오래된 문서부터 삭제할 개수만큼 삭제
+            # date_time 필드를 기준으로 오름차순 정렬하여 가장 오래된 문서를 찾음
+            delete_result = cls.collection.find().sort('date_time', 1).limit(excess)
+            ids_to_delete = [doc['_id'] for doc in delete_result]
+
+            # 해당 _id를 가진 문서들 삭제
+            cls.collection.delete_many({'_id': {'$in': ids_to_delete}})
+
+            return True, f"{excess} documents were deleted."
+        else:
+            return False, "No documents were deleted. Collection does not exceed the max_docs limit."
 
     def set_keywords(self, keywords):
         self.keywords = json.dumps(keywords)
@@ -106,25 +135,6 @@ class DetailsArticle:
         if document:
             document['_id'] = str(document['_id'])  # ObjectId를 문자열로 변환
         return document
-
-
-    # @classmethod
-    # def update_rating(cls, url, user_rating):
-    #     """detail_url에 해당하는 문서의 평점 업데이트"""
-    #     document = cls.collection.find_one({"detail_url": url})
-    #
-    #     if document:
-    #         # 기존에 평점 정보가 있는 경우, 새로운 평점을 기존 값에 더하고 카운트 증가
-    #         new_rate = document.get('detail_rate', 0) + user_rating
-    #         new_rate_count = document.get('detail_rate_count', 0) + 1
-    #         update_result = cls.collection.update_one(
-    #             {"detail_url": url},
-    #             {"$set": {"detail_rate": new_rate, "detail_rate_count": new_rate_count}}
-    #         )
-    #         return update_result.modified_count > 0  # 수정된 문서가 있는지 여부 반환
-    #     else:
-    #         # 문서가 없는 경우, False 반환
-    #         return False
 
     @classmethod
     def update_rating(cls, _id, user_rating):
@@ -186,17 +196,6 @@ class DetailsArticle:
         return document and document.get("detail_topic") == ""
 
     @classmethod
-    def update_topic_and_keywords(cls, detail_url, new_detail_topic, new_detail_keywords):
-        """주어진 detail_url에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
-        # 업데이트를 위한 쿼리 작성
-        update_result = cls.collection.update_one(
-            {"detail_url": detail_url},
-            {"$set": {"detail_topic": new_detail_topic, "detail_keywords": new_detail_keywords}}  # 직접 리스트 할당
-        )
-
-        # 업데이트된 문서의 수를 반환 (업데이트 성공 여부 확인용)
-        return update_result.modified_count > 0
-
     def update_topic_and_keywords(cls, _id, new_detail_topic, new_detail_keywords):
         """주어진 _id에 해당하는 문서의 detail_topic과 detail_keywords를 업데이트"""
         update_result = cls.collection.update_one(
@@ -240,5 +239,41 @@ class KeywordArticle:
         return total
 
 
-if __name__ == '__main__':
-    KeywordArticle.find_by_keywords(["반도체"])
+class HeadlineNews:
+    collection = db['headlines']
+
+    def __init__(self, _id, headline_url, headline_thumbnail_url,
+                 headline_title, headline_press, headline_date):
+        self._id = _id
+        self.headline_url = headline_url
+        self.headline_thumbnail_url = headline_thumbnail_url
+        self.headline_title = headline_title
+        self.headline_press = headline_press
+        self.headline_date = headline_date
+
+    def save(self):
+        """문서 저장. _id가 제공되지 않은 경우에만 새로운 문서로 삽입"""
+        if not self._id:  # _id가 없는 경우, 새 문서로 취급
+            document = {k: v for k, v in self.__dict__.items() if v is not None and not k.startswith('_')}
+            result = self.collection.insert_one(document)
+            self._id = str(result.inserted_id)  # 삽입된 문서의 ObjectId를 문자열로 변환하여 저장
+        else:  # _id가 있는 경우, 해당 _id를 가진 문서를 업데이트
+            self.collection.update_one(
+                {'_id': ObjectId(self._id)},  # ObjectId로 변환
+                {'$set': {k: v for k, v in self.__dict__.items() if v is not None and not k.startswith('_')}},
+                upsert=True
+            )
+
+    @classmethod
+    def delete_all(cls):
+        cls.collection.delete_many({})
+
+    @classmethod
+    def find_all(cls):
+        """컬렉션의 모든 문서 조회"""
+        documents_cursor = cls.collection.find({})
+        documents_list = list(documents_cursor)
+        for document in documents_list:
+            # ObjectId를 문자열로 변환
+            document['_id'] = str(document['_id'])
+        return documents_list
