@@ -1,22 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as m from '@src/components/styles/MyPage/MyInfoStyle'
 
 import EditIcon from '@mui/icons-material/Edit'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { useAtom } from 'jotai'
+import { isUserAtom } from '@src/stores/authAtom'
 
 type Props = {}
 
 const MyInfo = (props: Props) => {
   const [edit, SetEdit] = useState(false)
+  const [user, setUser] = useAtom(isUserAtom)
 
-  const [name, setName] = useState('USER99')
-  const [email, setEmail] = useState('USER99@ssafy.com')
-  const [phone, setPhone] = useState('010-2000-2000')
-  const [birth, setBirth] = useState('1997-07-11')
-  const [gender, setGender] = useState('m')
+  const [nickname, setNickname] = useState(user.nickname)
+  const [email, setEmail] = useState(user.email)
+  const [phone, setPhone] = useState(user.phone)
+  const [birth, setBirth] = useState(user.birth)
+  const [gender, setGender] = useState(user.gender)
 
   const goEdit = () => {
     SetEdit(!edit)
+    if (edit) {
+      setUser({
+        nickname: nickname,
+        email: email,
+        phone: phone,
+        birth: birth,
+        gender: gender,
+      })
+    }
   }
 
   return (
@@ -24,9 +36,9 @@ const MyInfo = (props: Props) => {
       <m.Category>
         <m.Title>이름</m.Title>
         <m.Content
-          value={name}
+          value={nickname as string}
           onChange={event => {
-            setName(event.target.value)
+            setNickname(event.target.value as string)
           }}
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
@@ -36,9 +48,9 @@ const MyInfo = (props: Props) => {
       <m.Category>
         <m.Title>이메일</m.Title>
         <m.Content
-          value={email}
+          value={email as string}
           onChange={event => {
-            setEmail(event.target.value)
+            setEmail(event.target.value as string)
           }}
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
@@ -48,9 +60,9 @@ const MyInfo = (props: Props) => {
       <m.Category>
         <m.Title>전화번호</m.Title>
         <m.Content
-          value={phone}
+          value={phone as string}
           onChange={event => {
-            setPhone(event.target.value)
+            setPhone(event.target.value as string)
           }}
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
@@ -60,9 +72,9 @@ const MyInfo = (props: Props) => {
       <m.Category>
         <m.Title>생년월일</m.Title>
         <m.Content
-          value={birth}
+          value={birth as string}
           onChange={event => {
-            setBirth(event.target.value)
+            setBirth(event.target.value as string)
           }}
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
@@ -77,13 +89,13 @@ const MyInfo = (props: Props) => {
           <m.Content
             value="남"
             onChange={event => {
-              setGender('m')
+              setGender(true)
             }}
             disabled={edit ? false : true}
             className={edit ? 'edit' : ''}
             type="radio"
             name="gender"
-            checked={gender == 'm' ? true : false}
+            checked={gender ? true : false}
           />
         </m.GenderLabel>
         <m.GenderLabel className="female">
@@ -91,13 +103,13 @@ const MyInfo = (props: Props) => {
           <m.Content
             value="여"
             onChange={event => {
-              setGender('f')
+              setGender(false)
             }}
             disabled={edit ? false : true}
             className={edit ? 'edit' : ''}
             type="radio"
             name="gender"
-            checked={gender == 'f' ? true : false}
+            checked={gender ? false : true}
           />
         </m.GenderLabel>
       </m.Category>
