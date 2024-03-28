@@ -103,7 +103,7 @@ def fetch_article_data(article_li):
     return {
         "headline_url": link_url,
         "headline_thumbnail_url": thumbnail,
-        "headline_title": title_text, # 요약 대신 전문 사용
+        "headline_title": title_text,
         "headline_press": press_text,
         "headline_date": article_date
     }
@@ -120,7 +120,7 @@ def load_headline_news():
     # 모든 기사 항목(li 태그) 리스트
     articles_li = list_container.find_all('li', class_='sa_item _SECTION_HEADLINE') if list_container else []
 
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=5) as executor:
         # 각 기사에 대한 fetch_article_data 함수 실행
         futures = [executor.submit(fetch_article_data, article_li) for article_li in articles_li]
         for future in futures:
