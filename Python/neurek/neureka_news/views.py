@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .serializers import SummaryArticleSerializer, IdsSerializer, IdSerializer, RateSerializer
 import json
 from django.http import HttpResponse, JsonResponse
-from .models import db, DetailsArticle, SummaryArticle, KeywordArticle
+from .models import db, DetailsArticle, SummaryArticle, KeywordArticle, HeadlineNews
 from .news_cluster import kmeans_cluster
 from .news_recommend import recommend_news
 from .news_summary import news_summary_id
@@ -160,7 +160,7 @@ def update_rating(request):
 # HEADLINE 뉴스 5개
 @api_view(["GET"])
 def get_headlines(request):
-    news_data = load_headline_news()
+    news_data = HeadlineNews.find_all()
 
     return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
                         content_type="application/json; charset=utf-8")
