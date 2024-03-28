@@ -46,7 +46,7 @@ const StocksContainer = () => {
   }
 
   // 기업 전체 조회
-  const { data: companyList, isLoading: isLoadingCompanyList } = useQuery({
+  const { data: companyList } = useQuery({
     queryKey: ['CompanyList'],
     queryFn: fetchCompanyList,
   })
@@ -62,11 +62,7 @@ const StocksContainer = () => {
   })
 
   // 선택 기업 최근 뉴스 조회
-  const {
-    data: companyNewsList,
-    refetch: refetchCompanyNewsList,
-    isLoading: isLoadingCompanyNewsList,
-  } = useQuery({
+  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
     queryKey: ['CompanyNewsList'],
     queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
     onSuccess: data => {
@@ -75,11 +71,7 @@ const StocksContainer = () => {
   })
 
   // 관심 기업 조회
-  const {
-    data: companyLikeList,
-    refetch: refetchCompanyLikeList,
-    isLoading: isLoadingCompanyLikeList,
-  } = useQuery({
+  const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
     queryKey: ['CompanyLikeList'],
     queryFn: () => fetchCompanyLikeList(user.email),
     onSuccess: data => {
@@ -120,14 +112,11 @@ const StocksContainer = () => {
   }
 
   // 최근 조회 기업 조회
-  const {
-    data: companyLatestList,
-    refetch: refetchCompanyLatestList,
-    isLoading: isLoadingCompanyLatestList,
-  } = useQuery({
-    queryKey: ['CompanyLatestList'],
-    queryFn: () => fetchCompanyLatestList(user.email),
-  })
+  const { data: companyLatestList, refetch: refetchCompanyLatestList } =
+    useQuery({
+      queryKey: ['CompanyLatestList'],
+      queryFn: () => fetchCompanyLatestList(user.email),
+    })
 
   // 최근 조회 기업 등록
   const { mutate: latestCompany } = useMutation({
@@ -156,30 +145,18 @@ const StocksContainer = () => {
 
   // 데이터 로딩 관련 상태 업데이트
   useEffect(() => {
-    if (companyList && companyNewsList) {
+    if (companyList) {
       setIsTutorialReady(true) // 모든 데이터가 로딩되었다면 true로 설정
     }
-  }, [companyList, companyNewsList])
+  }, [companyList])
 
   return (
     <s.Container>
       {isTutorialReady ? <StockTutorial /> : null}
       <s.SidebarWrap>
-        {isLoadingCompanyList ? (
-          <Loading />
-        ) : (
-          <SearchStocksSection data={companyList} />
-        )}
-        {isLoadingCompanyLikeList ? (
-          <Loading />
-        ) : (
-          <MyStocksSection data={companyLikeList} />
-        )}
-        {isLoadingCompanyLatestList ? (
-          <Loading />
-        ) : (
-          <LatestStocksSection data={companyLatestList} />
-        )}
+        {companyList && <SearchStocksSection data={companyList} />}
+        <MyStocksSection data={companyLikeList} />
+        <LatestStocksSection data={companyLatestList} />
       </s.SidebarWrap>
       <s.MainWrap>
         <MainTopSection

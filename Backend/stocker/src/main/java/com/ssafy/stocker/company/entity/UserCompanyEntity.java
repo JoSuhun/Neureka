@@ -22,6 +22,7 @@ public class UserCompanyEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @Column(name = "send_mail")
+
+    @Column(name = "send_mail" )
     private Boolean isSendmail ;
 }

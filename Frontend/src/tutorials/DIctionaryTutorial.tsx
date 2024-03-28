@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride'
 
 const DictionaryTutorial = () => {
-  const [run, setRun] = useState(true)
+  const [shouldRunTutorial, setShouldRunTutorial] = useState(true)
   const [steps, setSteps] = useState<Step[]>([
     {
       disableBeacon: true,
@@ -38,19 +38,31 @@ const DictionaryTutorial = () => {
     // 기타 등등 스텝 추가 가능
   ])
 
+  useEffect(() => {
+    const hasRunTutorial = sessionStorage.getItem('hasRunDictionaryTutorial')
+    if (hasRunTutorial) {
+      setShouldRunTutorial(false) // 이미 실행했다면 튜토리얼을 실행하지 않음
+    }
+  }, [])
+
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { status } = data
     const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED]
+
     if (finishedStatuses.includes(status)) {
-      setRun(false)
+      // 투어가 완료되거나 스킵되었을 때 sessionStorage에 상태 저장
+      sessionStorage.setItem('hasRunDictionaryTutorial', 'true')
+      setShouldRunTutorial(false) // 튜토리얼 실행을 멈춤
     }
   }
 
   return (
     <Joyride
       continuous
+      spotlightClicks
+      disableOverlayClose
       scrollOffset={200}
-      run={run}
+      run={shouldRunTutorial}
       scrollToFirstStep
       showProgress
       showSkipButton
