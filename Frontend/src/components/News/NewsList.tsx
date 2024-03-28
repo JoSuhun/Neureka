@@ -22,7 +22,7 @@ const NewsList = ({ newsData }: Props) => {
 
   const boxRef = useRef<HTMLDivElement>(null)
 
-  const [last, setLast] = useState(Math.ceil(newsData.length / 15))
+  const [last, setLast] = useState(Math.ceil(newsData?.length / 15))
   const [page, setPage] = useState(1)
   const [data, setData] = useState(newsData)
   const [news, setNews] = useState(newsData)
