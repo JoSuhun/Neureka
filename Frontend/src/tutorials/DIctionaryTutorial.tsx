@@ -39,8 +39,10 @@ const DictionaryTutorial = () => {
   ])
 
   useEffect(() => {
-    const hasRunTutorial = sessionStorage.getItem('hasRunDictionaryTutorial')
-    if (hasRunTutorial) {
+    const hasDictionaryTutorial = sessionStorage.getItem(
+      'hasDictionaryTutorial',
+    )
+    if (hasDictionaryTutorial) {
       setShouldRunTutorial(false) // 이미 실행했다면 튜토리얼을 실행하지 않음
     }
   }, [])
@@ -51,7 +53,7 @@ const DictionaryTutorial = () => {
 
     if (finishedStatuses.includes(status)) {
       // 투어가 완료되거나 스킵되었을 때 sessionStorage에 상태 저장
-      sessionStorage.setItem('hasRunDictionaryTutorial', 'true')
+      sessionStorage.setItem('hasDictionaryTutorial', 'true')
       setShouldRunTutorial(false) // 튜토리얼 실행을 멈춤
     }
   }
