@@ -14,6 +14,7 @@ const MainTopSection = (props: {
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
   const [likedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [isLiked, setIsLiked] = useState(false) // 관심 기업 여부
+  const [isSubscribe, setIsSubscribe] = useState(false) // 구독 기업 여부
 
   useEffect(() => {
     setIsLiked(
@@ -26,7 +27,11 @@ const MainTopSection = (props: {
       <s.Title>{selectedStock.companyName}</s.Title>
       <s.CodeNumber>({selectedStock.code})</s.CodeNumber>
       <s.ButtonWrap>
-        <s.AlarmButton />
+        {isSubscribe ? (
+          <s.SubscribeButton onClick={() => setIsSubscribe(false)} />
+        ) : (
+          <s.SubscribingButton onClick={() => setIsSubscribe(true)} />
+        )}
         {isLiked ? (
           <s.RemoveButton onClick={handleRemoveMyStock} />
         ) : (
