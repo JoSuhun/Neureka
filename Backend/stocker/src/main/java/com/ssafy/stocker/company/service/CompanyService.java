@@ -18,4 +18,6 @@ public interface CompanyService {
     void addCompanyRead(String code ,String email);
 
     List<CompanyReadEntity> listCompanyRead( String email);
+
+    void modifySendMail(String code,String email, Boolean isCheck);
 }
