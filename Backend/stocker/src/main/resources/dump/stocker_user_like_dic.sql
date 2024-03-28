@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `user_like_dic`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_like_dic` (
-  `user_dic_id` int NOT NULL AUTO_INCREMENT,
+  `user_dic_id` bigint NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `dic_id` int DEFAULT NULL,
   PRIMARY KEY (`user_dic_id`),
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25 15:31:06
+-- Dump completed on 2024-03-28 10:02:23
