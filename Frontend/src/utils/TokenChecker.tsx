@@ -19,14 +19,13 @@ const TokenChecker = (props: Props) => {
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
 
   const refresh = async () => {
-    console.log('토큰 재발행')
     const res = await axios.post('http://localhost:8080/reissue')
 
     const now = new Date().getTime()
     setExpireTime(now)
     setAccessToken(res.headers.authorization)
     setRefreshToken(res.headers.refreshtoken)
-    console.log('토큰 변경완료')
+    console.log('토큰 재발행')
   }
 
   const update = () => {
@@ -36,7 +35,6 @@ const TokenChecker = (props: Props) => {
 
       console.log('로그인 시간: ' + loginTime + '분')
 
-      console.log(loginTime >= 60 ? '토큰 끝. 재발행 해야 함.' : '토큰 유효')
       if (loginTime < 60) {
         refresh()
       } else {

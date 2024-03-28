@@ -22,8 +22,6 @@ import java.util.*;
 @Tag(name = "News", description = "NewsAPI")
 public class NewsController {
 
-    @Value("${releaseHostName}")
-    String hostname;
 
     private final NewsService newsService;
     private final WebClient webClient ;
@@ -31,7 +29,7 @@ public class NewsController {
     public NewsController(NewsService newsService, WebClient.Builder webClientBuilder) {
 
         this.newsService = newsService;
-        this.webClient = webClientBuilder.baseUrl("http://"+hostname+":8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
 //    @PostMapping("/word/search")
@@ -58,7 +56,7 @@ public class NewsController {
 
     @GetMapping("/newsdetail")
     @Operation(summary = "기사 상세조회. newsId 는 news의 url입니다.")
-    public ResponseEntity<?> getArticleDetail(@RequestParam(value = "사용자 이메일") String email,
+    public ResponseEntity<?> getArticleDetail(@RequestParam(value = "사용자 이메일", required = false) String email,
                                               @RequestParam(value = "뉴스기사 url") String newsId){
         String url = "/news/api/news_details/";
 
@@ -78,7 +76,9 @@ public class NewsController {
 //        log.info("Response from Django server: " + response);
 
         // 사용자가 열람한 기사이므로 이를 redis에 반영
-        newsService.saveUserViewedArticle(email, newsId);
+        if(email != null){
+            newsService.saveUserViewedArticle(email, newsId);
+        }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -110,8 +110,8 @@ public class NewsController {
     @Operation(summary = "해당 뉴스의 평가를 DB에 저장")
     public ResponseEntity<?> saveNewsRating(
 //                                            @RequestParam(value = "사용자 이메일") String email,
-                                            @RequestParam(value = "뉴스기사 url") String newsId,
-                                            @RequestParam(value = "평점(1~5사이)") String grade){
+                                            @RequestParam String newsId,
+                                            @RequestParam String grade){
         String url = "/news/api/update_rate/";
 
 
@@ -133,7 +133,7 @@ public class NewsController {
 
     @PostMapping("/other/")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
-    public ResponseEntity<?> recommThreeNews(@RequestParam(value = "사용자 이메일") String email,
+    public ResponseEntity<?> recommThreeNews(@RequestParam(value = "사용자 이메일", required = false) String email,
                                              @RequestParam(value = "뉴스기사 url") String newsId){
         String url = "/news/api/recomand/";
 
@@ -157,11 +157,15 @@ public class NewsController {
             e.printStackTrace();
         }
 
-        Object tmpObj = newsService.getRedisListValue(email);
+        Object tmpObj = null;
+
+        if(email != null){
+            tmpObj = newsService.getRedisListValue(email);
+        }
         List<String> viewedArticle = new ArrayList<>();
 
 
-        if(tmpObj != "false"){
+        if(tmpObj != "false" && tmpObj != null){
             viewedArticle = (List<String>) tmpObj;
         }
 

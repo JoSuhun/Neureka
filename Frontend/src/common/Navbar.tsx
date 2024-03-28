@@ -155,7 +155,9 @@ const Navbar = () => {
             <n.MenuSelect onClick={goNews}>오늘의 뉴스 확인하기</n.MenuSelect>
             <n.MenuSelect onClick={goStocks}>기업 정보 조회</n.MenuSelect>
             <n.MenuSelect onClick={goDictionary}>경제 용어 사전</n.MenuSelect>
-            <n.MenuSelect onClick={goMyPage}>개인 정보 설정</n.MenuSelect>
+            {isLogin ? (
+              <n.MenuSelect onClick={goMyPage}>개인 정보 설정</n.MenuSelect>
+            ) : null}
           </n.MenuList>
         </n.MenuBox>
       </n.Wrapper>

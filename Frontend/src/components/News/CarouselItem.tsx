@@ -6,41 +6,30 @@ import bgimage from '/image/bg-image.jpg'
 import bgimage2 from '/image/bg-image2.jpg'
 import bgimage3 from '/image/bg-image3.jpg'
 import { useNavigate } from 'react-router-dom'
+import { HotNews } from '@src/types/NewsType'
 
 type Props = {
-  type: string
+  news: HotNews
 }
 
-const CarouselItem = ({ type }: Props) => {
+const CarouselItem = ({ news }: Props) => {
   const navigate = useNavigate()
 
   return (
     <>
-      {type === '1' ? (
-        <c.CarouselCard
-          className="carousel-item"
-          bgimage={bgimage}
-          onClick={() => navigate('/news/1')}
-        >
-          <c.HeadLine>헤드라인 어쩌구 저쩌구 중요한 내용</c.HeadLine>
-        </c.CarouselCard>
-      ) : type === '2' ? (
-        <c.CarouselCard
-          className="carousel-item"
-          bgimage={bgimage2}
-          onClick={() => navigate('/news/2')}
-        >
-          <c.HeadLine>헤드라인 어쩌구 저쩌구 중요한 내용</c.HeadLine>
-        </c.CarouselCard>
-      ) : (
-        <c.CarouselCard
-          className="carousel-item"
-          bgimage={bgimage3}
-          onClick={() => navigate('/news/3')}
-        >
-          <c.HeadLine>헤드라인 어쩌구 저쩌구 중요한 내용</c.HeadLine>
-        </c.CarouselCard>
-      )}
+      <c.CarouselCard
+        className="carousel-item"
+        bgimage={news.headline_thumbnail_url}
+        onClick={() =>
+          navigate(`/news/${encodeURIComponent(news.headline_url)}`)
+        }
+      >
+        <c.HeadLine>{news.headline_title}</c.HeadLine>
+        <c.Info>
+          <c.Date>{news.headline_date}</c.Date>
+          <c.Press>{news.headline_press}</c.Press>
+        </c.Info>
+      </c.CarouselCard>
     </>
   )
 }

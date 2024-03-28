@@ -1,15 +1,18 @@
-import * as c from '@src/components/styles/Main/Category'
-import { categoriesAtom } from '@src/stores/mainAtom'
+// CategoryCarousel 컴포넌트
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import { Categories, Category } from '@src/types/MainType'
+import * as c from '@src/components/styles/Main/CategoryCarousel'
+import { Navigation } from 'swiper/modules'
+import { categoriesAtom } from '@src/stores/mainAtom'
 import { useAtom } from 'jotai'
 
-export type CategoryProps = {
-  name: string
-  image: string
+type Props = {
   show: boolean
 }
 
-const Category = ({ name, image, show }: CategoryProps) => {
+const CategoryCarousel = ({ show }: Props) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
   const handleCategories = (selectedCategory: Category) => {
     setCategories(prev => {
@@ -36,19 +39,34 @@ const Category = ({ name, image, show }: CategoryProps) => {
       }
     })
   }
-
-  if (!show) {
-    return null
-  }
-
+  if (!show) return null
   return (
-    <>
-      <c.categoryWrapper onClick={() => handleCategories({ name, image })}>
-        <c.Icon src={image}></c.Icon>
-        <c.Category>{name}</c.Category>
-      </c.categoryWrapper>
-    </>
+    <c.CarouselWrapper>
+      <Swiper
+        modules={[Navigation]} // 모듈 활성화
+        slidesPerView={9}
+        breakpoints={{
+          360: { slidesPerView: 3 },
+          640: { slidesPerView: 5 },
+          840: { slidesPerView: 7 },
+        }}
+        navigation={true} // 네비게이션 활성화 수정
+        centeredSlides={true}
+      >
+        {Categories.map((category, index) => (
+          <SwiperSlide
+            key={index}
+            onClick={() =>
+              handleCategories({ name: category.name, image: category.image })
+            }
+          >
+            <c.Icon src={category.image} alt={category.name} />
+            <c.Category>{category.name}</c.Category>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </c.CarouselWrapper>
   )
 }
 
-export default Category
+export default CategoryCarousel

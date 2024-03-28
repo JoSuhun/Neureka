@@ -22,21 +22,19 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/keyword", produces = "application/json")
 public class KeywordController {
 
-    @Value("${releaseHostName}")
-    String hostname;
     private final KeywordService keywordService ;
     private final WebClient webClient ;
 
     public KeywordController(KeywordService keywordService, WebClient.Builder webClientBuilder){
         this.keywordService = keywordService;
-        this.webClient = webClientBuilder.baseUrl("http://"+hostname+":8000").build();
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build();
     }
 
 
 
     @GetMapping()
     @Operation(summary = "메인화면에 띄울 키워드들을 조회합니다" )
-    public ResponseEntity<?> keywordList(@RequestParam(value = "keywords") List<String> keywords){
+    public ResponseEntity<?> keywordList(@RequestParam(value = "keywords", required = false) List<String> keywords){
         try {
             if(keywords == null){
                 keywords =  keywordService.findKeyword();

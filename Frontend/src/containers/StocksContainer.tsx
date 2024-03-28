@@ -159,7 +159,6 @@ const StocksContainer = () => {
   useEffect(() => {
     if (companyList && companyNewsList) {
       setIsTutorialReady(true) // 모든 데이터가 로딩되었다면 true로 설정
-      console.log(1111)
     }
   }, [companyList, companyNewsList])
 

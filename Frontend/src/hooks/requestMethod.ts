@@ -18,7 +18,6 @@ export const setClientHeaders = (authToken: string | null) => {
 
 publicRequest.interceptors.request.use(
   config => {
-    console.log(!config.headers.Authorization)
     if (config.headers.Authorization) {
       config.headers['Authorization'] = accessToken
     }
