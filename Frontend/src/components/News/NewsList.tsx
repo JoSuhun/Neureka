@@ -29,15 +29,15 @@ const NewsList = ({ newsData }: Props) => {
 
   useEffect(() => {
     if (question) {
-      const filteredData = newsData.filter(news =>
+      const filteredData = newsData?.filter(news =>
         news.article_title.includes(question),
       )
       setNews(filteredData)
-      setLast(Math.ceil(filteredData.length / 15))
+      setLast(Math.ceil(filteredData?.length / 15))
       setPage(1)
     } else {
       setNews(newsData)
-      setLast(Math.ceil(newsData.length / 15))
+      setLast(Math.ceil(newsData?.length / 15))
       setPage(1)
     }
   }, [question])
@@ -48,9 +48,9 @@ const NewsList = ({ newsData }: Props) => {
 
   useEffect(() => {
     if (page === last) {
-      setData(news.slice(15 * (page - 1)))
+      setData(news?.slice(15 * (page - 1)))
     } else {
-      setData(news.slice(15 * (page - 1), 15 * page))
+      setData(news?.slice(15 * (page - 1), 15 * page))
     }
 
     if (boxRef.current && page > 1) {
@@ -64,9 +64,7 @@ const NewsList = ({ newsData }: Props) => {
     <>
       <n.Wrapper ref={boxRef}>
         <n.NewsBox className="news-box">
-          {data.map((news, idx) => (
-            <NewsCard news={news} />
-          ))}
+          {data?.map((news, idx) => <NewsCard news={news} />)}
         </n.NewsBox>
         <n.PageStack>
           <n.NewsPagination

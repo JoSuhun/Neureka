@@ -3,37 +3,35 @@ import * as s from '../styles/News/HeaderStyle'
 import SearchInput from '@src/common/SearchInput'
 import { useAtom } from 'jotai'
 import { questionAtom } from '@src/stores/newsAtom'
+import NewsSearchInput from './NewsSearchInput'
 
-type Props = {}
+type Props = {
+  hotKeywordData: {
+    word: string
+    count: number
+  }[]
+}
 
-const Search = (props: Props) => {
+const Search = ({ hotKeywordData }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useAtom(questionAtom)
+  const [hotKeywords, setHotKeywords] = useState<string[]>([])
 
-  const hotkeywords = [
-    '김유산',
-    '윤주찬',
-    '이기영',
-    '이승현',
-    '조수훈',
-    '최시원',
-    '칠칠칠',
-    '팔팔팔',
-    '구구구',
-    '십십십',
-  ]
+  // const hotkeywords = hotKeywordData?.map((keyword, idx) => keyword?.word)
+  const hotkeywords = [1, 2, 3, 34, 4]
+
   const [num, setNum] = useState(0)
-  const [keyword, setKeyword] = useState(hotkeywords[0])
+  const [keyword, setKeyword] = useState(hotKeywords[0])
 
   // 10개의 키워드 2초마다
   useEffect(() => {
     const interval = setInterval(() => {
-      if (num < 9) {
+      if (num < hotKeywords?.length - 1) {
         setNum(prevNum => prevNum + 1)
-        setKeyword(hotkeywords[num + 1])
+        setKeyword(hotKeywords[num + 1])
       } else {
         setNum(0)
-        setKeyword(hotkeywords[0])
+        setKeyword(hotKeywords[0])
       }
     }, 2000)
 
@@ -44,7 +42,7 @@ const Search = (props: Props) => {
     <>
       <s.Wrapper className="header-wrapper">
         <s.SearchBar className="search-box">
-          <SearchInput
+          <NewsSearchInput
             search={search}
             setSearch={setSearch}
             question={question}
