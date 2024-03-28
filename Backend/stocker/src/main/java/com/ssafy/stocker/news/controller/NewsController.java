@@ -82,11 +82,11 @@ public class NewsController {
     @GetMapping("/newsdetail")
     @Operation(summary = "기사 상세조회. newsId 는 news의 url입니다.")
     public ResponseEntity<?> getArticleDetail(@RequestParam(value = "사용자 이메일", required = false) String email,
-                                              @RequestParam(value = "뉴스기사 url") String newsId){
+                                              @RequestParam(value = "뉴스기사 고유값") String newsId){
         String url = "/data/news/api/news_details/";
 
         Map<String, String> requestData = new HashMap<>();
-        requestData.put("link", newsId);
+        requestData.put("_id", newsId);
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
@@ -113,13 +113,17 @@ public class NewsController {
     public ResponseEntity<?> viewKeyword(@RequestBody Map<String, String[]> keyword){
         String url = "/data/news/api/keyword_article/";
 
-        Map<String, String[]> requestData = keyword;
+
+        Map<String, Object> jsonData = new HashMap<>();
+
+        jsonData.put("_ids", keyword.get("ids"));
+
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(requestData))
+                .body(BodyInserters.fromValue(jsonData))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
@@ -141,7 +145,7 @@ public class NewsController {
 
 
         Map<String, Object> jsonData = new HashMap<>();
-        jsonData.put("link", newsId);
+        jsonData.put("_id", newsId);
         jsonData.put("rating", grade);
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
@@ -159,11 +163,11 @@ public class NewsController {
     @PostMapping("/other/")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
     public ResponseEntity<?> recommThreeNews(@RequestParam(value = "사용자 이메일", required = false) String email,
-                                             @RequestParam(value = "뉴스기사 url") String newsId){
-        String url = "/data/news/api/recomand/";
+                                             @RequestParam(value = "뉴스기사 고유값") String newsId){
+        String url = "/data/news/api/recommend/";
 
         Map<String, String> reqData = new HashMap<>();
-        reqData.put("link", newsId);
+        reqData.put("_id", newsId);
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
