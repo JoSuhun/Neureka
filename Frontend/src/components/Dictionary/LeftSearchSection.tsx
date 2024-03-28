@@ -74,7 +74,9 @@ const LeftSearchSection = ({ data }: Props) => {
           <l.Words ref={boxRef}>
             {words
               ? words.map((word, idx) =>
-                  markedWords?.some(markedWord => markedWord.id === word.id) ? (
+                  markedWords?.some(
+                    markedWord => markedWord?.id === word?.id,
+                  ) ? (
                     <WordCard word={word} key={idx} marked={true} side="left" />
                   ) : (
                     <WordCard

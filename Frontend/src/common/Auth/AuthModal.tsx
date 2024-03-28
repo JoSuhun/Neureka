@@ -13,8 +13,11 @@ import {
   isRefreshTokenAtom,
   isExpireTimeAtom,
   isUserAtom,
+  isUserEmailAtom,
 } from '@src/stores/authAtom'
 import base64 from 'base-64'
+import { useQuery } from 'react-query'
+import { fetchUserInfo } from '@src/apis/AuthApi'
 
 type Props = {}
 
@@ -24,6 +27,7 @@ const AuthModal = (props: Props) => {
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const parseJwt = (token: string) => {
     let payload = token.substring(
@@ -42,12 +46,12 @@ const AuthModal = (props: Props) => {
       setIsLogin(true)
       const now = new Date().getTime()
       setExpireTime(now)
-      console.log(parseJwt(getCookie('Authorization')))
       const googleUserInfo = parseJwt(getCookie('Authorization'))
       setUserInfo(prevUserInfo => ({
         ...prevUserInfo,
         email: googleUserInfo.email,
       }))
+      setUserEmail(googleUserInfo.email)
     }
   }, [])
 

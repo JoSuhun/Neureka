@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const NewCardBox = styled.div`
   background-color: white;
-  height: 300px;
+  height: 350px;
   /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -54,4 +54,12 @@ export const NewsContent = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   color: var(--color-grey);
+`
+export const NewsInfo = styled.p`
+  display: flex;
+  justify-content: end;
+  margin-top: 5px;
+`
+export const Press = styled.span`
+  font-size: 0.8rem;
 `
