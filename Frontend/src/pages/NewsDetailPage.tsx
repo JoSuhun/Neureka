@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom'
 type Props = {}
 
 const NewsDetailPage = ({}: Props) => {
-  const { url } = useParams()
+  const { id } = useParams()
 
   return (
     <>
       <TokenChecker />
-      <NewsDetailContainer newsUrl={url as string} />
+      <NewsDetailContainer newsId={id as string} />
     </>
   )
 }

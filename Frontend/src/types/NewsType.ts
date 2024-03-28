@@ -1,6 +1,7 @@
 import { Sentiment } from '@src/types/MainType'
 
 export type NewsSummary = {
+  _id: string
   thumbnail_url: string
   article_title: string
   article_link: string
@@ -10,6 +11,7 @@ export type NewsSummary = {
   keywords: string[]
   topic: string
   sentiment: Sentiment[]
+  nouns: string
 }
 
 export type NewsDetail = {
@@ -23,10 +25,10 @@ export type NewsDetail = {
 export type HotNews = {
   headline_date: string
   headline_press: string
-  headline_summary: string
   headline_thumbnail_url: string
   headline_title: string
   headline_url: string
+  _id: string
 }
 
 export type Search = {
