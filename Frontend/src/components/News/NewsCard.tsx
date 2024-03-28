@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import * as n from '../styles/News/NewsListStyle'
@@ -12,13 +12,12 @@ type Props = {
 
 const NewsCard = ({ news }: Props) => {
   const navigate = useNavigate()
+
   return (
     <>
       <n.NewCardBox
         className="card-box"
-        onClick={() =>
-          navigate(`/news/detail/${encodeURIComponent(news.article_link)}`)
-        }
+        onClick={() => navigate(`/news/newsdetail/${news._id}`)}
       >
         <n.NewsThumbnailBox className="card-thumbnail">
           <n.NewsThumbnail image={news.thumbnail_url} />

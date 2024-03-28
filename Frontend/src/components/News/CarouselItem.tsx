@@ -20,9 +20,7 @@ const CarouselItem = ({ news }: Props) => {
       <c.CarouselCard
         className="carousel-item"
         bgimage={news.headline_thumbnail_url}
-        onClick={() =>
-          navigate(`/news/${encodeURIComponent(news.headline_url)}`)
-        }
+        onClick={() => navigate(`/news/newsdetail/${news._id}`)}
       >
         <c.HeadLine>{news.headline_title}</c.HeadLine>
         <c.Info>
