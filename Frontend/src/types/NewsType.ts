@@ -1,4 +1,4 @@
-import { Sentiment } from "@src/types/MainType"
+import { Sentiment } from '@src/types/MainType'
 
 export type NewsSummary = {
   thumbnail_url: string
@@ -27,4 +27,10 @@ export type HotNews = {
   headline_thumbnail_url: string
   headline_title: string
   headline_url: string
+}
+
+export type Search = {
+  word: string
+  searchTime: string
+  swid: number
 }
