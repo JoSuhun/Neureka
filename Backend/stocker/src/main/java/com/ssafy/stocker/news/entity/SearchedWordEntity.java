@@ -20,6 +20,7 @@ public class SearchedWordEntity {
 
     private String email;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "search_time")
     private LocalDateTime searchTime;
 

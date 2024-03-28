@@ -1,6 +1,8 @@
 package com.ssafy.stocker.news.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.stocker.news.dto.HotWordDTO;
+import com.ssafy.stocker.news.entity.SearchedWordEntity;
 import com.ssafy.stocker.news.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,9 +34,32 @@ public class NewsController {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
     }
 
-//    @PostMapping("/word/search")
-//    @Operation("뉴스 키워드 검색")
-//    public ResponseEntity<?>
+    @PostMapping("/search/word")
+    @Operation(summary =  "뉴스 키워드 검색 db저장 ")
+    public ResponseEntity<?> searchWordAdd(@RequestBody SearchedWordEntity searchedWord){
+        try {
+
+            newsService.addSearchWord(searchedWord);
+            return null;
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping("/hot/word")
+    @Operation(summary = "인기검색어를 불러옵니다")
+    public ResponseEntity<?> hotWordList(){
+        try {
+            List<HotWordDTO> hotWordList = newsService.findHotWord();
+            return new ResponseEntity<List<HotWordDTO>>( hotWordList, HttpStatus.OK);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
     @GetMapping()
