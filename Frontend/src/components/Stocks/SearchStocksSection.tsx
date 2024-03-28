@@ -10,7 +10,7 @@ const SearchStocksSection = (props: { data: CompanyType[] }) => {
   const [searchBy, setSearchBy] = useState<string>('name') // select 분류
   const [searchTerm, setSearchTerm] = useState<string>('') // 검색어 입력
   const [showDropdown, setShowDropdown] = useState<boolean>(false) // 필터링 결과 드롭다운 여부
-  const [selectedStock, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
+  const [, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
   const handleSearchByChange = (
     event: React.ChangeEvent<HTMLSelectElement>,

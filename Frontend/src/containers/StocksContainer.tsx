@@ -24,17 +24,15 @@ import StockPriceSection from '@src/components/Stocks/StockPriceSection'
 import StockChartSection from '@src/components/Stocks/StockChartSection'
 import StockNewsSection from '@src/components/Stocks/StockNewsSection'
 import Loading from '@src/common/Loading'
-import * as s from '@src/containers/styles/StocksContainerStyle'
 import StockTutorial from '@src/tutorials/StockTutorial'
+import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
-  // 데이터 로딩 상태를 관리하는 상태 변수 추가
-  const [isTutorialReady, setIsTutorialReady] = useState(false)
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  const [isTutorialReady, setIsTutorialReady] = useState(false) // 데이터 로딩 상태 변수
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
   const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [, setSelectedNewsList] = useAtom(selectedNewsListAtom) // 기업 뉴스 리스트
@@ -148,11 +146,12 @@ const StocksContainer = () => {
     latestCompany(params)
   }
 
+  // 선택 기업 변경 시
   useEffect(() => {
-    setSelectedNewsList([]) // 선택 기업 변경 시, 최근 뉴스 데이터 초기회
-    refetchCompanyPriceList() // 선택 기업 변경 시, 차트 데이터 refetch
-    handleAddLatestCompany() // 선택 기업 변경 시, 최근 조회 기업 등록 refetch
-    refetchCompanyNewsList() // 선택 기업 변경 시, 최근 뉴스 조회 refetch
+    setSelectedNewsList([]) // 최근 뉴스 데이터 초기화
+    refetchCompanyPriceList() // 차트 데이터 refetch
+    handleAddLatestCompany() // 최근 조회 기업 등록 refetch
+    refetchCompanyNewsList() // 최근 뉴스 조회 refetch
   }, [selectedStock])
 
   // 데이터 로딩 관련 상태 업데이트
@@ -195,7 +194,7 @@ const StocksContainer = () => {
             <StockChartSection initialData={companyPriceList} />
           </>
         )}
-        {isLoadingCompanyNewsList ? <Loading /> : <StockNewsSection />}
+        <StockNewsSection />
       </s.MainWrap>
     </s.Container>
   )
