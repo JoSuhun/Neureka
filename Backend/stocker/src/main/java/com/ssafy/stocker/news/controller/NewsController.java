@@ -28,10 +28,13 @@ public class NewsController {
     private final NewsService newsService;
     private final WebClient webClient ;
 
-    public NewsController(NewsService newsService, WebClient.Builder webClientBuilder) {
+    private final String releaseHostName ;
+
+    public NewsController(NewsService newsService, WebClient.Builder webClientBuilder,@Value("${releaseHostName}") String releaseHostName) {
 
         this.newsService = newsService;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
+        this.releaseHostName = releaseHostName;
+        this.webClient = webClientBuilder.baseUrl("http://"+releaseHostName+":8000").build() ;
     }
 
     @PostMapping("/search/word")
@@ -85,6 +88,9 @@ public class NewsController {
                                               @RequestParam(value = "뉴스기사 고유값") String newsId){
         String url = "/data/news/api/news_details/";
 
+
+        System.out.println(releaseHostName);
+
         Map<String, String> requestData = new HashMap<>();
         requestData.put("_id", newsId);
 
@@ -113,6 +119,9 @@ public class NewsController {
     public ResponseEntity<?> viewKeyword(@RequestBody Map<String, String[]> keyword){
         String url = "/data/news/api/keyword_article/";
 
+        System.out.println("++++++++++++++++++++++++++++++");
+        System.out.println(keyword);
+        System.out.println("++++++++++++++++++++++++++++++");
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()

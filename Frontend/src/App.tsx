@@ -8,11 +8,11 @@ import StocksPage from '@src/pages/StocksPage'
 import Footer from '@src/common/Footer'
 import MyPage from './pages/MyPage'
 import DictionaryPage from './pages/DictionaryPage'
+import dotenv from 'dotenv'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthModal from './common/Auth/AuthModal'
 import { CookiesProvider } from 'react-cookie'
-
 const queryClient = new QueryClient()
 
 function App() {

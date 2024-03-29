@@ -15,6 +15,9 @@ import {
 import { removeCookie } from '@src/utils/loginCookie'
 import { setClientHeaders } from '@src/hooks/requestMethod'
 
+import { path } from 'd3'
+
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
@@ -82,7 +85,10 @@ const Navbar = () => {
   }
 
   // 로그인 url
-  const google_url = 'http://localhost:8080/oauth2/authorization/google'
+  
+
+  // const google_url = `http://${localhost}:8080/oauth2/authorization/google`;
+
 
   const login = (url: string) => {
     window.location.href = url

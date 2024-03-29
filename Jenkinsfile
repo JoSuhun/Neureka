@@ -33,7 +33,7 @@ pipeline {
                     sh 'docker pull csw1511/neureka-python:latest'
 
                     // 3. 새로 갱신된 이미지를 기반으로 컨테이너 실행
-                    sh 'docker run -d --name Frontend -p 5174:5174 csw1511/neureka-frontend:latest'
+                    sh 'docker run -d --name Frontend -p 5173:5173 csw1511/neureka-frontend:latest'
                     sh 'docker run -d --name Backend -p 8080:8080 csw1511/neureka-backend:latest'
                     sh 'docker run -d --name Python -p 8000:8000 csw1511/neureka-python:latest'
                 }

@@ -25,9 +25,13 @@ public class KeywordController {
     private final KeywordService keywordService ;
     private final WebClient webClient ;
 
-    public KeywordController(KeywordService keywordService, WebClient.Builder webClientBuilder){
+
+    private final String releaseHostName ;
+
+    public KeywordController(KeywordService keywordService, WebClient.Builder webClientBuilder,@Value("${releaseHostName}") String releaseHostName){
         this.keywordService = keywordService;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build();
+        this.releaseHostName = releaseHostName;
+        this.webClient = webClientBuilder.baseUrl("http://"+releaseHostName+":8000").build();
     }
 
 
