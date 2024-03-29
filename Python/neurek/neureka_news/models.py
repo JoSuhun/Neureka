@@ -165,7 +165,7 @@ class DetailsArticle:
             }},
             {"$addFields": {
                 "weighted_score": {
-                    "$multiply": ["$average_rating", 1]  # 평점에 가중치 1
+                    "$multiply": ["$average_rating", 2]  # 평점에 가중치 2
                 }
             }},
             {"$sort": {"weighted_score": -1, "detail_date": -1}},  # weighted_score와 detail_date 모두를 고려하여 정렬
