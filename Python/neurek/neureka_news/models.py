@@ -173,7 +173,7 @@ class DetailsArticle:
             {"$limit": 30}  # 상위 30개 문서 선택
         ]
 
-        # 이 파이프라인을 실행하는 코드 예시
+        # 파이프라인 실행 코드
         docs = cls.collection.aggregate(pipeline)
 
         # 조회 결과에서 _id만 추출하여 리스트로 변환하여 반환
