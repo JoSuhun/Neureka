@@ -12,7 +12,6 @@ type Props = {
 }
 
 const RightWordsSection = ({ data }: Props) => {
-  // const [markedWords, SetMarkedWrods] = useAtom(markedWordsAtom)
   const [markedWords, SetMarkedWords] = useAtom(markedWordsAtom)
 
   useEffect(() => {
