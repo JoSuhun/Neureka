@@ -16,7 +16,6 @@ import { isUserEmailAtom } from '@src/stores/authAtom'
 type Props = {}
 
 const DictionaryContainer = (props: Props) => {
-  const [markedWords, setMarkedWords] = useState<any>(null)
   const [mark, setMark] = useAtom(toggleMarkingAtom)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
@@ -44,9 +43,6 @@ const DictionaryContainer = (props: Props) => {
   } = useQuery({
     queryKey: 'get-marked',
     queryFn: () => fetchMarkedWords(userEmail),
-    onSuccess: res => {
-      setMarkedWords(res)
-    },
   })
 
   if (isLoadingWords || isLoadingMarked) return <>Loading . . .</>

@@ -12,7 +12,7 @@ type Props = {
   }[]
 }
 
-const Search = ({ hotKeywordData }: Props) => {
+const Header = ({ hotKeywordData }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useAtom(questionAtom)
   const [hotKeywords, setHotKeywords] = useState<string[]>([])
@@ -85,4 +85,4 @@ const Search = ({ hotKeywordData }: Props) => {
   )
 }
 
-export default Search
+export default Header
