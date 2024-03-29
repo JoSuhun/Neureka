@@ -12,6 +12,7 @@ export const KeywordTitle = styled.h2`
   font-size: 3rem;
   margin-bottom: 1rem;
   margin: 50px 0;
+  color: #110079;
 `
 
 export const KeywordCircle = styled.div`
