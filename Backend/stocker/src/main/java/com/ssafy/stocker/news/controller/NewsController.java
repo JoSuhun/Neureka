@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.stocker.news.dto.HotWordDTO;
 import com.ssafy.stocker.news.entity.SearchedWordEntity;
 import com.ssafy.stocker.news.service.NewsService;
+import com.ssafy.stocker.news.service.NewsServiceImpl;
+import com.ssafy.stocker.user.service.UserService;
+import com.ssafy.stocker.user.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,7 @@ public class NewsController {
 
     private final NewsService newsService;
     private final WebClient webClient ;
+
 
     public NewsController(NewsService newsService, WebClient.Builder webClientBuilder) {
 
@@ -130,9 +134,9 @@ public class NewsController {
     @PostMapping("/grade")
     @Operation(summary = "해당 뉴스의 평가를 DB에 저장")
     public ResponseEntity<?> saveNewsRating(
-//                                            @RequestParam(value = "사용자 이메일") String email,
-                                            @RequestParam String newsId,
-                                            @RequestParam String grade){
+                                            @RequestParam(value = "사용자 이메일") String email,
+                                            @RequestParam(value = "뉴스기사 고유값") String newsId,
+                                            @RequestParam(value = "뉴스 평점") String grade){
         String url = "/data/news/api/update_rate/";
 
 
@@ -149,8 +153,28 @@ public class NewsController {
                 .bodyToMono(String.class)
                 .block();
 
+        newsService.saveUserArticleRating(email, newsId, grade);
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/grade")
+    @Operation(summary = "요청받은 이메일과 뉴스기사 고유값을 통해 해당 기사에 사용자가 매긴 평점 반환")
+    public ResponseEntity<?> returnNewsRating(@RequestParam(value = "사용자 이메일") String email,
+                                              @RequestParam(value = "뉴스기사 고유값") String newsId){
+
+        String rating = newsService.returnUserArticleRating(email,newsId);
+
+        if(Objects.equals(rating, "")){
+            return new ResponseEntity<>("값이 없습니다", HttpStatus.BAD_REQUEST);
+        }else{
+            System.out.println(rating);
+
+            return new ResponseEntity<>(rating, HttpStatus.OK);
+        }
+
+    }
+
 
     @PostMapping("/other/")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
@@ -215,4 +239,6 @@ public class NewsController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
 }
