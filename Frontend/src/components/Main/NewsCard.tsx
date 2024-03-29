@@ -15,8 +15,8 @@ const NewsCard = ({ news, className }: Props) => {
   const [showTooltip, setShowTooltip] = useState(false)
 
   const handleClick = () => {
-    if (news.article_link) {
-      navigate(`/news/detail/${encodeURIComponent(news.article_link)}`)
+    if (news._id) {
+      navigate(`/news/newsdetail/${news._id}`)
     }
   }
   const handleMouseEnter = () => {
