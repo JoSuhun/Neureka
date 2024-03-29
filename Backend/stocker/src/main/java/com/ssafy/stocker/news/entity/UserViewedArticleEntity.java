@@ -1,5 +1,6 @@
 package com.ssafy.stocker.news.entity;
 
+import com.ssafy.stocker.user.dto.UserInfoEntity;
 import com.ssafy.stocker.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,8 +17,11 @@ public class UserViewedArticleEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private UserInfoEntity user;
 
-    @Column(name = "article_url")
-    private String articleUrl;
+    @Column(name = "article_id")
+    private String articleId;
+
+    @Column(name = "rating")
+    private String rating;
 }

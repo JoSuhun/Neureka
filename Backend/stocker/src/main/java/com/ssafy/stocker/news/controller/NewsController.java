@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.stocker.news.dto.HotWordDTO;
 import com.ssafy.stocker.news.entity.SearchedWordEntity;
 import com.ssafy.stocker.news.service.NewsService;
+import com.ssafy.stocker.news.service.NewsServiceImpl;
+import com.ssafy.stocker.user.service.UserService;
+import com.ssafy.stocker.user.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,7 @@ public class NewsController {
 
     private final NewsService newsService;
     private final WebClient webClient ;
+
 
     public NewsController(NewsService newsService, WebClient.Builder webClientBuilder) {
 
@@ -130,9 +134,9 @@ public class NewsController {
     @PostMapping("/grade")
     @Operation(summary = "해당 뉴스의 평가를 DB에 저장")
     public ResponseEntity<?> saveNewsRating(
-//                                            @RequestParam(value = "사용자 이메일") String email,
-                                            @RequestParam String newsId,
-                                            @RequestParam String grade){
+                                            @RequestParam(value = "사용자 이메일") String email,
+                                            @RequestParam(value = "뉴스기사 고유값") String newsId,
+                                            @RequestParam(value = "뉴스 평점") String grade){
         String url = "/data/news/api/update_rate/";
 
 
@@ -148,6 +152,8 @@ public class NewsController {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
+
+        newsService.saveUserArticleRating(email, newsId, grade);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -215,4 +221,6 @@ public class NewsController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
 }

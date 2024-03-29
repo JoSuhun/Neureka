@@ -3,6 +3,7 @@ package com.ssafy.stocker.news.service;
 import com.ssafy.stocker.news.dto.HotWordDTO;
 import com.ssafy.stocker.news.entity.SearchedWordEntity;
 import com.ssafy.stocker.news.entity.UserViewedArticleEntity;
+import com.ssafy.stocker.user.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface NewsService {
     void addSearchWord(SearchedWordEntity searchedWord);
 
     List<HotWordDTO> findHotWord();
+
+
+    void saveUserArticleRating(String email, String newsId, String rating);
 }
