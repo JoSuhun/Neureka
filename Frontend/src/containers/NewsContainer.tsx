@@ -7,10 +7,13 @@ import NewsList from '@src/components/News/NewsList'
 
 import { useQuery } from 'react-query'
 import { fetchNewsList, fetchHotNews, fetchHotSearch } from '@src/apis/NewsApi'
+import { useAtom } from 'jotai'
+import { questionAtom } from '@src/stores/newsAtom'
 
 type Props = {}
 
 const NewsContainer = (props: Props) => {
+  const [search, setSearch] = useAtom(questionAtom)
   const [hotKeywordsData, setHotKeywordsData] = useState<
     | {
         word: string
@@ -61,7 +64,7 @@ const NewsContainer = (props: Props) => {
 
   useEffect(() => {
     refetch()
-  }, [])
+  }, [search])
 
   if (isNewsListLoading) {
     return <>뉴스 불러오는 중 . . .</>
