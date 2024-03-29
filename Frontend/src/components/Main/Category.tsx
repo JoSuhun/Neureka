@@ -2,15 +2,18 @@ import * as c from '@src/components/styles/Main/Category'
 import { categoriesAtom } from '@src/stores/mainAtom'
 import { Categories, Category } from '@src/types/MainType'
 import { useAtom } from 'jotai'
+import { useState } from 'react'
 
 export type CategoryProps = {
   name: string
   image: string
+  imageStatic: string
   show: boolean
 }
 
-const Category = ({ name, image, show }: CategoryProps) => {
+const Category = ({ name, image, imageStatic, show }: CategoryProps) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
+  const [isHovered, setIsHovered] = useState(false)
   const handleCategories = (selectedCategory: Category) => {
     setCategories(prev => {
       // 선택된 카테고리가 이미 리스트에 있는지 확인
@@ -43,8 +46,12 @@ const Category = ({ name, image, show }: CategoryProps) => {
 
   return (
     <>
-      <c.categoryWrapper onClick={() => handleCategories({ name, image })}>
-        <c.Icon src={image}></c.Icon>
+      <c.categoryWrapper
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => handleCategories({ name, image, imageStatic })}
+      >
+        <c.Icon src={isHovered ? image : imageStatic} />
         <c.Category>{name}</c.Category>
       </c.categoryWrapper>
     </>
