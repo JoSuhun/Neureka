@@ -3,9 +3,13 @@ from bson.objectid import ObjectId
 from datetime import datetime, timedelta
 import json
 
-# MongoDB 클라이언트 설정
+# MongoDB 클라이언트 설정 실서버
 client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
 db = client['S10P23C105']
+
+# MongoDB 로컬 서버
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client['article_database']
 
 if __name__ == '__main__':
     print("is neureka new model")
@@ -305,45 +309,118 @@ class HeadlineNews:
             document['_id'] = str(document['_id'])
         return documents_list
 
+
 class UserProfile:
     collection = db['user']
 
-    def __init__(self, user_id, interests):
+    def __init__(self, user_id, ):
+        self.client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
+        self.db = self.client['S10P23C105']
+        self.collection = self.db['user']
         self.user_id = user_id
-        self.interests = interests
 
+    def read_article(self, user_id, article):
+        """기사 읽었을 때 관심도 업데이트"""
+        now = datetime.now()
+
+        # 토픽과 신문사에 대한 관심도 업데이트
+        update_operations = {
+            '$inc': {
+                'interests.topics.' + article['topic']: 1,
+                'interests.press.' + article['press']: 1
+            }
+        }
+
+        # 키워드가 리스트 형태로 제공되므로, 각 키워드에 대해 반복 처리
+        for keyword in article['keywords']:
+            keyword_score_inc_key = 'interests.keywords.' + keyword + '.score'
+            keyword_last_read_set_key = 'interests.keywords.' + keyword + '.last_read'
+
+            if '$inc' not in update_operations:
+                update_operations['$inc'] = {}
+            if '$set' not in update_operations:
+                update_operations['$set'] = {}
+
+            update_operations['$inc'][keyword_score_inc_key] = 1
+            update_operations['$set'][keyword_last_read_set_key] = now
+
+        self.adjust_interests_based_on_time(user_id)
+        # MongoDB 업데이트 연산 실행
+        self.collection.update_one({'user_id': user_id}, update_operations, upsert=True)
+        # 시간에 따른 관심도 조정 및 오래된 데이터 삭제 로직 추가 필요
+
+
+    # 관심도 갱신
     @classmethod
-    def update_interests(cls, user_id, keywords, review=False):
-        """사용자의 관심사를 업데이트합니다."""
-        score_increment = 10 if review else 1  # 리뷰를 남겼을 경우 더 큰 가중치 부여
-        user_profile = cls.collection.find_one({'user_id': user_id})
+    def adjust_interests_based_on_time(self, user_id):
+        """시간에 따른 관심도 조정 및 오래된 데이터 삭제"""
+        # 사용자의 현재 관심사 데이터를 조회
+        user_data = self.collection.find_one({'user_id': user_id})
+        if not user_data or 'interests' not in user_data or 'keywords' not in user_data['interests']:
+            return  # 관심사 데이터가 없는 경우 처리 종료
 
-        if not user_profile:
-            # 사용자 프로필이 없으면 새로 생성
-            user_profile = {'user_id': user_id, 'interests': {}}
+        keywords_data = user_data['interests']['keywords']
+        now = datetime.now()
 
-        for keyword in keywords:
-            # 기존 점수에 추가
-            if keyword in user_profile['interests']:
-                user_profile['interests'][keyword] += score_increment
-            else:
-                user_profile['interests'][keyword] = score_increment
+        # 키워드 데이터를 마지막 읽은 시간에 따라 내림차순 정렬
+        sorted_keywords = sorted(keywords_data.items(), key=lambda item: item[1]['last_read'], reverse=True)
 
-        cls.collection.update_one({'user_id': user_id}, {'$set': user_profile}, upsert=True)
+        # 20개 이상의 키워드가 있다면, 그 이후의 키워드에 대해 값 조정
+        for keyword, data in sorted_keywords[20:]:
+            if data['score'] > 0:
+                keywords_data[keyword]['score'] -= 1
+            elif data['score'] < 0:
+                keywords_data[keyword]['score'] += 1
 
-    # @classmethod
-    # def article_read(request, user_id, article_id):
-    #     """기사 읽기 요청 처리"""
-    #     # 이 함수는 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
-    #     # 예시에서는 article_id를 사용하여 기사의 키워드를 조회하는 대신, 키워드 목록을 직접 정의합니다.
-    #     keywords = ['keyword1', 'keyword2']
-    #     update_interests(user_id, keywords)
-    #     return JsonResponse({'message': 'User interests updated.'})
-    #
-    # @classmethod
-    # def article_reviewed(request, user_id, article_id):
-    #     """기사 리뷰 요청 처리"""
-    #     # 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
-    #     keywords = ['keyword1', 'keyword2']
-    #     update_interests(user_id, keywords, review=True)
-    #     return JsonResponse({'message': 'User interests updated with higher weight for review.'})
+        # 2달 이상 오래된 키워드 또는 점수가 0인 키워드 삭제
+        two_months_ago = now - timedelta(days=60)
+        for keyword, data in list(keywords_data.items()):
+            if data['last_read'] < two_months_ago or data['score'] == 0:
+                del keywords_data[keyword]
+
+        # 수정된 관심사 데이터를 MongoDB에 업데이트
+        self.collection.update_one({'user_id': user_id}, {'$set': {'interests.keywords': keywords_data}})
+
+    def recommend_article(self):
+        """가장 높은 유사도를 가진 summary article을 추천"""
+        user_profile = self.collection.find_one({'user_id': self.user_id})
+        if not user_profile or 'interests' not in user_profile:
+            return None  # 사용자 프로필이 없거나 관심사 정보가 없는 경우
+
+        # 사용자의 관심사를 기반으로 추출
+        user_topics = user_profile['interests'].get('topics', {})
+        user_keywords = user_profile['interests'].get('keywords', {}).keys()
+        user_presses = user_profile['interests'].get('press', {})
+
+        summary_articles = SummaryArticle.find_all()
+
+        def calculate_jaccard_similarity(set1, set2):
+            """자카드 유사도 계산"""
+            intersection = len(set1.intersection(set2))
+            union = len(set1.union(set2))
+            return intersection / union if union else 0
+
+        # 최고의 유사도와 해당 기사 초기화
+        highest_similarity = 0
+        recommended_article = None
+
+        for article in summary_articles:
+            article_set = set([article['topic']] + article['keywords'] + [article['press']])
+            user_set = set(user_topics.keys()) | set(user_keywords) | set(user_presses.keys())
+            similarity = calculate_jaccard_similarity(article_set, user_set)
+
+            if similarity > highest_similarity:
+                highest_similarity = similarity
+                recommended_article = article
+
+        return recommended_article
+
+    def calculate_weight(self, user_id, _id, rating):
+        """평점에 따른 가중치 계산"""
+        # 평점에 따라 가중치 조정 로직 구현
+        if rating >= 4:
+            return 2
+        elif rating == 3:
+            return 1
+        else:
+            return -1

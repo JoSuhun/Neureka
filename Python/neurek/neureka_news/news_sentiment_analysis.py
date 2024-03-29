@@ -30,14 +30,12 @@ def predict_sentiment(inputs):
             "score": prob.item()
         })
 
-    # 결과 정렬
-    sorted_probs = sorted(all_probs, key=lambda x: x['score'], reverse=True)
-
-    return sorted_probs
+    # 정렬하지 않고 결과 반환
+    return all_probs
 
 
 # 확인용
 if __name__ == "__main__":
-    inputs = "너도 나도 투자 확대…대세로 발돋움하는 '사모대출'"
+    inputs = "“여보, 금리 내리기 전에 이거 사놓자”…한달새 1.5조 뭉칫돈 몰렸다는데"
     sorted_probs = predict_sentiment(inputs)
     print(sorted_probs)
