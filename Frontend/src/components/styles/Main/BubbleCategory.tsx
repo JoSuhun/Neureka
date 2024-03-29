@@ -69,5 +69,5 @@ export const IsLoginContaier = styled.div<CategoryBoxProps>`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
-  /* z-index: 2; */
+  z-index: 2;
 `

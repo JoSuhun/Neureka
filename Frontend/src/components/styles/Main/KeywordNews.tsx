@@ -24,17 +24,15 @@ export const KeywordCircle = styled.div`
 `
 export const SelectedKeyword = styled.div`
   position: absolute;
-  /* z-index: 10; */
-  // 가운데 원의 스타일 지정
-  width: 12vw; // 실제 크기에 맞게 조정
-  height: 12vw; // 실제 크기에 맞게 조정
+  width: 12vw;
+  height: 12vw;
   border-radius: 50%;
-  background-color: #b5c9f0; // 색상은 실제로 원하는 것에 맞게 조정
+  background-color: #b5c9f0;
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center; // 텍스트 중앙 정렬
+  text-align: center;
   font-weight: bold;
   font-size: 2vw;
 `
@@ -46,11 +44,19 @@ export const NewsGrid = styled.div`
   justify-content: center;
   gap: 20px;
   width: 100%;
-  padding: 0 20px; // 컨테이너 양쪽 패딩
+  padding: 0 20px;
   .odd {
-    grid-column: 2 / 5; // 1번부터 5번 열까지 차지
+    grid-column: 2 / 5;
   }
   .even {
-    grid-column: 7 / 10; // 8번부터 12번 열까지 차지
+    grid-column: 7 / 10;
+  }
+  @media (max-width: 1400px) {
+    .odd {
+      grid-column: 1 / 5;
+    }
+    .even {
+      grid-column: 7 / 11;
+    }
   }
 `
