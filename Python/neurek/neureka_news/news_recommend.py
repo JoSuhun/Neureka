@@ -27,7 +27,7 @@ tagger = Tagger(API_KEY, 'localhost', 5757)
 model = SentenceTransformer('ddobokki/klue-roberta-small-nli-sts')
 
 
-def keyword_extraction(url):
+def article_extraction(url):
     response = requests.get(url)
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
     soup = BeautifulSoup(response.content, "html.parser")
@@ -40,6 +40,17 @@ def keyword_extraction(url):
         article_text = {"error": "뭔가 잘못된것 같아요"}
 
     return article_text
+
+def return_extraction(url):
+    response = requests.get(url)
+    time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    title = soup.find('h2', {'class': 'media_end_head_headline', 'id': 'title_area'})
+    img_tag = soup.select_one('#img1')
+    img_src = img_tag['data-src'] if img_tag and img_tag.get('data-src') else None
+
+    return title.get_text(strip=True), img_src
 
 def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
     word_doc_similarity = cosine_similarity(candidate_embeddings, doc_embedding.reshape(1, -1))
@@ -100,7 +111,7 @@ def recommend_news(id_str):
             stop_words_path = "LDA/stop_words.txt"
             stop_words = load_stop_words(stop_words_path)
 
-            article_text = keyword_extraction(article_data['detail_url'])
+            article_text= article_extraction(article_data['detail_url'])
 
             new_topic = text_through_LDA_probability(article_text)
             new_keywords = keyword_ext(article_text, stop_words)
@@ -118,7 +129,20 @@ def recommend_news(id_str):
 
             # 비슷한 기사를 불러오기
         similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
-        return similar_ids
+
+        result = []
+        for similar_id in similar_ids:
+            url = DetailsArticle.find_by_id(similar_id)['detail_url']
+
+            title, thumbnail_url = return_extraction(url)
+
+            temp = {"_id": similar_id,
+                    "title": title,
+                    "thumbnail_url": thumbnail_url}
+
+            result.append(temp)
+
+        return result
 
 
     else:
@@ -126,14 +150,14 @@ def recommend_news(id_str):
         return []
 
 
-# # #확인용
-# import pprint
-# if __name__ == "__main__":
-#     start_time = time.time()
-#
-#     recommend_news_list = []
-#     pprint.pprint(recommend_news("660514343e1e0e805978c358"))
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+# #확인용
+import pprint
+if __name__ == "__main__":
+    start_time = time.time()
+
+    recommend_news_list = []
+    pprint.pprint(recommend_news("660514343e1e0e805978c358"))
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")
