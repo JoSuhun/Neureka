@@ -29,24 +29,15 @@ def process_element(element):
                 content += process_element(child)  # 자식 요소에 대한 재귀적 처리
     return content
 
-# 웹페이지에서 본문 내용 추출하기
-def extract_content_from_url(url):
-    response = requests.get(url)
-    html = response.text
-
-    soup = BeautifulSoup(html, 'html.parser')
-    article = soup.find('article', id='dic_area')
-
-    return process_element(article)
-
 
 def keyword_extraction(url):
     response = requests.get(url)
     time.sleep(0.1)  # 서버에 과부하를 주지 않기 위해 잠시 대기
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # `soup.find("article")`의 결과가 None인 경우를 처리
     article = soup.find("article")
+
+    detail_text = process_element(article)
     if article:
         article_text = article.get_text(strip=True)
         # article_text가 있는 경우에만 이미지 태그를 찾음
@@ -57,31 +48,22 @@ def keyword_extraction(url):
         article_text = "No article text found"
         img_src = None
 
-    return article_text, img_src
+    date_element = soup.select_one('[data-date-time]')
+    if date_element:
+        date_time_str = date_element['data-date-time']
+        # 여러 날짜 형식을 시도
+        date_formats = ['%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M:%S']
+        for fmt in date_formats:
+            try:
+                date_time = datetime.strptime(date_time_str, fmt)
+                date_time.strftime('%Y-%m-%d %H:%M')
+            except ValueError:
+                continue  # 현재 형식이 맞지 않으면 다음 형식으로 시도
+        date_time = date_time.strftime('%Y-%m-%d %H:%M')
+    else:
+        date_time = datetime.now().strftime('%Y-%m-%d %H:%M')
 
-# 날짜 포메팅 변경
-def get_date_from_url(url):
-    try:
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, "html.parser")
-        date_element = soup.select_one('[data-date-time]')
-
-        if date_element:
-            date_time_str = date_element['data-date-time']
-            # 여러 날짜 형식을 시도
-            date_formats = ['%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M:%S']
-            for fmt in date_formats:
-                try:
-                    date_time = datetime.strptime(date_time_str, fmt)
-                    return date_time.strftime('%Y-%m-%d %H:%M')
-                except ValueError:
-                    continue  # 현재 형식이 맞지 않으면 다음 형식으로 시도
-            # 모든 형식이 맞지 않는 경우 현재 날짜 반환
-            return datetime.now().strftime('%Y-%m-%d %H:%M')
-        else:
-            return datetime.now().strftime('%Y-%m-%d %H:%M')
-    except Exception as e:
-        return datetime.now().strftime('%Y-%m-%d %H:%M')
+    return article_text, img_src, date_time, detail_text
 
 
 # 개별 뉴스 항목 처리를 위한 함수
@@ -107,14 +89,13 @@ def process_news_item(i, soup):
         summary = summary_element.text.strip() if summary_element else None
 
         # 다른 함수 호출 및 처리...
-        text, thumbnail_url = keyword_extraction(naver_news_link)
-        article_date = get_date_from_url(naver_news_link)
+        text, thumbnail_url, article_date, detail_text = keyword_extraction(naver_news_link)
 
         detail_article = DetailsArticle(
             detail_url=naver_news_link[:-8],
             detail_title=title,
             detail_press=press,
-            detail_text=extract_content_from_url(naver_news_link),
+            detail_text=detail_text,
             detail_date=article_date,
             detail_topic="",
             detail_keywords=""
@@ -143,14 +124,11 @@ def crawling_news(keyword):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # 뉴스 항목 리스트 초기화
-    news_list = []
-
     # 임시로 모든 뉴스 항목 저장
     temp_news_list = []
 
     with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 40)]
+        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 20)]
         for future in as_completed(futures):
             news_data = future.result()
             if news_data:

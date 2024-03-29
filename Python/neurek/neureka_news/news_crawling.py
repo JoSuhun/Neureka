@@ -274,7 +274,7 @@ def update_keyword_dict(news_data, keyword_dict):
             for keyword in article["keywords"]:
                 # 해당 키워드가 해당 토픽의 키워드 딕셔너리에 없으면 초기화
                 if keyword not in keyword_dict[topic]:
-                    keyword_dict[topic][keyword] = {"count": 0, "_ids": []}  # 'links'를 '_ids'로 변경
+                    keyword_dict[topic][keyword] = {"count": 0, "_ids": []}
 
                 # 키워드 count 증가 및 _id 추가
                 keyword_dict[topic][keyword]["count"] += 1
