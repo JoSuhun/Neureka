@@ -20,8 +20,8 @@ public class SchedulerConfig {
 
 
     //서버를 실행시킬때마다 실행
-    @Scheduled(initialDelay = 0 , fixedDelay = Long.MAX_VALUE)
-    public void sendMail() {
-        sendMailService.sendMail();
-    }
+//    @Scheduled(initialDelay = 0 , fixedDelay = Long.MAX_VALUE)
+//    public void sendMail() {
+//        sendMailService.sendMail();
+//    }
 }

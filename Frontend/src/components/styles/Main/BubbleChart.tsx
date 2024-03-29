@@ -7,7 +7,9 @@ export const Container = styled.div`
 export const Svg = styled.svg`
   width: 100%;
   height: 600px;
-  border: 1px solid black;
+  background-color: var(--color-lightgrey);
+  border-top: 3px solid var(--color-dark);
+  border-bottom: 3px solid var(--color-dark);
 `
 
 export const Graph = styled.g``
@@ -31,7 +33,7 @@ export const Keyword = styled.div<{ radius: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: ${(props: { radius: number }) => 10 + 2 ** (props.radius / 18)}px;
+  font-size: ${(props: { radius: number }) => 12 + 2 ** (props.radius / 20)}px;
   overflow: hidden;
   height: 100%;
 `

@@ -46,12 +46,12 @@ const AuthModal = (props: Props) => {
       setIsLogin(true)
       const now = new Date().getTime()
       setExpireTime(now)
-      const googleUserInfo = parseJwt(getCookie('Authorization'))
+      const UserInfo = parseJwt(getCookie('Authorization'))
       setUserInfo(prevUserInfo => ({
         ...prevUserInfo,
-        email: googleUserInfo.email,
+        email: UserInfo.email,
       }))
-      setUserEmail(googleUserInfo.email)
+      setUserEmail(UserInfo.email)
     }
   }, [])
 

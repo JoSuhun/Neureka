@@ -35,6 +35,7 @@ const BubbleCategory = () => {
               key={key}
               name={element.name}
               image={element.image}
+              imageStatic={element.imageStatic}
               show={categoryToggle}
             />
           ))}

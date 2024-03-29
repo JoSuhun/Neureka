@@ -19,7 +19,7 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 
-article_count = 100
+article_count = 200
 
 
 def crawling():
@@ -153,15 +153,23 @@ def keyword_extraction(url):
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # `soup.find("article")`의 결과가 None인 경우를 처리
     article = soup.find("article")
     if article:
         article_text = article.get_text(strip=True)
-        # article_text가 있는 경우에만 이미지 태그를 찾음
+        # 기존 로직을 유지하면서 예외 처리 추가
         img_tag = soup.select_one('#img1')
-        img_src = img_tag['data-src'] if img_tag else None
+        # img_tag가 존재하지만 data-src가 없는 경우를 대비해 예외 처리
+        if img_tag and img_tag.has_attr('data-src'):
+            img_src = img_tag['data-src']
+        else:
+            # img_tag에서 data-src를 찾지 못한 경우, 동영상 썸네일 태그 검색
+            alternative_tag = soup.select_one('#contents > div._VOD_PLAYER_WRAP')
+            if alternative_tag and alternative_tag.has_attr('data-cover-image-url'):
+                img_src = alternative_tag['data-cover-image-url']
+            else:
+                # 없으면 뭐 어쩔 수 없지만요
+                img_src = None
     else:
-        # article_text가 없는 경우, img_src도 None으로 설정
         article_text = "No article text found"
         img_src = None
 

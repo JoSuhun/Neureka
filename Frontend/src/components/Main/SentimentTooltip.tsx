@@ -1,11 +1,10 @@
 import { Sentiment } from '@src/types/MainType'
-
+import * as s from '@src/components/styles/Main/SentimentTooltip.tsx'
 type Props = {
   sentiments: Sentiment[]
 }
 
 const SentimentTooltip = ({ sentiments }: Props) => {
-  // sentiment에 따른 스타일과 라벨을 정의하는 함수
   const getStyleAndLabel = (sentiment: Sentiment) => {
     switch (sentiment.label) {
       case 'positive':
@@ -20,24 +19,16 @@ const SentimentTooltip = ({ sentiments }: Props) => {
   }
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        zIndex: 100,
-        backgroundColor: 'white',
-        padding: '10px',
-        border: '1px solid black',
-      }}
-    >
+    <s.Wrapper>
       {sentiments.map((sentiment, index) => {
-        const { color, label } = getStyleAndLabel(sentiment) // 스타일과 라벨 가져오기
+        const { color, label } = getStyleAndLabel(sentiment)
         return (
-          <div key={index} style={{ color }}>
+          <s.Sentiment key={index} $color={color}>
             <strong>{label}</strong>: {sentiment.score.toFixed(2)}
-          </div>
+          </s.Sentiment>
         )
       })}
-    </div>
+    </s.Wrapper>
   )
 }
 
