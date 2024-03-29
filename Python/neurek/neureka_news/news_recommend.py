@@ -126,13 +126,13 @@ def recommend_news(id_str):
         return []
 
 
-# #확인용
+# # #확인용
 # import pprint
 # if __name__ == "__main__":
 #     start_time = time.time()
 #
 #     recommend_news_list = []
-#     pprint.pprint(recommend_news("https://n.news.naver.com/mnews/article/366/0000980751"))
+#     pprint.pprint(recommend_news("660514343e1e0e805978c358"))
 #     end_time = time.time()  # 종료 시간 저장
 #     elapsed_time = end_time - start_time  # 경과 시간 계산
 #

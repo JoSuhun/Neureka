@@ -7,7 +7,6 @@ from .models import db, DetailsArticle, SummaryArticle, KeywordArticle, Headline
 from .news_cluster import kmeans_cluster
 from .news_recommend import recommend_news
 from .news_summary import news_summary_id
-from .news_headline import load_headline_news
 from rest_framework.decorators import api_view
 
 
@@ -133,9 +132,9 @@ def news_summary(request):
     serializer = IdSerializer(data=request.data)
     if serializer.is_valid():
         id_str = serializer.validated_data.get('_id')
-        summary_text = news_summary_id(id_str)
+        summary_text, title = news_summary_id(id_str)
         if summary_text:
-            return Response(summary_text)
+            return Response({"title": title, "summary": summary_text})
         else:
             return Response({"message": "요약에 실패 했어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
