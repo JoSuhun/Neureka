@@ -28,7 +28,7 @@ export const CategoryToggle = styled.button`
 `
 
 export const CategoryWrapper = styled.div<CategoryBoxProps>`
-  margin-bottom: -1px;
+  margin-bottom: -2.5px;
   display: flex;
   flex-wrap: wrap;
   visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
@@ -38,7 +38,9 @@ export const CategoryWrapper = styled.div<CategoryBoxProps>`
   gap: 10px;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border-top: 3px solid var(--color-dark);
+  border-bottom: 3px solid var(--color-dark);
+  /* border: 1px solid black; */
 `
 
 export const Category = styled.button<CategoryBoxProps>`
