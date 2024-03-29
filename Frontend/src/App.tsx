@@ -8,6 +8,7 @@ import StocksPage from '@src/pages/StocksPage'
 import Footer from '@src/common/Footer'
 import MyPage from './pages/MyPage'
 import DictionaryPage from './pages/DictionaryPage'
+import TextToSpeechContainer from './containers/TextToSpeechContainer'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthModal from './common/Auth/AuthModal'
@@ -31,6 +32,7 @@ function App() {
               <Route path="/stocks" element={<StocksPage />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/dictionary" element={<DictionaryPage />} />
+              <Route path="/speech" element={<TextToSpeechContainer />} />
             </Routes>
             <Footer />
           </BrowserRouter>
