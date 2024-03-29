@@ -1,24 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as g from '@src/components/styles/NewsDetail/ArticleGradeStyle'
 
 import Rating from '@mui/material/Rating'
+import { useMutation } from 'react-query'
+import { fetchPostGrade } from '@src/apis/NewsApi'
+import { useAtom } from 'jotai'
+import { isUserEmailAtom } from '@src/stores/authAtom'
 
-type Props = {}
+type Props = {
+  grade: string
+  newsId: string
+}
 
-const ArticleGrade = (props: Props) => {
-  const [value, setValue] = React.useState<number | null>(3)
+type Grade = {
+  email: string
+  newsId: string
+  grade: string
+}
+
+const ArticleGrade = ({ grade, newsId }: Props) => {
+  const [value, setValue] = useState<number>(parseInt(grade))
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
+
+  const { mutate: gradeMutate } = useMutation(
+    (data: Grade) => fetchPostGrade(data),
+    {
+      onSuccess: () => {
+        console.log('평점성공!')
+      },
+      onError: err => {
+        console.log('평점에러! : ' + err)
+      },
+    },
+  )
+
+  const handleRatingChange = (
+    event: React.ChangeEvent<{}>,
+    newValue: number | null,
+  ) => {
+    if (newValue !== null) {
+      setValue(newValue)
+      // 새로운 값으로 요청을 보냄
+      gradeMutate({
+        email: userEmail,
+        newsId: newsId,
+        grade: newValue.toString(),
+      })
+    }
+  }
 
   return (
     <>
       <g.Wrapper className="article-grade">
         <g.GradeMsg>다음에도 이 주제의 기사를 읽고 싶으신가요?</g.GradeMsg>
-        <Rating
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue)
-          }}
-        />
+        <Rating value={value} onChange={handleRatingChange} />
       </g.Wrapper>
     </>
   )
