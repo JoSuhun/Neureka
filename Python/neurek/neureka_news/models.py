@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from datetime import datetime, timedelta
 import json
 
 # MongoDB 클라이언트 설정
@@ -47,7 +48,7 @@ class SummaryArticle:
             documents_list.append(doc)
         return documents_list
 
-    # TODO link -> id
+
     @classmethod
     def find_by_id(cls, _id):
         """_id로 문서 조회"""
@@ -120,7 +121,6 @@ class DetailsArticle:
             print(f"Error saving document: {e}")
             return False
 
-    # TODO
     @classmethod
     def find_by_url(cls, url):
         """URL로 문서 조회하며 '_id' 필드 제외"""
@@ -154,29 +154,32 @@ class DetailsArticle:
 
     @classmethod
     def find_urls_by_keywords_sorted_by_average_rating(cls, keywords):
-        """주어진 키워드를 포함하고, 평균 점수로 정렬한 후, 상위 30개의 detail_url만 추출하여 반환"""
+        """주어진 키워드를 포함하고, 평균 점수로 정렬한 후, 상위 30개의 _id만 추출하여 반환"""
+
+        # 현재 날짜로부터 7일 전의 날짜를 계산
+        seven_days_ago = datetime.now() - timedelta(days=7)
         pipeline = [
-            {"$match": {"detail_keywords": {"$in": keywords}}},  # 키워드 포함 필터링
+            {"$match": {
+                "detail_keywords": {"$in": keywords},
+                "detail_date": {"$gte": seven_days_ago.strftime('%Y-%m-%d %H:%M')}
+            }},
             {"$addFields": {
-                "average_rating": {
-                    "$cond": {
-                        "if": {"$eq": ["$detail_rate_count", 0]},  # 평가 횟수가 0인 경우
-                        "then": 0,  # 평균 점수를 0으로 설정
-                        "else": {"$divide": [{"$toDouble": "$detail_rate"}, "$detail_rate_count"]}  # 평균 점수 계산
-                    }
+                "weighted_score": {
+                    "$multiply": ["$average_rating", 1]  # 평점에 가중치 1
                 }
             }},
-            {"$sort": {"detail_date": -1, "average_rating": -1}},  # 최신순, 평균 점수 높은 순으로 정렬
-            {"$project": {"_id": 1}}  # detail_url 필드만 포함
+            {"$sort": {"weighted_score": -1, "detail_date": -1}},  # weighted_score와 detail_date 모두를 고려하여 정렬
+            {"$project": {"_id": 1}},
+            {"$limit": 30}  # 상위 30개 문서 선택
         ]
 
-        documents = cls.collection.aggregate(pipeline)
+        # 이 파이프라인을 실행하는 코드 예시
+        docs = cls.collection.aggregate(pipeline)
 
-        # 조회 결과에서 detail_url만 추출하여 리스트로 변환하여 반환
-        urls = [str(doc['_id']) for doc in documents if '_id' in doc]
+        # 조회 결과에서 _id만 추출하여 리스트로 변환하여 반환
+        ids = [str(doc['_id']) for doc in docs]
 
-        # 상위 30개만 선택하여 반환
-        return urls[:30]
+        return ids
 
     @classmethod
     def is_topic_empty_for_url(cls, detail_url):
@@ -251,6 +254,7 @@ class HeadlineNews:
         self.headline_press = headline_press
         self.headline_date = headline_date
 
+    @classmethod
     def save(self):
         """문서 저장. _id가 제공되지 않은 경우에만 새로운 문서로 삽입"""
         if not self._id:  # _id가 없는 경우, 새 문서로 취급
@@ -277,3 +281,46 @@ class HeadlineNews:
             # ObjectId를 문자열로 변환
             document['_id'] = str(document['_id'])
         return documents_list
+
+class UserProfile:
+    collection = db['user']
+
+    def __init__(self, user_id, interests):
+        self.user_id = user_id
+        self.interests = interests
+
+    @classmethod
+    def update_interests(cls, user_id, keywords, review=False):
+        """사용자의 관심사를 업데이트합니다."""
+        score_increment = 10 if review else 1  # 리뷰를 남겼을 경우 더 큰 가중치 부여
+        user_profile = cls.collection.find_one({'user_id': user_id})
+
+        if not user_profile:
+            # 사용자 프로필이 없으면 새로 생성
+            user_profile = {'user_id': user_id, 'interests': {}}
+
+        for keyword in keywords:
+            # 기존 점수에 추가
+            if keyword in user_profile['interests']:
+                user_profile['interests'][keyword] += score_increment
+            else:
+                user_profile['interests'][keyword] = score_increment
+
+        cls.collection.update_one({'user_id': user_id}, {'$set': user_profile}, upsert=True)
+
+    @classmethod
+    def article_read(request, user_id, article_id):
+        """기사 읽기 요청 처리"""
+        # 이 함수는 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
+        # 예시에서는 article_id를 사용하여 기사의 키워드를 조회하는 대신, 키워드 목록을 직접 정의합니다.
+        keywords = ['keyword1', 'keyword2']
+        update_interests(user_id, keywords)
+        return JsonResponse({'message': 'User interests updated.'})
+
+    @classmethod
+    def article_reviewed(request, user_id, article_id):
+        """기사 리뷰 요청 처리"""
+        # 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
+        keywords = ['keyword1', 'keyword2']
+        update_interests(user_id, keywords, review=True)
+        return JsonResponse({'message': 'User interests updated with higher weight for review.'})
