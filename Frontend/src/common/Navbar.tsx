@@ -87,7 +87,6 @@ const Navbar = () => {
   // 로그인 url
   
 
-  // const google_url = `http://${localhost}:8080/oauth2/authorization/google`;
 
 
   const login = (url: string) => {
