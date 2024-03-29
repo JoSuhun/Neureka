@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useAtom } from 'jotai'
 import { useQuery, useMutation } from 'react-query'
 import {
@@ -62,7 +62,7 @@ const StocksContainer = () => {
   })
 
   // 선택 기업 최근 뉴스 조회
-  const { data: companyNewsList, refetch: refetchCompanyNewsList } = useQuery({
+  const { refetch: refetchCompanyNewsList } = useQuery({
     queryKey: ['CompanyNewsList'],
     queryFn: () => fetchCompanyNewsList(selectedStock.companyName),
     onSuccess: data => {
