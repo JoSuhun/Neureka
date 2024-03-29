@@ -30,7 +30,7 @@ const BubbleChart = ({ keywords }: BubbleChartProps) => {
   const dx = [1, -1, -1, 1, 0, 1, 0, -1]
 
   const getColorForId = (id: number) => {
-    if (id % 5 == 0) return '#F28521'
+    if (id % 5 == 0) return '#FFA500'
     else if (id % 5 == 1) return '#21F2D9'
     else if (id % 5 == 2) return '#007EC5'
     else if (id % 5 == 3) return '#EE8273'
@@ -75,7 +75,7 @@ const BubbleChart = ({ keywords }: BubbleChartProps) => {
       .force('center', d3.forceCenter(width / 2, 300)) // 중앙으로 이동하는 힘
       .force(
         'collision',
-        d3.forceCollide().radius((d: any) => (d as Bubble).r + 2),
+        d3.forceCollide().radius((d: any) => (d as Bubble).r + 5),
       )
       .on('tick', () => {
         // SVG 영역 내에서 각 버블의 위치 조정

@@ -8,10 +8,13 @@ export const container = styled.div`
 `
 
 export const NewsWrapper = styled.div`
+  margin-top: -7px;
   width: 85%;
   display: flex;
   justify-content: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  border-top: 3px solid var(--color-dark);
+  border-bottom: 3px solid var(--color-dark);
   min-height: 200px;
 `
 

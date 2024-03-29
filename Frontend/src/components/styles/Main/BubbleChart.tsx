@@ -8,6 +8,8 @@ export const Svg = styled.svg`
   width: 100%;
   height: 600px;
   background-color: var(--color-lightgrey);
+  border-top: 3px solid var(--color-dark);
+  border-bottom: 3px solid var(--color-dark);
 `
 
 export const Graph = styled.g``
