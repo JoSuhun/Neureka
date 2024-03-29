@@ -57,6 +57,7 @@ export type CompanyNewsType = {
   thumbnail_url: string
   title: string
   article_date: string
+  _id: string
 }
 
 export type CompanySubscribeType = {
