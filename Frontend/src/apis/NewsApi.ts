@@ -5,10 +5,10 @@ export const fetchNewsList = async () => {
   return await publicRequest.get('news')
 }
 
-export const fetchNewsDetail = async (url: string) => {
+export const fetchNewsDetail = async (newsId: string) => {
   return await publicRequest.get('news/newsdetail', {
     params: {
-      newsId: url,
+      newsId: newsId,
     },
   })
 }
@@ -23,4 +23,16 @@ export const fetchSearch = async (data: Search) => {
 
 export const fetchHotSearch = async () => {
   return await publicRequest.get('news/hot/word')
+}
+
+export const fetchOtherNews = async (newsId: string) => {
+  return await publicRequest.post(
+    'news/other/',
+    {},
+    {
+      params: {
+        newsId: newsId,
+      },
+    },
+  )
 }
