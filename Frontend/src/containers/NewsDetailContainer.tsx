@@ -7,8 +7,10 @@ import ArticleGrade from '@src/components/NewsDetail/ArticleGrade'
 import SimilarArticle from '@src/components/NewsDetail/SimilarArticle'
 import BackBtn from '@src/components/NewsDetail/BackBtn'
 import { useQuery } from 'react-query'
-import { fetchNewsDetail } from '@src/apis/NewsApi'
+import { fetchGetGrade, fetchNewsDetail } from '@src/apis/NewsApi'
 import { useNavigate } from 'react-router-dom'
+import { useAtom } from 'jotai'
+import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 
 type Props = {
   newsId: string
@@ -16,6 +18,8 @@ type Props = {
 
 const NewsDetailContainer = ({ newsId }: Props) => {
   const [otherNews, setOtherNews] = useState<string[] | null>(null)
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -29,10 +33,21 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     data: newsData,
     isError: isNewsListError,
     error: newsListError,
-    refetch,
   } = useQuery({
     queryKey: ['news-detail', newsId],
-    queryFn: () => fetchNewsDetail(newsId), // mongoDB 업데이트 필요함
+    queryFn: () => fetchNewsDetail(newsId),
+  })
+
+  const {
+    isLoading: isGradeLoading,
+    data: newsGrade,
+    isError: isGradeError,
+    error: gradeError,
+    refetch,
+  } = useQuery({
+    queryKey: 'news-grade',
+    queryFn: () => fetchGetGrade(userEmail, newsId),
+    onSuccess: res => console.log(res.data),
   })
 
   if (isNewsListLoading) {
@@ -47,7 +62,9 @@ const NewsDetailContainer = ({ newsId }: Props) => {
           <n.Search />
         </n.GoDictionaryBtn>
         <ArticleContent newsData={newsData?.data} />
-        <ArticleGrade />
+        {isLogin ? (
+          <ArticleGrade grade={newsGrade?.data} newsId={newsId} />
+        ) : null}
         <SimilarArticle newsId={newsId} />
         <BackBtn />
       </n.Container>

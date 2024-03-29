@@ -27,12 +27,35 @@ export const fetchHotSearch = async () => {
 
 export const fetchOtherNews = async (newsId: string) => {
   return await publicRequest.post(
-    'news/other/',
+    'news/other',
     {},
     {
       params: {
         newsId: newsId,
       },
+    },
+  )
+}
+
+export const fetchGetGrade = async (email: string, newsId: string) => {
+  return await publicRequest.get('news/grade', {
+    params: {
+      email: email,
+      newsId: newsId,
+    },
+  })
+}
+
+export const fetchPostGrade = async (data: {
+  email: string
+  newsId: string
+  grade: string
+}) => {
+  return await publicRequest.post(
+    'news/grade',
+    {},
+    {
+      params: data,
     },
   )
 }

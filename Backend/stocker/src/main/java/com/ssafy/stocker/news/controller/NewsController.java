@@ -134,9 +134,9 @@ public class NewsController {
     @PostMapping("/grade")
     @Operation(summary = "해당 뉴스의 평가를 DB에 저장")
     public ResponseEntity<?> saveNewsRating(
-                                            @RequestParam(value = "사용자 이메일") String email,
-                                            @RequestParam(value = "뉴스기사 고유값") String newsId,
-                                            @RequestParam(value = "뉴스 평점") String grade){
+                                            @RequestParam String email,
+                                            @RequestParam String newsId,
+                                            @RequestParam String grade){
         String url = "/data/news/api/update_rate/";
 
 
@@ -160,8 +160,8 @@ public class NewsController {
 
     @GetMapping("/grade")
     @Operation(summary = "요청받은 이메일과 뉴스기사 고유값을 통해 해당 기사에 사용자가 매긴 평점 반환")
-    public ResponseEntity<?> returnNewsRating(@RequestParam(value = "사용자 이메일") String email,
-                                              @RequestParam(value = "뉴스기사 고유값") String newsId){
+    public ResponseEntity<?> returnNewsRating(@RequestParam String email,
+                                              @RequestParam String newsId){
 
         String rating = newsService.returnUserArticleRating(email,newsId);
 
