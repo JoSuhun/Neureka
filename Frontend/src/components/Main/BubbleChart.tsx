@@ -80,8 +80,14 @@ const BubbleChart = ({ keywords }: BubbleChartProps) => {
       .on('tick', () => {
         // SVG 영역 내에서 각 버블의 위치 조정
         scaledBubbles.forEach(bubble => {
-          bubble.x = Math.max(bubble.r, Math.min(width - bubble.r, bubble.x))
-          bubble.y = Math.max(bubble.r, Math.min(600 - bubble.r, bubble.y))
+          bubble.x = Math.max(
+            bubble.r * 1.1,
+            Math.min(width - bubble.r * 1.1, bubble.x),
+          )
+          bubble.y = Math.max(
+            bubble.r * 1.1,
+            Math.min(600 - bubble.r * 1.1, bubble.y),
+          )
         })
 
         setBubbles([...scaledBubbles])
