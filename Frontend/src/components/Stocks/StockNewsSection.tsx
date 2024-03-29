@@ -9,16 +9,15 @@ const StockNewsSection = () => {
 
   const navigate = useNavigate()
   const handleNewsDetail = (link: string) => {
-    navigate(`/news/detail/${encodeURIComponent(link)}`)
+    navigate(`/news/newsdetail/${link}`)
   }
-
   return (
     <s.Container className="stockNews">
       <s.Title>최근 뉴스</s.Title>
       <s.Wrap>
         {selectedNewsList.length > 0 ? (
           selectedNewsList.map((item, index) => (
-            <s.Item key={index} onClick={() => handleNewsDetail(item.link)}>
+            <s.Item key={index} onClick={() => handleNewsDetail(item._id)}>
               <s.ItemBox>
                 <s.ItemInfo>
                   <s.ItemPublisher>{item.press}</s.ItemPublisher>
