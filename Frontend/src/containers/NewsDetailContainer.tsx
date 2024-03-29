@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as n from '@src/containers/styles/NewsDetailContainerStyle'
 
 import bgimage from '/image/bg-image-newsDetail.jpg'
@@ -15,6 +15,7 @@ type Props = {
 }
 
 const NewsDetailContainer = ({ newsId }: Props) => {
+  const [otherNews, setOtherNews] = useState<string[] | null>(null)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -30,10 +31,8 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     error: newsListError,
     refetch,
   } = useQuery({
-    queryKey: 'get-news-detail',
+    queryKey: ['news-detail', newsId],
     queryFn: () => fetchNewsDetail(newsId), // mongoDB 업데이트 필요함
-    // queryFn: () =>
-    //   fetchNewsDetail('https://n.news.naver.com/mnews/article/011/0004316543'), // 일단은 mongoDB 더미데이터 사용 ..
   })
 
   if (isNewsListLoading) {
@@ -49,7 +48,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
         </n.GoDictionaryBtn>
         <ArticleContent newsData={newsData?.data} />
         <ArticleGrade />
-        <SimilarArticle />
+        <SimilarArticle newsId={newsId} />
         <BackBtn />
       </n.Container>
     </>
