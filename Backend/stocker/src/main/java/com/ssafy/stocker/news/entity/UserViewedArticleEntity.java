@@ -16,7 +16,7 @@ public class UserViewedArticleEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_info_id")
     private UserInfoEntity user;
 
     @Column(name = "article_id")

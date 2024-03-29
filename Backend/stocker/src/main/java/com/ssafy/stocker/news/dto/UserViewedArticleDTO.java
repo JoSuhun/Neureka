@@ -16,5 +16,5 @@ public class UserViewedArticleDTO {
 
     private String email;
 
-    private String rating;
+    private int rating;
 }

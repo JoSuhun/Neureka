@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -71,6 +72,19 @@ public class NewsServiceImpl implements NewsService {
 
 
         userVIewedArticleRepository.save(userViewedArticleEntity);
+    }
+
+    @Override
+    public String returnUserArticleRating(String email, String newsId) {
+        UserInfoEntity userInfoDto = userServiceImpl.findUser(email);
+
+        Optional<UserViewedArticleEntity> rating = userVIewedArticleRepository.findByArticleIdAndUser(newsId, userInfoDto);
+
+        if(rating.isPresent()){
+            return rating.get().getRating();
+        }else{
+            return "";
+        }
     }
 
     // 개수 받는거 설정 상위 10개

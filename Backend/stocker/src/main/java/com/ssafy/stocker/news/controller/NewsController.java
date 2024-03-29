@@ -158,6 +158,24 @@ public class NewsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/grade")
+    @Operation(summary = "요청받은 이메일과 뉴스기사 고유값을 통해 해당 기사에 사용자가 매긴 평점 반환")
+    public ResponseEntity<?> returnNewsRating(@RequestParam(value = "사용자 이메일") String email,
+                                              @RequestParam(value = "뉴스기사 고유값") String newsId){
+
+        String rating = newsService.returnUserArticleRating(email,newsId);
+
+        if(Objects.equals(rating, "")){
+            return new ResponseEntity<>("값이 없습니다", HttpStatus.BAD_REQUEST);
+        }else{
+            System.out.println(rating);
+
+            return new ResponseEntity<>(rating, HttpStatus.OK);
+        }
+
+    }
+
+
     @PostMapping("/other/")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
     public ResponseEntity<?> recommThreeNews(@RequestParam(required = false) String email,

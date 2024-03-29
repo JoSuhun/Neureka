@@ -20,4 +20,7 @@ public interface NewsService {
 
 
     void saveUserArticleRating(String email, String newsId, String rating);
+
+    String returnUserArticleRating(String email, String newsId);
 }
+
