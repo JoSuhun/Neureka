@@ -227,19 +227,42 @@ class KeywordArticle:
         if not result or 'keywords' not in result:
             return None
 
-        total = {}
-        for keyword in keywords:
-            if keyword in result['keywords']:
-                keyword_data = result['keywords'][keyword]
-                for sub_keyword, details in keyword_data.items():
-                    if sub_keyword not in total:
-                        total[sub_keyword] = {"count": 0, "ids": []}
-                    total[sub_keyword]['count'] += details['count']
+        if len(keywords) == 8:
+            total = {}
+            for keyword in keywords:
+                if keyword in result['keywords']:
+                    keyword_data = result['keywords'][keyword]
+                    for sub_keyword, details in keyword_data.items():
+                        if sub_keyword not in total:
+                            total[sub_keyword] = {"count": 0, "ids": []}
+                        total[sub_keyword]['count'] += details['count']
 
-                    # 중복 제거 처리
-                    total[sub_keyword]['ids'] = list(set(total[sub_keyword]['ids'] + details['_ids']))
+                        # 중복 제거 처리
+                        total[sub_keyword]['ids'] = list(set(total[sub_keyword]['ids'] + details['_ids']))
 
-        return total
+            return total
+        else:
+            ids_per_keyword = max(1, 30 // len(keywords))  # 각 키워드별로 추출할 _ids 개수, 최소 1개는 보장
+            total = {}
+
+            for keyword in keywords:
+                if keyword in result['keywords']:
+                    keyword_data = result['keywords'][keyword]
+                    for sub_keyword, details in keyword_data.items():
+                        if sub_keyword not in total:
+                            total[sub_keyword] = {"count": 0, "ids": []}
+
+                        # ids_per_keyword 개수만큼의 _ids를 선택
+                        selected_ids = details['_ids'][:ids_per_keyword]
+
+                        total[sub_keyword]['count'] += details['count']
+                        total[sub_keyword]['ids'].extend(selected_ids)  # 기존 ids에 추가
+
+                        # 최종적으로 ids 중복 제거
+                        total[sub_keyword]['ids'] = list(set(total[sub_keyword]['ids']))
+
+            return total
+
 
 
 class HeadlineNews:
@@ -308,19 +331,19 @@ class UserProfile:
 
         cls.collection.update_one({'user_id': user_id}, {'$set': user_profile}, upsert=True)
 
-    @classmethod
-    def article_read(request, user_id, article_id):
-        """기사 읽기 요청 처리"""
-        # 이 함수는 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
-        # 예시에서는 article_id를 사용하여 기사의 키워드를 조회하는 대신, 키워드 목록을 직접 정의합니다.
-        keywords = ['keyword1', 'keyword2']
-        update_interests(user_id, keywords)
-        return JsonResponse({'message': 'User interests updated.'})
-
-    @classmethod
-    def article_reviewed(request, user_id, article_id):
-        """기사 리뷰 요청 처리"""
-        # 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
-        keywords = ['keyword1', 'keyword2']
-        update_interests(user_id, keywords, review=True)
-        return JsonResponse({'message': 'User interests updated with higher weight for review.'})
+    # @classmethod
+    # def article_read(request, user_id, article_id):
+    #     """기사 읽기 요청 처리"""
+    #     # 이 함수는 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
+    #     # 예시에서는 article_id를 사용하여 기사의 키워드를 조회하는 대신, 키워드 목록을 직접 정의합니다.
+    #     keywords = ['keyword1', 'keyword2']
+    #     update_interests(user_id, keywords)
+    #     return JsonResponse({'message': 'User interests updated.'})
+    #
+    # @classmethod
+    # def article_reviewed(request, user_id, article_id):
+    #     """기사 리뷰 요청 처리"""
+    #     # 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
+    #     keywords = ['keyword1', 'keyword2']
+    #     update_interests(user_id, keywords, review=True)
+    #     return JsonResponse({'message': 'User interests updated with higher weight for review.'})
