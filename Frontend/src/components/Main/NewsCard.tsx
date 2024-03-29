@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import defaultImage from '/image/defaultImage.png'
 import * as n from '@src/components/styles/Main/NewsCard'
 import { KeywordNews } from '@src/types/MainType'
 import { useNavigate } from 'react-router-dom'
@@ -35,7 +35,7 @@ const NewsCard = ({ news, className }: Props) => {
       >
         {showTooltip && <SentimentTooltip sentiments={news.sentiment} />}
         <n.NewsThumbnailBox className="card-thumbnail">
-          <n.NewsThumbnail image={news.thumbnail_url} />
+          <n.NewsThumbnail image={news.thumbnail_url || defaultImage} />
         </n.NewsThumbnailBox>
         <n.News>
           <n.NewsTitle className="card-title">{news.article_title}</n.NewsTitle>

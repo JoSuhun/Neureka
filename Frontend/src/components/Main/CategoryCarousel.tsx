@@ -1,4 +1,3 @@
-// CategoryCarousel 컴포넌트
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -63,7 +62,7 @@ const CategoryCarousel = ({ show }: Props) => {
           640: { slidesPerView: 5, initialSlide: 2 },
           840: { slidesPerView: 7, initialSlide: 3 },
         }}
-        navigation={true} // 네비게이션 활성화 수정
+        navigation={true}
         centeredSlides={true}
       >
         {Categories.map((category, index) => (
