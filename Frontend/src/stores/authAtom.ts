@@ -12,7 +12,10 @@ export const isRefreshTokenAtom = atomWithStorage<string | null>(
   'refreshToken',
   null,
 )
-export const isExpireTimeAtom = atomWithStorage<number>('tokenExpireTime', 0)
+export const isExpireTimeAtom = atomWithStorage<number | null>(
+  'tokenExpireTime',
+  0,
+)
 
 export const isUserEmailAtom = atomWithStorage<string>('useremail', '')
 

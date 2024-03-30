@@ -1,16 +1,26 @@
 import Carousel from '@src/components/News/Carousel'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Wrapper } from './styles/NewsContainerStyle'
-import Search from '@src/components/News/Header'
+import Header from '@src/components/News/Header'
 import CustomizedNews from '@src/components/News/CustomizedNews'
 import NewsList from '@src/components/News/NewsList'
 
 import { useQuery } from 'react-query'
-import { fetchNewsList, fetchHotNews } from '@src/apis/NewsApi'
+import { fetchNewsList, fetchHotNews, fetchHotSearch } from '@src/apis/NewsApi'
+import { useAtom } from 'jotai'
+import { questionAtom } from '@src/stores/newsAtom'
 
 type Props = {}
 
 const NewsContainer = (props: Props) => {
+  const [search, setSearch] = useAtom(questionAtom)
+  const [hotKeywordsData, setHotKeywordsData] = useState<
+    | {
+        word: string
+        count: number
+      }[]
+    | null
+  >(null)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -34,9 +44,27 @@ const NewsContainer = (props: Props) => {
     queryKey: 'get-hot-news',
     queryFn: fetchHotNews,
     onSuccess: res => {
-      console.log(res.data)
+      // console.log(res.data)
     },
   })
+
+  const {
+    isLoading: isHotKeyworodsLoading,
+    data: hotKeywordData,
+    isError: isHotKeywordError,
+    error: hotKeywordError,
+    refetch,
+  } = useQuery({
+    queryKey: 'hot-keywords',
+    queryFn: fetchHotSearch,
+    onSuccess: res => {
+      setHotKeywordsData(res.data)
+    },
+  })
+
+  useEffect(() => {
+    refetch()
+  }, [search])
 
   if (isNewsListLoading) {
     return <>뉴스 불러오는 중 . . .</>
@@ -44,6 +72,10 @@ const NewsContainer = (props: Props) => {
 
   if (isHotNewsLoading) {
     return <>인기뉴스 불러오는 중 ...</>
+  }
+
+  if (isHotKeyworodsLoading) {
+    return <>실시간 인기 검색어 로딩 중 ...</>
   }
 
   if (isNewsListError) {
@@ -54,7 +86,7 @@ const NewsContainer = (props: Props) => {
     <>
       <Carousel hotNewsData={hotNewsData?.data} />
       <Wrapper>
-        <Search />
+        <Header hotKeywordData={hotKeywordData?.data} />
         <CustomizedNews />
         <NewsList newsData={newsData?.data} />
       </Wrapper>

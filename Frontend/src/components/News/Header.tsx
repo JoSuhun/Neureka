@@ -3,37 +3,47 @@ import * as s from '../styles/News/HeaderStyle'
 import SearchInput from '@src/common/SearchInput'
 import { useAtom } from 'jotai'
 import { questionAtom } from '@src/stores/newsAtom'
+import NewsSearchInput from './NewsSearchInput'
 
-type Props = {}
+type Props = {
+  hotKeywordData: {
+    word: string
+    count: number
+  }[]
+}
 
-const Search = (props: Props) => {
+const Search = ({ hotKeywordData }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useAtom(questionAtom)
+  const [hotKeywords, setHotKeywords] = useState<string[]>([])
+  const [num, setNum] = useState(-1)
+  const [keyword, setKeyword] = useState('')
 
-  const hotkeywords = [
-    '김유산',
-    '윤주찬',
-    '이기영',
-    '이승현',
-    '조수훈',
-    '최시원',
-    '칠칠칠',
-    '팔팔팔',
-    '구구구',
-    '십십십',
-  ]
-  const [num, setNum] = useState(0)
-  const [keyword, setKeyword] = useState(hotkeywords[0])
+  useEffect(() => {
+    const keywordArr = hotKeywordData?.map((keyword, idx) => keyword?.word)
+    if (keywordArr?.length > 10) {
+      setHotKeywords(keywordArr?.slice(0, 10))
+    } else if (keywordArr?.length > 0) {
+      setHotKeywords(keywordArr)
+    }
+
+    setNum(0)
+    if (hotKeywordData.length > 0) {
+      setKeyword(hotKeywordData[0].word)
+    }
+  }, [hotKeywordData])
 
   // 10개의 키워드 2초마다
   useEffect(() => {
     const interval = setInterval(() => {
-      if (num < 9) {
+      if (num < hotKeywords?.length - 1) {
         setNum(prevNum => prevNum + 1)
-        setKeyword(hotkeywords[num + 1])
+        setKeyword(hotKeywords[num + 1])
       } else {
         setNum(0)
-        setKeyword(hotkeywords[0])
+        if (hotKeywords.length > 0) {
+          setKeyword(hotKeywords[0])
+        }
       }
     }, 2000)
 
@@ -44,31 +54,32 @@ const Search = (props: Props) => {
     <>
       <s.Wrapper className="header-wrapper">
         <s.SearchBar className="search-box">
-          <SearchInput
+          <NewsSearchInput
             search={search}
             setSearch={setSearch}
             question={question}
             setQuestion={setQuestion}
           />
         </s.SearchBar>
-
-        <s.HotKeyword className="hot-keyword">
-          <s.KeywordTitle>실시간 인기 키워드</s.KeywordTitle>
-          <s.SelectBox>
-            <s.Label>
-              <s.OptionNum>{num + 1}</s.OptionNum>
-              {keyword}
-            </s.Label>
-            <s.SelectOptions>
-              {hotkeywords.map((keyword, idx) => (
-                <s.Option>
-                  <s.OptionNum>{idx + 1}</s.OptionNum>
-                  {keyword}
-                </s.Option>
-              ))}
-            </s.SelectOptions>
-          </s.SelectBox>
-        </s.HotKeyword>
+        {hotKeywordData.length > 0 ? (
+          <s.HotKeyword className="hot-keyword">
+            <s.KeywordTitle>실시간 인기 키워드</s.KeywordTitle>
+            <s.SelectBox>
+              <s.Label>
+                <s.OptionNum>{num + 1}</s.OptionNum>
+                {keyword}
+              </s.Label>
+              <s.SelectOptions>
+                {hotKeywords?.map((keyword, idx) => (
+                  <s.Option>
+                    <s.OptionNum>{idx + 1}</s.OptionNum>
+                    {keyword}
+                  </s.Option>
+                ))}
+              </s.SelectOptions>
+            </s.SelectBox>
+          </s.HotKeyword>
+        ) : null}
       </s.Wrapper>
     </>
   )

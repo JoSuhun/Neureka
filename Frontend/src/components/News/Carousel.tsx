@@ -40,7 +40,7 @@ const Carousel = ({ hotNewsData }: Props) => {
       <c.PrevButton onClick={handlePrev} />
       <c.Container className="carousel">
         <c.Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
-          {hotNewsData.map((news, index) => (
+          {hotNewsData?.map((news, index) => (
             <c.Slide key={index}>
               <CarouselItem news={news} />
             </c.Slide>
