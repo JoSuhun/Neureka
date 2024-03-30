@@ -34,7 +34,7 @@ public class NewsController {
 
         this.newsService = newsService;
         this.releaseHostName = releaseHostName;
-        this.webClient = webClientBuilder.baseUrl("http://"+releaseHostName+":8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("https://"+releaseHostName+":8000").build() ;
     }
 
     @PostMapping("/search/word")

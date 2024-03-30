@@ -71,6 +71,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://j10c105.p.ssafy.io:3000",
     "http://j10c105.p.ssafy.io:8080",
     "http://j10c105.p.ssafy.io:5173",
+    "https://j10c105.p.ssafy.io:3000",
+    "https://j10c105.p.ssafy.io:8080",
+    "https://j10c105.p.ssafy.io:5173",
 ]
 
 ROOT_URLCONF = 'neureka.urls'
