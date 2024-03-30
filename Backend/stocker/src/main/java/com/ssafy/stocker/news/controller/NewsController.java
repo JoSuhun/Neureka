@@ -176,7 +176,7 @@ public class NewsController {
     }
 
 
-    @PostMapping("/other/")
+    @PostMapping("/other")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
     public ResponseEntity<?> recommThreeNews(@RequestParam(required = false) String email,
                                              @RequestParam String newsId){

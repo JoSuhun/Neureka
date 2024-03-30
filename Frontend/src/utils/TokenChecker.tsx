@@ -61,6 +61,7 @@ const TokenChecker = (props: Props) => {
         })
         removeCookie('Authorization')
         removeCookie('refresh')
+        localStorage.removeItem('accessToken')
         console.log('토큰 만료로 로그아웃됨')
       }
     }
