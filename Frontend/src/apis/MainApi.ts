@@ -9,7 +9,7 @@ export const fetchKeywords = async (categories: Category[]) => {
   return await publicRequest.get(`keyword?${queryString}`);
 }
 
-export const fetchKeywordArticles = async (ids: string[]) => {
+export const fetchKeywordNews = async (ids: string[]) => {
   // const response = await publicRequest.post('news/keyword', {"ids":ids})
   // console.log(response.data)
   // return response
