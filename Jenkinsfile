@@ -36,6 +36,8 @@ pipeline {
                     sh 'docker run -d --name Frontend -p 5173:5173 csw1511/neureka-frontend:latest'
                     sh 'docker run -d --name Backend -p 8080:8080 csw1511/neureka-backend:latest'
                     sh 'docker run -d --name Python -p 8000:8000 csw1511/neureka-python:latest'
+                    sh 'docker run -d --name redis -p 6379:6379 redis
+                    
                 }
             }
         }
