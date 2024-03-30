@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as n from '@src/containers/styles/NewsDetailContainerStyle'
 
 import bgimage from '/image/bg-image-newsDetail.jpg'
@@ -7,14 +7,19 @@ import ArticleGrade from '@src/components/NewsDetail/ArticleGrade'
 import SimilarArticle from '@src/components/NewsDetail/SimilarArticle'
 import BackBtn from '@src/components/NewsDetail/BackBtn'
 import { useQuery } from 'react-query'
-import { fetchNewsDetail } from '@src/apis/NewsApi'
+import { fetchGetGrade, fetchNewsDetail } from '@src/apis/NewsApi'
 import { useNavigate } from 'react-router-dom'
+import { useAtom } from 'jotai'
+import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 
 type Props = {
-  newsUrl: string
+  newsId: string
 }
 
-const NewsDetailContainer = ({ newsUrl }: Props) => {
+const NewsDetailContainer = ({ newsId }: Props) => {
+  const [otherNews, setOtherNews] = useState<string[] | null>(null)
+  const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -28,12 +33,21 @@ const NewsDetailContainer = ({ newsUrl }: Props) => {
     data: newsData,
     isError: isNewsListError,
     error: newsListError,
+  } = useQuery({
+    queryKey: ['news-detail', newsId],
+    queryFn: () => fetchNewsDetail(newsId),
+  })
+
+  const {
+    isLoading: isGradeLoading,
+    data: newsGrade,
+    isError: isGradeError,
+    error: gradeError,
     refetch,
   } = useQuery({
-    queryKey: 'get-news-detail',
-    // queryFn: () => fetchNewsDetail(newsUrl), // mongoDB 업데이트 필요함
-    queryFn: () =>
-      fetchNewsDetail('https://n.news.naver.com/mnews/article/011/0004316543'), // 일단은 mongoDB 더미데이터 사용 ..
+    queryKey: 'news-grade',
+    queryFn: () => fetchGetGrade(userEmail, newsId),
+    onSuccess: res => console.log(res.data),
   })
 
   if (isNewsListLoading) {
@@ -48,8 +62,10 @@ const NewsDetailContainer = ({ newsUrl }: Props) => {
           <n.Search />
         </n.GoDictionaryBtn>
         <ArticleContent newsData={newsData?.data} />
-        <ArticleGrade />
-        <SimilarArticle />
+        {isLogin ? (
+          <ArticleGrade grade={newsGrade?.data} newsId={newsId} />
+        ) : null}
+        <SimilarArticle newsId={newsId} />
         <BackBtn />
       </n.Container>
     </>

@@ -9,17 +9,12 @@ export const publicRequest = axios.create({
   baseURL: BASE_URL,
 })
 
-export const setClientHeaders = (authToken: string | null) => {
-  publicRequest.interceptors.request.use(config => {
-    config.headers['Authorization'] = authToken
-    return config
-  })
-}
-
 publicRequest.interceptors.request.use(
   config => {
-    if (!config.headers.Authorization) {
+    if (accessToken) {
       config.headers['Authorization'] = accessToken
+    } else {
+      delete config.headers['Authorization'] // 토큰이 없을 때 헤더에서 제거
     }
     return config
   },
@@ -36,6 +31,7 @@ publicRequest.interceptors.response.use(
   async error => {
     if (error.response?.status === 403) {
       console.log('토큰 없음')
+      localStorage.removeItem('accessToken')
       console.log(error)
 
       error.config.headers = {
@@ -43,6 +39,7 @@ publicRequest.interceptors.response.use(
       }
     } else if (error.response?.status === 401) {
       console.log('토큰 만료')
+      localStorage.removeItem('accessToken')
       console.log(error)
     } else {
       return error

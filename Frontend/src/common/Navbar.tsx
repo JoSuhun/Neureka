@@ -11,9 +11,9 @@ import {
   isAccessTokenAtom,
   isRefreshTokenAtom,
   isExpireTimeAtom,
+  isUserEmailAtom,
 } from '@src/stores/authAtom'
 import { removeCookie } from '@src/utils/loginCookie'
-import { setClientHeaders } from '@src/hooks/requestMethod'
 
 import { path } from 'd3'
 
@@ -30,6 +30,7 @@ const Navbar = () => {
   const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
   const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const navigate = useNavigate()
 
@@ -51,7 +52,8 @@ const Navbar = () => {
     setIsLogin(false)
     removeCookie('Authorization')
     removeCookie('refresh')
-    setClientHeaders(null)
+    setUserEmail('')
+    localStorage.removeItem('accessToken')
   }
 
   const goHome = () => {

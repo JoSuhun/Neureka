@@ -31,19 +31,30 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info(oAuth2User.toString());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        log.info("커스텀서비스" + registrationId);
+        log.info("name " + oAuth2User.getName()  );
+        log.info(oAuth2User.getAttributes().toString());
+
         OAuth2Response oAuth2Response = null;
+
         if (registrationId.equals("naver")) {
 
             oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
         }
         else if (registrationId.equals("google")) {
-
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
         }
-        else {
+        else if (registrationId.equals("kakao")){
+            log.info("kakao 로그인 시도");
+//            KakaoResponse kakaoResponse = KakaoResponseConverter.convertFromJsonString(oAuth2User.getAttributes());
 
+            oAuth2Response = new KakaoResponse(oAuth2User.getAttributes());
+
+        }
+        else{
             return null;
         }
+
         String username = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId();
         UserEntity existData = userRepository.findByUsername(username);
 
