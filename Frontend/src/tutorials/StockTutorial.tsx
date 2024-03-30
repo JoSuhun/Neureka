@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride'
 import {
   AddButton,
@@ -6,6 +6,7 @@ import {
 } from '@src/components/styles/Stocks/MainTopSectionStyle'
 
 const StockTutorial = () => {
+  const [shouldRunTutorial, setShouldRunTutorial] = useState(true)
   const [run, setRun] = useState(true)
   const [steps, setSteps] = useState<Step[]>([
     {
@@ -29,17 +30,11 @@ const StockTutorial = () => {
       target: '.latestStocks',
       content: '최근 조회한 종목을 볼 수 있습니다.',
     },
-    // {
-    //   title: (
-    //     <>
-    //       <span>관심 종목 추가/제거 </span>
-    //       <AddButton />
-    //       <RemoveButton />
-    //     </>
-    //   ),
-    //   target: '.addRemoveBtn',
-    //   content: '관심 종목을 추가하거나 제거할 수 있습니다.',
-    // },
+    {
+      title: '관심종목 / 뉴스레터 구독',
+      target: '.subscribeBtn',
+      content: '관심 종목을 추가하거나 제거할 수 있습니다.',
+    },
     {
       title: '주식 정보',
       target: '.stockInfo',
@@ -64,19 +59,31 @@ const StockTutorial = () => {
     // 기타 등등 스텝 추가 가능
   ])
 
+  useEffect(() => {
+    const hasStocksTutorial = sessionStorage.getItem('hasStocksTutorial')
+    if (hasStocksTutorial) {
+      setShouldRunTutorial(false) // 이미 실행했다면 튜토리얼을 실행하지 않음
+    }
+  }, [])
+
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { status } = data
     const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED]
+
     if (finishedStatuses.includes(status)) {
-      setRun(false)
+      // 투어가 완료되거나 스킵되었을 때 sessionStorage에 상태 저장
+      sessionStorage.setItem('hasStocksTutorial', 'true')
+      setShouldRunTutorial(false) // 튜토리얼 실행을 멈춤
     }
   }
 
   return (
     <Joyride
       continuous
+      spotlightClicks
+      disableOverlayClose
       scrollOffset={200}
-      run={run}
+      run={shouldRunTutorial}
       scrollToFirstStep
       showProgress
       showSkipButton

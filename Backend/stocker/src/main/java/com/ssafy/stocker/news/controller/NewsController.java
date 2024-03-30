@@ -1,9 +1,13 @@
 package com.ssafy.stocker.news.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ssafy.stocker.news.dto.HotWordDTO;
 import com.ssafy.stocker.news.entity.SearchedWordEntity;
 import com.ssafy.stocker.news.service.NewsService;
+import com.ssafy.stocker.news.service.NewsServiceImpl;
+import com.ssafy.stocker.user.service.UserService;
+import com.ssafy.stocker.user.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +31,10 @@ public class NewsController {
 
     private final NewsService newsService;
     private final WebClient webClient ;
-
     private final String releaseHostName ;
 
     public NewsController(NewsService newsService, WebClient.Builder webClientBuilder,@Value("${releaseHostName}") String releaseHostName) {
+
 
         this.newsService = newsService;
         this.releaseHostName = releaseHostName;
@@ -84,8 +88,8 @@ public class NewsController {
 
     @GetMapping("/newsdetail")
     @Operation(summary = "기사 상세조회. newsId 는 news의 url입니다.")
-    public ResponseEntity<?> getArticleDetail(@RequestParam(value = "사용자 이메일", required = false) String email,
-                                              @RequestParam(value = "뉴스기사 고유값") String newsId){
+    public ResponseEntity<?> getArticleDetail(@RequestParam(required = false) String email,
+                                              @RequestParam String newsId){
         String url = "/data/news/api/news_details/";
 
 
@@ -94,24 +98,27 @@ public class NewsController {
         Map<String, String> requestData = new HashMap<>();
         requestData.put("_id", newsId);
 
-        // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
-        String response = webClient.post()
-                .uri(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(requestData))
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        try {
+            // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
+            String response = webClient.post()
+                    .uri(url)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(requestData))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
 
-        // 응답 처리
-//        log.info("Response from Django server: " + response);
+            // 사용자가 열람한 기사이므로 이를 redis에 반영
+            if(email != null){
+                newsService.saveUserViewedArticle(email, newsId);
+            }
 
-        // 사용자가 열람한 기사이므로 이를 redis에 반영
-        if(email != null){
-            newsService.saveUserViewedArticle(email, newsId);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/keyword")
@@ -139,7 +146,7 @@ public class NewsController {
     @PostMapping("/grade")
     @Operation(summary = "해당 뉴스의 평가를 DB에 저장")
     public ResponseEntity<?> saveNewsRating(
-//                                            @RequestParam(value = "사용자 이메일") String email,
+                                            @RequestParam String email,
                                             @RequestParam String newsId,
                                             @RequestParam String grade){
         String url = "/data/news/api/update_rate/";
@@ -158,13 +165,33 @@ public class NewsController {
                 .bodyToMono(String.class)
                 .block();
 
+        newsService.saveUserArticleRating(email, newsId, grade);
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/other/")
+    @GetMapping("/grade")
+    @Operation(summary = "요청받은 이메일과 뉴스기사 고유값을 통해 해당 기사에 사용자가 매긴 평점 반환")
+    public ResponseEntity<?> returnNewsRating(@RequestParam String email,
+                                              @RequestParam String newsId){
+
+        String rating = newsService.returnUserArticleRating(email,newsId);
+
+        if(Objects.equals(rating, "")){
+            return new ResponseEntity<>("값이 없습니다", HttpStatus.BAD_REQUEST);
+        }else{
+            System.out.println(rating);
+
+            return new ResponseEntity<>(rating, HttpStatus.OK);
+        }
+
+    }
+
+
+    @PostMapping("/other")
     @Operation(summary = "해당 뉴스와 유사한 내용의 뉴스를 3개 추천")
-    public ResponseEntity<?> recommThreeNews(@RequestParam(value = "사용자 이메일", required = false) String email,
-                                             @RequestParam(value = "뉴스기사 고유값") String newsId){
+    public ResponseEntity<?> recommThreeNews(@RequestParam(required = false) String email,
+                                             @RequestParam String newsId) {
         String url = "/data/news/api/recommend/";
 
         Map<String, String> reqData = new HashMap<>();
@@ -179,36 +206,52 @@ public class NewsController {
                 .bodyToMono(String.class)
                 .block();
 
+        System.out.println(response);
+
+
         ObjectMapper objectMapper = new ObjectMapper();
-        List<String> jsonList = null;
+        List<Map<String, Object>> dataList = null;
         try {
-            jsonList = Arrays.asList(objectMapper.readValue(response, String[].class));
+            // JSON 문자열을 List<Map<String, Object>>으로 변환
+            dataList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {
+            });
+
+            // 데이터 출력
+            for (Map<String, Object> data : dataList) {
+                System.out.println("ID: " + data.get("_id"));
+                System.out.println("Title: " + data.get("title"));
+                System.out.println("Thumbnail URL: " + data.get("thumbnail_url"));
+                System.out.println();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Object tmpObj = null;
+        Object readedArticle = null;
 
+        // 이메일 요청값으로 들어왔으면, 이를 기반으로 사용자가 읽었던 기사들 리스트를 redis에서 읽어온다
         if(email != null){
-            tmpObj = newsService.getRedisListValue(email);
+            readedArticle = newsService.getRedisListValue(email);
         }
         List<String> viewedArticle = new ArrayList<>();
 
 
-        if(tmpObj != "false" && tmpObj != null){
-            viewedArticle = (List<String>) tmpObj;
+        // 사용자가 읽은 기사가있다면, 필터링하기 위해 viewedArticle에 집어넣자
+        if(readedArticle != "false" && readedArticle != null){
+            viewedArticle = (List<String>) readedArticle;
         }
 
-        List<String> resultList = new ArrayList<>();
+        List<Map<String, Object>> resultList = new ArrayList<>();
 
-        for (String item : jsonList) {
-            if (!viewedArticle.contains(item)) {
-                resultList.add(item);
+        for (Map<String, Object> data : dataList) {
+            if (!viewedArticle.contains(data.get("_id"))) {
+                resultList.add(data);
                 if(resultList.size() == 3) break;
             }
         }
 
         return new ResponseEntity<>(resultList, HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/hot")
@@ -224,4 +267,6 @@ public class NewsController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
 }

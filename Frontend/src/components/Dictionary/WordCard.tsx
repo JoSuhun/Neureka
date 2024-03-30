@@ -13,7 +13,7 @@ import { MarkWord } from '@src/types/WordType'
 
 import { useAtom } from 'jotai'
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
-import { isLoginAtom } from '@src/stores/authAtom'
+import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import { modalOpenAtom } from '@src/stores/authModalAtom'
 
 type Props = {
@@ -23,6 +23,7 @@ type Props = {
 }
 
 const WordCard = ({ word, marked, side }: Props) => {
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
   const [isSave, SetIsSave] = useState(false)
   const [mark, setMark] = useAtom(toggleMarkingAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
@@ -58,11 +59,15 @@ const WordCard = ({ word, marked, side }: Props) => {
 
   // 즐겨찾기 버튼 클릭 이벤트
   const handleMark = () => {
+    console.log(word)
+    const titleWithoutTags = word?.title
+      ? word.title.replace(/(<([^>]+)>)/gi, '')
+      : ''
     if (isLogin) {
       SetIsSave(true)
       markMutate({
-        email: 'dbtks2759@gmail.com',
-        title: word?.title as string,
+        email: userEmail,
+        title: titleWithoutTags,
       })
     } else {
       setOpenLogin(true)
@@ -73,7 +78,7 @@ const WordCard = ({ word, marked, side }: Props) => {
   const handleUnmark = () => {
     SetIsSave(false)
     unmarkMutate({
-      email: 'dbtks2759@gmail.com',
+      email: userEmail,
       title: word?.title as string,
     })
   }
@@ -87,7 +92,7 @@ const WordCard = ({ word, marked, side }: Props) => {
             {marked && side == 'right' ? (
               <c.deleteBtn className="deleteBtn" onClick={handleUnmark} />
             ) : marked ? (
-              <c.saveBtn className="saveBtn" src={saved} />
+              <c.saveBtn className="saveBtn" src={saved} onClick={handleMark} />
             ) : (
               <c.saveBtn
                 className="saveBtn"

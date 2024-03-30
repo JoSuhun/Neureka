@@ -38,6 +38,7 @@ example_text = """
 def news_summary_id(_id):
     article_data = DetailsArticle.find_by_id(_id)
     url = article_data['detail_url']
+    title = article_data['detail_title']
 
     response = requests.get(url)
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
@@ -50,7 +51,7 @@ def news_summary_id(_id):
     else:
         article_text = {"error": "뭔가 잘못된 것 같아요"}
 
-    return news_summary(article_text)
+    return news_summary(article_text), title
 
 def news_summary(text):
     # 토크나이저를 사용하여 뉴스기사 원문을 모델이 인식할 수 있는 토큰형태로 바꿔줍니다.
