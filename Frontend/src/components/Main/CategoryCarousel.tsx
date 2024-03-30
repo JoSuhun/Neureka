@@ -8,11 +8,7 @@ import { categoriesAtom } from '@src/stores/mainAtom'
 import { useAtom } from 'jotai'
 import { useState } from 'react'
 
-type Props = {
-  show: boolean
-}
-
-const CategoryCarousel = ({ show }: Props) => {
+const CategoryCarousel = () => {
   const [categories, setCategories] = useAtom(categoriesAtom)
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
   const handleCategories = (selectedCategory: Category) => {
@@ -49,7 +45,6 @@ const CategoryCarousel = ({ show }: Props) => {
     setHoveredCategory(null)
   }
 
-  if (!show) return null
   return (
     <c.CarouselWrapper>
       <Swiper
@@ -75,7 +70,7 @@ const CategoryCarousel = ({ show }: Props) => {
                 imageStatic: category.imageStatic,
               })
             }
-            onMouseEnter={() => handleMouseEnter(category.name)} // 각 카테고리에 대한 onMouseEnter 핸들러 추가
+            onMouseEnter={() => handleMouseEnter(category.name)}
             onMouseLeave={handleMouseLeave}
           >
             <c.Icon
