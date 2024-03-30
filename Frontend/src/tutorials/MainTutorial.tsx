@@ -9,6 +9,7 @@ const MainTutorial = ({ run }: MainTutorialProps) => {
   const [shouldRunTutorial, setShouldRunTutorial] = useState(run)
   const [steps, setSteps] = useState<Step[]>([
     {
+      disableBeacon: true,
       title: '카테고리 선택',
       target: '.CategoryList',
       content: '관심있는 카테고리를 선택해보세요.',

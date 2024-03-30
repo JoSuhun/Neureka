@@ -9,21 +9,22 @@ import loading from '/image/loading.gif'
 import { useAtom, useAtomValue } from 'jotai'
 import { categoriesAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 import { useQuery } from 'react-query'
-import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
+import { fetchKeywordNews, fetchKeywords } from '@src/apis/MainApi'
 import MainTutorial from '@src/tutorials/MainTutorial'
 import { fetchUserInfo } from '@src/apis/AuthApi'
 import { isLoginAtom, isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
-
+import useMoveScroll from '@src/hooks/clickToScrollMethod';
 type Props = {}
 
 const MainContainer = (props: Props) => {
   const [runTutorial, setRunTutorial] = useState(false)
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
-  const [selectedKeyword] = useAtom(selectedKeywordAtom)
+  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom);
   const [categories] = useAtom(categoriesAtom)
   const userEmail = useAtomValue(isUserEmailAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
+  const { element: newsWrapperRef, onMoveToElement: moveToNewsWrapper } = useMoveScroll();
 
   // 키워드 데이터 요청
   const { data: keywordsData, refetch: refetchKeywords } = useQuery(
@@ -42,12 +43,16 @@ const MainContainer = (props: Props) => {
   const {
     data: keywordNewsData,
     refetch: refetchKeywordNews,
-    isLoading: keywordArticlesLoading,
+    isLoading: keywordNewsLoading,
   } = useQuery(
-    ['fetchKeywordArticles', selectedKeyword],
-    () => fetchKeywordArticles(selectedKeyword.ids),
+    ['fetchKeywordNews', selectedKeyword],
+    () => fetchKeywordNews(selectedKeyword.ids),
     {
-      // selectedKeyword.ids 배열에 항목이 있을 경우에만 요청을 활성화
+      onSuccess: () => {
+        if (selectedKeyword.ids.length > 0 ) {
+          setTimeout(() => moveToNewsWrapper(), 100);
+        }
+      },
       enabled: selectedKeyword.ids.length > 0,
     },
   )
@@ -86,8 +91,16 @@ const MainContainer = (props: Props) => {
     refetchKeywordNews()
   }, [selectedKeyword, refetchKeywordNews])
 
+
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // 컴포넌트가 마운트될 때(selectedKeywordAtom을 사용하는 페이지가 로드될 때),
+    // selectedKeywordAtom의 값을 초기값으로 설정합니다.
+    setSelectedKeyword({keyword: '', count: 0, ids: []});
+  }, [setSelectedKeyword]); // setSelectedKeyword 함수가 변경되지 않기 때문에, 의존성 배열에 추가합니다.
+
+  useEffect(() => {
+    // window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     const checkScroll = () => {
       if (tutorialStartRef.current) {
         const rect = tutorialStartRef.current.getBoundingClientRect()
@@ -124,8 +137,8 @@ const MainContainer = (props: Props) => {
           )}
         </m.BubbleChartWrapper>
 
-        <m.NewsWrapper>
-          {keywordArticlesLoading ? (
+        <m.NewsWrapper ref={newsWrapperRef}>
+          {keywordNewsLoading ? (
             <div>
               <h1>기사 받는 중</h1>
               <img src={loading}></img>
