@@ -4,8 +4,11 @@ from datetime import datetime, timedelta
 import json
 
 # MongoDB 클라이언트 설정 실서버
-client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
-db = client['S10P23C105']
+ssafy_mongo = 'mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin'
+ssafy_db = 'S10P23C105'
+
+client = MongoClient(f'{ssafy_mongo}')
+db = client[f'{ssafy_db}']
 
 # MongoDB 로컬 서버
 # client = MongoClient('mongodb://localhost:27017/')
@@ -15,6 +18,7 @@ if __name__ == '__main__':
     print("is neureka new model")
 
 
+# TODO 책갈피 : 요약 기사
 class SummaryArticle:
     collection = db['summary_article_collection']
 
@@ -60,14 +64,19 @@ class SummaryArticle:
         object_id = ObjectId(_id)
         return cls.collection.find_one({"_id": object_id})
 
+    @classmethod
+    def find_by_topics(cls, topics):
+        """주어진 토픽 리스트에 해당하는 기사들을 조회"""
+        documents_cursor = cls.collection.find({'topic': {'$in': topics}})
+        documents_list = []
+        for doc in documents_cursor:
+            # ObjectId를 문자열로 변환하여 '_id' 값을 업데이트
+            doc['_id'] = str(doc['_id'])
+            documents_list.append(doc)
+        return documents_list
 
     @classmethod
-    def delete_all(cls):
-        # 컬렉션의 모든 문서 삭제
-        cls.collection.delete_many({})
-
-    @classmethod
-    def trim_collection(cls, max_docs=2000):
+    def trim_collection(cls, max_docs=4000):
         """
         컬렉션의 문서 개수가 max_docs를 초과하는 경우,
         가장 오래된 문서부터 초과분을 삭제합니다.
@@ -96,6 +105,7 @@ class SummaryArticle:
         return json.loads(self.keywords)
 
 
+# TODO 책갈피 : 상세 기사
 class DetailsArticle:
     collection = db['details_article_collection']
 
@@ -140,8 +150,9 @@ class DetailsArticle:
             document['_id'] = str(document['_id'])  # ObjectId를 문자열로 변환
         return document
 
+    # TODO : 여기 수정해야함. user_id가 추가되었음을 알려.
     @classmethod
-    def update_rating(cls, _id, user_rating):
+    def update_rating(cls, _id, user_rating, user_id):
         """_id에 해당하는 문서의 평점 업데이트"""
         document = cls.collection.find_one({"_id": ObjectId(_id)})
 
@@ -152,7 +163,15 @@ class DetailsArticle:
                 {"_id": ObjectId(_id)},
                 {"$set": {"detail_rate": new_rate, "detail_rate_count": new_rate_count}}
             )
-            return update_result.modified_count > 0
+
+            # 평점에 따른 가중치 결정
+            weight = 1 if user_rating == 3 else 2 if user_rating in [4, 5] else -1
+
+            # UserProfile 클래스 인스턴스 생성 및 관심도 업데이트
+            user_profile = UserProfile(user_id)
+            user_profile.update_interests_from_rating(document.get('detail_keywords', []), weight)
+
+            return True
         else:
             return False
 
@@ -212,6 +231,7 @@ class DetailsArticle:
         return update_result.modified_count > 0
 
 
+# TODO 책갈피 : 기사의 키워드 (버블 띄울때 필요)
 class KeywordArticle:
     collection = db['keyword_article_collection']
 
@@ -268,7 +288,7 @@ class KeywordArticle:
             return total
 
 
-
+# TODO 책갈피 : 헤드 라인 뉴스
 class HeadlineNews:
     collection = db['headlines']
 
@@ -281,7 +301,7 @@ class HeadlineNews:
         self.headline_press = headline_press
         self.headline_date = headline_date
 
-    @classmethod
+
     def save(self):
         """문서 저장. _id가 제공되지 않은 경우에만 새로운 문서로 삽입"""
         if not self._id:  # _id가 없는 경우, 새 문서로 취급
@@ -310,12 +330,13 @@ class HeadlineNews:
         return documents_list
 
 
+# TODO 책갈피 : 유저 추천 기사를 위한 유저 테이블
 class UserProfile:
     collection = db['user']
 
-    def __init__(self, user_id, ):
-        self.client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
-        self.db = self.client['S10P23C105']
+    def __init__(self, user_id):
+        self.client = MongoClient(f'{ssafy_mongo}')
+        self.db = self.client[f'{ssafy_db}']
         self.collection = self.db['user']
         self.user_id = user_id
 
@@ -323,104 +344,114 @@ class UserProfile:
         """기사 읽었을 때 관심도 업데이트"""
         now = datetime.now()
 
-        # 토픽과 신문사에 대한 관심도 업데이트
         update_operations = {
-            '$inc': {
-                'interests.topics.' + article['topic']: 1,
-                'interests.press.' + article['press']: 1
-            }
+            '$inc': {},
+            '$set': {}
         }
 
+        # 토픽과 신문사에 대한 관심도 업데이트
+        if 'detail_topic' in article:
+            update_operations['$inc']['interests.topics.' + article['detail_topic'] + '.score'] = 1
+            update_operations['$set']['interests.topics.' + article['detail_topic'] + '.last_read'] = now
+
+        if 'detail_press' in article:
+            update_operations['$inc']['interests.press.' + article['detail_press']] = 1
+
         # 키워드가 리스트 형태로 제공되므로, 각 키워드에 대해 반복 처리
-        for keyword in article['keywords']:
-            keyword_score_inc_key = 'interests.keywords.' + keyword + '.score'
-            keyword_last_read_set_key = 'interests.keywords.' + keyword + '.last_read'
+        for keyword in article.get('detail_keywords', []):
+            update_operations['$inc']['interests.keywords.' + keyword + '.score'] = 1
+            update_operations['$set']['interests.keywords.' + keyword + '.last_read'] = now
 
-            if '$inc' not in update_operations:
-                update_operations['$inc'] = {}
-            if '$set' not in update_operations:
-                update_operations['$set'] = {}
-
-            update_operations['$inc'][keyword_score_inc_key] = 1
-            update_operations['$set'][keyword_last_read_set_key] = now
-
-        self.adjust_interests_based_on_time(user_id)
         # MongoDB 업데이트 연산 실행
         self.collection.update_one({'user_id': user_id}, update_operations, upsert=True)
-        # 시간에 따른 관심도 조정 및 오래된 데이터 삭제 로직 추가 필요
-
+        # 시간에 따른 관심도 조정 및 오래된 데이터 삭제 로직을 이후에 실행
+        self.adjust_interests_based_on_time(user_id)
 
     # 관심도 갱신
-    @classmethod
     def adjust_interests_based_on_time(self, user_id):
         """시간에 따른 관심도 조정 및 오래된 데이터 삭제"""
-        # 사용자의 현재 관심사 데이터를 조회
         user_data = self.collection.find_one({'user_id': user_id})
-        if not user_data or 'interests' not in user_data or 'keywords' not in user_data['interests']:
-            return  # 관심사 데이터가 없는 경우 처리 종료
+        if not user_data or 'interests' not in user_data:
+            return {"message": "어라... 이상하네요... 왜 유저 정보가 없지.."}
 
-        keywords_data = user_data['interests']['keywords']
         now = datetime.now()
+        if 'keywords' in user_data['interests']:
+            keywords_data = user_data['interests']['keywords']
 
-        # 키워드 데이터를 마지막 읽은 시간에 따라 내림차순 정렬
-        sorted_keywords = sorted(keywords_data.items(), key=lambda item: item[1]['last_read'], reverse=True)
+            # 키워드 데이터를 마지막 읽은 시간에 따라 내림차순 정렬
+            sorted_keywords = sorted(keywords_data.items(), key=lambda item: item[1]['last_read'], reverse=True)
 
-        # 20개 이상의 키워드가 있다면, 그 이후의 키워드에 대해 값 조정
-        for keyword, data in sorted_keywords[20:]:
-            if data['score'] > 0:
-                keywords_data[keyword]['score'] -= 1
-            elif data['score'] < 0:
-                keywords_data[keyword]['score'] += 1
+            # 20개 이상의 키워드가 있다면, 그 이후의 키워드에 대해 값 조정
+            for keyword, data in sorted_keywords[20:]:
+                if data['score'] > 0:
+                    keywords_data[keyword]['score'] -= 1
+                elif data['score'] < 0:
+                    keywords_data[keyword]['score'] += 1
 
-        # 2달 이상 오래된 키워드 또는 점수가 0인 키워드 삭제
-        two_months_ago = now - timedelta(days=60)
-        for keyword, data in list(keywords_data.items()):
-            if data['last_read'] < two_months_ago or data['score'] == 0:
-                del keywords_data[keyword]
+            # 2달 이상 오래된 키워드 또는 점수가 0인 키워드 삭제
+            two_months_ago = now - timedelta(days=60)
+            for keyword, data in list(keywords_data.items()):
+                if data['last_read'] < two_months_ago or data['score'] == 0:
+                    del keywords_data[keyword]
 
-        # 수정된 관심사 데이터를 MongoDB에 업데이트
-        self.collection.update_one({'user_id': user_id}, {'$set': {'interests.keywords': keywords_data}})
+            self.collection.update_one({'user_id': user_id}, {'$set': {'interests.keywords': keywords_data}})
 
-    def recommend_article(self):
+        if 'topics' in user_data['interests']:
+            topics_data = user_data['interests']['topics']
+
+            # 토픽 데이터를 마지막 읽은 시간에 따라 내림차순 정렬
+            sorted_topics = sorted(topics_data.items(), key=lambda item: item[1].get('last_read', now), reverse=True)
+
+            # 20개 이상의 토픽이 있다면, 그 이후의 토픽에 대해 값 조정
+            for topic, data in (sorted_topics[20:] if len(sorted_topics) > 20 else []):
+                if data['score'] > 0:
+                    topics_data[topic]['score'] -= 1
+
+            self.collection.update_one({'user_id': user_id}, {'$set': {'interests.topics': topics_data}})
+
+    def recommend_article(self, user_id, topic):
         """가장 높은 유사도를 가진 summary article을 추천"""
-        user_profile = self.collection.find_one({'user_id': self.user_id})
+        user_profile = self.collection.find_one({'user_id': user_id})
+
+        if topic:  # topic 리스트가 주어진 경우 해당 토픽에 해당하는 기사만 추출
+            summary_articles = SummaryArticle.find_by_topics(topic)
+        else:  # topic 리스트가 비어있는 경우 모든 기사 대상
+            summary_articles = SummaryArticle.find_all()
+
         if not user_profile or 'interests' not in user_profile:
-            return None  # 사용자 프로필이 없거나 관심사 정보가 없는 경우
-
-        # 사용자의 관심사를 기반으로 추출
-        user_topics = user_profile['interests'].get('topics', {})
-        user_keywords = user_profile['interests'].get('keywords', {}).keys()
-        user_presses = user_profile['interests'].get('press', {})
-
-        summary_articles = SummaryArticle.find_all()
-
-        def calculate_jaccard_similarity(set1, set2):
-            """자카드 유사도 계산"""
-            intersection = len(set1.intersection(set2))
-            union = len(set1.union(set2))
-            return intersection / union if union else 0
-
-        # 최고의 유사도와 해당 기사 초기화
-        highest_similarity = 0
-        recommended_article = None
-
-        for article in summary_articles:
-            article_set = set([article['topic']] + article['keywords'] + [article['press']])
-            user_set = set(user_topics.keys()) | set(user_keywords) | set(user_presses.keys())
-            similarity = calculate_jaccard_similarity(article_set, user_set)
-
-            if similarity > highest_similarity:
-                highest_similarity = similarity
-                recommended_article = article
-
-        return recommended_article
-
-    def calculate_weight(self, user_id, _id, rating):
-        """평점에 따른 가중치 계산"""
-        # 평점에 따라 가중치 조정 로직 구현
-        if rating >= 4:
-            return 2
-        elif rating == 3:
-            return 1
+            latest_articles = sorted(summary_articles, key=lambda x: x['date_time'], reverse=True)
+            recommended_articles = latest_articles[:2]
         else:
-            return -1
+            preferred_keywords = set(user_profile['interests'].get('keywords', {}).keys())
+            article_similarities = []
+
+            # 자카드 유사도 계산
+            for article in summary_articles:
+                article_keywords_set = set(article['keywords'])
+                intersection = len(article_keywords_set.intersection(preferred_keywords))
+                union = len(article_keywords_set.union(preferred_keywords))
+                jaccard_similarity = intersection / union if union else 0
+                article_similarities.append((article, jaccard_similarity))
+
+            article_similarities.sort(key=lambda x: x[1], reverse=True)
+            recommended_articles = article_similarities[:2]
+
+        # 'nouns' 항목 제외하고 반환
+        recommended_articles_without_nouns = [
+            {key: value for key, value in article[0].items() if key != 'nouns'} for article in recommended_articles
+        ]
+        return recommended_articles_without_nouns
+
+    def update_interests_from_rating(self, keywords, weight):
+        """평점에 따라 사용자의 키워드 관심도 업데이트"""
+        now = datetime.now()
+        update_operations = {}
+        for keyword in keywords:
+            keyword_score_inc_key = f'interests.keywords.{keyword}.score'
+            keyword_last_read_set_key = f'interests.keywords.{keyword}.last_read'
+
+            update_operations.setdefault('$inc', {})[keyword_score_inc_key] = weight
+            update_operations.setdefault('$set', {})[keyword_last_read_set_key] = now
+
+        self.collection.update_one({'user_id': self.user_id}, update_operations, upsert=True)
+        self.adjust_interests_based_on_time(self.user_id)

@@ -30,7 +30,6 @@ def predict_sentiment(inputs):
             "score": prob.item()
         })
 
-    # 정렬하지 않고 결과 반환
     return all_probs
 
 
