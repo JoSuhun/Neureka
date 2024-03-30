@@ -91,19 +91,15 @@ const MainContainer = (props: Props) => {
     const checkScroll = () => {
       if (tutorialStartRef.current) {
         const rect = tutorialStartRef.current.getBoundingClientRect()
-        // 화면에 특정 컴포넌트가 보이기 시작하면 튜토리얼 시작
         if (rect.top <= window.innerHeight) {
           setRunTutorial(true)
-          // 스크롤 이벤트 리스너 제거
           window.removeEventListener('scroll', checkScroll)
         }
       }
     }
 
-    // 스크롤 이벤트 리스너 추가
     window.addEventListener('scroll', checkScroll)
 
-    // 컴포넌트 언마운트 시 리스너 제거
     return () => {
       window.removeEventListener('scroll', checkScroll)
     }

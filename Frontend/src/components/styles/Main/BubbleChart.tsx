@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--color-lightgrey);
+  border-top: 3px solid var(--color-dark);
 `
 
 export const Svg = styled.svg`
