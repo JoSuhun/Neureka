@@ -8,7 +8,7 @@ export const container = styled.div`
 `
 
 export const NewsWrapper = styled.div`
-  margin-top: -7px;
+  margin-top: -3px;
   width: 85%;
   display: flex;
   justify-content: center;
