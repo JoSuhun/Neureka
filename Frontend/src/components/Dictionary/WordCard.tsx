@@ -59,11 +59,15 @@ const WordCard = ({ word, marked, side }: Props) => {
 
   // 즐겨찾기 버튼 클릭 이벤트
   const handleMark = () => {
+    console.log(word)
+    const titleWithoutTags = word?.title
+      ? word.title.replace(/(<([^>]+)>)/gi, '')
+      : ''
     if (isLogin) {
       SetIsSave(true)
       markMutate({
         email: userEmail,
-        title: word?.title as string,
+        title: titleWithoutTags,
       })
     } else {
       setOpenLogin(true)
@@ -88,7 +92,7 @@ const WordCard = ({ word, marked, side }: Props) => {
             {marked && side == 'right' ? (
               <c.deleteBtn className="deleteBtn" onClick={handleUnmark} />
             ) : marked ? (
-              <c.saveBtn className="saveBtn" src={saved} />
+              <c.saveBtn className="saveBtn" src={saved} onClick={handleMark} />
             ) : (
               <c.saveBtn
                 className="saveBtn"

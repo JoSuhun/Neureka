@@ -31,6 +31,7 @@ publicRequest.interceptors.response.use(
   async error => {
     if (error.response?.status === 403) {
       console.log('토큰 없음')
+      localStorage.removeItem('accessToken')
       console.log(error)
 
       error.config.headers = {
@@ -38,6 +39,7 @@ publicRequest.interceptors.response.use(
       }
     } else if (error.response?.status === 401) {
       console.log('토큰 만료')
+      localStorage.removeItem('accessToken')
       console.log(error)
     } else {
       return error
