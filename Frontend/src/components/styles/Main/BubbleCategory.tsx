@@ -1,9 +1,6 @@
 import { CategoryBoxProps } from '@src/types/MainType'
 import styled from 'styled-components'
 
-export type CategoryBlockerProps = {
-  $isLogin: boolean
-}
 
 export const Container = styled.div`
   width: 100%;
@@ -28,7 +25,7 @@ export const CategoryToggle = styled.button`
 `
 
 export const CategoryWrapper = styled.div<CategoryBoxProps>`
-  margin-bottom: -2.5px;
+  margin-bottom: -3px;
   display: flex;
   flex-wrap: wrap;
   visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
@@ -40,7 +37,6 @@ export const CategoryWrapper = styled.div<CategoryBoxProps>`
   align-items: center;
   border-top: 3px solid var(--color-dark);
   border-bottom: 3px solid var(--color-dark);
-  /* border: 1px solid black; */
 `
 
 export const Category = styled.button<CategoryBoxProps>`
@@ -50,24 +46,3 @@ export const Category = styled.button<CategoryBoxProps>`
   transition: opacity 0.3s ease;
 `
 
-export const CategoryBlocker = styled.div<CategoryBlockerProps>`
-  position: relative;
-  width: 100%;
-`
-
-export const IsLoginContaier = styled.div<CategoryBoxProps>`
-  display: flex;
-  position: absolute;
-  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
-  font-size: 2rem;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-`
