@@ -20,3 +20,4 @@ class IdSerializer(serializers.Serializer):
 class RateSerializer(serializers.Serializer):
     _id = serializers.CharField(max_length=24)
     rating = serializers.IntegerField(min_value=0, max_value=5)
+    user_id = serializers.CharField(max_length=30)

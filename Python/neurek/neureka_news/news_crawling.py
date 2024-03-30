@@ -19,7 +19,7 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 
-article_count = 200
+article_count = 4000
 
 
 def crawling():
@@ -222,13 +222,19 @@ def keyword_ext(text, stop_words):
     tokenized_nouns = ' '.join([word[0] for word in tokenized_doc if word[1] in ['NNG', 'NNP'] and word[0] not in stop_words])
 
     n_gram_range = (1, 1)
-    count = CountVectorizer(ngram_range=n_gram_range).fit([tokenized_nouns])
-    candidates = count.get_feature_names_out()
+    # 예외 처리 추가
+    try:
+        count = CountVectorizer(ngram_range=n_gram_range).fit([tokenized_nouns])
+        candidates = count.get_feature_names_out()
+    except ValueError:
+        # 예외 발생 시(불용어만 있는경우...)
+        return ["불용어", "밖에", "없는경우"], tokenized_nouns
 
     doc_embedding = model.encode([text])[0]
     candidate_embeddings = model.encode(candidates)
 
     return mmr(doc_embedding, candidate_embeddings, candidates, top_n=3, diversity=0.3), tokenized_nouns
+
 
 
 def process_article(article, stop_words):
