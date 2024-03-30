@@ -145,12 +145,12 @@ def load_headline_news():
 
 
 # # 테스트
-# import pprint
-# if __name__ == "__main__":
-#     start_time = time.time()
-#     pprint.pprint(load_headline_news())
-#
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+import pprint
+if __name__ == "__main__":
+    start_time = time.time()
+    pprint.pprint(load_headline_news())
+
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")
