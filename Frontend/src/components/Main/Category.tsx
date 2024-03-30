@@ -8,10 +8,9 @@ export type CategoryProps = {
   name: string
   image: string
   imageStatic: string
-  show: boolean
 }
 
-const Category = ({ name, image, imageStatic, show }: CategoryProps) => {
+const Category = ({ name, image, imageStatic }: CategoryProps) => {
   const [categories, setCategories] = useAtom(categoriesAtom)
   const [isHovered, setIsHovered] = useState(false)
   const handleCategories = (selectedCategory: Category) => {
@@ -38,10 +37,6 @@ const Category = ({ name, image, imageStatic, show }: CategoryProps) => {
         return sortedSelectedCategories
       }
     })
-  }
-
-  if (!show) {
-    return null
   }
 
   return (

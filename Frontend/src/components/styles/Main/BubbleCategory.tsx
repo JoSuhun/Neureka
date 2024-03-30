@@ -6,31 +6,40 @@ export const Container = styled.div`
   width: 100%;
 `
 
-export const ToggleWrapper = styled.div`
+export const InfoWrapper = styled.div`
   display: flex;
-  justify-content: end;
   width: 100%;
 `
 
-// 카테고리 박스 토글용 버튼
-export const CategoryToggle = styled.button`
+export const CategoryInfo1 = styled.button`
   background-color: var(--color-yellow);
   color: white;
   width: 40%;
   height: 40px;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: 700;
   border: none;
 `
+export const CategoryInfo2 = styled.div`
+  color: black;
+  width: 60%;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
 
-export const CategoryWrapper = styled.div<CategoryBoxProps>`
+export const CategoryWrapper = styled.div`
   margin-bottom: -3px;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
   width: 100%;
-  height: ${({ $show }) => ($show ? '150px' : '0')};
+  height: 150px;
   transition: all 0.3s;
   gap: 10px;
   justify-content: center;
@@ -39,10 +48,9 @@ export const CategoryWrapper = styled.div<CategoryBoxProps>`
   border-bottom: 3px solid var(--color-dark);
 `
 
-export const Category = styled.button<CategoryBoxProps>`
+export const Category = styled.button`
   width: 18%;
   height: 50px;
-  opacity: ${({ $show }) => ($show ? '1' : '0')};
   transition: opacity 0.3s ease;
 `
 
