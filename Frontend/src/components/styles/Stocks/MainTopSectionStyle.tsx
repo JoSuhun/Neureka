@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import NotificationAddOutlinedIcon from '@mui/icons-material/NotificationAddOutlined'
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
 
 export const Container = styled.div`
   display: flex;
@@ -59,8 +59,8 @@ export const RemoveButton = styled(RemoveCircleIcon)`
   }
 `
 
-export const SubscribeButton = styled(NotificationAddOutlinedIcon)`
-  color: gray;
+export const SubscribeButton = styled(NotificationAddIcon)`
+  color: darkgray;
   font-size: 1.5rem !important;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;

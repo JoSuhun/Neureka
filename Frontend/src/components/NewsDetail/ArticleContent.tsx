@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import * as n from '@src/components/styles/NewsDetail/ArticleContentStyle'
 

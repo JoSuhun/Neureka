@@ -67,3 +67,7 @@ export const Words = styled.div`
     width: 9px;
   }
 `
+export const Empty = styled.p`
+  color: var(--color-dark);
+  text-align: center;
+`

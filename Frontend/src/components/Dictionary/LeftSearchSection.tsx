@@ -30,7 +30,7 @@ const LeftSearchSection = ({ data }: Props) => {
   // 키워드 검색 시 제목 또는 내용에 포함된 카드만 조회 (검색 내용이 없을 시 전체 단어 보여줌)
   useEffect(() => {
     if (question) {
-      const filteredWords = words?.filter(
+      const filteredWords = data?.filter(
         word =>
           word.title.includes(question) || word.content.includes(question),
       )
@@ -72,22 +72,17 @@ const LeftSearchSection = ({ data }: Props) => {
           </l.SearchBar>
 
           <l.Words ref={boxRef}>
-            {words
-              ? words.map((word, idx) =>
-                  markedWords?.some(
-                    markedWord => markedWord?.id === word?.id,
-                  ) ? (
-                    <WordCard word={word} key={idx} marked={true} side="left" />
-                  ) : (
-                    <WordCard
-                      word={word}
-                      key={idx}
-                      marked={false}
-                      side="left"
-                    />
-                  ),
-                )
-              : null}
+            {words && words.length > 0 ? (
+              words.map((word, idx) =>
+                markedWords?.some(markedWord => markedWord?.id === word?.id) ? (
+                  <WordCard word={word} key={idx} marked={true} side="left" />
+                ) : (
+                  <WordCard word={word} key={idx} marked={false} side="left" />
+                ),
+              )
+            ) : (
+              <l.Empty>검색 결과가 없어요</l.Empty>
+            )}
           </l.Words>
         </l.Box>
       </l.Wrapper>

@@ -11,26 +11,35 @@ import { Word } from '@src/types/WordType'
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 import { useAtom } from 'jotai'
 import DictionaryTutorial from '@src/tutorials/DIctionaryTutorial'
+import { isUserEmailAtom } from '@src/stores/authAtom'
+import { questionAtom } from '@src/stores/newsAtom'
 
 type Props = {}
 
 const DictionaryContainer = (props: Props) => {
   const [markedWords, setMarkedWords] = useState<any>(null)
   const [mark, setMark] = useAtom(toggleMarkingAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
+  const [question, setQuestion] = useAtom(questionAtom)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   useEffect(() => {
-    refetch()
+    getMarkedRefetch()
   }, [mark])
+
+  useEffect(() => {
+    getWordsRefetch()
+  }, [question])
 
   const {
     isLoading: isLoadingWords,
     data: wordsData,
     isError: isErrorWords,
     error: errorWords,
+    refetch: getWordsRefetch,
   } = useQuery('get-words', fetchWords)
 
   const {
@@ -38,10 +47,10 @@ const DictionaryContainer = (props: Props) => {
     data: markedData,
     isError: isErrorMarked,
     error: errorMarked,
-    refetch,
+    refetch: getMarkedRefetch,
   } = useQuery({
     queryKey: 'get-marked',
-    queryFn: () => fetchMarkedWords('dbtks2759@gmail.com'),
+    queryFn: () => fetchMarkedWords(userEmail),
     onSuccess: res => {
       setMarkedWords(res)
     },
@@ -56,7 +65,7 @@ const DictionaryContainer = (props: Props) => {
         <DictionaryTutorial />
         <d.Box className="dictionaryPage">
           <LeftSearchSection data={wordsData?.data} />
-          <RightWordsSection data={markedWords?.data} />
+          <RightWordsSection data={markedData?.data} />
         </d.Box>
       </d.Wrapper>
     </>
