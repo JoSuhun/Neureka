@@ -4,8 +4,8 @@ import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
 } from '@src/stores/stockAtom'
-import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
 import Tooltip from '@src/common/Tooltip'
+import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
 
 const MainTopSection = (props: {
   handleAddMyStock: () => void
@@ -25,6 +25,10 @@ const MainTopSection = (props: {
   const currentItem = likedCompanyList.find(
     item => item.company.code === selectedStock.code,
   )
+
+  const handleSubscribeWithoutLike = () => {
+    alert('❌ 구독하려면 먼저 관심 기업으로 등록해주세요! ❌')
+  }
 
   useEffect(() => {
     setIsLiked(
@@ -52,7 +56,11 @@ const MainTopSection = (props: {
           </Tooltip>
         ) : (
           <Tooltip message={'매일 아침 메일을 받아보세요!'}>
-            <s.SubscribeButton onClick={handleSubscribeCompany} />
+            <s.SubscribeButton
+              onClick={
+                isLiked ? handleSubscribeCompany : handleSubscribeWithoutLike
+              }
+            />
           </Tooltip>
         )}
       </s.ButtonWrap>
