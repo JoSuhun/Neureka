@@ -23,6 +23,7 @@ const CategoryCarousel = () => {
       } else {
         // 존재하지 않는 경우, 카테고리 추가
         if (prev.length >= 3) {
+          alert("카테고리는 최대 3개까지 선택가능합니다.")
           return prev
         }
         const updatedCategories = [...prev, selectedCategory]
