@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { useQuery, useMutation } from 'react-query'
 import {
   fetchCompanyList,
@@ -12,6 +12,7 @@ import {
   fetchCompanyNewsList,
   fetchCompanySubscribe,
 } from '@src/apis/StockApi'
+import { isUserEmailAtom } from '@src/stores/authAtom'
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
@@ -33,17 +34,10 @@ const StocksContainer = () => {
     window.scrollTo(0, 0)
   }, [])
 
+  const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
   const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [, setSelectedNewsList] = useAtom(selectedNewsListAtom) // 기업 뉴스 리스트
-
-  const user = {
-    user_id: 1,
-    email: 'tmdgus1761@gmail.com',
-    name: '이승현',
-    role: 'ROLE_USER',
-    username: 'google 113694125224268545930',
-  }
 
   // 기업 전체 조회
   const { data: companyList } = useQuery({
@@ -73,7 +67,7 @@ const StocksContainer = () => {
   // 관심 기업 조회
   const { data: companyLikeList, refetch: refetchCompanyLikeList } = useQuery({
     queryKey: ['CompanyLikeList'],
-    queryFn: () => fetchCompanyLikeList(user.email),
+    queryFn: () => fetchCompanyLikeList(userEmail),
     onSuccess: data => {
       setLikedCompanyList(data) // 관심 기업 업데이트
     },
@@ -87,9 +81,8 @@ const StocksContainer = () => {
   })
 
   const handleAddMyStock = () => {
-    const email = 'tmdgus1761@gmail.com'
     const params = {
-      email,
+      email: userEmail,
       code: selectedStock.code,
     }
     likeCompany(params)
@@ -103,9 +96,8 @@ const StocksContainer = () => {
   })
 
   const handleRemoveMyStock = () => {
-    const email = 'tmdgus1761@gmail.com'
     const params = {
-      email,
+      email: userEmail,
       code: selectedStock.code,
     }
     unLikeCompany(params)
@@ -115,7 +107,7 @@ const StocksContainer = () => {
   const { data: companyLatestList, refetch: refetchCompanyLatestList } =
     useQuery({
       queryKey: ['CompanyLatestList'],
-      queryFn: () => fetchCompanyLatestList(user.email),
+      queryFn: () => fetchCompanyLatestList(userEmail),
     })
 
   // 최근 조회 기업 등록
@@ -126,11 +118,9 @@ const StocksContainer = () => {
   })
 
   const handleAddLatestCompany = () => {
-    const email = 'tmdgus1761@gmail.com'
     const params = {
-      email,
+      email: userEmail,
       code: selectedStock.code,
-      companyName: selectedStock.companyName,
     }
     latestCompany(params)
   }
@@ -144,11 +134,9 @@ const StocksContainer = () => {
 
   // 구독
   const handleSubscribeCompany = () => {
-    console.log(selectedStock)
-    const email = 'tmdgus1761@gmail.com'
     const params = {
       code: selectedStock.code,
-      email,
+      email: userEmail,
       isCheck: true,
     }
     subscribeCompany(params)
@@ -156,10 +144,9 @@ const StocksContainer = () => {
 
   // 구독 취소
   const handleUnSubscribeCompany = () => {
-    const email = 'tmdgus1761@gmail.com'
     const params = {
       code: selectedStock.code,
-      email,
+      email: userEmail,
       isCheck: false,
     }
     subscribeCompany(params)
