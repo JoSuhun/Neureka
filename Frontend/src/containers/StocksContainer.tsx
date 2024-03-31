@@ -27,13 +27,10 @@ import StockChartSection from '@src/components/Stocks/StockChartSection'
 import StockNewsSection from '@src/components/Stocks/StockNewsSection'
 import Loading from '@src/common/Loading'
 import StockTutorial from '@src/tutorials/StockTutorial'
+import { confetti } from '@src/App'
 import * as s from '@src/containers/styles/StocksContainerStyle'
 
 const StocksContainer = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
   const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
   const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
@@ -132,6 +129,25 @@ const StocksContainer = () => {
     onSuccess: () => refetchCompanyLikeList(), // 관심 기업 조회 refetch
   })
 
+  // 구독시 꽃가루 이벤트
+  const handleConfetti = () => {
+    confetti.addConfetti({
+      confettiColors: [
+        '#ff00ff', // 핑크
+        '#ffff00', // 노랑
+        '#00ff00', // 녹색
+        '#00ffff', // 청록
+        '#0000ff', // 파랑
+        '#ff0000', // 빨강
+        '#800080', // 보라
+        '#ffa500', // 주황
+        '#008000', // 초록
+      ],
+      confettiRadius: 5,
+      confettiNumber: 800,
+    })
+  }
+
   // 구독
   const handleSubscribeCompany = () => {
     const params = {
@@ -140,6 +156,7 @@ const StocksContainer = () => {
       isCheck: true,
     }
     subscribeCompany(params)
+    handleConfetti()
   }
 
   // 구독 취소
@@ -159,6 +176,10 @@ const StocksContainer = () => {
     handleAddLatestCompany() // 최근 조회 기업 등록 refetch
     refetchCompanyNewsList() // 최근 뉴스 조회 refetch
   }, [selectedStock])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <s.Container>
