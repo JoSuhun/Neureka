@@ -29,6 +29,7 @@ publicRequest.interceptors.response.use(
     return response
   },
   async error => {
+    console.log(error.response)
     if (error.response?.status === 403) {
       console.log('토큰 없음')
       localStorage.removeItem('accessToken')

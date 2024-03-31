@@ -24,7 +24,7 @@ const RightWordsSection = ({ data }: Props) => {
     <>
       <r.Wrapper className="wordsSection">
         <r.Title>MARK</r.Title>
-        {data?.length ? (
+        {data.length > 0 ? (
           <r.Box>
             {data?.map((word: any, idx: number) =>
               word?.dictionary ? (

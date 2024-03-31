@@ -51,3 +51,20 @@ export const Search = styled(SearchIcon)`
   color: var(--color-lightblue);
   font-size: 2.3rem !important;
 `
+
+export const SearchSection = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(100%, -50%);
+  transition: transform 1s ease-in-out;
+  > div {
+    width: 50%;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    opacity: 0.9;
+  }
+  &.show {
+    transform: translate(50%, -50%);
+  }
+`

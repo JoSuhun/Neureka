@@ -19,8 +19,12 @@ type Props = {}
 const DictionaryContainer = (props: Props) => {
   const [markedWords, setMarkedWords] = useState<any>(null)
   const [mark, setMark] = useAtom(toggleMarkingAtom)
-  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
+  // const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
   const [question, setQuestion] = useAtom(questionAtom)
+  const userEmailFromLocalStorage = localStorage.getItem('useremail')
+  const userEmail = userEmailFromLocalStorage
+    ? JSON.parse(userEmailFromLocalStorage)
+    : ''
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -40,7 +44,10 @@ const DictionaryContainer = (props: Props) => {
     isError: isErrorWords,
     error: errorWords,
     refetch: getWordsRefetch,
-  } = useQuery('get-words', fetchWords)
+  } = useQuery({
+    queryKey: 'get-words',
+    queryFn: fetchWords,
+  })
 
   const {
     isLoading: isLoadingMarked,

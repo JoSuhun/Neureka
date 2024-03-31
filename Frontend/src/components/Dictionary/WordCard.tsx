@@ -92,7 +92,7 @@ const WordCard = ({ word, marked, side }: Props) => {
             {marked && side == 'right' ? (
               <c.deleteBtn className="deleteBtn" onClick={handleUnmark} />
             ) : marked ? (
-              <c.saveBtn className="saveBtn" src={saved} onClick={handleMark} />
+              <c.saveBtn className="saveBtn" src={saved} />
             ) : (
               <c.saveBtn
                 className="saveBtn"
