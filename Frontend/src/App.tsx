@@ -13,8 +13,10 @@ import TextToSpeechContainer from './containers/TextToSpeechContainer'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthModal from './common/Auth/AuthModal'
 import { CookiesProvider } from 'react-cookie'
+import JSConfetti from 'js-confetti'
 
 const queryClient = new QueryClient()
+export const confetti = new JSConfetti()
 
 function App() {
   return (
