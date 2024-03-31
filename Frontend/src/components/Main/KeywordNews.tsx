@@ -3,6 +3,8 @@ import { useAtom } from 'jotai'
 import NewsCard from '@src/components/Main/NewsCard'
 import { selectedKeywordAtom } from '@src/stores/mainAtom'
 import { KeywordNews } from '@src/types/MainType'
+import useMoveScroll from '@src/hooks/clickToScrollMethod'
+import { useEffect } from 'react'
 
 export type KeywordNewsProps = {
   keywordNews: KeywordNews[]
@@ -11,6 +13,7 @@ export type KeywordNewsProps = {
 const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
   const [selectedKeyword] = useAtom(selectedKeywordAtom)
   const safeKeywordNews = Array.isArray(keywordNews) ? keywordNews : []
+  const { element: newsRef, onMoveToElement: moveToNews } = useMoveScroll();
 
   // 더미 뉴스 데이터 생성
   const dummyNews = {
@@ -27,16 +30,23 @@ const KeywordNews = ({ keywordNews }: KeywordNewsProps) => {
     sentiment: [],
   }
 
+  
   // 필요한 더미 데이터 개수 계산
   const neededCount = Math.max(0, 4 - safeKeywordNews.length)
   const dummyNewsArray = Array.from({ length: neededCount }, () => dummyNews)
-
+  
   // 기존 뉴스 데이터와 더미 데이터 합치기
   const resultKeywordNews = [...safeKeywordNews, ...dummyNewsArray]
+  
+  useEffect(() => {
+    if (selectedKeyword.keyword && newsRef.current) {
+      moveToNews()
+    }
+  }, [selectedKeyword]); 
 
   return (
     <>
-      <k.container className="KeywordNews">
+      <k.container className="KeywordNews" ref={newsRef}>
         {selectedKeyword.keyword !== '' ? (
           <>
             <k.KeywordTitle>Keyword News</k.KeywordTitle>
