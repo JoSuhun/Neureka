@@ -1,5 +1,5 @@
 import Carousel from '@src/components/News/Carousel'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Wrapper } from './styles/NewsContainerStyle'
 import Header from '@src/components/News/Header'
 import CustomizedNews from '@src/components/News/CustomizedNews'
@@ -21,6 +21,7 @@ const NewsContainer = (props: Props) => {
       }[]
     | null
   >(null)
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -86,8 +87,8 @@ const NewsContainer = (props: Props) => {
     <>
       <Carousel hotNewsData={hotNewsData?.data} />
       <Wrapper>
-        <Header hotKeywordData={hotKeywordData?.data} />
         <CustomizedNews />
+        <Header hotKeywordData={hotKeywordData?.data} />
         <NewsList newsData={newsData?.data} />
       </Wrapper>
     </>
