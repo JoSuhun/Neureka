@@ -6,26 +6,32 @@ import ArticleContent from '@src/components/NewsDetail/ArticleContent'
 import ArticleGrade from '@src/components/NewsDetail/ArticleGrade'
 import SimilarArticle from '@src/components/NewsDetail/SimilarArticle'
 import BackBtn from '@src/components/NewsDetail/BackBtn'
-import { useQuery } from 'react-query'
-import { fetchGetGrade, fetchNewsDetail } from '@src/apis/NewsApi'
+import { useMutation, useQuery } from 'react-query'
+import {
+  fetchGetGrade,
+  fetchNewsDetail,
+  fetchOtherNews,
+} from '@src/apis/NewsApi'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import LeftSearchSection from '@src/components/Dictionary/LeftSearchSection'
 import { fetchWords } from '@src/apis/DictionaryApi'
+import { OtherNews } from '@src/types/NewsType'
 
 type Props = {
   newsId: string
 }
 
 const NewsDetailContainer = ({ newsId }: Props) => {
-  const [otherNews, setOtherNews] = useState<string[] | null>(null)
+  const [otherNews, setOtherNews] = useState<OtherNews[] | null>(null)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const [search, setSearch] = useState(false)
   useEffect(() => {
     window.scrollTo(0, 0)
+    otherNewsMutate(newsId)
   }, [])
 
   const navigate = useNavigate()
@@ -65,6 +71,15 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     queryFn: fetchWords,
   })
 
+  const { mutate: otherNewsMutate } = useMutation(
+    (newsId: string) => fetchOtherNews(newsId),
+    {
+      onSuccess: res => {
+        setOtherNews(res.data)
+      },
+    },
+  )
+
   if (isNewsListLoading) {
     return <>뉴스 불러오는 중 . . .</>
   }
@@ -83,7 +98,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
         {isLogin ? (
           <ArticleGrade grade={newsGrade?.data} newsId={newsId} />
         ) : null}
-        <SimilarArticle newsId={newsId} />
+        <SimilarArticle otherNewsData={otherNews as OtherNews[]} />
         <BackBtn />
       </n.Container>
     </>
