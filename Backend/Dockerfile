@@ -18,7 +18,6 @@ WORKDIR /app
 COPY --from=builder /build/build/libs/stocker-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
-EXPOSE 8443
 
 # root 대신 nobody 권한으로 실행
 USER nobody
