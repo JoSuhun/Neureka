@@ -1,5 +1,5 @@
 import { publicRequest } from '@src/hooks/requestMethod'
-import { Search } from '@src/types/NewsType'
+import { Search, SearchRecommend } from '@src/types/NewsType'
 
 export const fetchNewsList = async () => {
   return await publicRequest.get('news')
@@ -58,4 +58,8 @@ export const fetchPostGrade = async (data: {
       params: data,
     },
   )
+}
+
+export const fetchRecommendNews = async (data: SearchRecommend) => {
+  return await publicRequest.post('news/recommend_for_user', data)
 }
