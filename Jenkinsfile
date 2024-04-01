@@ -52,7 +52,7 @@ def buildAndPushImage(projectName, credentials) {
     def lowercaseProjectName = projectName.toLowerCase()
     dir("${projectName}") {
         // Docker 이미지 빌드
-        sh "docker build --no-cache -t csw1511/neureka-${lowercaseProjectName}:latest ."
+        sh "docker build -t csw1511/neureka-${lowercaseProjectName}:latest ."
         sh "echo ${projectName} ${lowercaseProjectName}"
 
         // Docker Hub에 이미지 푸시
