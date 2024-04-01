@@ -1,3 +1,5 @@
+import StopIcon from '@mui/icons-material/Stop'
+import PauseIcon from '@mui/icons-material/Pause'
 import Tooltip from '@src/common/Tooltip'
 import * as c from '@src/components/styles/TTS/ControlButtonsStyle'
 
@@ -17,18 +19,16 @@ const ControlButtons = ({
   return (
     <c.Container>
       {isPlaying ? (
-        <>
-          <Tooltip message={'일시정지하시겠습니까?'}>
-            <c.PauseButton onClick={onPause} />
-          </Tooltip>
-          <Tooltip message={'멈추시겠습니까?'}>
-            <c.StopButton onClick={onStop} />
-          </Tooltip>
-        </>
+        <c.ButtonWrap>
+          <c.PauseButton onClick={onPause}>
+            <PauseIcon />
+          </c.PauseButton>
+          <c.StopButton onClick={onStop}>
+            <StopIcon />
+          </c.StopButton>
+        </c.ButtonWrap>
       ) : (
-        <Tooltip message={'재생하시겠습니까?'}>
-          <c.PlayButton onClick={onPlay} />
-        </Tooltip>
+        <c.PlayButton onClick={onPlay}>본문듣기 시작</c.PlayButton>
       )}
     </c.Container>
   )
