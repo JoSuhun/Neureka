@@ -12,6 +12,7 @@ from bson.objectid import ObjectId
 import pprint
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
+import random
 
 
 #### 크롤링 후 처리
@@ -139,7 +140,6 @@ def recommend_news(id_str):
 
         # 비슷한 기사를 불러오기
         similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
-        print(f"similar_ids : {similar_ids}")
 
         summary_article = []
         for article_id in similar_ids:
@@ -152,26 +152,27 @@ def recommend_news(id_str):
         if len(summary_article) != 0:
             print("그냥 뉴스")
             for article in summary_article:
-
                 temp = {"_id": article['_id'],
                         "title": article['article_title'],
                         "thumbnail_url": article['thumbnail_url']}
-
                 result.append(temp)
 
-            return result
         else:
             # 기업뉴스에서 들어왔을 경우
             print("기업 뉴스")
             with ThreadPoolExecutor(max_workers=5) as executor:
-                future_to_article_id = {executor.submit(fetch_article_details, article_id): article_id for article_id in
-                                        similar_ids}
+                future_to_article_id = {
+                    executor.submit(fetch_article_details, article_id): article_id for article_id in similar_ids
+                }
                 for future in as_completed(future_to_article_id):
                     article_details = future.result()
                     if article_details:
                         result.append(article_details)
 
-            return result
+        # 리스트 섞기
+        random.shuffle(result)
+
+        return result
     else:
         print("추천 기사를 받는데 오류입니다.")
         return []
@@ -182,7 +183,7 @@ if __name__ == "__main__":
     start_time = time.time()
 
     recommend_news_list = []
-    pprint.pprint(recommend_news("660a4cc095108de5536b75cc"))
+    pprint.pprint(recommend_news("660a622b95108de5536dce2d"))
     end_time = time.time()  # 종료 시간 저장
     elapsed_time = end_time - start_time  # 경과 시간 계산
 

@@ -41,20 +41,20 @@ def recommend_articles_to_user(user_id, topic):
 
 
 # # 테스트 코드
-# if __name__ == '__main__':
+if __name__ == '__main__':
 #     # 테스트 사용자 ID와 기사 ID
 #     test_user_id = '2710yap3'
 #     test_article_id = '6607caaf666b59298cefbb02'
 #
-#     start_time = time.time()
+    start_time = time.time()
 #     # 사용자가 기사를 읽고 관심도를 업데이트하는 시나리오
 #     read_article_and_update_interests(test_user_id, test_article_id)
 #
 #     # 사용자에게 기사를 추천하는 시나리오
 #     # 2번째 매개변수에 topic을 리스트로 넣어보세요
-#     recommend_articles_to_user(test_user_id, [])
+    recommend_articles_to_user("2710yap@gmail.com", [])
 #
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
 #
-#     print(f"Execution time: {elapsed_time} seconds")
+    print(f"Execution time: {elapsed_time} seconds")

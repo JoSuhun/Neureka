@@ -186,13 +186,13 @@ class DetailsArticle:
     def find_urls_by_keywords_sorted_by_average_rating(cls, keywords):
         """주어진 키워드를 포함하고, 평균 점수로 정렬한 후, 상위 30개의 _id만 추출하여 반환"""
 
-        # 현재 날짜로부터 7일 전의 날짜를 계산
-        # seven_days_ago = datetime.now() - timedelta(days=7)
+        # 현재 날짜로부터 14일 전의 날짜를 계산
+        seven_days_ago = datetime.now() - timedelta(days=14)
 
         pipeline = [
             {"$match": {
                 "detail_keywords": {"$in": keywords},
-                # "detail_date": {"$gte": seven_days_ago.strftime('%Y-%m-%d %H:%M')}
+                "detail_date": {"$gte": seven_days_ago.strftime('%Y-%m-%d %H:%M')}
             }},
             {"$addFields": {
                 "weighted_score": {
