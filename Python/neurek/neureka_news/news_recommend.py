@@ -124,7 +124,7 @@ def recommend_news(id_str):
         summary_article = []
         for article_id in similar_ids:
             article = SummaryArticle.find_by_id(article_id)
-            if article is not None:
+            if article is not None and str(article['_id']) != _id:
                 article['_id'] = str(article['_id'])
                 summary_article.append(article)
 
