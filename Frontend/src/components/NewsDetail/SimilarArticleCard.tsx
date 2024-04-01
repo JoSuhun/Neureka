@@ -2,42 +2,31 @@ import React, { useEffect, useState } from 'react'
 
 import * as c from '@src/components/styles/NewsDetail/SimilarArticleCardStyle'
 
-import defaultThumbnail from '/image/ky.gif'
 import { useQuery } from 'react-query'
 import { fetchNewsDetail } from '@src/apis/NewsApi'
+import { OtherNews } from '@src/types/NewsType'
+
+import defaultThumbnail from '/image/defaultImage.png'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
-  news: string
+  news: OtherNews
 }
 
 const SimilarArticleCard = ({ news }: Props) => {
-  const [newsTitle, setNewsTitle] = useState('')
-
-  const {
-    isLoading: isNewsListLoading,
-    data: newsData,
-    isError: isNewsListError,
-    error: newsListError,
-    refetch,
-  } = useQuery({
-    queryKey: ['news-detail', news],
-    queryFn: () => fetchNewsDetail(news),
-    onSuccess: res => {
-      console.log(res.data)
-      setNewsTitle(res.data.detail_title)
-    },
-  })
-
-  if (isNewsListLoading) {
-    return <>로딩중 . . .</>
-  }
+  const navigate = useNavigate()
 
   return (
     <>
-      <c.Wrapper className="card">
-        <c.Thumbnail className="card-thumbnail" />
-        <c.Title className="card-title">{newsTitle}</c.Title>
-        <c.Content className="card-content">ss</c.Content>
+      <c.Wrapper
+        className="card"
+        onClick={() => navigate(`/news/newsdetail/${news._id}`)}
+      >
+        <c.Thumbnail
+          className="card-thumbnail"
+          src={news.thumbnail_url ? news.thumbnail_url : defaultThumbnail}
+        />
+        <c.Title className="card-title">{news.title}</c.Title>
       </c.Wrapper>
     </>
   )

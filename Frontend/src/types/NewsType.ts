@@ -36,3 +36,9 @@ export type Search = {
   searchTime: string
   swid: number
 }
+
+export type OtherNews = {
+  _id: string
+  title: string
+  thumbnail_url: string | null
+}
