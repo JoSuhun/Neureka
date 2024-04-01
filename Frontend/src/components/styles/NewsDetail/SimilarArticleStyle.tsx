@@ -11,13 +11,10 @@ export const Wrapper = styled.div`
       font-size: 1.4rem;
     }
     .card-box {
-      height: 280px;
+      height: auto;
     }
     .card-title {
       font-size: 1.1rem;
-    }
-    .card-content {
-      font-size: 1rem;
     }
   }
   @media screen and (max-width: 992px) {
@@ -25,22 +22,15 @@ export const Wrapper = styled.div`
       font-size: 1.3rem;
     }
     .card-box {
-      height: 220px;
+      /* height: 220px; */
     }
     .card-title {
       font-size: 1rem;
     }
-    .card-content {
-      font-size: 0.9rem;
-      -webkit-line-clamp: 2;
-    }
   }
   @media screen and (max-width: 768px) {
     .card-box {
-      height: 170px;
-    }
-    .card-content {
-      display: none;
+      /* height: 170px; */
     }
   }
   @media screen and (max-width: 576px) {
@@ -68,7 +58,6 @@ export const Title = styled.p`
 `
 export const ArticleBox = styled.div`
   width: 100%;
-  height: 330px;
   display: flex;
   justify-content: space-between;
 `

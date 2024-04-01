@@ -6,35 +6,30 @@ import SimilarArticleCard from './SimilarArticleCard'
 import sampleimage from '/image/satoru.gif'
 import { useMutation } from 'react-query'
 import { fetchOtherNews } from '@src/apis/NewsApi'
+import { OtherNews } from '@src/types/NewsType'
+import Loading from '@src/common/Loading'
 
 type Props = {
-  newsId: string
+  otherNewsData: OtherNews[]
 }
 
-const SimilarArticle = ({ newsId }: Props) => {
-  const [otherNews, setOtherNews] = useState<string[] | null>(null)
-
-  const { mutate: otherNewsMutate } = useMutation(
-    (newsId: string) => fetchOtherNews(newsId),
-    {
-      onSuccess: res => {
-        // console.log('비슷한 기사 가져오기 성공' + res.data)
-        setOtherNews(res.data)
-      },
-    },
-  )
-  useEffect(() => {
-    otherNewsMutate(newsId)
-  }, [])
+const SimilarArticle = ({ otherNewsData }: Props) => {
+  // useEffect(() => {
+  //   otherNewsMutate(newsId)
+  // }, [])
 
   return (
     <>
       <s.Wrapper>
         <s.Title className="title">방금 보신 기사와 비슷해요 !</s.Title>
         <s.ArticleBox className="card-box">
-          {otherNews?.map((news, idx) => (
-            <SimilarArticleCard news={news} key={idx} />
-          ))}
+          {otherNewsData ? (
+            otherNewsData?.map((news, idx) => (
+              <SimilarArticleCard news={news} key={idx} />
+            ))
+          ) : (
+            <Loading />
+          )}
         </s.ArticleBox>
       </s.Wrapper>
     </>
