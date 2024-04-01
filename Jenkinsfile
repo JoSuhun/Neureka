@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // 0. 컨테이너 뭐 돌아가는지좀 봐야겠다
-                    sh 'docker ps -a'
+                    sh "docker ps -a"
 
                     // 1. 기존 작동중인 컨테이너 삭제 및 중지
                     sh 'docker stop Frontend Backend Python || true' // 기존 컨테이너 중지
@@ -37,7 +37,8 @@ pipeline {
                     sh 'docker run -d --name Backend -p 8080:8080 csw1511/neureka-backend:latest'
                     sh 'docker run -d --name Python -p 8000:8000 csw1511/neureka-python:latest'
                     
-                    
+                    // 4. 기존에 사용하던 이미지들을 삭제하기
+                    removeRemainImage()
                 }
             }
         }
@@ -58,5 +59,15 @@ def buildAndPushImage(projectName, credentials) {
             sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
             sh "docker push csw1511/neureka-${lowercaseProjectName}:latest"
         }
+    }
+}
+
+def removeRemainImage(){
+    def process = 'docker images'.execute() // 이미지 목록을 가져옴
+    def imagesWithNone = process.text.readLines().findAll { it.contains('<none>') } // <none> 태그가 붙은 이미지를 필터링함
+
+    imagesWithNone.each { image ->
+        def imageId = image.tokenize()[2] // 이미지 ID 추출
+        "docker rmi $imageId".execute().text // 이미지 삭제
     }
 }
