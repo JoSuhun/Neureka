@@ -147,6 +147,7 @@ public class NewsController {
         Map<String, Object> jsonData = new HashMap<>();
         jsonData.put("_id", newsId);
         jsonData.put("rating", grade);
+        jsonData.put("user_id", email);
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
@@ -260,5 +261,47 @@ public class NewsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
+    @PostMapping("recommend_for_user")
+    @Operation(summary = "뉴스 메인에서 추천기사")
+    public ResponseEntity<?> recommendForUser(@RequestBody Map<String, Object> userAndTopic){
+        String url = "/data/news/api/recommend_for_user/";
+
+
+        System.out.println(userAndTopic.get("user_id"));
+        System.out.println(userAndTopic.get("topic"));
+
+
+        String response = webClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(userAndTopic)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    @PostMapping("update_interests")
+    @Operation(summary = "기사의 detail 페이지에 들어갔을때 유저의 관심도를 수정합니다.")
+    public ResponseEntity<?> updateInterests(@RequestBody Map<String,Object> userAndArticle){
+        String url = "/data/news/api/update_interests/";
+
+        System.out.println(userAndArticle.get("user_id"));
+        System.out.println(userAndArticle.get("article_id"));
+
+        String response = webClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(userAndArticle)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
