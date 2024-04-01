@@ -19,7 +19,7 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 
-article_count = 4000
+article_count = 100
 
 
 def crawling():
