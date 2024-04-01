@@ -22,6 +22,7 @@ import { OtherNews, UserInterest } from '@src/types/NewsType'
 import TextToSpeechContainer from './TextToSpeechContainer'
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 import { Word, UserWord } from '@src/types/WordType'
+import Loading from '@src/common/Loading'
 
 type Props = {
   newsId: string
@@ -50,7 +51,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
         article_id: newsId,
       })
     }
-  }, [])
+  }, [newsId])
 
   const navigate = useNavigate()
 
@@ -146,7 +147,11 @@ const NewsDetailContainer = ({ newsId }: Props) => {
   })
 
   if (isNewsListLoading) {
-    return <>뉴스 불러오는 중 . . .</>
+    return (
+      <>
+        <Loading />
+      </>
+    )
   }
 
   return (
