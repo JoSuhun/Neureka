@@ -26,7 +26,8 @@ type Props = {
 const NewsDetailContainer = ({ newsId }: Props) => {
   const [otherNews, setOtherNews] = useState<OtherNews[] | null>(null)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
-  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
+
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
 
   const [search, setSearch] = useState(false)
   useEffect(() => {
