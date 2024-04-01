@@ -11,13 +11,14 @@ import {
   fetchGetGrade,
   fetchNewsDetail,
   fetchOtherNews,
+  fetchUserInterest,
 } from '@src/apis/NewsApi'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import LeftSearchSection from '@src/components/Dictionary/LeftSearchSection'
 import { fetchMarkedWords, fetchWords } from '@src/apis/DictionaryApi'
-import { OtherNews } from '@src/types/NewsType'
+import { OtherNews, UserInterest } from '@src/types/NewsType'
 import TextToSpeechContainer from './TextToSpeechContainer'
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 import { Word, UserWord } from '@src/types/WordType'
@@ -43,6 +44,12 @@ const NewsDetailContainer = ({ newsId }: Props) => {
   useEffect(() => {
     window.scrollTo(0, 0)
     otherNewsMutate(newsId)
+    if (userEmail) {
+      userInterestMutate({
+        user_id: userEmail,
+        article_id: newsId,
+      })
+    }
   }, [])
 
   const navigate = useNavigate()
@@ -75,7 +82,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     error: newsListError,
   } = useQuery({
     queryKey: ['news-detail', newsId],
-    queryFn: () => fetchNewsDetail(newsId),
+    queryFn: () => fetchNewsDetail(newsId, userEmail),
   })
 
   const {
@@ -107,6 +114,13 @@ const NewsDetailContainer = ({ newsId }: Props) => {
       onSuccess: res => {
         setOtherNews(res.data)
       },
+    },
+  )
+
+  const { mutate: userInterestMutate } = useMutation(
+    (data: UserInterest) => fetchUserInterest(data),
+    {
+      onSuccess: res => console.log(res.data),
     },
   )
 

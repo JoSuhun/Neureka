@@ -8,6 +8,7 @@ const accessToken = localStorage.getItem('accessToken')
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
 })
+publicRequest.defaults.withCredentials = true
 
 publicRequest.interceptors.request.use(
   config => {

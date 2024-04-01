@@ -60,3 +60,8 @@ export type SearchRecommend = {
   user_id: string
   topic: string[]
 }
+
+export type UserInterest = {
+  user_id: string
+  article_id: string
+}
