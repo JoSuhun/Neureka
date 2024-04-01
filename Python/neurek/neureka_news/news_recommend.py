@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 
-from neurek.neureka_news.models import DetailsArticle
+from neurek.neureka_news.models import DetailsArticle, SummaryArticle
 from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 import requests
 import numpy as np
@@ -14,7 +14,7 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 import time
 from bson.objectid import ObjectId
-
+import pprint
 
 
 #### 크롤링 후 처리
@@ -41,16 +41,6 @@ def article_extraction(url):
 
     return article_text
 
-def return_extraction(url):
-    response = requests.get(url)
-    time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
-    soup = BeautifulSoup(response.content, "html.parser")
-
-    title = soup.find('h2', {'class': 'media_end_head_headline', 'id': 'title_area'})
-    img_tag = soup.select_one('#img1')
-    img_src = img_tag['data-src'] if img_tag and img_tag.get('data-src') else None
-
-    return title.get_text(strip=True), img_src
 
 def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
     word_doc_similarity = cosine_similarity(candidate_embeddings, doc_embedding.reshape(1, -1))
@@ -71,6 +61,7 @@ def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
 
     top_keywords = [words[idx] for idx in keywords_idx]
     return top_keywords
+
 
 def keyword_ext(text, stop_words):
     tokenized_doc = tagger.pos(text)
@@ -111,7 +102,7 @@ def recommend_news(id_str):
             stop_words_path = "LDA/stop_words.txt"
             stop_words = load_stop_words(stop_words_path)
 
-            article_text= article_extraction(article_data['detail_url'])
+            article_text = article_extraction(article_data['detail_url'])
 
             new_topic = text_through_LDA_probability(article_text)
             new_keywords = keyword_ext(article_text, stop_words)
@@ -127,18 +118,21 @@ def recommend_news(id_str):
             new_keywords = article_data['detail_keywords']
             print("Article already has a topic.")
 
-            # 비슷한 기사를 불러오기
+        # 비슷한 기사를 불러오기
         similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
 
+        summary_article = []
+        for article_id in similar_ids:
+            article = SummaryArticle.find_by_id(article_id)
+            if article is not None:
+                summary_article.append(article)
+
         result = []
-        for similar_id in similar_ids:
-            url = DetailsArticle.find_by_id(similar_id)['detail_url']
+        for article in summary_article:
 
-            title, thumbnail_url = return_extraction(url)
-
-            temp = {"_id": similar_id,
-                    "title": title,
-                    "thumbnail_url": thumbnail_url}
+            temp = {"_id": article['_id'],
+                    "title": article['article_title'],
+                    "thumbnail_url": article['thumbnail_url']}
 
             result.append(temp)
 
@@ -151,12 +145,11 @@ def recommend_news(id_str):
 
 
 # #확인용
-import pprint
 if __name__ == "__main__":
     start_time = time.time()
 
     recommend_news_list = []
-    pprint.pprint(recommend_news("660514343e1e0e805978c358"))
+    pprint.pprint(recommend_news("6607caae666b59298cefbaff"))
     end_time = time.time()  # 종료 시간 저장
     elapsed_time = end_time - start_time  # 경과 시간 계산
 
