@@ -1,4 +1,6 @@
-import React, { ChangeEvent } from 'react'
+import { ChangeEvent } from 'react'
+import Tooltip from '@src/common/Tooltip'
+import * as v from '@src/components/styles/TTS/VolumeSliderStyle'
 
 interface VolumeSliderProps {
   volume: number
@@ -7,8 +9,10 @@ interface VolumeSliderProps {
 
 const VolumeSlider = ({ volume, onChange }: VolumeSliderProps) => {
   return (
-    <div>
-      <div>Volume</div>
+    <v.Container>
+      <Tooltip message={'볼륨을 조절해보세요!'}>
+        <v.Title>음량 조절</v.Title>
+      </Tooltip>
       <input
         type="range"
         min="0"
@@ -17,7 +21,7 @@ const VolumeSlider = ({ volume, onChange }: VolumeSliderProps) => {
         value={volume}
         onChange={onChange}
       />
-    </div>
+    </v.Container>
   )
 }
 
