@@ -71,7 +71,9 @@ const DictionaryContainer = (props: Props) => {
       <d.Wrapper>
         <DictionaryTutorial />
         <d.Box className="dictionaryPage">
-          <LeftSearchSection data={wordsData?.data} />
+          <d.LeftWrapper>
+            <LeftSearchSection data={wordsData?.data} />
+          </d.LeftWrapper>
           <RightWordsSection data={markedData?.data} />
         </d.Box>
       </d.Wrapper>

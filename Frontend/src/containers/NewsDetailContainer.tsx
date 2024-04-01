@@ -16,9 +16,11 @@ import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import LeftSearchSection from '@src/components/Dictionary/LeftSearchSection'
-import { fetchWords } from '@src/apis/DictionaryApi'
+import { fetchMarkedWords, fetchWords } from '@src/apis/DictionaryApi'
 import { OtherNews } from '@src/types/NewsType'
 import TextToSpeechContainer from './TextToSpeechContainer'
+import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
+import { Word, UserWord } from '@src/types/WordType'
 
 type Props = {
   newsId: string
@@ -30,7 +32,14 @@ const NewsDetailContainer = ({ newsId }: Props) => {
 
   const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
 
-  const [search, setSearch] = useState(false)
+  const [more, setMore] = useState(false)
+  const [openDictionary, setOpenDictionary] = useState(false)
+  const [openTTS, setOpenTTS] = useState(false)
+
+  const [markedWords, SetMarkedWords] = useAtom(markedWordsAtom)
+
+  const [mark, setMark] = useAtom(toggleMarkingAtom)
+
   useEffect(() => {
     window.scrollTo(0, 0)
     otherNewsMutate(newsId)
@@ -38,7 +47,26 @@ const NewsDetailContainer = ({ newsId }: Props) => {
 
   const navigate = useNavigate()
 
-  const goSearch = () => setSearch(!search)
+  const goSearch = () => {
+    if (openDictionary) {
+      setOpenDictionary(false)
+      return
+    }
+    if (openTTS) {
+      setOpenTTS(false)
+      return
+    }
+    setMore(!more)
+  }
+  const goDictionary = () => {
+    setOpenDictionary(true)
+    setMore(false)
+  }
+
+  const goTTS = () => {
+    setOpenTTS(true)
+    setMore(false)
+  }
 
   const {
     isLoading: isNewsListLoading,
@@ -82,6 +110,27 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     },
   )
 
+  useEffect(() => {
+    getMarkedRefetch()
+  }, [mark])
+
+  const {
+    isLoading: isLoadingMarked,
+    data: markedData,
+    isError: isErrorMarked,
+    error: errorMarked,
+    refetch: getMarkedRefetch,
+  } = useQuery({
+    queryKey: 'get-marked',
+    queryFn: () => fetchMarkedWords(userEmail),
+    onSuccess: res => {
+      const filtered: Word[] = []
+      res.data?.forEach((word: UserWord) => filtered.push(word.dictionary))
+      SetMarkedWords(filtered)
+      console.log(filtered)
+    },
+  })
+
   if (isNewsListLoading) {
     return <>뉴스 불러오는 중 . . .</>
   }
@@ -90,19 +139,34 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     <>
       <n.HeaderImage bgimage={bgimage} />
       <n.Container>
-        <n.SearchSection className={search ? 'show' : ''}>
+        <n.SearchSection className={openDictionary ? 'show' : 'none'}>
           <LeftSearchSection data={wordsData?.data} />
         </n.SearchSection>
-        <n.GoDictionaryBtn onClick={goSearch}>
-          <n.Search />
-        </n.GoDictionaryBtn>
+        <n.TTSSection className={openTTS ? 'show' : 'none'}>
+          <TextToSpeechContainer articleContent={newsData?.data.detail_text} />
+        </n.TTSSection>
+
+        <n.GoMoreBtn onClick={goSearch}>
+          {more ? (
+            <n.Back />
+          ) : openDictionary || openTTS ? (
+            <n.Clear />
+          ) : (
+            <n.More />
+          )}
+        </n.GoMoreBtn>
+
+        <n.SelectBox className={more ? 'show' : 'none'}>
+          <n.Select onClick={goDictionary}>단어 검색하기</n.Select>
+          <n.Select onClick={goTTS}>음성 뉴스 듣기</n.Select>
+        </n.SelectBox>
+
         <ArticleContent newsData={newsData?.data} />
         {isLogin ? (
           <ArticleGrade grade={newsGrade?.data} newsId={newsId} />
         ) : null}
         <SimilarArticle otherNewsData={otherNews as OtherNews[]} />
         <BackBtn />
-        <TextToSpeechContainer articleContent={newsData?.data.detail_text} />
       </n.Container>
     </>
   )
