@@ -22,8 +22,14 @@ const MyInfo = (props: Props) => {
   const [phone, setPhone] = useState('')
   const [birth, setBirth] = useState('')
   const [gender, setGender] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
 
   const goSave = () => {
+    if (phone.length < 13) {
+      setPhoneError(true)
+      // alert('전화 번호를 확인하세요!')
+      return
+    }
     SetEdit(!edit)
     setUser({
       userInfoId: id,
@@ -57,6 +63,9 @@ const MyInfo = (props: Props) => {
     if (phone?.length === 11) {
       setPhone(phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'))
     }
+    if (phone?.length === 13) {
+      setPhoneError(false)
+    }
   }, [phone])
 
   // 유저 정보 수정
@@ -74,6 +83,9 @@ const MyInfo = (props: Props) => {
 
   return (
     <m.InfoBox>
+      <m.ErrorAlert className={phoneError ? 'error' : ''}>
+        전화번호를 확인하세요!
+      </m.ErrorAlert>
       <m.Category>
         <m.Title>이름</m.Title>
         <m.Content
@@ -88,14 +100,7 @@ const MyInfo = (props: Props) => {
 
       <m.Category>
         <m.Title>이메일</m.Title>
-        <m.Content
-          value={email}
-          onChange={event => {
-            setEmail(event.target.value as string)
-          }}
-          disabled={edit ? false : true}
-          className={edit ? 'edit' : ''}
-        />
+        <m.Content value={email} disabled={false} className="disabled" />
       </m.Category>
 
       <m.Category>

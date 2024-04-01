@@ -74,7 +74,6 @@ const AuthModal = (props: Props) => {
         isOpen={isOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
       >
         <m.Wrapper>
           <m.CloseBtn onClick={closeModal} />
