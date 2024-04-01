@@ -141,6 +141,11 @@ def recommend_news(id_str):
         # 비슷한 기사를 불러오기
         similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
 
+        print("similar_ids-----------------")
+        print(similar_ids)
+        print("new_keywords-----------------")
+        print(new_keywords)
+
         summary_article = []
         for article_id in similar_ids:
             article = SummaryArticle.find_by_id(article_id)
@@ -178,13 +183,13 @@ def recommend_news(id_str):
         return []
 
 
-# #확인용
-if __name__ == "__main__":
-    start_time = time.time()
-
-    recommend_news_list = []
-    pprint.pprint(recommend_news("660a622b95108de5536dce2d"))
-    end_time = time.time()  # 종료 시간 저장
-    elapsed_time = end_time - start_time  # 경과 시간 계산
-
-    print(f"Execution time: {elapsed_time} seconds")
+# # #확인용
+# if __name__ == "__main__":
+#     start_time = time.time()
+#
+#     recommend_news_list = []
+#     pprint.pprint(recommend_news("660a622b95108de5536dce2d"))
+#     end_time = time.time()  # 종료 시간 저장
+#     elapsed_time = end_time - start_time  # 경과 시간 계산
+#
+#     print(f"Execution time: {elapsed_time} seconds")
