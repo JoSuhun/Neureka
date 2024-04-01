@@ -41,7 +41,7 @@ const TokenChecker = (props: Props) => {
   const update = () => {
     const tokenExpireTime = localStorage.getItem('tokenExpireTime')
 
-    if (JSON.parse(localStorage.getItem('isLogin') as string)) {
+    if (localStorage.getItem('isLogin') == 'true') {
       const now = new Date().getTime()
       const loginTime = Math.round(
         (now - parseInt(tokenExpireTime as string)) / 1000 / 60,
@@ -69,10 +69,13 @@ const TokenChecker = (props: Props) => {
         removeCookie('Authorization')
         removeCookie('refresh')
         localStorage.removeItem('accessToken')
+        localStorage.removeItem('userInfo')
         navigate('/')
         console.log('토큰 만료로 로그아웃됨')
       }
     } else {
+      removeCookie('Authorization')
+      removeCookie('refresh')
       return
     }
   }

@@ -23,11 +23,15 @@ const MyInfo = (props: Props) => {
   const [birth, setBirth] = useState('')
   const [gender, setGender] = useState(false)
   const [phoneError, setPhoneError] = useState(false)
+  const [nameError, setNameError] = useState(false)
 
   const goSave = () => {
     if (phone.length < 13) {
       setPhoneError(true)
-      // alert('전화 번호를 확인하세요!')
+      return
+    }
+    if (name.length < 1) {
+      setNameError(true)
       return
     }
     SetEdit(!edit)
@@ -60,6 +64,12 @@ const MyInfo = (props: Props) => {
   }
 
   useEffect(() => {
+    if (name?.length > 0) {
+      setNameError(false)
+    }
+  }, [name])
+
+  useEffect(() => {
     if (phone?.length === 11) {
       setPhone(phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'))
     }
@@ -83,6 +93,9 @@ const MyInfo = (props: Props) => {
 
   return (
     <m.InfoBox>
+      <m.ErrorAlert className={nameError ? 'error' : ''}>
+        이름을 확인하세요! (* 한 글자 이상)
+      </m.ErrorAlert>
       <m.ErrorAlert className={phoneError ? 'error' : ''}>
         전화번호를 확인하세요!
       </m.ErrorAlert>
