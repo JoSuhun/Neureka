@@ -31,13 +31,11 @@ public class NewsController {
 
     private final NewsService newsService;
     private final WebClient webClient ;
-    private final String releaseHostName ;
 
     public NewsController(NewsService newsService, WebClient.Builder webClientBuilder,@Value("${releaseHostName}") String releaseHostName) {
 
 
         this.newsService = newsService;
-        this.releaseHostName = releaseHostName;
         this.webClient = webClientBuilder.baseUrl("http://"+releaseHostName+":8000").build() ;
     }
 
@@ -92,8 +90,6 @@ public class NewsController {
                                               @RequestParam String newsId){
         String url = "/data/news/api/news_details/";
 
-
-        System.out.println(releaseHostName);
 
         Map<String, String> requestData = new HashMap<>();
         requestData.put("_id", newsId);
