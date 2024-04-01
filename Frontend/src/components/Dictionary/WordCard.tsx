@@ -114,16 +114,16 @@ const WordCard = ({ word, marked, side }: Props) => {
               />
             </c.Title>
           )}
-          {side === 'right' ? (
+          {side === 'left' ? (
+            <c.Content>
+              <div dangerouslySetInnerHTML={{ __html: word?.content || '' }} />
+            </c.Content>
+          ) : (
             <c.Content>
               <div
                 dangerouslySetInnerHTML={{ __html: word?.content || '' }}
                 className={titleClicked ? 'clicked' : 'none'}
               />
-            </c.Content>
-          ) : (
-            <c.Content>
-              <div dangerouslySetInnerHTML={{ __html: word?.content || '' }} />
             </c.Content>
           )}
         </c.CardBox>

@@ -4,7 +4,6 @@ import SearchIcon from '@mui/icons-material/Search'
 
 export const Wrapper = styled.div`
   background-color: var(--color-lightblue);
-  width: 50%;
   height: 80vh;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;

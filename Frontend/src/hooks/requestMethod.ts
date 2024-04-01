@@ -43,6 +43,7 @@ publicRequest.interceptors.response.use(
       localStorage.removeItem('accessToken')
       console.log(error)
     } else {
+      localStorage.removeItem('accessToken')
       return error
     }
   },
