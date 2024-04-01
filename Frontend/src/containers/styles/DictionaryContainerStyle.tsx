@@ -25,3 +25,7 @@ export const Box = styled.div`
 
   /* gap: 0 5px; */
 `
+
+export const LeftWrapper = styled.div`
+  width: 50%;
+`
