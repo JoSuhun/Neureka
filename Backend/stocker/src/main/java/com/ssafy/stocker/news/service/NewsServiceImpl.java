@@ -63,8 +63,13 @@ public class NewsServiceImpl implements NewsService {
     public void saveUserArticleRating(String email, String newsId, String rating) {
         UserInfoEntity userInfoDto = userServiceImpl.findUser(email);
 
-
         UserViewedArticleEntity userViewedArticleEntity = new UserViewedArticleEntity();
+
+        Optional<UserViewedArticleEntity> isRated = userVIewedArticleRepository.findByArticleIdAndUser(newsId, userInfoDto);
+        if(isRated.isPresent()){
+            userViewedArticleEntity = isRated.get();
+        }
+
 
         userViewedArticleEntity.setUser(userInfoDto);
         userViewedArticleEntity.setArticleId(newsId);
