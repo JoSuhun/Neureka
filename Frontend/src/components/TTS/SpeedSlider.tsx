@@ -7,8 +7,8 @@ interface SpeedSliderProps {
 
 const SpeedSlider = ({ rate, onChange }: SpeedSliderProps) => {
   return (
-    <label>
-      Speed
+    <div>
+      <div>Speed</div>
       <input
         type="range"
         min="0"
@@ -17,7 +17,7 @@ const SpeedSlider = ({ rate, onChange }: SpeedSliderProps) => {
         value={rate}
         onChange={onChange}
       />
-    </label>
+    </div>
   )
 }
 
