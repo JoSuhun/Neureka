@@ -6,8 +6,10 @@ type Props = {}
 
 const LoginSection = (props: Props) => {
   // 구글 로그인 url
-  const google_url = `${import.meta.env.VITE_REACT_APP_OAUTH_URL}/google`
-  const kakao_url = `${import.meta.env.VITE_REACT_APP_OAUTH_URL}/kakao`
+
+
+  const google_url = `https://j10c105.p.ssafy.io:8080/oauth2/authorization/google`
+  const kakao_url = `http://j10c105.p.ssafy.io:8080/oauth2/authorization/kakao`
 
   const kakaoLogin = () => {
     login(kakao_url)
