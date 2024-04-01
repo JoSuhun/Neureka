@@ -1,8 +1,3 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
-
 from neurek.neureka_news.models import DetailsArticle, SummaryArticle
 from neurek.neureka_news.LDA.keyword_for_lda import text_through_LDA_probability
 import requests
@@ -15,6 +10,8 @@ from bareunpy import Tagger
 import time
 from bson.objectid import ObjectId
 import pprint
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import os
 
 
 #### 크롤링 후 처리
@@ -77,10 +74,36 @@ def keyword_ext(text, stop_words):
 
     return mmr(doc_embedding, candidate_embeddings, candidates, top_n=3, diversity=0.3)
 
-def load_stop_words(file_path):
+def load_stop_words(file_name):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, file_name)
     with open(file_path, 'r', encoding='utf-8') as file:
         stop_words = set(line.strip() for line in file)
+
     return stop_words
+
+def fetch_article_details(article_id):
+    article = DetailsArticle.find_by_id(article_id)
+    article['_id'] = str(article['_id'])
+
+    try:
+        response = requests.get(article['detail_url'])
+        time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
+        soup = BeautifulSoup(response.content, "html.parser")
+
+        img_src = None  # 기본값 설정
+        img_tag = soup.select_one('#img1')
+        if img_tag and img_tag.has_attr('data-src'):
+            img_src = img_tag['data-src']
+        else:
+            alternative_tag = soup.select_one('#contents > div._VOD_PLAYER_WRAP')
+            if alternative_tag and alternative_tag.has_attr('data-cover-image-url'):
+                img_src = alternative_tag['data-cover-image-url']
+
+        return {"_id": article['_id'], "title": article['detail_title'], "thumbnail_url": img_src}
+    except Exception as e:
+        print(f"Error fetching article details: {e}")
+        return None
 
 
 def recommend_news(id_str):
@@ -89,16 +112,13 @@ def recommend_news(id_str):
     except:
         print("Invalid ID format.")
         return []
-
     # 해당 ID에 해당하는 기사
     article_data = DetailsArticle.find_by_id(_id)
-
 
     # 불러온 내용이 있는지 확인
     if article_data:
         # 그 기사에 topic이 존재하는지 확인하고, 없을 때 topic과 keywords를 추가
         if DetailsArticle.is_topic_empty_for_id(_id):
-
             stop_words_path = "LDA/stop_words.txt"
             stop_words = load_stop_words(stop_words_path)
 
@@ -108,7 +128,6 @@ def recommend_news(id_str):
             new_keywords = keyword_ext(article_text, stop_words)
 
             update_success = DetailsArticle.update_topic_and_keywords(_id, new_topic, new_keywords)
-
 
             if update_success:
                 print("Topic and keywords were successfully updated.")
@@ -120,6 +139,7 @@ def recommend_news(id_str):
 
         # 비슷한 기사를 불러오기
         similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
+        print(f"similar_ids : {similar_ids}")
 
         summary_article = []
         for article_id in similar_ids:
@@ -129,17 +149,29 @@ def recommend_news(id_str):
                 summary_article.append(article)
 
         result = []
-        for article in summary_article:
+        if len(summary_article) != 0:
+            print("그냥 뉴스")
+            for article in summary_article:
 
-            temp = {"_id": article['_id'],
-                    "title": article['article_title'],
-                    "thumbnail_url": article['thumbnail_url']}
+                temp = {"_id": article['_id'],
+                        "title": article['article_title'],
+                        "thumbnail_url": article['thumbnail_url']}
 
-            result.append(temp)
+                result.append(temp)
 
-        return result
+            return result
+        else:
+            # 기업뉴스에서 들어왔을 경우
+            print("기업 뉴스")
+            with ThreadPoolExecutor(max_workers=5) as executor:
+                future_to_article_id = {executor.submit(fetch_article_details, article_id): article_id for article_id in
+                                        similar_ids}
+                for future in as_completed(future_to_article_id):
+                    article_details = future.result()
+                    if article_details:
+                        result.append(article_details)
 
-
+            return result
     else:
         print("추천 기사를 받는데 오류입니다.")
         return []
@@ -150,7 +182,7 @@ if __name__ == "__main__":
     start_time = time.time()
 
     recommend_news_list = []
-    pprint.pprint(recommend_news("6607caae666b59298cefbaff"))
+    pprint.pprint(recommend_news("660a4cc095108de5536b75cc"))
     end_time = time.time()  # 종료 시간 저장
     elapsed_time = end_time - start_time  # 경과 시간 계산
 

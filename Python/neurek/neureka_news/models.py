@@ -6,9 +6,16 @@ import json
 # MongoDB 클라이언트 설정 실서버
 ssafy_mongo = 'mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin'
 ssafy_db = 'S10P23C105'
+local_mongo = 'mongodb://localhost:27017/'
+local_db = 'article_database'
 
-client = MongoClient(f'{ssafy_mongo}')
-db = client[f'{ssafy_db}']
+# True 원격 db False 로컬 db
+mode = True
+mongo = ssafy_mongo if mode else local_mongo
+mongo_db = ssafy_db if mode else local_db
+
+client = MongoClient(f'{mongo}')
+db = client[f'{mongo_db}']
 
 # MongoDB 로컬 서버
 # client = MongoClient('mongodb://localhost:27017/')
@@ -180,11 +187,12 @@ class DetailsArticle:
         """주어진 키워드를 포함하고, 평균 점수로 정렬한 후, 상위 30개의 _id만 추출하여 반환"""
 
         # 현재 날짜로부터 7일 전의 날짜를 계산
-        seven_days_ago = datetime.now() - timedelta(days=7)
+        # seven_days_ago = datetime.now() - timedelta(days=7)
+
         pipeline = [
             {"$match": {
                 "detail_keywords": {"$in": keywords},
-                "detail_date": {"$gte": seven_days_ago.strftime('%Y-%m-%d %H:%M')}
+                # "detail_date": {"$gte": seven_days_ago.strftime('%Y-%m-%d %H:%M')}
             }},
             {"$addFields": {
                 "weighted_score": {
@@ -335,8 +343,8 @@ class UserProfile:
     collection = db['user']
 
     def __init__(self, user_id):
-        self.client = MongoClient(f'{ssafy_mongo}')
-        self.db = self.client[f'{ssafy_db}']
+        self.client = MongoClient(f'{mongo}')
+        self.db = self.client[f'{mongo_db}']
         self.collection = self.db['user']
         self.user_id = user_id
 
