@@ -8,6 +8,7 @@ def read_article_and_update_interests(user_id, article_id):
     사용자의 관심도를 업데이트합니다.
     """
     # 해당 기사의 정보를 조회합니다.
+
     article = DetailsArticle.find_by_id(article_id)
     if article:
         # UserProfile 인스턴스를 생성합니다.
