@@ -42,3 +42,21 @@ export type OtherNews = {
   title: string
   thumbnail_url: string | null
 }
+
+export type RecommendNews = {
+  _id: string
+  thumbnail_url: string
+  article_title: string
+  article_link: string
+  article_summary: string
+  press: string
+  date_time: string
+  keywords: string[]
+  topic: string
+  sentiment: Sentiment[]
+}
+
+export type SearchRecommend = {
+  user_id: string
+  topic: string[]
+}

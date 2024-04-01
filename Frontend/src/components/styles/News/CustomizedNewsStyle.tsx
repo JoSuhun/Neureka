@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
 `
 export const Title = styled.div`
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--color-dark);
 `
 export const NewsBox = styled.div`
@@ -45,17 +45,25 @@ export const NewsList = styled.div`
   height: 50%;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  border-radius: 20px;
   cursor: pointer;
+  transform: translateY(0);
+  transition: transform 300ms ease-in-out;
+  &:hover {
+    box-shadow: var(--shadow);
+    background-color: #f6f8ff;
+    transform: translateY(-2px);
+  }
   &:hover .news-content {
     color: black;
   }
-  padding: 10px 0;
+  padding: 10px;
 `
 
 export const NewsThumbnail = styled.img<{ image: string }>`
-  width: 30%;
-  height: 130px;
+  width: 15%;
+  height: 80px;
   background: url(${props => props.image});
   background-size: cover;
 `
@@ -66,7 +74,7 @@ export const NewsSection = styled.div`
 
 export const NewsTitle = styled.div`
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 1%;
   color: var(--color-dark);
 `

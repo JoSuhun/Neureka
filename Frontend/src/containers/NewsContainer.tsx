@@ -5,15 +5,25 @@ import Header from '@src/components/News/Header'
 import CustomizedNews from '@src/components/News/CustomizedNews'
 import NewsList from '@src/components/News/NewsList'
 
-import { useQuery } from 'react-query'
-import { fetchNewsList, fetchHotNews, fetchHotSearch } from '@src/apis/NewsApi'
+import { useMutation, useQuery } from 'react-query'
+import {
+  fetchNewsList,
+  fetchHotNews,
+  fetchHotSearch,
+  fetchRecommendNews,
+} from '@src/apis/NewsApi'
 import { useAtom } from 'jotai'
 import { questionAtom } from '@src/stores/newsAtom'
+import { RecommendNews, SearchRecommend } from '@src/types/NewsType'
+import Loading from '@src/common/Loading'
 
 type Props = {}
 
 const NewsContainer = (props: Props) => {
   const [search, setSearch] = useAtom(questionAtom)
+  const [recommendNews, setRecommendNews] = useState<RecommendNews[] | null>(
+    null,
+  )
   const [hotKeywordsData, setHotKeywordsData] = useState<
     | {
         word: string
@@ -22,8 +32,26 @@ const NewsContainer = (props: Props) => {
     | null
   >(null)
 
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
+
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+
+  const { mutate: recommendNewsMutate } = useMutation(
+    (data: SearchRecommend) => fetchRecommendNews(data),
+    {
+      onSuccess: res => {
+        setRecommendNews(res.data)
+      },
+    },
+  )
+
+  useEffect(() => {
+    recommendNewsMutate({
+      user_id: userEmail,
+      topic: [],
+    })
   }, [])
 
   const {
@@ -68,7 +96,11 @@ const NewsContainer = (props: Props) => {
   }, [search])
 
   if (isNewsListLoading) {
-    return <>뉴스 불러오는 중 . . .</>
+    return (
+      <>
+        <Loading />
+      </>
+    )
   }
 
   if (isHotNewsLoading) {
@@ -87,7 +119,7 @@ const NewsContainer = (props: Props) => {
     <>
       <Carousel hotNewsData={hotNewsData?.data} />
       <Wrapper>
-        <CustomizedNews />
+        <CustomizedNews recommendNewsData={recommendNews as RecommendNews[]} />
         <Header hotKeywordData={hotKeywordData?.data} />
         <NewsList newsData={newsData?.data} />
       </Wrapper>
