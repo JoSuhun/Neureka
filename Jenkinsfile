@@ -10,9 +10,13 @@ pipeline {
             steps {
                 script {
                     // 각 프로젝트 폴더에서 Docker 이미지를 빌드하고 Docker Hub에 푸시
+                    sh "docker image ls"
                     buildAndPushImage('Frontend', DOCKER_CREDENTIALS)
+                    sh "docker image ls"
                     buildAndPushImage('Backend', DOCKER_CREDENTIALS)
+                    sh "docker image ls"
                     buildAndPushImage('Python', DOCKER_CREDENTIALS)
+                    sh "docker image ls"
                 }
             }
         }
@@ -20,9 +24,6 @@ pipeline {
         stage('Deploy with Docker') {
             steps {
                 script {
-                    // 0. 컨테이너 뭐 돌아가는지좀 봐야겠다
-                    sh "docker ps -a"
-                    sh "docker image ls"
 
                     // 1. 기존 작동중인 컨테이너 삭제 및 중지
                     sh 'docker stop Frontend Backend Python || true' // 기존 컨테이너 중지
@@ -39,8 +40,6 @@ pipeline {
                     sh 'docker run -d --name Python -p 8000:8000 csw1511/neureka-python:latest'
                     
                     // 4. 기존에 사용하던 이미지들을 삭제하기
-                    sh "docker ps -a"
-                    sh "docker image ls"
                 }
             }
         }
