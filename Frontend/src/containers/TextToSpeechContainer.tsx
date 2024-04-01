@@ -64,13 +64,6 @@ const TextToSpeechContainer = (props: { articleContent: string }) => {
   const [rate, setRate] = useState(1)
   const [volume, setVolume] = useState(1)
 
-  useEffect(() => {
-    const synth = window.speechSynthesis
-    const u = new SpeechSynthesisUtterance(text)
-    const voices = synth.getVoices()
-    setUtterance(u)
-  }, [text])
-
   // 시작
   const handlePlay = () => {
     const synth = window.speechSynthesis
@@ -130,15 +123,46 @@ const TextToSpeechContainer = (props: { articleContent: string }) => {
     setVolume(parseFloat(event.target.value))
   }
 
+  useEffect(() => {
+    const synth = window.speechSynthesis
+    const u = new SpeechSynthesisUtterance(text)
+    const voices = synth.getVoices()
+    setUtterance(u)
+
+    return () => {
+      synth.cancel() // 컴포넌트가 unmount 될 때 음성 합성을 중지합니다.
+    }
+  }, [text])
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        const synth = window.speechSynthesis
+        synth.cancel() // 페이지가 숨겨지면 음성 합성을 중지합니다.
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange) // 이벤트 리스너를 정리합니다.
+    }
+  }, [])
+
   return (
     <t.Container>
-      <VoiceSelect
-        voices={window.speechSynthesis.getVoices()}
-        selectedVoice={voice?.name}
-        onChange={handleVoiceChange}
-      />
-      <SpeedSlider rate={rate} onChange={handleRateChange} />
-      <VolumeSlider volume={volume} onChange={handleVolumeChange} />
+      <t.Title>음성재생 설정</t.Title>
+      {!isPlaying && (
+        <t.Setting>
+          <VoiceSelect
+            voices={window.speechSynthesis.getVoices()}
+            selectedVoice={voice?.name}
+            onChange={handleVoiceChange}
+          />
+          <SpeedSlider rate={rate} onChange={handleRateChange} />
+          <VolumeSlider volume={volume} onChange={handleVolumeChange} />
+        </t.Setting>
+      )}
       <ControlButtons
         onPlay={handlePlay}
         onPause={handlePause}
