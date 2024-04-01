@@ -10,6 +10,7 @@ def read_article_and_update_interests(user_id, article_id):
     # 해당 기사의 정보를 조회합니다.
 
     article = DetailsArticle.find_by_id(article_id)
+
     if article:
         # UserProfile 인스턴스를 생성합니다.
         user_profile = UserProfile(user_id)
@@ -19,9 +20,13 @@ def read_article_and_update_interests(user_id, article_id):
             'detail_press': article.get('detail_press'),
             'detail_keywords': article.get('detail_keywords')
         })
+
         print(f"User {user_id}'s interests updated based on article {article_id}.")
+        return {"message": "유저가 기사를 읽음으로써, 관심도가 증가했습니다"}
     else:
         print(f"Article {article_id} not found. 기사가 없는데요...")
+        message = f"Article {article_id} not found. 기사가 없는데요..."
+        return {"message": message}
 
 
 def recommend_articles_to_user(user_id, topic):

@@ -177,16 +177,17 @@ def update_interests(request):
 
     # 유효성 검사: 사용자 ID와 기사 ID가 제공되었는지 확인합니다.
     if not user_id or not article_id:
-        return Response({"error": "Missing user_id or article_id in request. 제대로 주셔야해유"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "Missing user_id or article_id in request. 제대로 주셔야해유"},
+                        status=status.HTTP_400_BAD_REQUEST)
 
     try:
-        # 관심도 업데이트 함수를 호출합니다.
-        read_article_and_update_interests(user_id, article_id)
         # 성공 응답을 반환합니다.
-        return Response({"message": "유저가 기사를 읽음으로써, 관심도가 증가했습니다"}, status=status.HTTP_200_OK)
+        return Response(read_article_and_update_interests(user_id, article_id),
+                        status=status.HTTP_200_OK)
     except Exception as e:
         # 오류 처리: 예상치 못한 오류가 발생한 경우
-        return Response({"error": f"An error occurred: {str(e)} 뭔가... 뭔가 잘못됐어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(read_article_and_update_interests(user_id, article_id),
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # 사용자에게 기사 추천
