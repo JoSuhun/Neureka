@@ -8,8 +8,8 @@ const LoginSection = (props: Props) => {
   // 구글 로그인 url
 
 
-  const google_url = `http://j10c105.p.ssafy.io:8080/oauth2/authorization/google`
-  const kakao_url = `http://j10c105.p.ssafy.io:8080/oauth2/authorization/kakao`
+  const google_url = `http://j10c105.p.ssafy.io/oauth2/authorization/google`
+  const kakao_url = `http://j10c105.p.ssafy.io/oauth2/authorization/kakao`
 
   const kakaoLogin = () => {
     login(kakao_url)
