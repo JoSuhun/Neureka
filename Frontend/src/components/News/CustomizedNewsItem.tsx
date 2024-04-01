@@ -14,7 +14,7 @@ const CustomizedNewsItem = ({ news }: Props) => {
   const navigate = useNavigate()
   return (
     <>
-      <c.NewsList onClick={() => navigate(`news/newsdetail/${news._id}`)}>
+      <c.NewsList onClick={() => navigate(`newsdetail/${news._id}`)}>
         <c.NewsThumbnail image={news.thumbnail_url} />
         <c.NewsSection>
           <c.NewsTitle className="news-title">{news.article_title}</c.NewsTitle>

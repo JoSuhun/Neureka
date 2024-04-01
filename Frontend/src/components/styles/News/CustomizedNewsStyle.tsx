@@ -2,15 +2,15 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   /* background-color: beige; */
-  width: 86%;
+  width: 100%;
   /* height: 40vh; */
-  padding: 2% 7%;
-  border-top: 1px solid var(--color-navy);
-  border-bottom: 1px solid var(--color-navy);
+  /* padding: 2% 7%; */
+  /* border-top: 1px solid var(--color-navy);
+  border-bottom: 1px solid var(--color-navy); */
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-lightblue);
+  /* background-color: var(--color-lightblue); */
   @media screen and (max-width: 992px) {
     img {
       display: none;
@@ -28,31 +28,29 @@ export const Wrapper = styled.div`
     }
   }
 `
-export const Title = styled.div`
-  width: 100%;
-  font-size: 1.4rem;
-  color: var(--color-dark);
-`
+
 export const NewsBox = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  margin-top: 20px;
+
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 export const NewsList = styled.div`
   width: 100%;
-  height: 50%;
+  height: 110px;
   display: flex;
   align-items: center;
   /* border-bottom: 1px solid black; */
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
   transform: translateY(0);
   transition: transform 300ms ease-in-out;
   &:hover {
     box-shadow: var(--shadow);
-    background-color: #f6f8ff;
+    background-color: #00000013;
     transform: translateY(-2px);
   }
   &:hover .news-content {
@@ -62,10 +60,11 @@ export const NewsList = styled.div`
 `
 
 export const NewsThumbnail = styled.img<{ image: string }>`
-  width: 15%;
-  height: 80px;
+  width: 20%;
+  height: 100px;
   background: url(${props => props.image});
   background-size: cover;
+  margin-right: 10px;
 `
 export const NewsSection = styled.div`
   width: 100%;
