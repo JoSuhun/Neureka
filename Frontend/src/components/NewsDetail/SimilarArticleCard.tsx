@@ -26,7 +26,9 @@ const SimilarArticleCard = ({ news }: Props) => {
           className="card-thumbnail"
           src={news.thumbnail_url ? news.thumbnail_url : defaultThumbnail}
         />
-        <c.Title className="card-title">{news.title}</c.Title>
+        <c.TitleBox>
+          <c.Title className="card-title">{news.title}</c.Title>
+        </c.TitleBox>
       </c.Wrapper>
     </>
   )

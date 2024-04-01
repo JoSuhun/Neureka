@@ -14,9 +14,6 @@ const CustomizedNews = ({ recommendNewsData }: Props) => {
   return (
     <>
       <c.Wrapper>
-        <c.Title>
-          {userInfo.name ? <p>{userInfo.name}님을 위한 뉴스</p> : null}
-        </c.Title>
         <c.NewsBox>
           {recommendNewsData ? (
             recommendNewsData?.map((news, idx) => (

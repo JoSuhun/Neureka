@@ -51,6 +51,7 @@ const Navbar = () => {
     removeCookie('refresh')
     setUserEmail('')
     localStorage.removeItem('accessToken')
+    localStorage.removeItem('userInfo')
   }
 
   const goHome = () => {
