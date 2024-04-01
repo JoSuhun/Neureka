@@ -12,10 +12,11 @@ import {
   fetchHotSearch,
   fetchRecommendNews,
 } from '@src/apis/NewsApi'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { questionAtom } from '@src/stores/newsAtom'
 import { RecommendNews, SearchRecommend } from '@src/types/NewsType'
 import Loading from '@src/common/Loading'
+import { isLoginAtom } from '@src/stores/authAtom'
 
 type Props = {}
 
@@ -31,6 +32,7 @@ const NewsContainer = (props: Props) => {
       }[]
     | null
   >(null)
+  const isLogin = useAtomValue(isLoginAtom)
 
   const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
 
@@ -119,7 +121,11 @@ const NewsContainer = (props: Props) => {
     <>
       <Carousel hotNewsData={hotNewsData?.data} />
       <Wrapper>
-        <CustomizedNews recommendNewsData={recommendNews as RecommendNews[]} />
+        {isLogin ? (
+          <CustomizedNews
+            recommendNewsData={recommendNews as RecommendNews[]}
+          />
+        ) : null}
         <Header hotKeywordData={hotKeywordData?.data} />
         <NewsList newsData={newsData?.data} />
       </Wrapper>
