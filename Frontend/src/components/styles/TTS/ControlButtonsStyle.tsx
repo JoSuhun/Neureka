@@ -1,35 +1,59 @@
 import styled from 'styled-components'
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
-import PauseRoundedIcon from '@mui/icons-material/PauseRounded'
-import StopRoundedIcon from '@mui/icons-material/StopRounded'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
 `
 
-export const PlayButton = styled(PlayArrowRoundedIcon)`
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+export const PlayButton = styled.button`
+  background-color: #4d89f9;
+  color: #ffffff;
+  padding: 4%;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 0.9rem;
 
   &:hover {
-    transform: scale(1.2);
+    background-color: #3578e5; /* 호버 시 색상 변경 */
+    cursor: pointer; /* 호버 시 커서 모양 변경 */
   }
 `
-export const PauseButton = styled(PauseRoundedIcon)`
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+
+export const ButtonWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+`
+
+export const PauseButton = styled.button`
+  background-color: #4d89f9;
+  color: #ffffff;
+  padding: 2%;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1rem;
 
   &:hover {
-    transform: scale(1.2);
+    background-color: #3578e5; /* 호버 시 색상 변경 */
+    cursor: pointer; /* 호버 시 커서 모양 변경 */
   }
 `
 
-export const StopButton = styled(StopRoundedIcon)`
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+export const StopButton = styled.button`
+  background-color: #4d89f9;
+  color: #ffffff;
+  padding: 2%;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1rem;
 
   &:hover {
-    transform: scale(1.2);
+    background-color: #3578e5; /* 호버 시 색상 변경 */
+    cursor: pointer; /* 호버 시 커서 모양 변경 */
   }
 `
