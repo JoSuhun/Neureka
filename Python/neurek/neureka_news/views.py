@@ -100,6 +100,7 @@ def news_details(request):
         try:
             article = DetailsArticle.find_by_id(_id)
             if article:
+                DetailsArticle.increment_views_by_id(_id)
                 return Response(article)
             else:
                 return Response({"message": "Article not found. 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_404_NOT_FOUND)
@@ -197,10 +198,10 @@ def recommend_for_user(request):
     user_id = request.data.get('user_id')
     topic = request.data.get('topic', [])
 
-    # 유효성 검사
-    if not user_id:
-        return Response({"error": "Missing user_id in request. user_id를 제대로 주세요!"},
-                        status=status.HTTP_400_BAD_REQUEST)
+    # # 유효성 검사
+    # if not user_id:
+    #     return Response({"error": "Missing user_id in request. user_id를 제대로 주세요!"},
+    #                     status=status.HTTP_400_BAD_REQUEST)
 
     # 유효성 검사2
     if not isinstance(topic, list):
