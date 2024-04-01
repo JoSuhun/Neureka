@@ -13,7 +13,7 @@ import {
   isExpireTimeAtom,
   isUserEmailAtom,
 } from '@src/stores/authAtom'
-import { removeCookie } from '@src/utils/loginCookie'
+import { getCookie, removeCookie } from '@src/utils/loginCookie'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

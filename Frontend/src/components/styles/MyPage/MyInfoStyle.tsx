@@ -25,9 +25,6 @@ export const Content = styled.input`
   border-bottom: 1.5px solid transparent;
   &.edit {
     border-bottom: 1.5px solid var(--color-blue);
-    &:hover {
-      cursor: pointer;
-    }
     &:focus-visible {
       /* border: 2px dashed var(--color-blue);
       border-radius: 3px; */
