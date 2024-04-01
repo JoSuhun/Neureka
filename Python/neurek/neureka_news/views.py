@@ -116,7 +116,8 @@ def news_recommend(request):
     if serializer.is_valid():
         _id = serializer.validated_data.get('_id')
         try:
-            recommend_list = recommend_news(_id)
+            print(str(_id))
+            recommend_list = recommend_news(str(_id))
             if recommend_list:
                 return Response(recommend_list)
             else:
@@ -168,7 +169,6 @@ def get_headlines(request):
 
 
 # 사용자가 디테일 페이지에 들어갔을때 이 요청을 해줘야함
-# TODO : 여기라고 알려주기
 @api_view(["POST"])
 def update_interests(request):
     # 요청에서 사용자 ID와 기사 ID를 추출합니다.
