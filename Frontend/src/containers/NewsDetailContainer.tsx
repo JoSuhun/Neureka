@@ -18,6 +18,7 @@ import { isLoginAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import LeftSearchSection from '@src/components/Dictionary/LeftSearchSection'
 import { fetchWords } from '@src/apis/DictionaryApi'
 import { OtherNews } from '@src/types/NewsType'
+import TextToSpeechContainer from './TextToSpeechContainer'
 
 type Props = {
   newsId: string
@@ -101,6 +102,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
         ) : null}
         <SimilarArticle otherNewsData={otherNews as OtherNews[]} />
         <BackBtn />
+        <TextToSpeechContainer articleContent={newsData?.data.detail_text} />
       </n.Container>
     </>
   )
