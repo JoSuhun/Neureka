@@ -28,6 +28,7 @@ const WordCard = ({ word, marked, side }: Props) => {
   const [mark, setMark] = useAtom(toggleMarkingAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
   const [openLogin, setOpenLogin] = useAtom(modalOpenAtom)
+  const [titleClicked, setTitleClicked] = useState(false)
 
   // 단어 즐겨찾기
   const { mutate: markMutate } = useMutation(
@@ -87,23 +88,44 @@ const WordCard = ({ word, marked, side }: Props) => {
     <>
       <c.Card>
         <c.CardBox className="cardBox">
-          <c.Title>
-            <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
-            {marked && side == 'right' ? (
+          {marked && side == 'right' ? (
+            <c.Title>
+              <div
+                dangerouslySetInnerHTML={{ __html: word?.title || '' }}
+                onClick={() => setTitleClicked(!titleClicked)}
+              />
+
               <c.deleteBtn className="deleteBtn" onClick={handleUnmark} />
-            ) : marked ? (
+            </c.Title>
+          ) : marked ? (
+            <c.Title>
+              <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
+
               <c.saveBtn className="saveBtn" src={saved} />
-            ) : (
+            </c.Title>
+          ) : (
+            <c.Title>
+              <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
+
               <c.saveBtn
                 className="saveBtn"
                 src={notsaved}
                 onClick={handleMark}
               />
-            )}
-          </c.Title>
-          <c.Content>
-            <div dangerouslySetInnerHTML={{ __html: word?.content || '' }} />
-          </c.Content>
+            </c.Title>
+          )}
+          {side === 'right' ? (
+            <c.Content>
+              <div
+                dangerouslySetInnerHTML={{ __html: word?.content || '' }}
+                className={titleClicked ? 'clicked' : 'none'}
+              />
+            </c.Content>
+          ) : (
+            <c.Content>
+              <div dangerouslySetInnerHTML={{ __html: word?.content || '' }} />
+            </c.Content>
+          )}
         </c.CardBox>
       </c.Card>
     </>
