@@ -33,7 +33,7 @@ public class CompanyController {
     public CompanyController(CompanyService companyService, WebClient.Builder webClientBuilder, @Value("${releaseHostName}")String releaseHostName){
         this.releaseHostName = releaseHostName;
         this.companyService = companyService;
-        this.webClient = webClientBuilder.baseUrl("https://"+releaseHostName+":8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("http://"+releaseHostName+":8000").build() ;
     }
 
     @Operation(summary = "사용자가 최근 조회한 기업을 리스트에 추가합니다." )
