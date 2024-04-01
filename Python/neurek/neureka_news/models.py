@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime, timedelta
 import json
+import random
 
 # MongoDB 클라이언트 설정 실서버
 ssafy_mongo = 'mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin'
@@ -117,7 +118,7 @@ class DetailsArticle:
     collection = db['details_article_collection']
 
     def __init__(self, detail_url, detail_title, detail_text, detail_press, detail_date,
-                 detail_topic, detail_keywords):
+                 detail_topic, detail_keywords, views=0):
         self.detail_url = detail_url
         self.detail_title = detail_title
         self.detail_text = detail_text
@@ -125,7 +126,6 @@ class DetailsArticle:
         self.detail_date = detail_date
         self.detail_topic = detail_topic
         self.detail_keywords = detail_keywords
-
 
     def save(self):
         """문서 저장. detail_url이 기존에 없을 경우에만 저장 (업서트 사용)."""
@@ -238,6 +238,18 @@ class DetailsArticle:
         )
         return update_result.modified_count > 0
 
+    # 조회수 + 1
+    @classmethod
+    def increment_views_by_id(cls, _id):
+        """_id에 해당하는 문서의 views 수를 1 증가시킴. views가 없다면 1로 초기화."""
+        # _id를 사용하여 문서 조회 및 views 업데이트
+        update_result = cls.collection.update_one(
+            {"_id": ObjectId(_id)},  # 검색 조건
+            {"$inc": {"views": 1}},  # $inc 연산자를 사용하여 views 값을 1 증가
+            upsert=True  # 문서가 없을 경우 새로운 문서를 삽입
+        )
+        return update_result.modified_count > 0
+
 
 # TODO 책갈피 : 기사의 키워드 (버블 띄울때 필요)
 class KeywordArticle:
@@ -342,7 +354,7 @@ class HeadlineNews:
 class UserProfile:
     collection = db['user']
 
-    def __init__(self, user_id):
+    def __init__(self, user_id=None):
         self.client = MongoClient(f'{mongo}')
         self.db = self.client[f'{mongo_db}']
         self.collection = self.db['user']
@@ -417,13 +429,44 @@ class UserProfile:
 
             self.collection.update_one({'user_id': user_id}, {'$set': {'interests.topics': topics_data}})
 
-    def recommend_article(self, user_id, topic):
-        """가장 높은 유사도를 가진 summary article을 추천"""
-        user_profile = self.collection.find_one({'user_id': user_id})
+    def recommend_articles_for_anonymous(self):
+        # MongoDB에서 DetailsArticle 데이터 조회
+        detail_articles = list(DetailsArticle.collection.find())
 
-        if topic:  # topic 리스트가 주어진 경우 해당 토픽에 해당하는 기사만 추출
+        # 현재 날짜로부터 7일 이전의 날짜를 문자열 형태로 계산
+        seven_days_ago_str = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d %H:%M')
+
+        recommended_articles = []
+        for article in detail_articles:
+            # 문자열 형태의 날짜를 비교하여 최근 7일 이내인지 확인
+            if article['detail_date'] >= seven_days_ago_str:
+                # 각 DetailsArticle 문서의 _id가 SummaryArticle 컬렉션에 존재하는지 확인
+                summary_article = SummaryArticle.collection.find_one({"_id": article['_id']})
+
+                if summary_article:
+                    # 조건을 만족하는 경우, 최종 결과에 포함시키기 전에 처리
+                    article_data = {key: value if key != '_id' else str(value) for key, value in summary_article.items() if
+                                    key != 'nouns'}
+                    recommended_articles.append(article_data)
+
+                # 최대 10개의 결과만 필요
+                if len(recommended_articles) >= 10:
+                    break
+
+        # 추천 기사 목록을 무작위로 섞음
+        random.shuffle(recommended_articles)
+
+        # 필터링된 기사 중 최대 2개 선택
+        return recommended_articles[:2]
+
+    def recommend_articles_for_user(self, user_id, topic):
+        """사용자 ID가 주어졌을 때 사용자의 선호도에 기반한 기사 추천"""
+        user_profile = self.collection.find_one({'user_id': user_id})
+        self.collection.update_many({}, {"$set": {"views": 0}})
+
+        if topic:
             summary_articles = SummaryArticle.find_by_topics(topic)
-        else:  # topic 리스트가 비어있는 경우 모든 기사 대상
+        else:
             summary_articles = SummaryArticle.find_all()
 
         if not user_profile or 'interests' not in user_profile:
@@ -433,7 +476,6 @@ class UserProfile:
             preferred_keywords = set(user_profile['interests'].get('keywords', {}).keys())
             article_similarities = []
 
-            # 자카드 유사도 계산
             for article in summary_articles:
                 article_keywords_set = set(article['keywords'])
                 intersection = len(article_keywords_set.intersection(preferred_keywords))
@@ -444,11 +486,10 @@ class UserProfile:
             article_similarities.sort(key=lambda x: x[1], reverse=True)
             recommended_articles = article_similarities[:2]
 
-        # 'nouns' 항목 제외하고 반환
-        recommended_articles_without_nouns = [
-            {key: value for key, value in article[0].items() if key != 'nouns'} for article in recommended_articles
+        return [
+            {key: value if key != '_id' else str(value) for key, value in article[0].items() if key != 'nouns'}
+            for article in recommended_articles
         ]
-        return recommended_articles_without_nouns
 
     def update_interests_from_rating(self, keywords, weight):
         """평점에 따라 사용자의 키워드 관심도 업데이트"""
