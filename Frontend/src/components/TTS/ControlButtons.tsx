@@ -1,29 +1,36 @@
-import VolumeUpIcon from '@mui/icons-material/VolumeUp'
-import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
-import VolumeOffOutlinedIcon from '@mui/icons-material/VolumeOffOutlined'
-import PauseOutlinedIcon from '@mui/icons-material/PauseOutlined'
+import Tooltip from '@src/common/Tooltip'
+import * as c from '@src/components/styles/TTS/ControlButtonsStyle'
 
 interface ControlButtonsProps {
   onPlay: () => void
   onPause: () => void
   onStop: () => void
-  isPaused: boolean
+  isPlaying: boolean
 }
 
 const ControlButtons = ({
   onPlay,
   onPause,
   onStop,
-  isPaused,
+  isPlaying,
 }: ControlButtonsProps) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-      <VolumeUpOutlinedIcon onClick={onPlay}>
-        {isPaused ? 'Resume' : 'Play!'}
-      </VolumeUpOutlinedIcon>
-      <PauseOutlinedIcon onClick={onPause}>Pause</PauseOutlinedIcon>
-      <VolumeOffOutlinedIcon onClick={onStop}>Stop</VolumeOffOutlinedIcon>
-    </div>
+    <c.Container>
+      {isPlaying ? (
+        <>
+          <Tooltip message={'일시정지하시겠습니까?'}>
+            <c.PauseButton onClick={onPause} />
+          </Tooltip>
+          <Tooltip message={'멈추시겠습니까?'}>
+            <c.StopButton onClick={onStop} />
+          </Tooltip>
+        </>
+      ) : (
+        <Tooltip message={'재생하시겠습니까?'}>
+          <c.PlayButton onClick={onPlay} />
+        </Tooltip>
+      )}
+    </c.Container>
   )
 }
 
