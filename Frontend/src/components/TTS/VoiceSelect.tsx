@@ -8,8 +8,8 @@ interface VoiceSelectProps {
 
 const VoiceSelect = ({ voices, selectedVoice, onChange }: VoiceSelectProps) => {
   return (
-    <label>
-      Voice
+    <div>
+      <div>Voice</div>
       <select value={selectedVoice} onChange={onChange}>
         {voices.map(voice => (
           <option key={voice.name} value={voice.name}>
@@ -17,7 +17,7 @@ const VoiceSelect = ({ voices, selectedVoice, onChange }: VoiceSelectProps) => {
           </option>
         ))}
       </select>
-    </label>
+    </div>
   )
 }
 
