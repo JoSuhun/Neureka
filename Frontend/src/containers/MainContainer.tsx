@@ -18,7 +18,7 @@ type Props = {}
 const MainContainer = (props: Props) => {
   const [runTutorial, setRunTutorial] = useState(false)
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
-  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom);
+  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
   const userEmail = useAtomValue(isUserEmailAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
@@ -32,10 +32,6 @@ const MainContainer = (props: Props) => {
       enabled: false,
     },
   )
-
-  useEffect(() => {
-    refetchKeywords()
-  }, [categories, refetchKeywords])
 
   // 키워드 뉴스 데이터 요청
   const {
@@ -81,16 +77,19 @@ const MainContainer = (props: Props) => {
   }, [userEmail])
 
   useEffect(() => {
+    refetchKeywords()
+  }, [categories, refetchKeywords])
+
+  useEffect(() => {
     refetchKeywordNews()
   }, [selectedKeyword, refetchKeywordNews])
 
+  useEffect(() => {
+    setSelectedKeyword({ keyword: '', count: 0, ids: [] })
+  }, [setSelectedKeyword])
 
   useEffect(() => {
-    setSelectedKeyword({keyword: '', count: 0, ids: []});
-  }, [setSelectedKeyword]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     const checkScroll = () => {
       if (tutorialStartRef.current) {
         const rect = tutorialStartRef.current.getBoundingClientRect()
@@ -127,7 +126,7 @@ const MainContainer = (props: Props) => {
           )}
         </m.BubbleChartWrapper>
 
-        <m.NewsWrapper >
+        <m.NewsWrapper>
           {keywordNewsLoading ? (
             <div>
               <h1>기사 받는 중</h1>
