@@ -3,15 +3,15 @@ import axios from 'axios'
 
 import * as l from '@src/components/styles/Dictionary/LeftSearchSectionStyle'
 
-import save from '/image/save.png'
-import notsave from '/image/notsave.png'
 import WordCard from './WordCard'
 
 import { Word } from '@src/types/WordType'
 import SearchInput from './SearchInput'
 
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtomValue } from 'jotai'
 import { markedWordsAtom } from '@src/stores/dictionaryAtom'
+
+import searchIcon from '/image/searchIcon.png'
 
 type Props = {
   data: Word[] | null
@@ -92,7 +92,10 @@ const LeftSearchSection = ({ data, mini }: Props) => {
                 ),
               )
             ) : (
-              <l.Empty>검색 결과가 없어요</l.Empty>
+              <l.Empty>
+                <l.Search src={searchIcon} />
+                검색 결과가 없어요
+              </l.Empty>
             )}
           </l.Words>
         </l.Box>
