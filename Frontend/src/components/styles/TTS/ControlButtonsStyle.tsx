@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const PlayButton = styled.button`
   background-color: #4d89f9;
   color: #ffffff;
-  padding: 4%;
+  padding: 3%;
   border: 1px solid #ffffff;
   border-radius: 5px;
   width: 100%;
