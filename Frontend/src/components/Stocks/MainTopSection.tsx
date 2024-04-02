@@ -32,10 +32,6 @@ const MainTopSection = (props: {
     alert('관심기업으로 등록하기 위해 로그인을 해주세요.')
   }
 
-  const handleUnLikeWithoutLogin = () => {
-    alert('관심기업에서 삭제위해 로그인을 해주세요.')
-  }
-
   const handleSubscribeWithoutLike = () => {
     alert('이메일 구독 서비스를 위해 먼저 관심 기업으로 등록해주세요!')
   }
