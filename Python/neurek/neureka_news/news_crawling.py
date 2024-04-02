@@ -17,7 +17,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
-
+import re
 
 article_count = 300
 
@@ -59,14 +59,16 @@ def crawling():
                 article_dict = {}
 
                 # 기사 제목과 링크 가져오기
-                article_subjects = soup.select(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSubject > a')
+                article_subjects = soup.select(
+                    f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSubject > a')
 
                 for article_subject in article_subjects:
                     article_dict['article_title'] = article_subject.text.strip() if article_subject else None
                     article_dict['article_link'] = article_subject['href'] if article_subject else None
 
                 # 기사 요약, 언론사, 날짜 및 시간 가져오기
-                article_summary = soup.select_one(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSummary')
+                article_summary = soup.select_one(
+                    f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSummary')
                 if article_summary:
                     # Summary 정리
                     summary_text = article_summary.text.strip().replace('\n', '').replace('\t', '')
@@ -86,7 +88,8 @@ def crawling():
 
             # 다음 페이지 확인
             try:
-                next_button = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, last_page_selector)))
+                next_button = WebDriverWait(driver, 3).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, last_page_selector)))
                 if 'disabled' in next_button.get_attribute('class'):
                     break
             except TimeoutException:
@@ -102,6 +105,7 @@ def crawling():
 
     print("[+] crawling done")
     return article_list
+
 
 # 확인용 출력
 # for idx, article in enumerate(article_list, start=1):
@@ -197,6 +201,7 @@ def process_element(element):
                 content += process_element(child)  # 자식 요소에 대한 재귀적 처리
     return content
 
+
 # 웹페이지에서 본문 내용 추출하기
 def extract_content_from_url(url):
     response = requests.get(url)
@@ -218,7 +223,8 @@ def load_stop_words(file_path):
 def keyword_ext(text, stop_words):
     tokenized_doc = tagger.pos(text)
     # stop_words를 고려하여 불용어가 아닌 명사만 추가
-    tokenized_nouns = ' '.join([word[0] for word in tokenized_doc if word[1] in ['NNG', 'NNP'] and word[0] not in stop_words])
+    tokenized_nouns = ' '.join(
+        [word[0] for word in tokenized_doc if word[1] in ['NNG', 'NNP'] and word[0] not in stop_words])
 
     n_gram_range = (1, 1)
     # 예외 처리 추가
@@ -233,7 +239,6 @@ def keyword_ext(text, stop_words):
     candidate_embeddings = model.encode(candidates)
 
     return mmr(doc_embedding, candidate_embeddings, candidates, top_n=3, diversity=0.3), tokenized_nouns
-
 
 
 def process_article(article, stop_words):
@@ -281,10 +286,14 @@ def process_article(article, stop_words):
 
 
 def update_keyword_dict(news_data, keyword_dict):
-    for article in tqdm(news_data, desc="Updating keyword dict"):
+    for article in news_data:
         topic = article["topic"]
         if topic in keyword_dict:
             for keyword in article["keywords"]:
+                # 키워드가 한글 12자를 넘거나 숫자로 이루어진 경우 6자를 넘으면 건너뜀
+                if (re.match(r'^[가-힣]{13,}$', keyword) or re.match(r'^\d{7,}$', keyword)):
+                    continue
+
                 # 해당 키워드가 해당 토픽의 키워드 딕셔너리에 없으면 초기화
                 if keyword not in keyword_dict[topic]:
                     keyword_dict[topic][keyword] = {"count": 0, "_ids": []}
@@ -302,6 +311,7 @@ def update_keyword_dict(news_data, keyword_dict):
 
     return keyword_dict
 
+
 def for_schedule(article_list):
     stop_words_path = "LDA/stop_words.txt"
     stop_words = load_stop_words(stop_words_path)
@@ -314,9 +324,6 @@ def for_schedule(article_list):
         process_with_stop_words = partial(process_article, stop_words=stop_words)
         list(tqdm(executor.map(process_with_stop_words, article_list),
                   total=len(article_list), desc="Processing articles"))
-
-    # 요약본을 4000개가 넘는다면 오래된것부터 삭제
-    SummaryArticle.trim_collection()
 
     keyword_dict = {
         "반도체": {},
@@ -336,4 +343,9 @@ def for_schedule(article_list):
 
 
 if __name__ == "__main__":
-    for_schedule(crawling())
+
+    # crawling()
+    # 요약본을 2000개가 넘는다면 오래된것부터 삭제
+    SummaryArticle.trim_collection()
+    load_article = SummaryArticle.find_all()
+    for_schedule(load_article)

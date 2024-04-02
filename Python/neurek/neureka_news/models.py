@@ -84,7 +84,7 @@ class SummaryArticle:
         return documents_list
 
     @classmethod
-    def trim_collection(cls, max_docs=4000):
+    def trim_collection(cls, max_docs=2000):
         """
         컬렉션의 문서 개수가 max_docs를 초과하는 경우,
         가장 오래된 문서부터 초과분을 삭제합니다.
