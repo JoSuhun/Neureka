@@ -26,11 +26,11 @@ const MyInfo = (props: Props) => {
   const [nameError, setNameError] = useState(false)
 
   const goSave = () => {
-    if (phone.length < 13) {
+    if (phone && phone.length < 13) {
       setPhoneError(true)
       return
     }
-    if (name.length < 1) {
+    if (!name || name.length < 1) {
       setNameError(true)
       return
     }
