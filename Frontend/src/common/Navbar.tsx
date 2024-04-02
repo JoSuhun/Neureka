@@ -13,7 +13,7 @@ import {
   isExpireTimeAtom,
   isUserEmailAtom,
 } from '@src/stores/authAtom'
-import { removeCookie } from '@src/utils/loginCookie'
+import { getCookie, removeCookie } from '@src/utils/loginCookie'
 
 import { path } from 'd3'
 
@@ -54,6 +54,7 @@ const Navbar = () => {
     removeCookie('refresh')
     setUserEmail('')
     localStorage.removeItem('accessToken')
+    localStorage.removeItem('userInfo')
   }
 
   const goHome = () => {

@@ -10,7 +10,7 @@ import WordCard from './WordCard'
 import { Word } from '@src/types/WordType'
 import SearchInput from './SearchInput'
 
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { markedWordsAtom } from '@src/stores/dictionaryAtom'
 
 type Props = {
@@ -23,7 +23,7 @@ const LeftSearchSection = ({ data }: Props) => {
   const [words, SetWords] = useState<null | Word[]>(data)
   const [originalWords, SetOriginalWords] = useState<null | Word[]>(data)
 
-  const [markedWords, SetMarkedWords] = useAtom(markedWordsAtom)
+  const markedWords = useAtomValue(markedWordsAtom)
 
   const boxRef = useRef<HTMLDivElement>(null)
 

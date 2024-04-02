@@ -8,6 +8,7 @@ const accessToken = localStorage.getItem('accessToken')
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
 })
+publicRequest.defaults.withCredentials = true
 
 publicRequest.interceptors.request.use(
   config => {
@@ -29,6 +30,7 @@ publicRequest.interceptors.response.use(
     return response
   },
   async error => {
+    console.log(error.response)
     if (error.response?.status === 403) {
       console.log('토큰 없음')
       localStorage.removeItem('accessToken')
@@ -42,6 +44,7 @@ publicRequest.interceptors.response.use(
       localStorage.removeItem('accessToken')
       console.log(error)
     } else {
+      localStorage.removeItem('accessToken')
       return error
     }
   },

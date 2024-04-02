@@ -13,6 +13,7 @@ import {
 } from '@src/stores/authAtom'
 import { getCookie, removeCookie } from './loginCookie'
 import { CollectionsBookmarkOutlined } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
@@ -37,10 +38,16 @@ const TokenChecker = (props: Props) => {
     console.log('토큰 재발행')
   }
 
+  const navigate = useNavigate()
+
   const update = () => {
-    if (expireTime) {
+    const tokenExpireTime = localStorage.getItem('tokenExpireTime')
+
+    if (localStorage.getItem('isLogin') == 'true') {
       const now = new Date().getTime()
-      const loginTime = Math.round((now - expireTime) / 1000 / 60)
+      const loginTime = Math.round(
+        (now - parseInt(tokenExpireTime as string)) / 1000 / 60,
+      )
 
       console.log('로그인 시간: ' + loginTime + '분')
 
@@ -64,8 +71,14 @@ const TokenChecker = (props: Props) => {
         removeCookie('Authorization')
         removeCookie('refresh')
         localStorage.removeItem('accessToken')
+        localStorage.removeItem('userInfo')
+        navigate('/')
         console.log('토큰 만료로 로그아웃됨')
       }
+    } else {
+      removeCookie('Authorization')
+      removeCookie('refresh')
+      return
     }
   }
 

@@ -25,14 +25,16 @@ export const Content = styled.input`
   border-bottom: 1.5px solid transparent;
   &.edit {
     border-bottom: 1.5px solid var(--color-blue);
-    &:hover {
-      cursor: pointer;
+    &:focus-visible {
+      /* border: 2px dashed var(--color-blue);
+      border-radius: 3px; */
+      outline: none;
     }
   }
-  &:focus-visible {
-    border: 2px dashed var(--color-blue);
-    border-radius: 3px;
-    outline: none;
+  &.disabled {
+    &:focus-visible {
+      outline: none;
+    }
   }
 `
 
@@ -74,4 +76,28 @@ export const GenderLabel = styled.label`
   input {
     margin-left: 10px;
   }
+`
+
+export const ErrorAlert = styled.div`
+  background-color: #ff000070;
+  color: white;
+  font-size: 1rem;
+  /* font-weight: 700; */
+  border-radius: 7px;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -400%);
+  transition: transform 700ms ease-in-out;
+  /* transform: translateY(-150%); */
+  &.error {
+    transform: translate(-50%, 0%);
+  }
+  width: 20vw;
+  height: 50px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

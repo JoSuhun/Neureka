@@ -27,7 +27,7 @@ load_dotenv()
 prod_host = os.getenv("PROD_HOST")
 
 
-article_count = 4000
+article_count = 100
 
 
 def crawling():

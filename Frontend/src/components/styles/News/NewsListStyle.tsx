@@ -47,6 +47,7 @@ export const NewsBox = styled.div`
 export const NewCardBox = styled.div`
   background-color: white;
   height: 330px;
+  width: 100%;
   /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -116,3 +117,10 @@ export const PageStack = styled(Stack)`
   justify-content: center;
 `
 export const NewsPagination = styled(Pagination)``
+
+export const Empty = styled.p`
+  width: 100%;
+  margin: 10% 0;
+  text-align: center;
+  color: var(--color-navy);
+`

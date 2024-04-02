@@ -13,18 +13,16 @@ import { fetchKeywordNews, fetchKeywords } from '@src/apis/MainApi'
 import MainTutorial from '@src/tutorials/MainTutorial'
 import { fetchUserInfo } from '@src/apis/AuthApi'
 import { isLoginAtom, isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
-import useMoveScroll from '@src/hooks/clickToScrollMethod';
 type Props = {}
 
 const MainContainer = (props: Props) => {
   const [runTutorial, setRunTutorial] = useState(false)
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
-  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom);
+  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
   const userEmail = useAtomValue(isUserEmailAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
-  const { element: newsWrapperRef, onMoveToElement: moveToNewsWrapper } = useMoveScroll();
 
   // 키워드 데이터 요청
   const { data: keywordsData, refetch: refetchKeywords } = useQuery(
@@ -35,10 +33,6 @@ const MainContainer = (props: Props) => {
     },
   )
 
-  useEffect(() => {
-    refetchKeywords()
-  }, [categories, refetchKeywords])
-
   // 키워드 뉴스 데이터 요청
   const {
     data: keywordNewsData,
@@ -48,11 +42,6 @@ const MainContainer = (props: Props) => {
     ['fetchKeywordNews', selectedKeyword],
     () => fetchKeywordNews(selectedKeyword.ids),
     {
-      onSuccess: () => {
-        if (selectedKeyword.ids.length > 0 ) {
-          setTimeout(() => moveToNewsWrapper(), 100);
-        }
-      },
       enabled: selectedKeyword.ids.length > 0,
     },
   )
@@ -88,19 +77,19 @@ const MainContainer = (props: Props) => {
   }, [userEmail])
 
   useEffect(() => {
+    refetchKeywords()
+  }, [categories, refetchKeywords])
+
+  useEffect(() => {
     refetchKeywordNews()
   }, [selectedKeyword, refetchKeywordNews])
 
+  useEffect(() => {
+    setSelectedKeyword({ keyword: '', count: 0, ids: [] })
+  }, [setSelectedKeyword])
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때(selectedKeywordAtom을 사용하는 페이지가 로드될 때),
-    // selectedKeywordAtom의 값을 초기값으로 설정합니다.
-    setSelectedKeyword({keyword: '', count: 0, ids: []});
-  }, [setSelectedKeyword]); // setSelectedKeyword 함수가 변경되지 않기 때문에, 의존성 배열에 추가합니다.
-
-  useEffect(() => {
-    // window.scrollTo(0, 0)
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     const checkScroll = () => {
       if (tutorialStartRef.current) {
         const rect = tutorialStartRef.current.getBoundingClientRect()
@@ -137,7 +126,7 @@ const MainContainer = (props: Props) => {
           )}
         </m.BubbleChartWrapper>
 
-        <m.NewsWrapper ref={newsWrapperRef}>
+        <m.NewsWrapper>
           {keywordNewsLoading ? (
             <div>
               <h1>기사 받는 중</h1>

@@ -22,8 +22,18 @@ const MyInfo = (props: Props) => {
   const [phone, setPhone] = useState('')
   const [birth, setBirth] = useState('')
   const [gender, setGender] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
+  const [nameError, setNameError] = useState(false)
 
   const goSave = () => {
+    if (phone.length < 13) {
+      setPhoneError(true)
+      return
+    }
+    if (name.length < 1) {
+      setNameError(true)
+      return
+    }
     SetEdit(!edit)
     setUser({
       userInfoId: id,
@@ -54,8 +64,17 @@ const MyInfo = (props: Props) => {
   }
 
   useEffect(() => {
+    if (name?.length > 0) {
+      setNameError(false)
+    }
+  }, [name])
+
+  useEffect(() => {
     if (phone?.length === 11) {
       setPhone(phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'))
+    }
+    if (phone?.length === 13) {
+      setPhoneError(false)
     }
   }, [phone])
 
@@ -74,6 +93,12 @@ const MyInfo = (props: Props) => {
 
   return (
     <m.InfoBox>
+      <m.ErrorAlert className={nameError ? 'error' : ''}>
+        이름을 확인하세요! (* 한 글자 이상)
+      </m.ErrorAlert>
+      <m.ErrorAlert className={phoneError ? 'error' : ''}>
+        전화번호를 확인하세요!
+      </m.ErrorAlert>
       <m.Category>
         <m.Title>이름</m.Title>
         <m.Content
@@ -88,14 +113,7 @@ const MyInfo = (props: Props) => {
 
       <m.Category>
         <m.Title>이메일</m.Title>
-        <m.Content
-          value={email}
-          onChange={event => {
-            setEmail(event.target.value as string)
-          }}
-          disabled={edit ? false : true}
-          className={edit ? 'edit' : ''}
-        />
+        <m.Content value={email} disabled={false} className="disabled" />
       </m.Category>
 
       <m.Category>

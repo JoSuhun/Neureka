@@ -63,9 +63,13 @@ const NewsList = ({ newsData }: Props) => {
   return (
     <>
       <n.Wrapper ref={boxRef}>
-        <n.NewsBox className="news-box">
-          {data?.map((news, idx) => <NewsCard news={news} />)}
-        </n.NewsBox>
+        {news?.length > 0 ? (
+          <n.NewsBox className="news-box">
+            {data?.map((news, idx) => <NewsCard news={news} />)}
+          </n.NewsBox>
+        ) : (
+          <n.Empty>검색 결과가 없어요</n.Empty>
+        )}
         <n.PageStack>
           <n.NewsPagination
             count={last}
