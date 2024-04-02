@@ -6,13 +6,14 @@ export const container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `
 
-export const KeywordTitle = styled.h2`
-  font-size: 3rem;
+export const KeywordTitle = styled.p`
+  font-size: 1.8rem;
   margin-bottom: 1rem;
   margin: 50px 0;
-  color: #110079;
+  color: navy;
 `
 
 export const KeywordCircle = styled.div`
@@ -21,6 +22,7 @@ export const KeywordCircle = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  margin-top: 10%;
 `
 export const SelectedKeyword = styled.div`
   position: absolute;
@@ -59,4 +61,9 @@ export const NewsGrid = styled.div`
       grid-column: 7 / 11;
     }
   }
+`
+export const Line = styled.img`
+  height: 150px;
+  position: absolute;
+  top: 0;
 `
