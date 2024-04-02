@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import SearchIcon from '@mui/icons-material/Search'
-
 export const Wrapper = styled.div`
   background-color: var(--color-lightblue);
   &.miniSearchSection {
@@ -77,4 +75,13 @@ export const Words = styled.div`
 export const Empty = styled.p`
   color: var(--color-dark);
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`
+
+export const Search = styled.img`
+  height: 20px;
+  margin-right: 10px;
 `
