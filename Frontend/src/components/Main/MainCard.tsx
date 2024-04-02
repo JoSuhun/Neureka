@@ -58,7 +58,7 @@ const MainCard = (props: Props) => {
           </m.Info>
           <m.Arrow className={scrollPosition > 30 ? `none` : ``} />
         </m.Box>
-        <m.Line src={line} />
+        {/* <m.Line src={line} /> */}
       </m.Wrapper>
     </>
   )
