@@ -4,6 +4,8 @@ import wrapperbgimage from '/image/bg-image4.jpg'
 import line from '/image/Line.png'
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import { useNavigate } from 'react-router-dom'
+import useMoveScroll from '@src/hooks/clickToScrollMethod'
 
 type Props = {}
 
@@ -11,12 +13,14 @@ const MainCard = (props: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const boxRef = useRef<HTMLDivElement>(null)
 
+  const { element: newsRef, onMoveToElement: moveToNews } = useMoveScroll()
+  const navigate = useNavigate()
+
   const updateScroll = useCallback(() => {
     if (boxRef.current) {
       const scrollTop = boxRef.current.scrollTop
       setScrollPosition(scrollTop)
     }
-    console.log(scrollPosition)
   }, [])
 
   useEffect(() => {
@@ -38,19 +42,28 @@ const MainCard = (props: Props) => {
           <m.Title className={scrollPosition > 30 ? `changed` : ''}>
             NEúrēka
           </m.Title>
-          <m.Info className={scrollPosition > 30 ? `changed` : ``}>
+          <m.Info
+            className={scrollPosition > 30 ? `changed` : ``}
+            onClick={() => navigate('news')}
+          >
             오늘의 뉴스
             <span>
               <MoreHorizIcon />
             </span>
           </m.Info>
-          <m.Info className={scrollPosition > 30 ? `changed` : ``}>
+          <m.Info
+            className={scrollPosition > 30 ? `changed` : ``}
+            onClick={moveToNews}
+          >
             관심 키워드 맞춤 뉴스 추천
             <span>
               <MoreHorizIcon />
             </span>
           </m.Info>
-          <m.Info className={scrollPosition > 30 ? `changed` : ``}>
+          <m.Info
+            className={scrollPosition > 30 ? `changed` : ``}
+            onClick={() => navigate('stocks')}
+          >
             원하는 기업의 각종 정보를 모아서
             <span>
               <MoreHorizIcon />
@@ -60,6 +73,7 @@ const MainCard = (props: Props) => {
         </m.Box>
         {/* <m.Line src={line} /> */}
       </m.Wrapper>
+      <div ref={newsRef}></div>
     </>
   )
 }
