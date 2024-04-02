@@ -6,6 +6,7 @@ export const SlideWrapper = styled.div`
   background-color: var(--color-navy);
   align-items: center;
   overflow: hidden;
+  cursor: default;
   @keyframes infiniteAnimation1 {
     0% {
       transform: translateX(0%);
