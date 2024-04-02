@@ -19,14 +19,13 @@ from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 
 
-article_count = 100
+article_count = 300
 
 
 def crawling():
     # 페이지 소스 가져오기
     driver = webdriver.Chrome()
     article_list = []
-    keyword_dict = {}
 
     # 마지막 페이지 확인하는 조건
     last_page_selector = "#contentarea_left > table > tbody > tr > td.pgRR"
@@ -148,7 +147,7 @@ def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
 
 
 # 태그 뗀 text
-def keyword_extraction(url):
+def crawling_extraction(url):
     response = requests.get(url)
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
     soup = BeautifulSoup(response.content, "html.parser")
@@ -240,7 +239,7 @@ def keyword_ext(text, stop_words):
 def process_article(article, stop_words):
     # 여기서 DB에 원문기사를 저장하는 로직
     url = article["article_link"]
-    text, thumbnail_src = keyword_extraction(url)
+    text, thumbnail_src = crawling_extraction(url)
     topic = text_through_LDA_probability(text)
     keywords, nouns = keyword_ext(text, stop_words)
     article["keywords"] = keywords
@@ -316,7 +315,7 @@ def for_schedule(article_list):
         list(tqdm(executor.map(process_with_stop_words, article_list),
                   total=len(article_list), desc="Processing articles"))
 
-    # 요약본을 2000개가 넘는다면 오래된것부터 삭제
+    # 요약본을 4000개가 넘는다면 오래된것부터 삭제
     SummaryArticle.trim_collection()
 
     keyword_dict = {
