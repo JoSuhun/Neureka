@@ -31,7 +31,7 @@ const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
 
   return (
     <s.SearchBox>
-      <s.SearchBar onSubmit={goSubmit}>
+      <s.SearchBar onSubmit={goSubmit} className="searchBar">
         <s.SearchInput
           value={content}
           onChange={event => SetContent(event.target.value)}
