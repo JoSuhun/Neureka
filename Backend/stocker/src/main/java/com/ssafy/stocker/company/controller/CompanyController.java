@@ -40,6 +40,7 @@ public class CompanyController {
     @PostMapping("/read")
     public ResponseEntity<?> companyReadAdd( @RequestParam String email ,@RequestParam String code){
         try {
+            log.info("companyReadAdd 실행 email , code : " +email +" " + code);
             companyService.addCompanyRead(code , email);
 
             return new ResponseEntity<>(HttpStatus.OK);
@@ -55,6 +56,8 @@ public class CompanyController {
     @GetMapping("/read")
     public ResponseEntity<?> companyReadList( @RequestParam String email){
         try {
+
+            log.info("companyReadList 실행 email : " +email );
             List<CompanyReadEntity> companyRead = companyService.listCompanyRead( email);
 
             return new ResponseEntity<List<CompanyReadEntity>>(companyRead ,HttpStatus.OK);
