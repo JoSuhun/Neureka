@@ -122,9 +122,6 @@ public class NewsController {
     public ResponseEntity<?> viewKeyword(@RequestBody Map<String, String[]> keyword){
         String url = "/data/news/api/keyword_article/";
 
-        System.out.println("++++++++++++++++++++++++++++++");
-        System.out.println(keyword);
-        System.out.println("++++++++++++++++++++++++++++++");
 
         // 요청 본문에 JSON 형식으로 데이터를 추가하여 요청 보내기
         String response = webClient.post()
@@ -203,7 +200,6 @@ public class NewsController {
                 .bodyToMono(String.class)
                 .block();
 
-        System.out.println(response);
 
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -212,6 +208,8 @@ public class NewsController {
             // JSON 문자열을 List<Map<String, Object>>으로 변환
             dataList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {
             });
+
+
 
             // 데이터 출력
             for (Map<String, Object> data : dataList) {

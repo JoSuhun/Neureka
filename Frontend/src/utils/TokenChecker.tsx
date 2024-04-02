@@ -27,7 +27,7 @@ const TokenChecker = (props: Props) => {
 
   const refresh = async () => {
     const res = await axios.post(
-      `${import.meta.env.VITE_REACT_APP_BASE_URL}/reissue`,
+      `${import.meta.env.VITE_REACT_APP_BASE_URL}/api/v1/reissue`,
     )
 
     const now = new Date().getTime()

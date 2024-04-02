@@ -60,8 +60,6 @@ public class KeywordController {
                     .bodyToMono(String.class)
                     .block();
 
-            System.out.println(response);
-
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         }catch (Exception e){
