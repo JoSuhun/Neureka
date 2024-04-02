@@ -1,4 +1,6 @@
 from apscheduler.schedulers.background import BlockingScheduler
+
+from neurek.neureka_news.models import SummaryArticle
 from neurek.neureka_news.news_headline import load_headline_news
 from neurek.neureka_news.news_crawling import for_schedule, crawling
 import datetime
@@ -11,7 +13,11 @@ def reload_headline():
 
 def start_crawling():
     print(f'크롤링 실행 : {datetime.datetime.now()}')
-    for_schedule(crawling())
+    crawling()
+    SummaryArticle.trim_collection()
+    load_article = SummaryArticle.find_all()
+    for_schedule(load_article)
+
 
 
 def main():
