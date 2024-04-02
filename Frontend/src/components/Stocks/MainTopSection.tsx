@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
+import { isUserEmailAtom } from '@src/stores/authAtom'
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
@@ -19,6 +20,7 @@ const MainTopSection = (props: {
     handleSubscribeCompany,
     handleUnSubscribeCompany,
   } = props
+  const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
   const [likedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [isLiked, setIsLiked] = useState(false) // 관심 기업 여부
@@ -26,8 +28,16 @@ const MainTopSection = (props: {
     item => item.company.code === selectedStock.code,
   )
 
+  const handleLikeWithoutLogin = () => {
+    alert('관심기업으로 등록하기 위해 로그인을 해주세요.')
+  }
+
+  const handleUnLikeWithoutLogin = () => {
+    alert('관심기업에서 삭제위해 로그인을 해주세요.')
+  }
+
   const handleSubscribeWithoutLike = () => {
-    alert('❌ 구독하려면 먼저 관심 기업으로 등록해주세요! ❌')
+    alert('이메일 구독 서비스를 위해 먼저 관심 기업으로 등록해주세요!')
   }
 
   useEffect(() => {
@@ -47,7 +57,9 @@ const MainTopSection = (props: {
           </Tooltip>
         ) : (
           <Tooltip message={'관심기업으로 등록해보세요!'}>
-            <s.AddButton onClick={handleAddMyStock} />
+            <s.AddButton
+              onClick={userEmail ? handleAddMyStock : handleLikeWithoutLogin}
+            />
           </Tooltip>
         )}
         {currentItem && currentItem.isSendmail ? (
