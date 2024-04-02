@@ -54,6 +54,7 @@ export const ErrorAlert = styled.div`
   left: 50%;
   top: 30%;
   opacity: 0;
+  display: none;
   transform: translate(-50%, -100%);
   transition: all 300ms ease-in-out;
   /* transform: translateY(-150%); */

@@ -18,6 +18,7 @@ import {
 import base64 from 'base-64'
 import { useQuery } from 'react-query'
 import { fetchUserInfo } from '@src/apis/AuthApi'
+import { setClientHeaders } from '@src/hooks/requestMethod'
 
 type Props = {}
 
@@ -42,6 +43,8 @@ const AuthModal = (props: Props) => {
     if (getCookie('Authorization')) {
       setAccessToken('Bearer ' + getCookie('Authorization'))
       setRefreshToken(getCookie('refresh'))
+
+      setClientHeaders(getCookie('Authorization'))
 
       setIsLogin(true)
       const now = new Date().getTime()
