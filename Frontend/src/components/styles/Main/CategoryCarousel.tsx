@@ -34,6 +34,7 @@ export const CarouselWrapper = styled.div`
 export const Icon = styled.img`
   width: 75px;
   height: 75px;
+  cursor: pointer;
 `
 
 export const Category = styled.div`

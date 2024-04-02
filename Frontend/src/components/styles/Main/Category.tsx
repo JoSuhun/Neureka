@@ -13,11 +13,13 @@ export const categoryWrapper = styled.div`
     transform: scale(1.1); // 마우스 호버 시 아이콘 확대
     cursor: pointer;
   }
+  cursor: pointer;
 `
 
 export const Icon = styled.img`
   width: 75px;
   height: 75px;
+  cursor: pointer;
 `
 
 export const Category = styled.div`
