@@ -1,5 +1,8 @@
-from apscheduler.schedulers.background import BlockingScheduler
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
+from apscheduler.schedulers.background import BlockingScheduler
 from neurek.neureka_news.models import SummaryArticle
 from neurek.neureka_news.news_headline import load_headline_news
 from neurek.neureka_news.news_crawling import for_schedule, crawling
@@ -19,9 +22,14 @@ def start_crawling():
     for_schedule(load_article)
 
 
+def test():
+    print("실행됨")
 
+
+# 이 scheduler.py가 있는 경로에서 "python .\scheduler.py"
 def main():
     schedule = BlockingScheduler(timezone='Asia/Seoul')
+    schedule.add_job(test, 'interval', seconds=5, id='test')
     schedule.add_job(reload_headline, 'interval', minutes=10, id='headline')
     schedule.add_job(start_crawling, 'interval', minutes=60, id='crawling')
 
