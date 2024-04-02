@@ -15,9 +15,10 @@ import { markedWordsAtom } from '@src/stores/dictionaryAtom'
 
 type Props = {
   data: Word[] | null
+  mini: boolean
 }
 
-const LeftSearchSection = ({ data }: Props) => {
+const LeftSearchSection = ({ data, mini }: Props) => {
   const [search, setSearch] = useState(false)
   const [question, setQuestion] = useState<null | string>(null)
   const [words, SetWords] = useState<null | Word[]>(data)
@@ -60,7 +61,7 @@ const LeftSearchSection = ({ data }: Props) => {
 
   return (
     <>
-      <l.Wrapper className="searchSection">
+      <l.Wrapper className={mini ? 'miniSearchSection' : 'searchSection'}>
         <l.Box>
           <l.SearchBar className="searchBar">
             <SearchInput
@@ -75,9 +76,19 @@ const LeftSearchSection = ({ data }: Props) => {
             {words && words.length > 0 ? (
               words.map((word, idx) =>
                 markedWords?.some(markedWord => markedWord?.id === word?.id) ? (
-                  <WordCard word={word} key={idx} marked={true} side="left" />
+                  <WordCard
+                    word={word}
+                    key={idx}
+                    marked={mini ? false : true}
+                    side={mini ? 'right' : 'left'}
+                  />
                 ) : (
-                  <WordCard word={word} key={idx} marked={false} side="left" />
+                  <WordCard
+                    word={word}
+                    key={idx}
+                    marked={false}
+                    side={mini ? 'right' : 'left'}
+                  />
                 ),
               )
             ) : (

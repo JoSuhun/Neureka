@@ -159,7 +159,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
       <n.HeaderImage bgimage={bgimage} />
       <n.Container>
         <n.SearchSection className={openDictionary ? 'show' : 'none'}>
-          <LeftSearchSection data={wordsData?.data} />
+          <LeftSearchSection data={wordsData?.data} mini={true} />
         </n.SearchSection>
         <n.TTSSection className={openTTS ? 'show' : 'none'}>
           <TextToSpeechContainer articleContent={newsData?.data.detail_text} />

@@ -103,6 +103,13 @@ const WordCard = ({ word, marked, side }: Props) => {
 
               <c.saveBtn className="saveBtn" src={saved} />
             </c.Title>
+          ) : side == 'right' ? (
+            <c.Title className="mini">
+              <div
+                dangerouslySetInnerHTML={{ __html: word?.title || '' }}
+                onClick={() => setTitleClicked(!titleClicked)}
+              />
+            </c.Title>
           ) : (
             <c.Title>
               <div dangerouslySetInnerHTML={{ __html: word?.title || '' }} />
