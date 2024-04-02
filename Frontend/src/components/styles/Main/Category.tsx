@@ -12,11 +12,13 @@ export const categoryWrapper = styled.div`
   &:hover {
     transform: scale(1.2); // 마우스 호버 시 아이콘 확대
   }
+  cursor: pointer;
 `
 
 export const Icon = styled.img`
   width: 75px;
   height: 75px;
+  cursor: pointer;
 `
 
 export const Category = styled.div`
@@ -24,4 +26,5 @@ export const Category = styled.div`
   height: 30px;
   text-align: center;
   font-size: 20px;
+  cursor: pointer;
 `

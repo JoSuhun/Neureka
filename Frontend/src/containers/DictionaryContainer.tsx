@@ -72,7 +72,7 @@ const DictionaryContainer = (props: Props) => {
         <DictionaryTutorial />
         <d.Box className="dictionaryPage">
           <d.LeftWrapper>
-            <LeftSearchSection data={wordsData?.data} />
+            <LeftSearchSection data={wordsData?.data} mini={false} />
           </d.LeftWrapper>
           <RightWordsSection data={markedData?.data} />
         </d.Box>

@@ -26,7 +26,8 @@ export const KeywordBox = styled.foreignObject<{ radius: number }>`
   display: flex; // Flexbox를 사용하여 내부 컨텐츠 중앙 정렬
   justify-content: center; // 가로 축에서 중앙 정렬
   align-items: center; // 세로 축에서 중앙 정렬
-  overflow: hidden; // 버블 크기를 넘어가는 텍스트 숨김
+  overflow: hidden; // 버블 크기를 넘어가는 텍스트
+  cursor: pointer;
 `
 
 export const Keyword = styled.div<{ radius: number }>`
@@ -40,4 +41,5 @@ export const Keyword = styled.div<{ radius: number }>`
   font-size: ${(props: { radius: number }) => 12 + 2 ** (props.radius / 20)}px;
   overflow: hidden;
   height: 100%;
+  cursor: pointer;
 `

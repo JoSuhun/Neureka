@@ -31,7 +31,7 @@ export const PlusBtn = styled.span`
 export const GoMoreBtn = styled.span`
   width: 50px;
   aspect-ratio: 1;
-  border-radius: 20px;
+  border-radius: 15px;
   position: fixed;
   z-index: 1;
   right: 0%;
@@ -109,24 +109,33 @@ export const Search = styled(SearchIcon)`
 export const SearchSection = styled.div`
   position: fixed;
   width: 25vw;
-  top: 55%;
+  top: 60%;
+  height: 30vh;
   right: 0%;
   transform: translate(100%, -50%);
   transition: transform 400ms ease-in-out;
+  opacity: 0.95;
   > div {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    opacity: 0.9;
+    box-shadow: var(--shadow);
   }
   &.show {
     transform: translate(0%, -50%);
+  }
+  div {
+    font-size: 1rem;
   }
 `
 
 export const TTSSection = styled.div`
   position: fixed;
-  width: 25vw;
-  top: 55%;
+  width: 20vw;
+  height: 50vh;
+  background-color: var(--color-lightblue);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  box-shadow: var(--shadow);
+  opacity: 0.8;
+  top: 70%;
   right: 0%;
   transform: translate(100%, -50%);
   transition: transform 400ms ease-in-out;
