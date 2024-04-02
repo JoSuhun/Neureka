@@ -141,8 +141,8 @@ const BubbleChart = ({ keywords }: BubbleChartProps) => {
               />
               <b.KeywordBox
                 radius={bubble.r}
-                x={-bubble.r * 0.9}
-                y={-bubble.r * 0.9}
+                x={-bubble.r * 0.95}
+                y={-bubble.r * 0.95}
               >
                 <b.Keyword radius={bubble.r}>
                   {bubble.name.length <= 12

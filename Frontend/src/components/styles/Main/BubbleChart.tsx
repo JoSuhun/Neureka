@@ -31,8 +31,8 @@ export const Bubble = styled.circle``
 // `
 
 export const KeywordBox = styled.foreignObject<{ radius: number }>`
-  width: ${props => props.radius * 1.8}px; // padding 고려하여 크기 조정
-  height: ${props => props.radius * 1.8}px; // padding 고려하여 크기 조정
+  width: ${props => props.radius * 1.9}px; // padding 고려하여 크기 조정
+  height: ${props => props.radius * 1.9}px; // padding 고려하여 크기 조정
   padding: 10%; // 버블 안쪽으로 내용물을 더 작게 만듭니다.
   display: flex;
   justify-content: center;
@@ -51,7 +51,7 @@ export const Keyword = styled.div<{ radius: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: ${(props: { radius: number }) => 12 + 2 ** (props.radius / 20)}px;
+  font-size: ${(props: { radius: number }) => 10 + 2 ** (props.radius / 21)}px;
   /* font-size: ${props =>
     Math.min(12 + props.radius / 20, 16)}px; // 글자 크기 최대값 제한 */
   overflow: hidden;
