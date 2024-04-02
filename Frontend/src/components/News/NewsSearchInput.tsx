@@ -15,6 +15,10 @@ type Props = {
 const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
   const [content, SetContent] = useState('')
 
+  useEffect(() => {
+    SetContent(question as string)
+  }, [question])
+
   const clearSearch = () => {
     setSearch(false)
     SetContent('')

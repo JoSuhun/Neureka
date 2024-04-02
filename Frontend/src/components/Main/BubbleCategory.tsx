@@ -14,19 +14,19 @@ const BubbleCategory = () => {
   return (
     <bc.Container>
       <bc.InfoWrapper>
-        <bc.CategoryInfo1
+        {/* <bc.CategoryInfo1
           className="CategoryToggle"
           >
           카테고리 선택
-        </bc.CategoryInfo1>
-        <bc.CategoryInfo2>※ 카테고리는 최대 3개까지 선택할 수 있습니다.</bc.CategoryInfo2>
+        </bc.CategoryInfo1> */}
+        <bc.CategoryInfo2>
+          ※ 카테고리는 최대 3개까지 선택할 수 있습니다.
+        </bc.CategoryInfo2>
       </bc.InfoWrapper>
       <bc.CategoryWrapper className="CategoryList">
         <CategoryCarousel />
       </bc.CategoryWrapper>
-      <bc.CategoryWrapper
-        className="SelectedCategories"
-        >
+      <bc.CategoryWrapper className="SelectedCategories">
         {selectedCategories.map((element, key) => (
           <Category
             key={key}

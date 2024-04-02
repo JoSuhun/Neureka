@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--color-lightgrey);
-  border-top: 3px solid var(--color-dark);
+  border-top: 2px solid var(--color-dark);
 `
 
 export const Svg = styled.svg`
@@ -41,5 +41,7 @@ export const Keyword = styled.div<{ radius: number }>`
   font-size: ${(props: { radius: number }) => 12 + 2 ** (props.radius / 20)}px;
   overflow: hidden;
   height: 100%;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 `
