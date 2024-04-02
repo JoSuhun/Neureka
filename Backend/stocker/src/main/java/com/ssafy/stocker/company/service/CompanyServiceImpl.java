@@ -81,7 +81,7 @@ public class CompanyServiceImpl implements  CompanyService {
         companyRead.setCompany(companyRepository.findByCode(code));
         companyRead.setEmail(email);
         if(!companyReadRepository.existsByEmailAndCompany(email, companyRead.getCompany())){
-            log.info("이미 조회한 email , company" + email + " " + company.to);
+            log.info("이미 조회한 email , company" + companyRead.getCompany() + " " + companyRead.getEmail());
             companyReadRepository.save(companyRead);
         }
 
