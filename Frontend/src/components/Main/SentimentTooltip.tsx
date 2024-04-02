@@ -23,8 +23,8 @@ const SentimentTooltip = ({ sentiments }: Props) => {
 
   // 가장 높은 score를 가진 sentiment 찾기
   const highestSentiment = sentiments.reduce((prev, current) => {
-    return (prev.score > current.score) ? prev : current
-  });
+    return prev.score > current.score ? prev : current
+  })
 
   // 해당 sentiment에 따른 스타일과 레이블 가져오기
   const { color, label } = getStyleAndLabel(highestSentiment)
@@ -40,7 +40,7 @@ const SentimentTooltip = ({ sentiments }: Props) => {
         )
       })} */}
       <s.Sentiment $color={color}>
-        이 기사는 {selectedKeyword.keyword}에 <strong>{label}</strong>적인 기사입니다.
+        이 기사는 <strong>{label}</strong>적인 기사입니다.
       </s.Sentiment>
     </s.Wrapper>
   )
