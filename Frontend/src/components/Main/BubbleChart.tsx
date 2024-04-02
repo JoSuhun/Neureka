@@ -139,8 +139,16 @@ const BubbleChart = ({ keywords }: BubbleChartProps) => {
                 r={selectedBubbleId === bubble.id ? bubble.r * 1.1 : bubble.r}
                 fill={getColorForId(bubble.id)}
               />
-              <b.KeywordBox radius={bubble.r} x={-bubble.r} y={-bubble.r}>
-                <b.Keyword radius={bubble.r}>{bubble.name}</b.Keyword>
+              <b.KeywordBox
+                radius={bubble.r}
+                x={-bubble.r * 0.9}
+                y={-bubble.r * 0.9}
+              >
+                <b.Keyword radius={bubble.r}>
+                  {bubble.name.length <= 12
+                    ? bubble.name
+                    : bubble.name.slice(0, 11) + '...'}
+                </b.Keyword>
               </b.KeywordBox>
             </b.Graph>
           ))}
