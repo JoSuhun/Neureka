@@ -121,9 +121,7 @@ const MainContainer = (props: Props) => {
         <m.BubbleChartWrapper ref={tutorialStartRef}>
           {keywordsData && keywordsData?.data ? (
             <BubbleChart keywords={keywordsData?.data} />
-          ) : (
-            <div>데이터를 불러오는 중...</div>
-          )}
+          ) : null}
         </m.BubbleChartWrapper>
 
         <m.NewsWrapper>

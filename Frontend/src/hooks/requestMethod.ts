@@ -3,18 +3,29 @@ import axios from 'axios'
 export const BASE_URL = `${import.meta.env.VITE_REACT_APP_BASE_URL}/api/v1/`
 
 axios.defaults.withCredentials = true
+const isLogin = localStorage.getItem('isLogin')
 const accessToken = localStorage.getItem('accessToken')
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
 })
+
 publicRequest.defaults.withCredentials = true
+
+export const setClientHeaders = (token: string) => {
+  publicRequest.interceptors.request.use(function (config) {
+    config.headers['Authorization'] = `Bearer ${token}`
+    return config
+  })
+}
 
 publicRequest.interceptors.request.use(
   config => {
     if (accessToken) {
+      console.log('토큰')
       config.headers['Authorization'] = accessToken
     } else {
+      console.log('zz')
       delete config.headers['Authorization'] // 토큰이 없을 때 헤더에서 제거
     }
     return config
