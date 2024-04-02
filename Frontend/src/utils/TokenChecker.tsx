@@ -26,7 +26,7 @@ const TokenChecker = (props: Props) => {
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const refresh = async () => {
-    const res = await axios.post(
+    const res = await axios.get(
       `https://j10c105.p.ssafy.io/api/v1/reissue`,
     )
 
