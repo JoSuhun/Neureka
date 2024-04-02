@@ -40,8 +40,7 @@ const SentimentTooltip = ({ sentiments }: Props) => {
         )
       })} */}
       <s.Sentiment $color={color}>
-        이 기사는 {selectedKeyword.keyword}에 <strong>{label}</strong>적인
-        기사입니다.
+        이 기사는 <strong>{label}</strong>적인 기사입니다.
       </s.Sentiment>
     </s.Wrapper>
   )
