@@ -27,7 +27,7 @@ const TokenChecker = (props: Props) => {
 
   const refresh = async () => {
     const res = await axios.post(
-      `http://j10c105.p.ssafy.io/api/v1/reissue`,
+      `https://j10c105.p.ssafy.io/api/v1/reissue`,
     )
 
     const now = new Date().getTime()
