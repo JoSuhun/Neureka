@@ -4,7 +4,15 @@ import SearchIcon from '@mui/icons-material/Search'
 
 export const Wrapper = styled.div`
   background-color: var(--color-lightblue);
-  height: 80vh;
+  &.miniSearchSection {
+    height: 50vh;
+    div {
+      font-size: 0.9rem;
+    }
+  }
+  &.searchSection {
+    height: 80vh;
+  }
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 
