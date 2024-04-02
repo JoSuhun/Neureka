@@ -56,7 +56,7 @@ class SummaryArticle:
     @classmethod
     def find_all(cls):
         """컬렉션의 모든 문서 조회"""
-        documents_cursor = cls.collection.find({})
+        documents_cursor = cls.collection.find({}).sort("date_time", -1)
         documents_list = []
         for doc in documents_cursor:
             # ObjectId를 문자열로 변환하여 '_id' 값을 업데이트
@@ -479,7 +479,9 @@ class UserProfile:
 
         if not user_profile or 'interests' not in user_profile:
             latest_articles = sorted(summary_articles, key=lambda x: x['date_time'], reverse=True)
-            recommended_articles = latest_articles[:2]
+            recommended_articles = latest_articles[:10]
+            random.shuffle(recommended_articles)
+            recommended_articles = recommended_articles[:2]
         else:
             preferred_keywords = set(user_profile['interests'].get('keywords', {}).keys())
             article_similarities = []
@@ -492,8 +494,9 @@ class UserProfile:
                 article_similarities.append((article, jaccard_similarity))
 
             article_similarities.sort(key=lambda x: x[1], reverse=True)
-            recommended_articles = article_similarities[:2]
-
+            recommended_articles = article_similarities[:10]
+            random.shuffle(recommended_articles)
+            recommended_articles = recommended_articles[:2]
         return [
             {key: value if key != '_id' else str(value) for key, value in article[0].items() if key != 'nouns'}
             for article in recommended_articles
