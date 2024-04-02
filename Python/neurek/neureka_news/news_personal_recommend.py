@@ -24,8 +24,8 @@ def read_article_and_update_interests(user_id, article_id):
         print(f"User {user_id}'s interests updated based on article {article_id}.")
         return {"message": "유저가 기사를 읽음으로써, 관심도가 증가했습니다"}
     else:
-        print(f"Article {article_id} not found. 기사가 없는데요...")
         message = f"Article {article_id} not found. 기사가 없는데요..."
+        print(message)
         return {"message": message}
 
 
