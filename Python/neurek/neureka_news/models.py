@@ -462,7 +462,15 @@ class UserProfile:
     def recommend_articles_for_user(self, user_id, topic):
         """사용자 ID가 주어졌을 때 사용자의 선호도에 기반한 기사 추천"""
         user_profile = self.collection.find_one({'user_id': user_id})
-        self.collection.update_many({}, {"$set": {"views": 0}})
+
+        if not user_profile:
+            # 사용자 프로필이 없는 경우, 새로운 프로필 생성 및 저장
+            user_profile = {
+                'user_id': user_id,
+                'interests': {'keywords': {}}
+            }
+            self.collection.insert_one(user_profile)
+            user_profile = self.collection.find_one({'user_id': user_id})  # 재조회
 
         if topic:
             summary_articles = SummaryArticle.find_by_topics(topic)
