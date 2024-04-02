@@ -34,7 +34,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
 
   const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
 
-  const [more, setMore] = useState(false)
+  const [more, setMore] = useState(true)
   const [openDictionary, setOpenDictionary] = useState(false)
   const [openTTS, setOpenTTS] = useState(false)
 
@@ -58,14 +58,13 @@ const NewsDetailContainer = ({ newsId }: Props) => {
   const goSearch = () => {
     if (openDictionary) {
       setOpenDictionary(false)
-      return
     }
     if (openTTS) {
       setOpenTTS(false)
-      return
     }
     setMore(!more)
   }
+
   const goDictionary = () => {
     setOpenDictionary(true)
     setMore(false)
@@ -172,13 +171,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
         </n.TTSSection>
 
         <n.GoMoreBtn onClick={goSearch}>
-          {more ? (
-            <n.Back />
-          ) : openDictionary || openTTS ? (
-            <n.Clear />
-          ) : (
-            <n.More />
-          )}
+          {openDictionary || openTTS ? <n.Clear /> : null}
         </n.GoMoreBtn>
 
         <n.SelectBox className={more ? 'show' : 'none'}>
