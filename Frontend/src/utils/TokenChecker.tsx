@@ -26,8 +26,8 @@ const TokenChecker = (props: Props) => {
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const refresh = async () => {
-    const res = await axios.post(
-      `${import.meta.env.VITE_REACT_APP_BASE_URL}/api/v1/reissue`,
+    const res = await axios.get(
+      `https://j10c105.p.ssafy.io/api/v1/reissue`,
     )
 
     const now = new Date().getTime()

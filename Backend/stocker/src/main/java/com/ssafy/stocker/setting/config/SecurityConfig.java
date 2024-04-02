@@ -111,11 +111,11 @@ public class SecurityConfig {
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        http
-                // HTTPS를 사용해야 하는 경로 설정
-                .requiresChannel()
-                .requestMatchers(r -> r.getRequestURI().startsWith("/secure"))
-                .requiresSecure();
+//        http
+//                // HTTPS를 사용해야 하는 경로 설정
+//                .requiresChannel()
+//                .requestMatchers(r -> r.getRequestURI().startsWith("/secure"))
+//                .requiresSecure();
         return http.build();
     }
 }
