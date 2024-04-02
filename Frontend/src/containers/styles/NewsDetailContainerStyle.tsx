@@ -22,7 +22,7 @@ export const PlusBtn = styled.span`
   width: 50px;
   aspect-ratio: 1;
   border-radius: 20px;
-  position: fixed;
+
   right: 3%;
   bottom: 5%;
   background-color: var(--color-grey);
@@ -33,7 +33,8 @@ export const GoMoreBtn = styled.span`
   aspect-ratio: 1;
   border-radius: 15px;
   position: fixed;
-  z-index: 1;
+  z-index: 200;
+
   right: 0%;
   bottom: 5%;
   background-color: var(--color-grey);
@@ -51,7 +52,6 @@ export const GoMoreBtn = styled.span`
 export const SelectBox = styled.div`
   background-color: var(--color-grey);
   position: fixed;
-  z-index: 0;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 
@@ -108,7 +108,8 @@ export const Search = styled(SearchIcon)`
 
 export const SearchSection = styled.div`
   position: fixed;
-  width: 25vw;
+  z-index: 100;
+  width: 21vw;
   top: 60%;
   height: 30vh;
   right: 0%;
@@ -122,13 +123,14 @@ export const SearchSection = styled.div`
     transform: translate(0%, -50%);
   }
   div {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 `
 
 export const TTSSection = styled.div`
   position: fixed;
-  width: 20vw;
+  z-index: 100;
+  width: 18vw;
   height: 50vh;
   background-color: var(--color-lightblue);
   border-top-left-radius: 30px;

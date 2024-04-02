@@ -63,7 +63,7 @@ const LeftSearchSection = ({ data, mini }: Props) => {
     <>
       <l.Wrapper className={mini ? 'miniSearchSection' : 'searchSection'}>
         <l.Box>
-          <l.SearchBar className="searchBar">
+          <l.SearchBar>
             <SearchInput
               search={search}
               setSearch={setSearch}
