@@ -172,10 +172,8 @@ public class NewsController {
         String rating = newsService.returnUserArticleRating(email,newsId);
 
         if(Objects.equals(rating, "")){
-            return new ResponseEntity<>("값이 없습니다", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("값이 없습니다", HttpStatus.OK);
         }else{
-            System.out.println(rating);
-
             return new ResponseEntity<>(rating, HttpStatus.OK);
         }
 
@@ -209,15 +207,6 @@ public class NewsController {
             dataList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {
             });
 
-
-
-            // 데이터 출력
-            for (Map<String, Object> data : dataList) {
-                System.out.println("ID: " + data.get("_id"));
-                System.out.println("Title: " + data.get("title"));
-                System.out.println("Thumbnail URL: " + data.get("thumbnail_url"));
-                System.out.println();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,11 +258,6 @@ public class NewsController {
     public ResponseEntity<?> recommendForUser(@RequestBody Map<String, Object> userAndTopic){
         String url = "/data/news/api/recommend_for_user/";
 
-
-        System.out.println(userAndTopic.get("user_id"));
-        System.out.println(userAndTopic.get("topic"));
-
-
         String response = webClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -291,9 +275,6 @@ public class NewsController {
     @Operation(summary = "기사의 detail 페이지에 들어갔을때 유저의 관심도를 수정합니다.")
     public ResponseEntity<?> updateInterests(@RequestBody Map<String,Object> userAndArticle){
         String url = "/data/news/api/update_interests/";
-
-        System.out.println(userAndArticle.get("user_id"));
-        System.out.println(userAndArticle.get("article_id"));
 
         String response = webClient.post()
                 .uri(url)
