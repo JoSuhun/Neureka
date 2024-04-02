@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import GlobalStyle from '@src/GlobalStyle'
 import MainPage from '@src/pages/MainPage'
 import Navbar from '@src/common/Navbar'
@@ -33,6 +33,7 @@ function App() {
               <Route path="/stocks" element={<StocksPage />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/dictionary" element={<DictionaryPage />} />
+              <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
             <Footer />
           </BrowserRouter>

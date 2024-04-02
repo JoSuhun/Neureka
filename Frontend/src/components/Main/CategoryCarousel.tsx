@@ -6,11 +6,15 @@ import * as c from '@src/components/styles/Main/CategoryCarousel'
 import { Navigation } from 'swiper/modules'
 import { categoriesAtom } from '@src/stores/mainAtom'
 import { useAtom } from 'jotai'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import alertIcon from '/image/alert.png'
 
 const CategoryCarousel = () => {
   const [categories, setCategories] = useAtom(categoriesAtom)
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
+  const [error, setError] = useState(false)
+  const errorRef = useRef<HTMLDivElement>(null)
+
   const handleCategories = (selectedCategory: Category) => {
     setCategories(prev => {
       // 선택된 카테고리가 이미 리스트에 있는지 확인
@@ -23,7 +27,8 @@ const CategoryCarousel = () => {
       } else {
         // 존재하지 않는 경우, 카테고리 추가
         if (prev.length >= 3) {
-          alert("카테고리는 최대 3개까지 선택가능합니다.")
+          // alert('카테고리는 최대 3개까지 선택가능합니다.')
+          setError(true)
           return prev
         }
         const updatedCategories = [...prev, selectedCategory]
@@ -48,6 +53,11 @@ const CategoryCarousel = () => {
 
   return (
     <c.CarouselWrapper>
+      <c.ErrorAlert className={error ? 'error' : 'none'} ref={errorRef}>
+        <c.AlertIcon src={alertIcon} />
+        카테고리는 최대 3개까지 선택 가능합니다.
+        <c.Clear onClick={() => setError(false)}>dd</c.Clear>
+      </c.ErrorAlert>
       <Swiper
         modules={[Navigation]} // 모듈 활성화
         slidesPerView={9}

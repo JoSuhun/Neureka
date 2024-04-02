@@ -11,9 +11,9 @@ const SentimentTooltip = ({ sentiments }: Props) => {
   const getStyleAndLabel = (sentiment: Sentiment) => {
     switch (sentiment.label) {
       case 'positive':
-        return { color: 'blue', label: '긍정' }
+        return { color: '#3f7beb', label: '긍정' }
       case 'negative':
-        return { color: 'red', label: '부정' }
+        return { color: '#eb533f', label: '부정' }
       case 'neutral':
         return { color: 'grey', label: '중립' }
       default:
@@ -40,7 +40,8 @@ const SentimentTooltip = ({ sentiments }: Props) => {
         )
       })} */}
       <s.Sentiment $color={color}>
-        이 기사는 <strong>{label}</strong>적인 기사입니다.
+        이 기사는 {selectedKeyword.keyword}에 <strong>{label}</strong>적인
+        기사입니다.
       </s.Sentiment>
     </s.Wrapper>
   )
