@@ -84,6 +84,13 @@ const NewsDetailContainer = ({ newsId }: Props) => {
   } = useQuery({
     queryKey: ['news-detail', newsId],
     queryFn: () => fetchNewsDetail(newsId, userEmail),
+    onSuccess: res => {
+      console.warn(res)
+      if (res.status === undefined) {
+        // navigate(-1)
+        navigate('/news')
+      }
+    },
   })
 
   const {
@@ -145,7 +152,6 @@ const NewsDetailContainer = ({ newsId }: Props) => {
       console.log(filtered)
     },
   })
-
   if (isNewsListLoading) {
     return (
       <>
