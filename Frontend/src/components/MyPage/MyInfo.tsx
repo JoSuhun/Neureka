@@ -4,7 +4,7 @@ import * as m from '@src/components/styles/MyPage/MyInfoStyle'
 import EditIcon from '@mui/icons-material/Edit'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useAtom, useAtomValue } from 'jotai'
-import { isUserAtom } from '@src/stores/authAtom'
+import { isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import { selectAtom } from 'jotai/utils'
 import { useMutation } from 'react-query'
 import { fetchChangeUserInfo } from '@src/apis/AuthApi'
@@ -15,6 +15,7 @@ type Props = {}
 const MyInfo = (props: Props) => {
   const [edit, SetEdit] = useState(false)
   const [user, setUser] = useAtom(isUserAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
   const [id, setId] = useState(0)
   const [nickname, setNickname] = useState('')
   const [name, setName] = useState('')
@@ -44,12 +45,13 @@ const MyInfo = (props: Props) => {
       birth: birth,
       gender: gender,
     })
+    userInfoMutate(user)
   }
 
   useEffect(() => {
     setId(user.userInfoId as number)
     setNickname(user.nickname as string)
-    setEmail(user.email as string)
+    setEmail(userEmail as string)
     setPhone(user.phone as string)
     setBirth(user.birth as string)
     setGender(user.gender as boolean)
@@ -103,6 +105,7 @@ const MyInfo = (props: Props) => {
         <m.Title>이름</m.Title>
         <m.Content
           value={name}
+          defaultValue={name ? name : '이름을 입력해주세요'}
           onChange={event => {
             setName(event.target.value as string)
           }}
