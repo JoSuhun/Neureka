@@ -1,5 +1,4 @@
-import { useAtom, useAtomValue } from 'jotai'
-import { isUserEmailAtom } from '@src/stores/authAtom'
+import { useAtom } from 'jotai'
 import { selectedCompanyAtom } from '@src/stores/stockAtom'
 import { CompanyType, CompanyLikeType } from '@src/types/CompanyType'
 import Tooltip from '@src/common/Tooltip'
@@ -11,7 +10,9 @@ const MyStocksSection = (props: {
   handleUnSubscribeCompany: (code: string) => void
 }) => {
   const { data, handleSubscribeCompany, handleUnSubscribeCompany } = props
-  const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
+
+  // const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
   const [, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
   const handleClick = (item: CompanyType) => {
