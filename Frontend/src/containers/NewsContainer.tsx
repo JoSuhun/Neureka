@@ -42,9 +42,15 @@ const NewsContainer = (props: Props) => {
   const [year, setYear] = useState(new Date().getFullYear())
   const [month, setMonth] = useState(new Date().getMonth() + 1)
   const [day, setDay] = useState(new Date().getDate())
+  const [question, setQuestion] = useAtom(questionAtom)
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    recommendNewsMutate({
+      user_id: userEmail,
+      topic: [],
+    })
+    setQuestion('')
   }, [])
 
   const { mutate: recommendNewsMutate } = useMutation(
@@ -55,13 +61,6 @@ const NewsContainer = (props: Props) => {
       },
     },
   )
-
-  useEffect(() => {
-    recommendNewsMutate({
-      user_id: userEmail,
-      topic: [],
-    })
-  }, [])
 
   const {
     isLoading: isNewsListLoading,
