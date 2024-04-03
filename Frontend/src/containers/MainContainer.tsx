@@ -20,7 +20,7 @@ const MainContainer = (props: Props) => {
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
   const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
-  const userEmail = localStorage.getItem('useremail')
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
 
