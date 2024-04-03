@@ -19,9 +19,9 @@ public class SchedulerConfig {
 //    @Scheduled(cron = "0 30 9 * * ?")
 //
 
-//    서버를 실행시킬때마다 실행
-    @Scheduled(initialDelay = 0 , fixedDelay = Long.MAX_VALUE)
-    public void sendMail() {
-        sendMailService.sendMail();
-    }
+////    서버를 실행시킬때마다 실행
+//    @Scheduled(initialDelay = 0 , fixedDelay = Long.MAX_VALUE)
+//    public void sendMail() {
+//        sendMailService.sendMail();
+//    }
 }
