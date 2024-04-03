@@ -46,6 +46,7 @@ const MyInfo = (props: Props) => {
       gender: gender,
     })
     userInfoMutate(user)
+    console.log('변경변경')
   }
 
   useEffect(() => {
@@ -56,7 +57,6 @@ const MyInfo = (props: Props) => {
     setBirth(user.birth as string)
     setGender(user.gender as boolean)
     setName(user.name as string)
-    userInfoMutate(user)
   }, [user])
 
   const phoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,16 +81,8 @@ const MyInfo = (props: Props) => {
   }, [phone])
 
   // 유저 정보 수정
-  const { mutate: userInfoMutate } = useMutation(
-    (data: User) => fetchChangeUserInfo(data),
-    {
-      onSuccess: () => {
-        console.log('변경성공!')
-      },
-      onError: err => {
-        console.log('변경에러! : ' + err)
-      },
-    },
+  const { mutate: userInfoMutate } = useMutation((data: User) =>
+    fetchChangeUserInfo(data),
   )
 
   return (
