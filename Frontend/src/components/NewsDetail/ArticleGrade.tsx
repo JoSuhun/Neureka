@@ -20,8 +20,12 @@ type Grade = {
 }
 
 const ArticleGrade = ({ grade, newsId }: Props) => {
-  const [value, setValue] = useState<number>(parseInt(grade))
+  const [value, setValue] = useState<number>(0)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
+
+  useEffect(() => {
+    setValue(parseInt(grade))
+  }, [grade])
 
   const { mutate: gradeMutate } = useMutation(
     (data: Grade) => fetchPostGrade(data),
@@ -54,7 +58,7 @@ const ArticleGrade = ({ grade, newsId }: Props) => {
     <>
       <g.Wrapper className="article-grade">
         <g.GradeMsg>다음에도 이 주제의 기사를 읽고 싶으신가요?</g.GradeMsg>
-        <Rating value={value} onChange={handleRatingChange} />
+        <Rating value={value ? value : 0} onChange={handleRatingChange} />
       </g.Wrapper>
     </>
   )
