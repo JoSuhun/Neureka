@@ -80,9 +80,6 @@ const NewsContainer = (props: Props) => {
   } = useQuery({
     queryKey: 'get-hot-news',
     queryFn: fetchHotNews,
-    onSuccess: res => {
-      // console.log(res.data)
-    },
   })
 
   const {

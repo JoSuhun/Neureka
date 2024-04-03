@@ -56,7 +56,6 @@ const MyInfo = ({ userInfoData }: Props) => {
       birth: birth,
       gender: gender,
     })
-    console.log('변경변경')
   }
 
   useEffect(() => {
