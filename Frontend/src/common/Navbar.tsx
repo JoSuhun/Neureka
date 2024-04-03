@@ -56,6 +56,7 @@ const Navbar = () => {
     setUserEmail('')
     localStorage.removeItem('accessToken')
     localStorage.removeItem('userInfo')
+    navigate('/')
   }
 
   const goHome = () => {
@@ -136,8 +137,8 @@ const Navbar = () => {
           className={scrollPosition > 100 ? `nav changed` : `nav original`}
         >
           <n.NavTitle className="title" onClick={goHome}>
-            <span>N</span>
-            Eúrēka
+            <span>NE</span>
+            ureka
           </n.NavTitle>
           <n.NavButton className="button-section">
             {isLogin ? (

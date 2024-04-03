@@ -14,6 +14,7 @@ import DictionaryTutorial from '@src/tutorials/DIctionaryTutorial'
 import { isUserEmailAtom } from '@src/stores/authAtom'
 import { questionAtom } from '@src/stores/newsAtom'
 import SlideBar from '@src/components/Main/SlideBar'
+import Loading from '@src/common/Loading'
 
 type Props = {}
 
@@ -64,7 +65,12 @@ const DictionaryContainer = (props: Props) => {
     },
   })
 
-  if (isLoadingWords || isLoadingMarked) return <>Loading . . .</>
+  if (isLoadingWords || isLoadingMarked)
+    return (
+      <>
+        <Loading />
+      </>
+    )
   if (isErrorWords || isErrorMarked) return <>error</>
 
   return (

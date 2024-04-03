@@ -83,11 +83,13 @@ export const Nav = styled.div`
 export const NavTitle = styled.span`
   cursor: pointer;
   font-size: 1.8rem;
-  letter-spacing: 3px;
   z-index: 1001;
   margin-left: 20px;
   span {
     color: var(--color-navy);
+    font-size: 2rem;
+    font-weight: 500;
+    margin-right: 1px;
   }
 `
 export const NavButton = styled.div`
