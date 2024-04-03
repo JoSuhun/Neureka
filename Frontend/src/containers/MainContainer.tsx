@@ -84,9 +84,9 @@ const MainContainer = (props: Props) => {
     refetchKeywordNews()
   }, [selectedKeyword, refetchKeywordNews])
 
-  useEffect(() => {
-    setSelectedKeyword({ keyword: '', count: 0, ids: [] })
-  }, [setSelectedKeyword])
+  // useEffect(() => {
+  //   setSelectedKeyword({ keyword: '', count: 0, ids: [] })
+  // }, [setSelectedKeyword])
 
   useEffect(() => {
     window.scrollTo(0, 0)
