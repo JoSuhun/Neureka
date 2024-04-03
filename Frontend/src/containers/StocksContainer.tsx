@@ -129,6 +129,27 @@ const StocksContainer = () => {
     onSuccess: () => refetchCompanyLikeList(), // 관심 기업 조회 refetch
   })
 
+  // 구독
+  const handleSubscribeCompany = (code: string) => {
+    const params = {
+      code,
+      email: userEmail,
+      isCheck: true,
+    }
+    subscribeCompany(params)
+    handleConfetti()
+  }
+
+  // 구독 취소
+  const handleUnSubscribeCompany = (code: string) => {
+    const params = {
+      code,
+      email: userEmail,
+      isCheck: false,
+    }
+    subscribeCompany(params)
+  }
+
   // 구독시 꽃가루 이벤트
   const handleConfetti = () => {
     confetti.addConfetti({
@@ -148,27 +169,6 @@ const StocksContainer = () => {
     })
   }
 
-  // 구독
-  const handleSubscribeCompany = () => {
-    const params = {
-      code: selectedStock.code,
-      email: userEmail,
-      isCheck: true,
-    }
-    subscribeCompany(params)
-    handleConfetti()
-  }
-
-  // 구독 취소
-  const handleUnSubscribeCompany = () => {
-    const params = {
-      code: selectedStock.code,
-      email: userEmail,
-      isCheck: false,
-    }
-    subscribeCompany(params)
-  }
-
   // 선택 기업 변경 시
   useEffect(() => {
     setSelectedNewsList([]) // 최근 뉴스 데이터 초기화
@@ -186,7 +186,11 @@ const StocksContainer = () => {
       {companyList ? <StockTutorial /> : null}
       <s.SidebarWrap>
         {companyList && <SearchStocksSection data={companyList} />}
-        <MyStocksSection data={companyLikeList} />
+        <MyStocksSection
+          data={companyLikeList}
+          handleSubscribeCompany={handleSubscribeCompany}
+          handleUnSubscribeCompany={handleUnSubscribeCompany}
+        />
         <LatestStocksSection data={companyLatestList} />
       </s.SidebarWrap>
       <s.MainWrap>
