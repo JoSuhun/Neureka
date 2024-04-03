@@ -160,7 +160,7 @@ const NewsDetailContainer = ({ newsId }: Props) => {
       {/* <n.HeaderImage bgimage={bgimage} /> */}
       <SlideBar />
       <n.Container
-        // style={{ marginTop: '20px' }}
+        style={{ marginTop: '20px' }}
         $backgroundimage={backgroundimage}
       >
         <n.SearchSection className={openDictionary ? 'show' : 'none'}>

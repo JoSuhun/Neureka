@@ -139,6 +139,7 @@ const MyInfo = (props: Props) => {
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
           type="date"
+          max={new Date().toISOString().substring(0, 10)}
         />
       </m.Category>
 
