@@ -11,8 +11,8 @@ import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
 const MainTopSection = (props: {
   handleAddMyStock: () => void
   handleRemoveMyStock: () => void
-  handleSubscribeCompany: () => void
-  handleUnSubscribeCompany: () => void
+  handleSubscribeCompany: (code: string) => void
+  handleUnSubscribeCompany: (code: string) => void
 }) => {
   const {
     handleAddMyStock,
@@ -60,7 +60,9 @@ const MainTopSection = (props: {
         )}
         {currentItem && currentItem.isSendmail ? (
           <Tooltip message={'이 기업을 구독중이에요! 구독을 취소하시겠습니까?'}>
-            <s.SubscribingButton onClick={handleUnSubscribeCompany} />
+            <s.SubscribingButton
+              onClick={() => handleUnSubscribeCompany(selectedStock.code)}
+            />
           </Tooltip>
         ) : (
           <Tooltip
@@ -68,7 +70,9 @@ const MainTopSection = (props: {
           >
             <s.SubscribeButton
               onClick={
-                isLiked ? handleSubscribeCompany : handleSubscribeWithoutLike
+                isLiked
+                  ? () => handleSubscribeCompany(selectedStock.code)
+                  : handleSubscribeWithoutLike
               }
             />
           </Tooltip>
