@@ -31,8 +31,27 @@ import * as c from '@src/components/styles/Stocks/StockChartSectionStyle'
 const StockChartSection = (props: { initialData: CompanyPriceType[] }) => {
   const { initialData } = props
 
+  // 화면 크기를 조정해보려다가 실패함
+  // const [canvasSize, setCanvasSize] = useState({ width: 900, height: 500 })
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setCanvasSize({
+  //       width: window.innerWidth * 0.8,
+  //       height: window.innerHeight * 0.6,
+  //     })
+  //   }
+  //   // 컴포넌트가 마운트될 때와 창 크기가 변경될 때 이벤트 리스너를 추가합니다.
+  //   window.addEventListener('resize', handleResize)
+  //   return () => window.removeEventListener('resize', handleResize)
+  // }, [])
+
+  // const height = canvasSize.height
+  // const width = canvasSize.width
+
   const height = 500
   const width = 900
+
   const margin = { left: 0, right: 60, top: 0, bottom: 24 }
 
   const ScaleProvider =
