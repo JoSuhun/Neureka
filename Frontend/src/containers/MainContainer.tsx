@@ -79,7 +79,7 @@ const MainContainer = (props: Props) => {
     if (isLogin) {
       userInfoRef()
     }
-  }, [userEmail])
+  }, [isLogin])
 
   useEffect(() => {
     refetchKeywords()
