@@ -53,6 +53,7 @@ const Navbar = () => {
     setUserEmail('')
     localStorage.removeItem('accessToken')
     localStorage.removeItem('userInfo')
+    navigate('/')
   }
 
   const goHome = () => {
