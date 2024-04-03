@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
   border: 1.5px solid transparent;
   &:hover {
-    border: 1.5px solid var(--color-orange);
+    /* border: 1.5px solid var(--color-orange); */
   }
   label {
     margin: 0 1px;

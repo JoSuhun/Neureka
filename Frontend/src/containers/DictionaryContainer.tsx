@@ -13,6 +13,7 @@ import { useAtom } from 'jotai'
 import DictionaryTutorial from '@src/tutorials/DIctionaryTutorial'
 import { isUserEmailAtom } from '@src/stores/authAtom'
 import { questionAtom } from '@src/stores/newsAtom'
+import SlideBar from '@src/components/Main/SlideBar'
 
 type Props = {}
 
@@ -68,10 +69,11 @@ const DictionaryContainer = (props: Props) => {
 
   return (
     <>
+      <SlideBar />
       <d.Wrapper>
         <DictionaryTutorial />
         <d.Box className="dictionaryPage">
-          <d.LeftWrapper>
+          <d.LeftWrapper className="searchSection">
             <LeftSearchSection data={wordsData?.data} mini={false} />
           </d.LeftWrapper>
           <RightWordsSection data={markedData?.data} />
