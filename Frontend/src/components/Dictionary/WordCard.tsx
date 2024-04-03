@@ -35,11 +35,7 @@ const WordCard = ({ word, marked, side }: Props) => {
     (data: MarkWord) => fetchMarkWord(data),
     {
       onSuccess: () => {
-        console.log('추가성공!')
         setMark(!mark)
-      },
-      onError: err => {
-        console.log('추가에러! : ' + err)
       },
     },
   )
@@ -49,11 +45,7 @@ const WordCard = ({ word, marked, side }: Props) => {
     (data: MarkWord) => fetchUnmarkWord(data),
     {
       onSuccess: () => {
-        console.log('삭제성공!')
         setMark(!mark)
-      },
-      onError: err => {
-        console.log('삭제에러! : ' + err)
       },
     },
   )
