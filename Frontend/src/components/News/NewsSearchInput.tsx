@@ -48,16 +48,8 @@ const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
     searchMutate(data)
   }
 
-  const { mutate: searchMutate } = useMutation(
-    (data: Search) => fetchSearch(data),
-    {
-      onSuccess: () => {
-        console.log('검색어 저장 성공!' + content.length)
-      },
-      onError: err => {
-        console.log('검색어 저장 실패!' + err)
-      },
-    },
+  const { mutate: searchMutate } = useMutation((data: Search) =>
+    fetchSearch(data),
   )
 
   return (
