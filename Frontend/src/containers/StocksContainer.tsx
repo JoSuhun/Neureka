@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom } from 'jotai'
 import { useQuery, useMutation } from 'react-query'
 import {
   fetchCompanyList,
@@ -12,7 +12,6 @@ import {
   fetchCompanyNewsList,
   fetchCompanySubscribe,
 } from '@src/apis/StockApi'
-import { isUserEmailAtom } from '@src/stores/authAtom'
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
