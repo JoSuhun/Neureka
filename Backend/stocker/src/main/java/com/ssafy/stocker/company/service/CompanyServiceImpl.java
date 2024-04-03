@@ -49,7 +49,11 @@ public class CompanyServiceImpl implements  CompanyService {
         userCompanyEntity.setUser(user);
         userCompanyEntity.setCompany(company);
         userCompanyEntity.setIsSendmail(false);
-        userCompanyRepository.save(userCompanyEntity);
+
+        //존재하지 않는다면
+        if(!userCompanyRepository.existsByUserAndCompany(userCompanyEntity.getUser(), userCompanyEntity.getCompany())){
+            userCompanyRepository.save(userCompanyEntity);
+        }
 
     }
 
