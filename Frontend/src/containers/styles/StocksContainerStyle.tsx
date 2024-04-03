@@ -5,6 +5,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2%;
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    padding: 0 2%;
+    margin: 0 2%;
+  }
 `
 
 export const SidebarWrap = styled.div`
@@ -17,6 +23,11 @@ export const SidebarWrap = styled.div`
   top: 15vh;
   border-radius: 20px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.174);
+
+  @media screen and (max-width: 1200px) {
+    min-height: auto;
+    flex-direction: row;
+  }
 `
 
 export const MainWrap = styled.div`
@@ -27,6 +38,10 @@ export const MainWrap = styled.div`
   padding: 0 2% 2%;
 
   > * {
-    margin-bottom: 3%; /* 각 자식 요소에 마진을 추가하여 간격을 조절합니다 */
+    margin-bottom: 3%;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
   }
 `
