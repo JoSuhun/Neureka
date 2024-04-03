@@ -58,7 +58,6 @@ const MainContainer = (props: Props) => {
     queryFn: () => fetchUserInfo(userEmail as string),
     onSuccess: res => {
       if (res.data) {
-        console.log(res.data)
         setUserInfo({
           birth: res.data.birth,
           email: res.data.email,

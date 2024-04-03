@@ -22,6 +22,9 @@ const CategoryCarousel = () => {
         category => category.name === selectedCategory.name,
       )
       if (isExisting) {
+        if (prev.length <= 3) {
+          setError(false)
+        }
         // 이미 존재하는 경우, 해당 카테고리를 제거
         return prev.filter(category => category.name !== selectedCategory.name)
       } else {
