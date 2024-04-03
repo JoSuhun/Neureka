@@ -20,7 +20,7 @@ const MainContainer = (props: Props) => {
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
   const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
-  const userEmail = useAtomValue(isUserEmailAtom)
+  const userEmail = localStorage.getItem('useremail')
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
 
@@ -57,22 +57,24 @@ const MainContainer = (props: Props) => {
     queryKey: 'userInfo',
     queryFn: () => fetchUserInfo(userEmail as string),
     onSuccess: res => {
-      console.log(res.data)
-      setUserInfo({
-        birth: res.data.birth,
-        email: res.data.email,
-        gender: res.data.gender,
-        name: res.data.name,
-        nickname: res.data.nickname,
-        phone: res.data.phone,
-        userInfoId: res.data.userInfoId,
-      })
+      if (res.data) {
+        setUserInfo({
+          birth: res.data.birth,
+          email: res.data.email,
+          gender: res.data.gender,
+          name: res.data.name,
+          nickname: res.data.nickname,
+          phone: res.data.phone,
+          userInfoId: res.data.userInfoId,
+        })
+      }
     },
   })
 
   useEffect(() => {
     if (isLogin) {
       userInfoRef()
+      console.log('유저정보 불러옴')
     }
   }, [userEmail])
 
