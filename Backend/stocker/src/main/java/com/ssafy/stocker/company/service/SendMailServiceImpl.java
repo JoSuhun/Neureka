@@ -170,20 +170,30 @@ public class SendMailServiceImpl implements SendMailService {
     //요약한 값 불러오기
     private String getSummaryNews(String newsId) {
 
-
         String url = "/data/news/api/news_summary/";
         log.info("getsummaryNews"  + newsId + "실행" + "경로는 " + url);
         Map<String, String> requestData = new HashMap<>();
         requestData.put("_id", newsId);
 
-        String summaryNews = webClient.post()
-                .uri(url)
-                .bodyValue(requestData)
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        try {
+            Thread.sleep(1000); // 1초 대기
 
-        return summaryNews;
+            String summaryNews = webClient.post()
+                    .uri(url)
+                    .bodyValue(requestData)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+
+            return summaryNews;
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // 스레드 인터럽트 상태 복원
+            log.error("Thread interrupted", e);
+            return "에러발생..";
+        }
+
+
 
     }
 
