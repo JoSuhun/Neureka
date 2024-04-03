@@ -40,6 +40,7 @@ pipeline {
                     sh 'docker run -d --name Python -p 8000:8000 csw1511/neureka-python:latest'
                     
                     // 4. 기존에 사용하던 이미지들을 삭제하기
+                    sh 'docker image prune -f'
                 }
             }
         }
