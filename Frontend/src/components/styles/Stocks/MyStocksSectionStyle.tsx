@@ -31,17 +31,14 @@ export const Wrap = styled.div`
 
 export const Item = styled.div`
   background-color: #ffffff;
-  border-radius: 10px;
   padding: 10px;
-  margin-bottom: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  font-size: 0.8rem;
-  font-weight: 500;
+  margin-bottom: 2%;
+  border-radius: 10px;
 
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   cursor: pointer;
 
@@ -51,15 +48,17 @@ export const Item = styled.div`
   }
 `
 
-export const NoneItem = styled.p`
+export const CompanyInfo = styled.div`
+  display: flex;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #000;
+  align-items: center;
+  width: 90%;
 `
 
 export const SubscribeButton = styled(NotificationAddIcon)`
   color: darkgray;
-  font-size: 1.3rem !important;
+  font-size: 1.2rem !important;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 
@@ -70,11 +69,17 @@ export const SubscribeButton = styled(NotificationAddIcon)`
 
 export const SubscribingButton = styled(NotificationsActiveRoundedIcon)`
   color: #ffc700;
-  font-size: 1.3rem !important;
+  font-size: 1.2rem !important;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 
   &:hover {
     transform: scale(1.2);
   }
+`
+
+export const NoneItem = styled.p`
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #000;
 `

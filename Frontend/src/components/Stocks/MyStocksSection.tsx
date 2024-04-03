@@ -5,8 +5,12 @@ import { CompanyType, CompanyLikeType } from '@src/types/CompanyType'
 import Tooltip from '@src/common/Tooltip'
 import * as m from '@src/components/styles/Stocks/MyStocksSectionStyle'
 
-const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
-  const { data } = props
+const MyStocksSection = (props: {
+  data: CompanyLikeType[]
+  handleSubscribeCompany: (code: string) => void
+  handleUnSubscribeCompany: (code: string) => void
+}) => {
+  const { data, handleSubscribeCompany, handleUnSubscribeCompany } = props
   const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
   const [, setSelectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
 
@@ -21,18 +25,19 @@ const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
         <m.Wrap>
           {data && data.length > 0 ? (
             data.map(item => (
-              <m.Item
-                key={item.company.companyId}
-                onClick={() => handleClick(item.company)}
-              >
-                <div>
+              <m.Item key={item.company.companyId}>
+                <m.CompanyInfo onClick={() => handleClick(item.company)}>
                   {item.company.companyName} ({item.company.code})
-                </div>
+                </m.CompanyInfo>
                 {item.isSendmail ? (
                   <Tooltip
                     message={'이 기업을 구독중이에요! 구독을 취소하시겠습니까?'}
                   >
-                    <m.SubscribingButton />
+                    <m.SubscribingButton
+                      onClick={() =>
+                        handleUnSubscribeCompany(item.company.code)
+                      }
+                    />
                   </Tooltip>
                 ) : (
                   <Tooltip
@@ -40,7 +45,9 @@ const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
                       '매일 아침, 이 기업의 요약 기사 메일을 받아보세요!'
                     }
                   >
-                    <m.SubscribeButton />
+                    <m.SubscribeButton
+                      onClick={() => handleSubscribeCompany(item.company.code)}
+                    />
                   </Tooltip>
                 )}
               </m.Item>
