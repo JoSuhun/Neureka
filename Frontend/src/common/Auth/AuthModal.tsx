@@ -11,7 +11,6 @@ import {
   isLoginAtom,
   isAccessTokenAtom,
   isRefreshTokenAtom,
-  isExpireTimeAtom,
   isUserAtom,
   isUserEmailAtom,
 } from '@src/stores/authAtom'
@@ -26,7 +25,6 @@ const AuthModal = (props: Props) => {
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
   const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
-  const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
@@ -47,8 +45,6 @@ const AuthModal = (props: Props) => {
       setClientHeaders(getCookie('Authorization'))
 
       setIsLogin(true)
-      const now = new Date().getTime()
-      setExpireTime(now)
       const UserInfo = parseJwt(getCookie('Authorization'))
       setUserInfo(prevUserInfo => ({
         ...prevUserInfo,
