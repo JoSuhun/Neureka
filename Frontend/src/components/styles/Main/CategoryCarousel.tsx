@@ -45,30 +45,31 @@ export const Category = styled.div`
 `
 export const ErrorAlert = styled.div`
   background-color: var(--color-lightblue);
-  /* color: white; */
   font-size: 1rem;
-  /* font-weight: 700; */
   border-radius: 7px;
   position: fixed;
   z-index: 10000;
   left: 50%;
   top: 30%;
-  opacity: 0;
-  display: none;
-  transform: translate(-50%, -100%);
-  transition: all 300ms ease-in-out;
-  /* transform: translateY(-150%); */
-  &.error {
-    transform: translate(-50%, 0%);
-    opacity: 1;
+  &.none {
+    display: none;
+    opacity: 0;
+    transform: translate(-50%, -100%);
+    transition: all 300ms ease-in-out;
   }
   width: 30vw;
   height: 50px;
   box-shadow: var(--shadow);
-  display: flex;
   align-items: center;
   justify-content: center;
+
+  &.error {
+    display: flex;
+    transform: translate(-50%, 0%);
+    opacity: 1;
+  }
 `
+
 export const Clear = styled(ClearIcon)`
   cursor: pointer;
   color: var(--color-grey);
