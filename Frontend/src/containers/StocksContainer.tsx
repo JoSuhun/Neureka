@@ -32,7 +32,8 @@ import * as s from '@src/containers/styles/StocksContainerStyle'
 import SlideBar from '@src/components/Main/SlideBar'
 
 const StocksContainer = () => {
-  const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
+  // const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 기업
   const [, setLikedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [, setSelectedNewsList] = useAtom(selectedNewsListAtom) // 기업 뉴스 리스트

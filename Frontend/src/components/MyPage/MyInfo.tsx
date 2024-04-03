@@ -10,9 +10,11 @@ import { useMutation } from 'react-query'
 import { fetchChangeUserInfo } from '@src/apis/AuthApi'
 import { User } from '@src/types/UserType'
 
-type Props = {}
+type Props = {
+  userInfoData: User
+}
 
-const MyInfo = (props: Props) => {
+const MyInfo = ({ userInfoData }: Props) => {
   const [edit, SetEdit] = useState(false)
   const [user, setUser] = useAtom(isUserAtom)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
@@ -58,14 +60,14 @@ const MyInfo = (props: Props) => {
   }
 
   useEffect(() => {
-    setId(user.userInfoId as number)
-    setNickname(user.nickname as string)
+    setId(userInfoData.userInfoId as number)
+    setNickname(userInfoData.nickname as string)
     setEmail(userEmail as string)
-    setPhone(user.phone as string)
-    setBirth(user.birth as string)
-    setGender(user.gender as boolean)
-    setName(user.name as string)
-  }, [user])
+    setPhone(userInfoData.phone as string)
+    setBirth(userInfoData.birth as string)
+    setGender(userInfoData.gender as boolean)
+    setName(userInfoData.name as string)
+  }, [userInfoData])
 
   const phoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
