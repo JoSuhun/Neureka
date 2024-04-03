@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime, timedelta
 from neurek.neureka_news.models import DetailsArticle, KeywordArticle, SummaryArticle
@@ -18,13 +20,38 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
 import re
+import platform
 
-article_count = 300
+article_count = 500
+
+def get_webdriver():
+    # 운영 체제에 따라 chromedriver 경로 설정
+    os_name = platform.system().lower()
+    if os_name == "linux":
+        chromedriver_path = "/home/ubuntu/chromedriver-linux64/chromedriver"  # Linux 경로
+        # Chrome 옵션 설정 (예: headless 모드)
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")  # GUI 없이 실행
+        chrome_options.add_argument("--no-sandbox")  # Sandbox 프로세스 사용 안 함
+        chrome_options.add_argument("--disable-dev-shm-usage")  # /dev/shm 파티션 사용 안 함
+
+        # Chrome WebDriver 서비스 생성 및 실행
+        service = Service(executable_path=chromedriver_path)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        return driver
+    elif os_name == "windows":
+        # chromedriver_path = "C:\\Path\\To\\chromedriver.exe"  # Windows 경로
+        driver = webdriver.Chrome()
+        return driver
+    else:
+        raise Exception("Unsupported OS")
+
+
 
 
 def crawling():
     # 페이지 소스 가져오기
-    driver = webdriver.Chrome()
+    driver = get_webdriver()
     article_list = []
 
     # 마지막 페이지 확인하는 조건
@@ -344,7 +371,7 @@ def for_schedule(article_list):
 
 if __name__ == "__main__":
 
-    # crawling()
+    crawling()
     # 요약본을 2000개가 넘는다면 오래된것부터 삭제
     SummaryArticle.trim_collection()
     load_article = SummaryArticle.find_all()

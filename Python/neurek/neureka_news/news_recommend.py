@@ -141,11 +141,6 @@ def recommend_news(id_str):
         # 비슷한 기사를 불러오기
         similar_ids = DetailsArticle.find_urls_by_keywords_sorted_by_average_rating(new_keywords)
 
-        print("similar_ids-----------------")
-        print(similar_ids)
-        print("new_keywords-----------------")
-        print(new_keywords)
-
         summary_article = []
         for article_id in similar_ids:
             article = SummaryArticle.find_by_id(article_id)
@@ -164,7 +159,7 @@ def recommend_news(id_str):
 
         else:
             # 기업뉴스에서 들어왔을 경우
-            print("기업 뉴스")
+            print("기업 뉴스(기사 요약본에 없는경우)")
             with ThreadPoolExecutor(max_workers=5) as executor:
                 future_to_article_id = {
                     executor.submit(fetch_article_details, article_id): article_id for article_id in similar_ids
