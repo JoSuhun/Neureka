@@ -27,16 +27,8 @@ const ArticleGrade = ({ grade, newsId }: Props) => {
     setValue(parseInt(grade))
   }, [grade])
 
-  const { mutate: gradeMutate } = useMutation(
-    (data: Grade) => fetchPostGrade(data),
-    {
-      onSuccess: () => {
-        console.log('평점성공!')
-      },
-      onError: err => {
-        console.log('평점에러! : ' + err)
-      },
-    },
+  const { mutate: gradeMutate } = useMutation((data: Grade) =>
+    fetchPostGrade(data),
   )
 
   const handleRatingChange = (

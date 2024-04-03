@@ -106,7 +106,6 @@ const Navbar = () => {
         !menuBoxRef.current.contains(event.target as Node)
       ) {
         setIsMenuOpen(false)
-        console.log('aa')
       }
     }
 

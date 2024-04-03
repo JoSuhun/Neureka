@@ -76,7 +76,6 @@ const TextToSpeechContainer = (props: { articleContent: string }) => {
       }
 
       const textArray = utterance.text.split(/[\n"']+/) // 정규식
-      console.log('text', textArray)
 
       textArray.forEach(text => {
         const newUtterance = new SpeechSynthesisUtterance(text)
