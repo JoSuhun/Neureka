@@ -45,7 +45,15 @@ const MyInfo = (props: Props) => {
       birth: birth,
       gender: gender,
     })
-    userInfoMutate(user)
+    userInfoMutate({
+      userInfoId: id,
+      name: name,
+      nickname: nickname,
+      email: email,
+      phone: phone,
+      birth: birth,
+      gender: gender,
+    })
     console.log('변경변경')
   }
 

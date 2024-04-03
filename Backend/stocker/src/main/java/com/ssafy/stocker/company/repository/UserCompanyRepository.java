@@ -16,4 +16,6 @@ public interface UserCompanyRepository  extends  JpaRepository<UserCompanyEntity
     UserCompanyEntity findByUserAndCompany(UserEntity user, CompanyEntity company);
 
     List<UserCompanyEntity> findByIsSendmail(Boolean isCheck);
+
+    Boolean existsByUserAndCompany(UserEntity user , CompanyEntity company);
 }
