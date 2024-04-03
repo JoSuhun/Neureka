@@ -25,6 +25,7 @@ import { Word, UserWord } from '@src/types/WordType'
 import Loading from '@src/common/Loading'
 import SlideBar from '@src/components/Main/SlideBar'
 import backgroundimage from '/image/background_paper.jpg'
+import { ConstructionOutlined } from '@mui/icons-material'
 
 type Props = {
   newsId: string
@@ -46,6 +47,10 @@ const NewsDetailContainer = ({ newsId }: Props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
+    gradeRefetch()
     otherNewsMutate(newsId)
     if (userEmail) {
       userInterestMutate({
@@ -98,9 +103,9 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     data: newsGrade,
     isError: isGradeError,
     error: gradeError,
-    refetch,
+    refetch: gradeRefetch,
   } = useQuery({
-    queryKey: 'news-grade',
+    queryKey: ['news-grade', newsId],
     queryFn: () => fetchGetGrade(userEmail, newsId),
   })
 
