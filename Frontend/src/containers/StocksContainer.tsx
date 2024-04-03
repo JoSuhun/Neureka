@@ -29,6 +29,7 @@ import Loading from '@src/common/Loading'
 import StockTutorial from '@src/tutorials/StockTutorial'
 import { confetti } from '@src/App'
 import * as s from '@src/containers/styles/StocksContainerStyle'
+import SlideBar from '@src/components/Main/SlideBar'
 
 const StocksContainer = () => {
   const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
@@ -182,35 +183,38 @@ const StocksContainer = () => {
   }, [])
 
   return (
-    <s.Container>
-      {companyList ? <StockTutorial /> : null}
-      <s.SidebarWrap>
-        {companyList && <SearchStocksSection data={companyList} />}
-        <MyStocksSection
-          data={companyLikeList}
-          handleSubscribeCompany={handleSubscribeCompany}
-          handleUnSubscribeCompany={handleUnSubscribeCompany}
-        />
-        <LatestStocksSection data={companyLatestList} />
-      </s.SidebarWrap>
-      <s.MainWrap>
-        <MainTopSection
-          handleAddMyStock={handleAddMyStock}
-          handleRemoveMyStock={handleRemoveMyStock}
-          handleSubscribeCompany={handleSubscribeCompany}
-          handleUnSubscribeCompany={handleUnSubscribeCompany}
-        />
-        {isLoadingCompanyPriceList ? (
-          <Loading />
-        ) : (
-          <>
-            <StockPriceSection data={companyPriceList} />
-            <StockChartSection initialData={companyPriceList} />
-          </>
-        )}
-        <StockNewsSection />
-      </s.MainWrap>
-    </s.Container>
+    <>
+      <SlideBar />
+      <s.Container>
+        {companyList ? <StockTutorial /> : null}
+        <s.SidebarWrap>
+          {companyList && <SearchStocksSection data={companyList} />}
+          <MyStocksSection
+            data={companyLikeList}
+            handleSubscribeCompany={handleSubscribeCompany}
+            handleUnSubscribeCompany={handleUnSubscribeCompany}
+          />
+          <LatestStocksSection data={companyLatestList} />
+        </s.SidebarWrap>
+        <s.MainWrap>
+          <MainTopSection
+            handleAddMyStock={handleAddMyStock}
+            handleRemoveMyStock={handleRemoveMyStock}
+            handleSubscribeCompany={handleSubscribeCompany}
+            handleUnSubscribeCompany={handleUnSubscribeCompany}
+          />
+          {isLoadingCompanyPriceList ? (
+            <Loading />
+          ) : (
+            <>
+              <StockPriceSection data={companyPriceList} />
+              <StockChartSection initialData={companyPriceList} />
+            </>
+          )}
+          <StockNewsSection />
+        </s.MainWrap>
+      </s.Container>
+    </>
   )
 }
 

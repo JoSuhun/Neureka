@@ -19,6 +19,7 @@ import { isLoginAtom } from '@src/stores/authAtom'
 
 import * as n from '@src/containers/styles/NewsContainerStyle'
 import bgimage from '/image/background_paper.jpg'
+import SlideBar from '@src/components/Main/SlideBar'
 
 type Props = {}
 
@@ -135,7 +136,8 @@ const NewsContainer = (props: Props) => {
 
   return (
     <>
-      <n.Wrapper>
+      <SlideBar />
+      <n.Wrapper style={{ marginTop: '20px' }}>
         <n.Header bgimage={bgimage} className="header">
           <n.LeftSide className="left">
             <n.SideHeader>

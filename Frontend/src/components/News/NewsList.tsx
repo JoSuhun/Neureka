@@ -65,7 +65,7 @@ const NewsList = ({ newsData }: Props) => {
       <n.Wrapper ref={boxRef} background={background}>
         {news?.length > 0 ? (
           <n.NewsBox className="news-box">
-            {data?.map((news, idx) => <NewsCard news={news} />)}
+            {data?.map((news, idx) => <NewsCard news={news} key={idx} />)}
           </n.NewsBox>
         ) : (
           <n.Empty>
