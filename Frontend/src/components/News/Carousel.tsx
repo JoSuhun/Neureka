@@ -8,7 +8,9 @@ type Props = {
 }
 const Carousel = ({ hotNewsData }: Props) => {
   const [counter, setCounter] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const cards = new Array(5).fill(0)
+
   const handleNext = () => {
     if (counter >= cards.length - 1) {
       setCounter(0)
@@ -25,15 +27,25 @@ const Carousel = ({ hotNewsData }: Props) => {
     }
   }
 
-  // 캐러셀 5초마다 넘김
+  const pauseCarousel = () => {
+    setIsPaused(true)
+  }
+
+  const resumeCarousel = () => {
+    setIsPaused(false)
+  }
+
+  // 캐러셀 3초마다 넘김 / 마우스 올렸을 때 일시정지
   useEffect(() => {
     const interval = setInterval(() => {
-      setCounter(prevCounter =>
-        prevCounter === cards.length - 1 ? 0 : prevCounter + 1,
-      )
-    }, 5000)
+      if (!isPaused) {
+        setCounter(prevCounter =>
+          prevCounter === cards.length - 1 ? 0 : prevCounter + 1,
+        )
+      }
+    }, 3000)
     return () => clearInterval(interval)
-  }, [cards.length])
+  }, [isPaused, cards.length])
 
   return (
     <c.Wrapper>
@@ -41,7 +53,11 @@ const Carousel = ({ hotNewsData }: Props) => {
       <c.Container className="carousel">
         <c.Slides style={{ transform: `translateX(${-100 * counter}%)` }}>
           {hotNewsData?.map((news, index) => (
-            <c.Slide key={index}>
+            <c.Slide
+              key={index}
+              onMouseEnter={pauseCarousel}
+              onMouseLeave={resumeCarousel}
+            >
               <CarouselItem news={news} />
             </c.Slide>
           ))}

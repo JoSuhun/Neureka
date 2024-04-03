@@ -6,6 +6,8 @@ import image from '/image/thumbnail-sample3.png'
 import { NewsSummary } from '@src/types/NewsType'
 import { NoMeals } from '@mui/icons-material'
 
+import defaultImage from '/image/defaultImage.png'
+
 type Props = {
   news: NewsSummary
 }
@@ -20,7 +22,9 @@ const NewsCard = ({ news }: Props) => {
         onClick={() => navigate(`/news/newsdetail/${news._id}`)}
       >
         <n.NewsThumbnailBox className="card-thumbnail">
-          <n.NewsThumbnail image={news.thumbnail_url} />
+          <n.NewsThumbnail
+            image={news.thumbnail_url ? news.thumbnail_url : defaultImage}
+          />
         </n.NewsThumbnailBox>
         <n.News>
           <n.NewsTitle className="card-title">{news.article_title}</n.NewsTitle>

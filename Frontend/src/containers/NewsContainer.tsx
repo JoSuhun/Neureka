@@ -147,7 +147,12 @@ const NewsContainer = (props: Props) => {
           {isLogin ? (
             <n.RightSide className="right">
               <n.SideHeader>
-                {userInfo ? <span>{userInfo.name}님을 위한 뉴스</span> : null}
+                {userInfo ? (
+                  <span>
+                    {userInfo.name ? userInfo.name : userInfo.email}님을 위한
+                    뉴스
+                  </span>
+                ) : null}
               </n.SideHeader>
               <CustomizedNews
                 recommendNewsData={recommendNews as RecommendNews[]}
