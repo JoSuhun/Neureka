@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import GlobalStyle from '@src/GlobalStyle'
 import MainPage from '@src/pages/MainPage'
 import Navbar from '@src/common/Navbar'
@@ -12,8 +12,10 @@ import DictionaryPage from './pages/DictionaryPage'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthModal from './common/Auth/AuthModal'
 import { CookiesProvider } from 'react-cookie'
+import JSConfetti from 'js-confetti'
 
 const queryClient = new QueryClient()
+export const confetti = new JSConfetti()
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
               <Route path="/stocks" element={<StocksPage />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/dictionary" element={<DictionaryPage />} />
+              <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
             <Footer />
           </BrowserRouter>

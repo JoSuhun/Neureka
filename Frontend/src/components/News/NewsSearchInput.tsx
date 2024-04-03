@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as s from '@src/components/styles/News/NewsSearchInputStyle'
 import { Search } from '@src/types/NewsType'
@@ -15,6 +15,10 @@ type Props = {
 const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
   const [content, SetContent] = useState('')
 
+  useEffect(() => {
+    SetContent(question as string)
+  }, [question])
+
   const clearSearch = () => {
     setSearch(false)
     SetContent('')
@@ -28,6 +32,11 @@ const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
 
   const goSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (content.trim() == '') {
+      SetContent('')
+      setQuestion(null)
+      return
+    }
     setSearch(true)
     setQuestion(content)
     const now = new Date()
@@ -43,7 +52,7 @@ const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
     (data: Search) => fetchSearch(data),
     {
       onSuccess: () => {
-        console.log('검색어 저장 성공!')
+        console.log('검색어 저장 성공!' + content.length)
       },
       onError: err => {
         console.log('검색어 저장 실패!' + err)
@@ -58,11 +67,11 @@ const SearchInput = ({ search, setSearch, question, setQuestion }: Props) => {
           value={content}
           onChange={event => SetContent(event.target.value)}
         />
-        {search ? (
+        {/* {search ? (
           <s.ClearButton onClick={clearSearch} />
-        ) : (
-          <s.SearchButton onClick={goSearch} />
-        )}
+        ) : ( */}
+        <s.SearchButton onClick={goSearch} />
+        {/* )} */}
       </s.SearchBar>
     </s.SearchBox>
   )

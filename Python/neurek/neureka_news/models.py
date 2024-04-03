@@ -2,15 +2,31 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime, timedelta
 import json
+import random
 
-# MongoDB 클라이언트 설정
-client = MongoClient('mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin')
-db = client['S10P23C105']
+# MongoDB 클라이언트 설정 실서버
+ssafy_mongo = 'mongodb+srv://S10P23C105:cKyZzMD36a@ssafy.ngivl.mongodb.net/S10P23C105?authSource=admin'
+ssafy_db = 'S10P23C105'
+local_mongo = 'mongodb://localhost:27017/'
+local_db = 'article_database'
+
+# True 원격 db False 로컬 db
+mode = True
+mongo = ssafy_mongo if mode else local_mongo
+mongo_db = ssafy_db if mode else local_db
+
+client = MongoClient(f'{mongo}')
+db = client[f'{mongo_db}']
+
+# MongoDB 로컬 서버
+# client = MongoClient('mongodb://localhost:27017/')
+# db = client['article_database']
 
 if __name__ == '__main__':
     print("is neureka new model")
 
 
+# TODO 책갈피 : 요약 기사
 class SummaryArticle:
     collection = db['summary_article_collection']
 
@@ -40,7 +56,7 @@ class SummaryArticle:
     @classmethod
     def find_all(cls):
         """컬렉션의 모든 문서 조회"""
-        documents_cursor = cls.collection.find({})
+        documents_cursor = cls.collection.find({}).sort("date_time", -1)
         documents_list = []
         for doc in documents_cursor:
             # ObjectId를 문자열로 변환하여 '_id' 값을 업데이트
@@ -56,11 +72,16 @@ class SummaryArticle:
         object_id = ObjectId(_id)
         return cls.collection.find_one({"_id": object_id})
 
-
     @classmethod
-    def delete_all(cls):
-        # 컬렉션의 모든 문서 삭제
-        cls.collection.delete_many({})
+    def find_by_topics(cls, topics):
+        """주어진 토픽 리스트에 해당하는 기사들을 조회"""
+        documents_cursor = cls.collection.find({'topic': {'$in': topics}})
+        documents_list = []
+        for doc in documents_cursor:
+            # ObjectId를 문자열로 변환하여 '_id' 값을 업데이트
+            doc['_id'] = str(doc['_id'])
+            documents_list.append(doc)
+        return documents_list
 
     @classmethod
     def trim_collection(cls, max_docs=2000):
@@ -92,11 +113,12 @@ class SummaryArticle:
         return json.loads(self.keywords)
 
 
+# TODO 책갈피 : 상세 기사
 class DetailsArticle:
     collection = db['details_article_collection']
 
     def __init__(self, detail_url, detail_title, detail_text, detail_press, detail_date,
-                 detail_topic, detail_keywords):
+                 detail_topic, detail_keywords, views=0):
         self.detail_url = detail_url
         self.detail_title = detail_title
         self.detail_text = detail_text
@@ -104,7 +126,6 @@ class DetailsArticle:
         self.detail_date = detail_date
         self.detail_topic = detail_topic
         self.detail_keywords = detail_keywords
-
 
     def save(self):
         """문서 저장. detail_url이 기존에 없을 경우에만 저장 (업서트 사용)."""
@@ -136,8 +157,9 @@ class DetailsArticle:
             document['_id'] = str(document['_id'])  # ObjectId를 문자열로 변환
         return document
 
+    # TODO : 여기 수정해야함. user_id가 추가되었음을 알려.
     @classmethod
-    def update_rating(cls, _id, user_rating):
+    def update_rating(cls, _id, user_rating, user_id):
         """_id에 해당하는 문서의 평점 업데이트"""
         document = cls.collection.find_one({"_id": ObjectId(_id)})
 
@@ -148,7 +170,15 @@ class DetailsArticle:
                 {"_id": ObjectId(_id)},
                 {"$set": {"detail_rate": new_rate, "detail_rate_count": new_rate_count}}
             )
-            return update_result.modified_count > 0
+
+            # 평점에 따른 가중치 결정
+            weight = 1 if user_rating == 3 else 2 if user_rating in [4, 5] else -1
+
+            # UserProfile 클래스 인스턴스 생성 및 관심도 업데이트
+            user_profile = UserProfile(user_id)
+            user_profile.update_interests_from_rating(document.get('detail_keywords', []), weight)
+
+            return True
         else:
             return False
 
@@ -156,8 +186,9 @@ class DetailsArticle:
     def find_urls_by_keywords_sorted_by_average_rating(cls, keywords):
         """주어진 키워드를 포함하고, 평균 점수로 정렬한 후, 상위 30개의 _id만 추출하여 반환"""
 
-        # 현재 날짜로부터 7일 전의 날짜를 계산
-        seven_days_ago = datetime.now() - timedelta(days=7)
+        # 현재 날짜로부터 14일 전의 날짜를 계산
+        seven_days_ago = datetime.now() - timedelta(days=14)
+
         pipeline = [
             {"$match": {
                 "detail_keywords": {"$in": keywords},
@@ -165,7 +196,7 @@ class DetailsArticle:
             }},
             {"$addFields": {
                 "weighted_score": {
-                    "$multiply": ["$average_rating", 1]  # 평점에 가중치 1
+                    "$multiply": ["$average_rating", 2]  # 평점에 가중치 2
                 }
             }},
             {"$sort": {"weighted_score": -1, "detail_date": -1}},  # weighted_score와 detail_date 모두를 고려하여 정렬
@@ -173,7 +204,7 @@ class DetailsArticle:
             {"$limit": 30}  # 상위 30개 문서 선택
         ]
 
-        # 이 파이프라인을 실행하는 코드 예시
+        # 파이프라인 실행 코드
         docs = cls.collection.aggregate(pipeline)
 
         # 조회 결과에서 _id만 추출하여 리스트로 변환하여 반환
@@ -207,7 +238,20 @@ class DetailsArticle:
         )
         return update_result.modified_count > 0
 
+    # 조회수 + 1
+    @classmethod
+    def increment_views_by_id(cls, _id):
+        """_id에 해당하는 문서의 views 수를 1 증가시킴. views가 없다면 1로 초기화."""
+        # _id를 사용하여 문서 조회 및 views 업데이트
+        update_result = cls.collection.update_one(
+            {"_id": ObjectId(_id)},  # 검색 조건
+            {"$inc": {"views": 1}},  # $inc 연산자를 사용하여 views 값을 1 증가
+            upsert=True  # 문서가 없을 경우 새로운 문서를 삽입
+        )
+        return update_result.modified_count > 0
 
+
+# TODO 책갈피 : 기사의 키워드 (버블 띄울때 필요)
 class KeywordArticle:
     collection = db['keyword_article_collection']
 
@@ -264,7 +308,7 @@ class KeywordArticle:
             return total
 
 
-
+# TODO 책갈피 : 헤드 라인 뉴스
 class HeadlineNews:
     collection = db['headlines']
 
@@ -277,7 +321,7 @@ class HeadlineNews:
         self.headline_press = headline_press
         self.headline_date = headline_date
 
-    @classmethod
+
     def save(self):
         """문서 저장. _id가 제공되지 않은 경우에만 새로운 문서로 삽입"""
         if not self._id:  # _id가 없는 경우, 새 문서로 취급
@@ -303,47 +347,173 @@ class HeadlineNews:
         for document in documents_list:
             # ObjectId를 문자열로 변환
             document['_id'] = str(document['_id'])
-        return documents_list
 
+        # 6개만 보내주도록 변경
+        return documents_list[:6]
+
+
+# TODO 책갈피 : 유저 추천 기사를 위한 유저 테이블
 class UserProfile:
     collection = db['user']
 
-    def __init__(self, user_id, interests):
+    def __init__(self, user_id=None):
+        self.client = MongoClient(f'{mongo}')
+        self.db = self.client[f'{mongo_db}']
+        self.collection = self.db['user']
         self.user_id = user_id
-        self.interests = interests
 
-    @classmethod
-    def update_interests(cls, user_id, keywords, review=False):
-        """사용자의 관심사를 업데이트합니다."""
-        score_increment = 10 if review else 1  # 리뷰를 남겼을 경우 더 큰 가중치 부여
-        user_profile = cls.collection.find_one({'user_id': user_id})
+    def read_article(self, user_id, article):
+        """기사 읽었을 때 관심도 업데이트"""
+        now = datetime.now()
+
+        update_operations = {
+            '$inc': {},
+            '$set': {}
+        }
+
+        # 토픽과 신문사에 대한 관심도 업데이트
+        if 'detail_topic' in article:
+            update_operations['$inc']['interests.topics.' + article['detail_topic'] + '.score'] = 1
+            update_operations['$set']['interests.topics.' + article['detail_topic'] + '.last_read'] = now
+
+        if 'detail_press' in article:
+            update_operations['$inc']['interests.press.' + article['detail_press']] = 1
+
+        # 키워드가 리스트 형태로 제공되므로, 각 키워드에 대해 반복 처리
+        for keyword in article.get('detail_keywords', []):
+            update_operations['$inc']['interests.keywords.' + keyword + '.score'] = 1
+            update_operations['$set']['interests.keywords.' + keyword + '.last_read'] = now
+
+        # MongoDB 업데이트 연산 실행
+        self.collection.update_one({'user_id': user_id}, update_operations, upsert=True)
+        # 시간에 따른 관심도 조정 및 오래된 데이터 삭제 로직을 이후에 실행
+        self.adjust_interests_based_on_time(user_id)
+
+    # 관심도 갱신
+    def adjust_interests_based_on_time(self, user_id):
+        """시간에 따른 관심도 조정 및 오래된 데이터 삭제"""
+        user_data = self.collection.find_one({'user_id': user_id})
+        if not user_data or 'interests' not in user_data:
+            return {"message": "어라... 이상하네요... 왜 유저 정보가 없지.."}
+
+        now = datetime.now()
+        if 'keywords' in user_data['interests']:
+            keywords_data = user_data['interests']['keywords']
+
+            # 키워드 데이터를 마지막 읽은 시간에 따라 내림차순 정렬
+            sorted_keywords = sorted(keywords_data.items(), key=lambda item: item[1]['last_read'], reverse=True)
+
+            # 20개 이상의 키워드가 있다면, 그 이후의 키워드에 대해 값 조정
+            for keyword, data in sorted_keywords[20:]:
+                if data['score'] > 0:
+                    keywords_data[keyword]['score'] -= 1
+                elif data['score'] < 0:
+                    keywords_data[keyword]['score'] += 1
+
+            # 2달 이상 오래된 키워드 또는 점수가 0인 키워드 삭제
+            two_months_ago = now - timedelta(days=60)
+            for keyword, data in list(keywords_data.items()):
+                if data['last_read'] < two_months_ago or data['score'] == 0:
+                    del keywords_data[keyword]
+
+            self.collection.update_one({'user_id': user_id}, {'$set': {'interests.keywords': keywords_data}})
+
+        if 'topics' in user_data['interests']:
+            topics_data = user_data['interests']['topics']
+
+            # 토픽 데이터를 마지막 읽은 시간에 따라 내림차순 정렬
+            sorted_topics = sorted(topics_data.items(), key=lambda item: item[1].get('last_read', now), reverse=True)
+
+            # 20개 이상의 토픽이 있다면, 그 이후의 토픽에 대해 값 조정
+            for topic, data in (sorted_topics[20:] if len(sorted_topics) > 20 else []):
+                if data['score'] > 0:
+                    topics_data[topic]['score'] -= 1
+
+            self.collection.update_one({'user_id': user_id}, {'$set': {'interests.topics': topics_data}})
+
+    def recommend_articles_for_anonymous(self):
+        # MongoDB에서 DetailsArticle 데이터 조회
+        detail_articles = list(DetailsArticle.collection.find())
+
+        # 현재 날짜로부터 7일 이전의 날짜를 문자열 형태로 계산
+        seven_days_ago_str = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d %H:%M')
+
+        recommended_articles = []
+        for article in detail_articles:
+            # 문자열 형태의 날짜를 비교하여 최근 7일 이내인지 확인
+            if article['detail_date'] >= seven_days_ago_str:
+                # 각 DetailsArticle 문서의 _id가 SummaryArticle 컬렉션에 존재하는지 확인
+                summary_article = SummaryArticle.collection.find_one({"_id": article['_id']})
+
+                if summary_article:
+                    # 조건을 만족하는 경우, 최종 결과에 포함시키기 전에 처리
+                    article_data = {key: value if key != '_id' else str(value) for key, value in summary_article.items() if
+                                    key != 'nouns'}
+                    recommended_articles.append(article_data)
+
+                # 최대 10개의 결과만 필요
+                if len(recommended_articles) >= 10:
+                    break
+
+        # 추천 기사 목록을 무작위로 섞음
+        random.shuffle(recommended_articles)
+
+        # 필터링된 기사 중 최대 2개 선택
+        return recommended_articles[:2]
+
+    def recommend_articles_for_user(self, user_id, topic):
+        """사용자 ID가 주어졌을 때 사용자의 선호도에 기반한 기사 추천"""
+        user_profile = self.collection.find_one({'user_id': user_id})
 
         if not user_profile:
-            # 사용자 프로필이 없으면 새로 생성
-            user_profile = {'user_id': user_id, 'interests': {}}
+            # 사용자 프로필이 없는 경우, 새로운 프로필 생성 및 저장
+            user_profile = {
+                'user_id': user_id,
+                'interests': {'keywords': {}}
+            }
+            self.collection.insert_one(user_profile)
+            user_profile = self.collection.find_one({'user_id': user_id})  # 재조회
 
+        if topic:
+            summary_articles = SummaryArticle.find_by_topics(topic)
+        else:
+            summary_articles = SummaryArticle.find_all()
+
+        if not user_profile or 'interests' not in user_profile:
+            latest_articles = sorted(summary_articles, key=lambda x: x['date_time'], reverse=True)
+            recommended_articles = latest_articles[:10]
+            random.shuffle(recommended_articles)
+            recommended_articles = recommended_articles[:2]
+        else:
+            preferred_keywords = set(user_profile['interests'].get('keywords', {}).keys())
+            article_similarities = []
+
+            for article in summary_articles:
+                article_keywords_set = set(article['keywords'])
+                intersection = len(article_keywords_set.intersection(preferred_keywords))
+                union = len(article_keywords_set.union(preferred_keywords))
+                jaccard_similarity = intersection / union if union else 0
+                article_similarities.append((article, jaccard_similarity))
+
+            article_similarities.sort(key=lambda x: x[1], reverse=True)
+            recommended_articles = article_similarities[:10]
+            random.shuffle(recommended_articles)
+            recommended_articles = recommended_articles[:2]
+        return [
+            {key: value if key != '_id' else str(value) for key, value in article[0].items() if key != 'nouns'}
+            for article in recommended_articles
+        ]
+
+    def update_interests_from_rating(self, keywords, weight):
+        """평점에 따라 사용자의 키워드 관심도 업데이트"""
+        now = datetime.now()
+        update_operations = {}
         for keyword in keywords:
-            # 기존 점수에 추가
-            if keyword in user_profile['interests']:
-                user_profile['interests'][keyword] += score_increment
-            else:
-                user_profile['interests'][keyword] = score_increment
+            keyword_score_inc_key = f'interests.keywords.{keyword}.score'
+            keyword_last_read_set_key = f'interests.keywords.{keyword}.last_read'
 
-        cls.collection.update_one({'user_id': user_id}, {'$set': user_profile}, upsert=True)
+            update_operations.setdefault('$inc', {})[keyword_score_inc_key] = weight
+            update_operations.setdefault('$set', {})[keyword_last_read_set_key] = now
 
-    # @classmethod
-    # def article_read(request, user_id, article_id):
-    #     """기사 읽기 요청 처리"""
-    #     # 이 함수는 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
-    #     # 예시에서는 article_id를 사용하여 기사의 키워드를 조회하는 대신, 키워드 목록을 직접 정의합니다.
-    #     keywords = ['keyword1', 'keyword2']
-    #     update_interests(user_id, keywords)
-    #     return JsonResponse({'message': 'User interests updated.'})
-    #
-    # @classmethod
-    # def article_reviewed(request, user_id, article_id):
-    #     """기사 리뷰 요청 처리"""
-    #     # 실제로 기사의 키워드를 조회하는 로직을 포함해야 합니다.
-    #     keywords = ['keyword1', 'keyword2']
-    #     update_interests(user_id, keywords, review=True)
-    #     return JsonResponse({'message': 'User interests updated with higher weight for review.'})
+        self.collection.update_one({'user_id': self.user_id}, update_operations, upsert=True)
+        self.adjust_interests_based_on_time(self.user_id)

@@ -128,6 +128,7 @@ def load_headline_news():
 
     # 모든 기사 항목(li 태그) 리스트
     articles_li = list_container.find_all('li', class_='sa_item _SECTION_HEADLINE') if list_container else []
+    articles_li_blind = list_container.find_all('li', class_='sa_item _SECTION_HEADLINE is_blind') if list_container else []
 
     # 새로운 헤드라인 뉴스를 위해 db 삭제
     HeadlineNews.delete_all()
@@ -140,17 +141,26 @@ def load_headline_news():
             if article_data:  # 유효한 데이터인 경우 결과 리스트에 추가
                 result_list.append(article_data)
 
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        # 각 기사에 대한 fetch_article_data 함수 실행
+        futures = [executor.submit(fetch_article_data, article_li) for article_li in articles_li_blind]
+        for future in futures:
+            article_data = future.result()
+            if article_data:  # 유효한 데이터인 경우 결과 리스트에 추가
+                result_list.append(article_data)
+
     return result_list
 
 
 
 # # 테스트
-# import pprint
-# if __name__ == "__main__":
-#     start_time = time.time()
-#     pprint.pprint(load_headline_news())
-#
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+import pprint
+if __name__ == "__main__":
+    start_time = time.time()
+    test = load_headline_news()
+    pprint.pprint(test)
+
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")

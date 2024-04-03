@@ -11,13 +11,13 @@ import {
   isLoginAtom,
   isAccessTokenAtom,
   isRefreshTokenAtom,
-  isExpireTimeAtom,
   isUserAtom,
   isUserEmailAtom,
 } from '@src/stores/authAtom'
 import base64 from 'base-64'
 import { useQuery } from 'react-query'
 import { fetchUserInfo } from '@src/apis/AuthApi'
+import { setClientHeaders } from '@src/hooks/requestMethod'
 
 type Props = {}
 
@@ -25,7 +25,6 @@ const AuthModal = (props: Props) => {
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
   const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
-  const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
@@ -43,15 +42,15 @@ const AuthModal = (props: Props) => {
       setAccessToken('Bearer ' + getCookie('Authorization'))
       setRefreshToken(getCookie('refresh'))
 
+      setClientHeaders(getCookie('Authorization'))
+
       setIsLogin(true)
-      const now = new Date().getTime()
-      setExpireTime(now)
-      const googleUserInfo = parseJwt(getCookie('Authorization'))
+      const UserInfo = parseJwt(getCookie('Authorization'))
       setUserInfo(prevUserInfo => ({
         ...prevUserInfo,
-        email: googleUserInfo.email,
+        email: UserInfo.email,
       }))
-      setUserEmail(googleUserInfo.email)
+      setUserEmail(UserInfo.email)
     }
   }, [])
 
@@ -74,7 +73,6 @@ const AuthModal = (props: Props) => {
         isOpen={isOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
       >
         <m.Wrapper>
           <m.CloseBtn onClick={closeModal} />

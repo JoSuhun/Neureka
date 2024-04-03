@@ -117,9 +117,10 @@ def process_news_item(i, soup):
 
 def crawling_news(keyword):
     url = (f"https://search.naver.com/search.naver?where=news&query={keyword}"
-           "&sm=tab_opt&sort=1&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0"
-           "&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0"
-           "&office_category=0&service_area=1")
+           f"&sm=tab_opt&sort=0&photo=0&field=0&pd=0&ds=&de="
+           f"&docid=&related=0&mynews=1&office_type=3&office_section_code="
+           f"&news_office_checked=&nso=&is_sug_officeid=0&office_category=3&service_area=1")
+
 
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -128,7 +129,7 @@ def crawling_news(keyword):
     temp_news_list = []
 
     with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 20)]
+        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 10)]
         for future in as_completed(futures):
             news_data = future.result()
             if news_data:

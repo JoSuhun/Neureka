@@ -13,7 +13,7 @@ import {
   isExpireTimeAtom,
   isUserEmailAtom,
 } from '@src/stores/authAtom'
-import { removeCookie } from '@src/utils/loginCookie'
+import { getCookie, removeCookie } from '@src/utils/loginCookie'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -49,7 +49,11 @@ const Navbar = () => {
     setIsLogin(false)
     removeCookie('Authorization')
     removeCookie('refresh')
+    removeCookie('JSESSIONID')
     setUserEmail('')
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('userInfo')
+    navigate('/')
   }
 
   const goHome = () => {
@@ -128,8 +132,8 @@ const Navbar = () => {
           className={scrollPosition > 100 ? `nav changed` : `nav original`}
         >
           <n.NavTitle className="title" onClick={goHome}>
-            <span>N</span>
-            Eúrēka
+            <span>NE</span>
+            ureka
           </n.NavTitle>
           <n.NavButton className="button-section">
             {isLogin ? (

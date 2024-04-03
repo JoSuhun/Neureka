@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
+import { isUserEmailAtom } from '@src/stores/authAtom'
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
 } from '@src/stores/stockAtom'
-import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
 import Tooltip from '@src/common/Tooltip'
+import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
 
 const MainTopSection = (props: {
   handleAddMyStock: () => void
   handleRemoveMyStock: () => void
-  handleSubscribeCompany: () => void
-  handleUnSubscribeCompany: () => void
+  handleSubscribeCompany: (code: string) => void
+  handleUnSubscribeCompany: (code: string) => void
 }) => {
   const {
     handleAddMyStock,
@@ -19,12 +20,25 @@ const MainTopSection = (props: {
     handleSubscribeCompany,
     handleUnSubscribeCompany,
   } = props
+  const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
   const [likedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [isLiked, setIsLiked] = useState(false) // 관심 기업 여부
   const currentItem = likedCompanyList.find(
     item => item.company.code === selectedStock.code,
   )
+
+  const handleLikeWithoutLogin = () => {
+    alert('로그인이 필요한 서비스입니다.')
+  }
+
+  const handleSubscribeWithoutLike = () => {
+    if (userEmail) {
+      alert('이메일 구독 서비스를 위해 먼저 관심 기업으로 등록해주세요!')
+    } else {
+      alert('로그인이 필요한 서비스입니다.')
+    }
+  }
 
   useEffect(() => {
     setIsLiked(
@@ -43,16 +57,26 @@ const MainTopSection = (props: {
           </Tooltip>
         ) : (
           <Tooltip message={'관심기업으로 등록해보세요!'}>
-            <s.AddButton onClick={handleAddMyStock} />
+            <s.AddButton
+              onClick={userEmail ? handleAddMyStock : handleLikeWithoutLogin}
+            />
           </Tooltip>
         )}
         {currentItem && currentItem.isSendmail ? (
-          <Tooltip message={'구독중이에요! 구독을 취소하시겠습니까?'}>
-            <s.SubscribingButton onClick={handleUnSubscribeCompany} />
+          <Tooltip message={'기업을 구독중이에요! 구독을 취소하시겠습니까?'}>
+            <s.SubscribingButton
+              onClick={() => handleUnSubscribeCompany(selectedStock.code)}
+            />
           </Tooltip>
         ) : (
-          <Tooltip message={'매일 아침 메일을 받아보세요!'}>
-            <s.SubscribeButton onClick={handleSubscribeCompany} />
+          <Tooltip message={'기업의 요약 기사 메일을 받아보세요!'}>
+            <s.SubscribeButton
+              onClick={
+                isLiked
+                  ? () => handleSubscribeCompany(selectedStock.code)
+                  : handleSubscribeWithoutLike
+              }
+            />
           </Tooltip>
         )}
       </s.ButtonWrap>

@@ -7,45 +7,35 @@ import { useAtom } from 'jotai'
 
 const BubbleCategory = () => {
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
-  const [categoryToggle, setCategoryToggle] = useAtom(categoryToggleAtom)
+  // const [categoryToggle, setCategoryToggle] = useAtom(categoryToggleAtom)
   const [selectedCategories, setCategories] = useAtom(categoriesAtom)
-  const handleToggleCategory = () => setCategoryToggle(prev => !prev)
+  // const handleToggleCategory = () => setCategoryToggle(prev => !prev)
 
   return (
     <bc.Container>
-      <bc.ToggleWrapper>
-        <bc.CategoryToggle
+      <bc.InfoWrapper>
+        {/* <bc.CategoryInfo1
           className="CategoryToggle"
-          onClick={handleToggleCategory}
-        >
+          >
           카테고리 선택
-        </bc.CategoryToggle>
-      </bc.ToggleWrapper>
-      <bc.CategoryBlocker $isLogin={isLogin}>
-        <bc.CategoryWrapper className="CategoryList" $show={categoryToggle}>
-          <CategoryCarousel show={categoryToggle} />
-        </bc.CategoryWrapper>
-
-        <bc.CategoryWrapper
-          className="SelectedCategories"
-          $show={categoryToggle}
-        >
-          {selectedCategories.map((element, key) => (
-            <Category
-              key={key}
-              name={element.name}
-              image={element.image}
-              show={categoryToggle}
-            />
-          ))}
-        </bc.CategoryWrapper>
-
-        {!isLogin && (
-          <bc.IsLoginContaier $show={categoryToggle}>
-            서비스를 이용하기 위해서 로그인이 필요합니다.
-          </bc.IsLoginContaier>
-        )}
-      </bc.CategoryBlocker>
+        </bc.CategoryInfo1> */}
+        <bc.CategoryInfo2>
+          ※ 카테고리는 최대 3개까지 선택할 수 있습니다.
+        </bc.CategoryInfo2>
+      </bc.InfoWrapper>
+      <bc.CategoryWrapper className="CategoryList">
+        <CategoryCarousel />
+      </bc.CategoryWrapper>
+      <bc.CategoryWrapper className="SelectedCategories">
+        {selectedCategories.map((element, key) => (
+          <Category
+            key={key}
+            name={element.name}
+            image={element.image}
+            imageStatic={element.imageStatic}
+          />
+        ))}
+      </bc.CategoryWrapper>
     </bc.Container>
   )
 }

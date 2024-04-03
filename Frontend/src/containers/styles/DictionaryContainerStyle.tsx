@@ -17,6 +17,9 @@ export const Box = styled.div`
   }
   @media screen and (max-width: 992px) {
     flex-direction: column;
+    .searchSection {
+      width: 100%;
+    }
   }
   @media screen and (max-width: 768px) {
   }
@@ -24,4 +27,8 @@ export const Box = styled.div`
   }
 
   /* gap: 0 5px; */
+`
+
+export const LeftWrapper = styled.div`
+  width: 50%;
 `

@@ -84,6 +84,7 @@ export const Label = styled.label`
 `
 export const SelectOptions = styled.ul`
   position: absolute;
+  z-index: 10000;
   list-style: none;
   top: 18px;
   left: 0;

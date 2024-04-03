@@ -36,3 +36,32 @@ export type Search = {
   searchTime: string
   swid: number
 }
+
+export type OtherNews = {
+  _id: string
+  title: string
+  thumbnail_url: string | null
+}
+
+export type RecommendNews = {
+  _id: string
+  thumbnail_url: string
+  article_title: string
+  article_link: string
+  article_summary: string
+  press: string
+  date_time: string
+  keywords: string[]
+  topic: string
+  sentiment: Sentiment[]
+}
+
+export type SearchRecommend = {
+  user_id: string
+  topic: string[]
+}
+
+export type UserInterest = {
+  user_id: string
+  article_id: string
+}

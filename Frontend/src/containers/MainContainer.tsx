@@ -9,19 +9,18 @@ import loading from '/image/loading.gif'
 import { useAtom, useAtomValue } from 'jotai'
 import { categoriesAtom, selectedKeywordAtom } from '@src/stores/mainAtom'
 import { useQuery } from 'react-query'
-import { fetchKeywordArticles, fetchKeywords } from '@src/apis/MainApi'
+import { fetchKeywordNews, fetchKeywords } from '@src/apis/MainApi'
 import MainTutorial from '@src/tutorials/MainTutorial'
 import { fetchUserInfo } from '@src/apis/AuthApi'
 import { isLoginAtom, isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
-
 type Props = {}
 
 const MainContainer = (props: Props) => {
   const [runTutorial, setRunTutorial] = useState(false)
   const tutorialStartRef = useRef<HTMLDivElement | null>(null)
-  const [selectedKeyword] = useAtom(selectedKeywordAtom)
+  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom)
   const [categories] = useAtom(categoriesAtom)
-  const userEmail = useAtomValue(isUserEmailAtom)
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
 
@@ -34,20 +33,15 @@ const MainContainer = (props: Props) => {
     },
   )
 
-  useEffect(() => {
-    refetchKeywords()
-  }, [categories, refetchKeywords])
-
   // 키워드 뉴스 데이터 요청
   const {
     data: keywordNewsData,
     refetch: refetchKeywordNews,
-    isLoading: keywordArticlesLoading,
+    isLoading: keywordNewsLoading,
   } = useQuery(
-    ['fetchKeywordArticles', selectedKeyword],
-    () => fetchKeywordArticles(selectedKeyword.ids),
+    ['fetchKeywordNews', selectedKeyword],
+    () => fetchKeywordNews(selectedKeyword.ids),
     {
-      // selectedKeyword.ids 배열에 항목이 있을 경우에만 요청을 활성화
       enabled: selectedKeyword.ids.length > 0,
     },
   )
@@ -63,16 +57,21 @@ const MainContainer = (props: Props) => {
     queryKey: 'userInfo',
     queryFn: () => fetchUserInfo(userEmail as string),
     onSuccess: res => {
-      console.log(res.data)
-      setUserInfo({
-        birth: res.data.birth,
-        email: res.data.email,
-        gender: res.data.gender,
-        name: res.data.name,
-        nickname: res.data.nickname,
-        phone: res.data.phone,
-        userInfoId: res.data.userInfoId,
-      })
+      if (res.data) {
+        setUserInfo({
+          birth: res.data.birth,
+          email: res.data.email,
+          gender: res.data.gender,
+          name: res.data.name,
+          nickname: res.data.nickname,
+          phone: res.data.phone,
+          userInfoId: res.data.userInfoId,
+        })
+        console.log('유저정보 불러옴')
+      }
+    },
+    onError: () => {
+      return
     },
   })
 
@@ -80,30 +79,34 @@ const MainContainer = (props: Props) => {
     if (isLogin) {
       userInfoRef()
     }
-  }, [userEmail])
+  }, [isLogin])
+
+  useEffect(() => {
+    refetchKeywords()
+  }, [categories, refetchKeywords])
 
   useEffect(() => {
     refetchKeywordNews()
   }, [selectedKeyword, refetchKeywordNews])
+
+  // useEffect(() => {
+  //   setSelectedKeyword({ keyword: '', count: 0, ids: [] })
+  // }, [setSelectedKeyword])
 
   useEffect(() => {
     window.scrollTo(0, 0)
     const checkScroll = () => {
       if (tutorialStartRef.current) {
         const rect = tutorialStartRef.current.getBoundingClientRect()
-        // 화면에 특정 컴포넌트가 보이기 시작하면 튜토리얼 시작
         if (rect.top <= window.innerHeight) {
           setRunTutorial(true)
-          // 스크롤 이벤트 리스너 제거
           window.removeEventListener('scroll', checkScroll)
         }
       }
     }
 
-    // 스크롤 이벤트 리스너 추가
     window.addEventListener('scroll', checkScroll)
 
-    // 컴포넌트 언마운트 시 리스너 제거
     return () => {
       window.removeEventListener('scroll', checkScroll)
     }
@@ -123,13 +126,11 @@ const MainContainer = (props: Props) => {
         <m.BubbleChartWrapper ref={tutorialStartRef}>
           {keywordsData && keywordsData?.data ? (
             <BubbleChart keywords={keywordsData?.data} />
-          ) : (
-            <div>데이터를 불러오는 중...</div>
-          )}
+          ) : null}
         </m.BubbleChartWrapper>
 
         <m.NewsWrapper>
-          {keywordArticlesLoading ? (
+          {keywordNewsLoading ? (
             <div>
               <h1>기사 받는 중</h1>
               <img src={loading}></img>

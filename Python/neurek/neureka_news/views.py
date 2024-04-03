@@ -7,6 +7,7 @@ from .models import db, DetailsArticle, SummaryArticle, KeywordArticle, Headline
 from .news_cluster import kmeans_cluster
 from .news_recommend import recommend_news
 from .news_summary import news_summary_id
+from .news_personal_recommend import read_article_and_update_interests, recommend_articles_to_user
 from rest_framework.decorators import api_view
 
 
@@ -99,6 +100,7 @@ def news_details(request):
         try:
             article = DetailsArticle.find_by_id(_id)
             if article:
+                DetailsArticle.increment_views_by_id(_id)
                 return Response(article)
             else:
                 return Response({"message": "Article not found. 해당되는 기사를 db에서 찾지 못했습니다."}, status=status.HTTP_404_NOT_FOUND)
@@ -115,7 +117,8 @@ def news_recommend(request):
     if serializer.is_valid():
         _id = serializer.validated_data.get('_id')
         try:
-            recommend_list = recommend_news(_id)
+            print(str(_id))
+            recommend_list = recommend_news(str(_id))
             if recommend_list:
                 return Response(recommend_list)
             else:
@@ -147,8 +150,9 @@ def update_rating(request):
     if serializer.is_valid():
         _id = serializer.validated_data.get('_id')
         rating = serializer.validated_data.get('rating')
+        user_id = serializer.validated_data.get('user_id')
 
-        if DetailsArticle.update_rating(_id, rating):
+        if DetailsArticle.update_rating(_id, rating, user_id):
             return Response({"message": "평점 등록 성공"}, status=status.HTTP_200_OK)
         else:
             return Response({"message": "평점 등록에 실패 했어요"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -163,3 +167,53 @@ def get_headlines(request):
 
     return HttpResponse(json.dumps(news_data, ensure_ascii=False, indent=4),
                         content_type="application/json; charset=utf-8")
+
+
+# 사용자가 디테일 페이지에 들어갔을때 이 요청을 해줘야함
+@api_view(["POST"])
+def update_interests(request):
+    # 요청에서 사용자 ID와 기사 ID를 추출합니다.
+    user_id = request.data.get('user_id')
+    article_id = request.data.get('article_id')
+
+    # 유효성 검사: 사용자 ID와 기사 ID가 제공되었는지 확인합니다.
+    if not user_id or not article_id:
+        return Response({"error": "Missing user_id or article_id in request. 제대로 주셔야해유"},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # 성공 응답을 반환합니다.
+        return Response(read_article_and_update_interests(user_id, article_id),
+                        status=status.HTTP_200_OK)
+    except Exception as e:
+        # 오류 처리: 예상치 못한 오류가 발생한 경우
+        return Response(read_article_and_update_interests(user_id, article_id),
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# 사용자에게 기사 추천
+@api_view(["POST"])
+def recommend_for_user(request):
+    # 요청에서 사용자 ID를 추출합니다.
+    user_id = request.data.get('user_id')
+    topic = request.data.get('topic', [])
+
+    # # 유효성 검사
+    # if not user_id:
+    #     return Response({"error": "Missing user_id in request. user_id를 제대로 주세요!"},
+    #                     status=status.HTTP_400_BAD_REQUEST)
+
+    # 유효성 검사2
+    if not isinstance(topic, list):
+        return Response({"error": "Invalid topic format. topic은 리스트 형태여야 합니다."},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # 사용자에게 추천할 기사
+        recommended_articles = recommend_articles_to_user(user_id, topic)
+        # 성공 응답과 함께 추천 기사 정보를 반환
+        return Response(recommended_articles, status=status.HTTP_200_OK)
+    except Exception as e:
+        # 오류 처리: 예상치 못한 오류가 발생한 경우
+        return Response({"error": f"An error occurred: {str(e)} 이건.. 예상치 못했는걸요?"},
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)

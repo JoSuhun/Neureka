@@ -6,39 +6,42 @@ import StopIcon from '@mui/icons-material/Stop'
 export const Wrapper = styled.div`
   overflow: hidden;
   display: flex;
+  /* width: 50%; */
+  /* margin: 0 10%; */
   justify-content: center;
   flex-direction: column;
   position: relative;
   @media screen and (max-width: 992px) {
     .carousel {
-      height: 55vh;
+      height: auto;
     }
     .carousel-item {
-      p {
-        font-size: 1.7rem;
+      .title {
+        font-size: 1rem;
       }
     }
   }
   @media screen and (max-width: 768px) {
     .carousel {
-      height: 50vh;
     }
     .carousel-item {
-      p {
-        font-size: 1.5rem;
+      img {
+        display: none;
+      }
+      .info {
+        display: none;
       }
     }
   }
   @media screen and (max-width: 576px) {
     .carousel {
-      height: 40vh;
     }
   }
 `
 
 export const Container = styled.div`
-  height: 70vh;
-  width: 100vw;
+  height: auto;
+  width: 40vw;
 `
 
 export const Slides = styled.div`
@@ -58,7 +61,7 @@ export const PrevButton = styled(ArrowLeftIcon)`
   position: absolute;
   z-index: 5;
   left: 0;
-  color: white;
+  color: var(--color-dark);
 `
 export const NextButton = styled(ArrowRightIcon)`
   background-color: transparent;
@@ -66,10 +69,11 @@ export const NextButton = styled(ArrowRightIcon)`
   position: absolute;
   z-index: 10;
   right: 0;
-  color: white;
+  color: var(--color-dark);
 `
 
 export const IndexBox = styled.div`
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   .focused_card {
@@ -78,66 +82,66 @@ export const IndexBox = styled.div`
 `
 
 export const CardIndex = styled(StopIcon)`
-  font-size: 1.1rem !important;
-  color: var(--color-lightgrey);
+  font-size: 1rem !important;
+  color: var(--color-grey);
 `
 
 export const CarouselCard = styled.div<{ bgimage: string }>`
-  width: 100dvw;
+  width: 40vw;
+
   height: 100%;
-  background-color: #ececec;
-  background-image: url(${props => props.bgimage});
-  background-size: cover;
-  background-position: bottom 10% right;
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   z-index: 0;
   cursor: pointer;
-
-  /* &::before {
-    background-color: #000000;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  } */
-  p {
-    z-index: 5;
-    padding: 1% 3%;
-    margin: 0;
+`
+export const CarouselContent = styled.div`
+  background-color: #00000013;
+  height: 90%;
+  margin: 20px;
+  padding: 15px 0;
+  position: relative;
+  &:hover .title {
+    font-weight: 600;
+    /* color: black; */
   }
 `
 
 export const HeadLine = styled.p`
-  background-color: var(--color-navy);
-  position: absolute;
-  color: white;
-  top: 70%;
-  left: 0;
-  font-size: 2rem;
+  /* background-color: var(--color-navy); */
+  /* color: white; */
+  /* width: 90%; */
+  margin: 0 30px;
+  margin-bottom: 2%;
+  /* position: absolute; */
+  /* top: 10%;
+  left: 0; */
+  font-size: 1.3rem;
 `
 export const Info = styled.p`
-  font-size: 1.3rem;
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  /* align-self: end; */
   position: absolute;
-  top: 0;
-  right: 0;
-
-  background-color: #00000094;
+  bottom: 10px;
+  /* width: 100%; */
+  /* background-color: #00000094; */
 `
 export const Date = styled.span`
-  color: white;
+  color: var(--color-grey);
 `
 export const Press = styled.span`
   color: var(--color-blue);
   font-weight: 700;
-  margin-left: 20px;
+  margin: 0 10px;
+`
+
+export const Thumbnail = styled.img`
+  width: 50%;
+  aspect-ratio: 2;
+  object-fit: cover;
+  margin-left: 30px;
+  margin-bottom: 20px;
 `

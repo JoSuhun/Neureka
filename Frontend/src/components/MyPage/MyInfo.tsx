@@ -4,7 +4,7 @@ import * as m from '@src/components/styles/MyPage/MyInfoStyle'
 import EditIcon from '@mui/icons-material/Edit'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useAtom, useAtomValue } from 'jotai'
-import { isUserAtom } from '@src/stores/authAtom'
+import { isUserAtom, isUserEmailAtom } from '@src/stores/authAtom'
 import { selectAtom } from 'jotai/utils'
 import { useMutation } from 'react-query'
 import { fetchChangeUserInfo } from '@src/apis/AuthApi'
@@ -15,6 +15,7 @@ type Props = {}
 const MyInfo = (props: Props) => {
   const [edit, SetEdit] = useState(false)
   const [user, setUser] = useAtom(isUserAtom)
+  const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
   const [id, setId] = useState(0)
   const [nickname, setNickname] = useState('')
   const [name, setName] = useState('')
@@ -22,8 +23,18 @@ const MyInfo = (props: Props) => {
   const [phone, setPhone] = useState('')
   const [birth, setBirth] = useState('')
   const [gender, setGender] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
+  const [nameError, setNameError] = useState(false)
 
   const goSave = () => {
+    if (phone && phone.length < 13) {
+      setPhoneError(true)
+      return
+    }
+    if (!name || name.length < 1) {
+      setNameError(true)
+      return
+    }
     SetEdit(!edit)
     setUser({
       userInfoId: id,
@@ -34,17 +45,26 @@ const MyInfo = (props: Props) => {
       birth: birth,
       gender: gender,
     })
+    userInfoMutate({
+      userInfoId: id,
+      name: name,
+      nickname: nickname,
+      email: email,
+      phone: phone,
+      birth: birth,
+      gender: gender,
+    })
+    console.log('변경변경')
   }
 
   useEffect(() => {
     setId(user.userInfoId as number)
     setNickname(user.nickname as string)
-    setEmail(user.email as string)
+    setEmail(userEmail as string)
     setPhone(user.phone as string)
     setBirth(user.birth as string)
     setGender(user.gender as boolean)
     setName(user.name as string)
-    userInfoMutate(user)
   }, [user])
 
   const phoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,30 +74,37 @@ const MyInfo = (props: Props) => {
   }
 
   useEffect(() => {
+    if (name?.length > 0) {
+      setNameError(false)
+    }
+  }, [name])
+
+  useEffect(() => {
     if (phone?.length === 11) {
       setPhone(phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'))
+    }
+    if (phone?.length === 13) {
+      setPhoneError(false)
     }
   }, [phone])
 
   // 유저 정보 수정
-  const { mutate: userInfoMutate } = useMutation(
-    (data: User) => fetchChangeUserInfo(data),
-    {
-      onSuccess: () => {
-        console.log('변경성공!')
-      },
-      onError: err => {
-        console.log('변경에러! : ' + err)
-      },
-    },
+  const { mutate: userInfoMutate } = useMutation((data: User) =>
+    fetchChangeUserInfo(data),
   )
 
   return (
     <m.InfoBox>
+      <m.ErrorAlert className={nameError ? 'error' : ''}>
+        이름을 확인하세요! (* 한 글자 이상)
+      </m.ErrorAlert>
+      <m.ErrorAlert className={phoneError ? 'error' : ''}>
+        전화번호를 확인하세요!
+      </m.ErrorAlert>
       <m.Category>
         <m.Title>이름</m.Title>
         <m.Content
-          value={name}
+          value={typeof name == 'string' ? name : '이름을 입력해주세요'}
           onChange={event => {
             setName(event.target.value as string)
           }}
@@ -88,14 +115,7 @@ const MyInfo = (props: Props) => {
 
       <m.Category>
         <m.Title>이메일</m.Title>
-        <m.Content
-          value={email}
-          onChange={event => {
-            setEmail(event.target.value as string)
-          }}
-          disabled={edit ? false : true}
-          className={edit ? 'edit' : ''}
-        />
+        <m.Content value={email} disabled={false} className="disabled" />
       </m.Category>
 
       <m.Category>
@@ -119,6 +139,7 @@ const MyInfo = (props: Props) => {
           disabled={edit ? false : true}
           className={edit ? 'edit' : ''}
           type="date"
+          max={new Date().toISOString().substring(0, 10)}
         />
       </m.Category>
 

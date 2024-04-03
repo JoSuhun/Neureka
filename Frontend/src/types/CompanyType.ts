@@ -41,7 +41,6 @@ export type CompanyLikeParmasType = {
 export type CompanyLatestParamsType = {
   email: string
   code: string
-  companyName: string
 }
 
 export type CompanyLatestType = {

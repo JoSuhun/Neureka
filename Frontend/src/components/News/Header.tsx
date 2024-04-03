@@ -71,7 +71,7 @@ const Search = ({ hotKeywordData }: Props) => {
               </s.Label>
               <s.SelectOptions>
                 {hotKeywords?.map((keyword, idx) => (
-                  <s.Option>
+                  <s.Option onClick={() => setQuestion(keyword)}>
                     <s.OptionNum>{idx + 1}</s.OptionNum>
                     {keyword}
                   </s.Option>

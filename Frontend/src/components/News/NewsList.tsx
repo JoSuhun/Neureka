@@ -4,14 +4,14 @@ import axios from 'axios'
 
 import * as n from '../styles/News/NewsListStyle'
 import NewsCard from './NewsCard'
-// import Pagination from './Pagination'
-import Pagination from '@mui/material/Pagination'
-import Stack from '@mui/material/Stack'
 
 import { NewsSummary } from '@src/types/NewsType'
 
 import { useAtom } from 'jotai'
 import { questionAtom } from '@src/stores/newsAtom'
+
+import search from '/image/searchIcon.png'
+import background from '/image/background_paper.jpg'
 
 type Props = {
   newsData: NewsSummary[]
@@ -62,10 +62,17 @@ const NewsList = ({ newsData }: Props) => {
 
   return (
     <>
-      <n.Wrapper ref={boxRef}>
-        <n.NewsBox className="news-box">
-          {data?.map((news, idx) => <NewsCard news={news} />)}
-        </n.NewsBox>
+      <n.Wrapper ref={boxRef} background={background}>
+        {news?.length > 0 ? (
+          <n.NewsBox className="news-box">
+            {data?.map((news, idx) => <NewsCard news={news} key={idx} />)}
+          </n.NewsBox>
+        ) : (
+          <n.Empty>
+            <n.Search src={search} />
+            검색 결과가 없어요
+          </n.Empty>
+        )}
         <n.PageStack>
           <n.NewsPagination
             count={last}

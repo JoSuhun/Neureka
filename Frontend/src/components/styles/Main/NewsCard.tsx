@@ -8,11 +8,12 @@ export const NewCardBox = styled.div`
   box-shadow: var(--shadow);
   cursor: pointer;
   &:hover img {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
   &:hover .card-thumbnail {
-    opacity: 0.8;
+    opacity: 0.5;
   }
+  position: relative;
 `
 
 export const NewsThumbnailBox = styled.div`
@@ -59,7 +60,10 @@ export const NewsInfo = styled.p`
   display: flex;
   justify-content: end;
   margin-top: 5px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 `
 export const Press = styled.span`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 `

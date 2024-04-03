@@ -1,25 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as c from '@src/components/styles/NewsDetail/SimilarArticleCardStyle'
 
-import defaultThumbnail from '/image/ky.gif'
+import { useQuery } from 'react-query'
+import { fetchNewsDetail } from '@src/apis/NewsApi'
+import { OtherNews } from '@src/types/NewsType'
+
+import defaultThumbnail from '/image/defaultImage.png'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
-  image: string | null
-  title: string
-  content: string
+  news: OtherNews
 }
 
-const SimilarArticleCard = ({ image, title, content }: Props) => {
+const SimilarArticleCard = ({ news }: Props) => {
+  const navigate = useNavigate()
+
   return (
     <>
-      <c.Wrapper className="card">
+      <c.Wrapper
+        className="card"
+        onClick={() => navigate(`/news/newsdetail/${news._id}`)}
+      >
         <c.Thumbnail
-          src={image ? image : defaultThumbnail}
           className="card-thumbnail"
+          src={news.thumbnail_url ? news.thumbnail_url : defaultThumbnail}
         />
-        <c.Title className="card-title">{title}</c.Title>
-        <c.Content className="card-content">{content}</c.Content>
+        <c.TitleBox>
+          <c.Title className="card-title">{news.title}</c.Title>
+        </c.TitleBox>
       </c.Wrapper>
     </>
   )

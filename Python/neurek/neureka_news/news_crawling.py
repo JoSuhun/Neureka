@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime, timedelta
 from neurek.neureka_news.models import DetailsArticle, KeywordArticle, SummaryArticle
@@ -17,16 +19,40 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 from bareunpy import Tagger
+import re
+import platform
+
+article_count = 500
+
+def get_webdriver():
+    # 운영 체제에 따라 chromedriver 경로 설정
+    os_name = platform.system().lower()
+    if os_name == "linux":
+        chromedriver_path = "/home/ubuntu/chromedriver-linux64/chromedriver"  # Linux 경로
+        # Chrome 옵션 설정 (예: headless 모드)
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")  # GUI 없이 실행
+        chrome_options.add_argument("--no-sandbox")  # Sandbox 프로세스 사용 안 함
+        chrome_options.add_argument("--disable-dev-shm-usage")  # /dev/shm 파티션 사용 안 함
+
+        # Chrome WebDriver 서비스 생성 및 실행
+        service = Service(executable_path=chromedriver_path)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        return driver
+    elif os_name == "windows":
+        # chromedriver_path = "C:\\Path\\To\\chromedriver.exe"  # Windows 경로
+        driver = webdriver.Chrome()
+        return driver
+    else:
+        raise Exception("Unsupported OS")
 
 
-article_count = 100
 
 
 def crawling():
     # 페이지 소스 가져오기
-    driver = webdriver.Chrome()
+    driver = get_webdriver()
     article_list = []
-    keyword_dict = {}
 
     # 마지막 페이지 확인하는 조건
     last_page_selector = "#contentarea_left > table > tbody > tr > td.pgRR"
@@ -60,14 +86,16 @@ def crawling():
                 article_dict = {}
 
                 # 기사 제목과 링크 가져오기
-                article_subjects = soup.select(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSubject > a')
+                article_subjects = soup.select(
+                    f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSubject > a')
 
                 for article_subject in article_subjects:
                     article_dict['article_title'] = article_subject.text.strip() if article_subject else None
                     article_dict['article_link'] = article_subject['href'] if article_subject else None
 
                 # 기사 요약, 언론사, 날짜 및 시간 가져오기
-                article_summary = soup.select_one(f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSummary')
+                article_summary = soup.select_one(
+                    f'#contentarea_left > div.mainNewsList._replaceNewsLink > ul > li:nth-child({idx}) > dl > dd.articleSummary')
                 if article_summary:
                     # Summary 정리
                     summary_text = article_summary.text.strip().replace('\n', '').replace('\t', '')
@@ -87,7 +115,8 @@ def crawling():
 
             # 다음 페이지 확인
             try:
-                next_button = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, last_page_selector)))
+                next_button = WebDriverWait(driver, 3).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, last_page_selector)))
                 if 'disabled' in next_button.get_attribute('class'):
                     break
             except TimeoutException:
@@ -103,6 +132,7 @@ def crawling():
 
     print("[+] crawling done")
     return article_list
+
 
 # 확인용 출력
 # for idx, article in enumerate(article_list, start=1):
@@ -148,20 +178,28 @@ def mmr(doc_embedding, candidate_embeddings, words, top_n, diversity):
 
 
 # 태그 뗀 text
-def keyword_extraction(url):
+def crawling_extraction(url):
     response = requests.get(url)
     time.sleep(0.2)  # 서버에 과부하를 주지 않기 위해 잠시 대기
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # `soup.find("article")`의 결과가 None인 경우를 처리
     article = soup.find("article")
     if article:
         article_text = article.get_text(strip=True)
-        # article_text가 있는 경우에만 이미지 태그를 찾음
+        # 기존 로직을 유지하면서 예외 처리 추가
         img_tag = soup.select_one('#img1')
-        img_src = img_tag['data-src'] if img_tag else None
+        # img_tag가 존재하지만 data-src가 없는 경우를 대비해 예외 처리
+        if img_tag and img_tag.has_attr('data-src'):
+            img_src = img_tag['data-src']
+        else:
+            # img_tag에서 data-src를 찾지 못한 경우, 동영상 썸네일 태그 검색
+            alternative_tag = soup.select_one('#contents > div._VOD_PLAYER_WRAP')
+            if alternative_tag and alternative_tag.has_attr('data-cover-image-url'):
+                img_src = alternative_tag['data-cover-image-url']
+            else:
+                # 없으면 뭐 어쩔 수 없지만요
+                img_src = None
     else:
-        # article_text가 없는 경우, img_src도 None으로 설정
         article_text = "No article text found"
         img_src = None
 
@@ -190,6 +228,7 @@ def process_element(element):
                 content += process_element(child)  # 자식 요소에 대한 재귀적 처리
     return content
 
+
 # 웹페이지에서 본문 내용 추출하기
 def extract_content_from_url(url):
     response = requests.get(url)
@@ -211,11 +250,17 @@ def load_stop_words(file_path):
 def keyword_ext(text, stop_words):
     tokenized_doc = tagger.pos(text)
     # stop_words를 고려하여 불용어가 아닌 명사만 추가
-    tokenized_nouns = ' '.join([word[0] for word in tokenized_doc if word[1] in ['NNG', 'NNP'] and word[0] not in stop_words])
+    tokenized_nouns = ' '.join(
+        [word[0] for word in tokenized_doc if word[1] in ['NNG', 'NNP'] and word[0] not in stop_words])
 
     n_gram_range = (1, 1)
-    count = CountVectorizer(ngram_range=n_gram_range).fit([tokenized_nouns])
-    candidates = count.get_feature_names_out()
+    # 예외 처리 추가
+    try:
+        count = CountVectorizer(ngram_range=n_gram_range).fit([tokenized_nouns])
+        candidates = count.get_feature_names_out()
+    except ValueError:
+        # 예외 발생 시(불용어만 있는경우...)
+        return ["불용어", "밖에", "없는경우"], tokenized_nouns
 
     doc_embedding = model.encode([text])[0]
     candidate_embeddings = model.encode(candidates)
@@ -226,7 +271,7 @@ def keyword_ext(text, stop_words):
 def process_article(article, stop_words):
     # 여기서 DB에 원문기사를 저장하는 로직
     url = article["article_link"]
-    text, thumbnail_src = keyword_extraction(url)
+    text, thumbnail_src = crawling_extraction(url)
     topic = text_through_LDA_probability(text)
     keywords, nouns = keyword_ext(text, stop_words)
     article["keywords"] = keywords
@@ -268,10 +313,14 @@ def process_article(article, stop_words):
 
 
 def update_keyword_dict(news_data, keyword_dict):
-    for article in tqdm(news_data, desc="Updating keyword dict"):
+    for article in news_data:
         topic = article["topic"]
         if topic in keyword_dict:
             for keyword in article["keywords"]:
+                # 키워드가 한글 12자를 넘거나 숫자로 이루어진 경우 6자를 넘으면 건너뜀
+                if (re.match(r'^[가-힣]{13,}$', keyword) or re.match(r'^\d{7,}$', keyword)):
+                    continue
+
                 # 해당 키워드가 해당 토픽의 키워드 딕셔너리에 없으면 초기화
                 if keyword not in keyword_dict[topic]:
                     keyword_dict[topic][keyword] = {"count": 0, "_ids": []}
@@ -289,6 +338,7 @@ def update_keyword_dict(news_data, keyword_dict):
 
     return keyword_dict
 
+
 def for_schedule(article_list):
     stop_words_path = "LDA/stop_words.txt"
     stop_words = load_stop_words(stop_words_path)
@@ -301,9 +351,6 @@ def for_schedule(article_list):
         process_with_stop_words = partial(process_article, stop_words=stop_words)
         list(tqdm(executor.map(process_with_stop_words, article_list),
                   total=len(article_list), desc="Processing articles"))
-
-    # 요약본을 2000개가 넘는다면 오래된것부터 삭제
-    SummaryArticle.trim_collection()
 
     keyword_dict = {
         "반도체": {},
@@ -323,4 +370,9 @@ def for_schedule(article_list):
 
 
 if __name__ == "__main__":
-    for_schedule(crawling())
+
+    crawling()
+    # 요약본을 2000개가 넘는다면 오래된것부터 삭제
+    SummaryArticle.trim_collection()
+    load_article = SummaryArticle.find_all()
+    for_schedule(load_article)

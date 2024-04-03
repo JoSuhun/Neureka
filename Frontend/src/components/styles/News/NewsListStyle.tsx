@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ background: string }>`
   display: flex;
   flex-direction: column;
-  background-color: var(--color-lightgrey);
+  background-image: url(${props => props.background});
+  /* background-color: var(--color-lightgrey); */
   padding-bottom: 3%;
+  position: relative;
   @media screen and (max-width: 1200px) {
     .press-title {
       display: none;
@@ -34,6 +36,23 @@ export const Wrapper = styled.div`
       grid-template-columns: repeat(1, 1fr);
     }
   }
+
+  &::after {
+    background: linear-gradient(45deg, transparent 16px, white 0),
+      linear-gradient(-45deg, transparent 16px, white 0);
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    background-size: 15px 32px;
+    content: '';
+    display: block;
+
+    width: 100%;
+    height: 32px;
+
+    position: absolute;
+    top: -7px;
+    left: 0px;
+  }
 `
 
 export const NewsBox = styled.div`
@@ -45,14 +64,15 @@ export const NewsBox = styled.div`
 `
 
 export const NewCardBox = styled.div`
-  background-color: white;
+  background-color: var(--color-lightgrey);
   height: 330px;
+  width: 100%;
   /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: var(--shadow);
   cursor: pointer;
   &:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
   &:hover .card-thumbnail {
     opacity: 0.8;
@@ -116,3 +136,17 @@ export const PageStack = styled(Stack)`
   justify-content: center;
 `
 export const NewsPagination = styled(Pagination)``
+
+export const Empty = styled.p`
+  width: 100%;
+  margin: 10% 0;
+  text-align: center;
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const Search = styled.img`
+  height: 20px;
+  margin-right: 10px;
+`

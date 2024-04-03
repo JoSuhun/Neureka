@@ -13,7 +13,10 @@ const MyPageHeader = (props: Props) => {
   }, [user])
   return (
     <>
-      <w.Welcome>안녕하세요, {name} 님</w.Welcome>
+      <w.Welcome>
+        안녕하세요
+        {name ? <>, {name} 님</> : null}
+      </w.Welcome>
     </>
   )
 }
