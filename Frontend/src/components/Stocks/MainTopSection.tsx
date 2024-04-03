@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useAtom, useAtomValue } from 'jotai'
-import { isUserEmailAtom } from '@src/stores/authAtom'
+import { useAtom } from 'jotai'
 import {
   selectedCompanyAtom,
   LikedCompanyListAtom,
 } from '@src/stores/stockAtom'
 import Tooltip from '@src/common/Tooltip'
 import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
+import Swal from 'sweetalert2'
 
 const MainTopSection = (props: {
   handleAddMyStock: () => void
@@ -20,7 +20,10 @@ const MainTopSection = (props: {
     handleSubscribeCompany,
     handleUnSubscribeCompany,
   } = props
-  const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
+
+  // const userEmail = useAtomValue(isUserEmailAtom) // 유저 이메일
+  const userEmail = JSON.parse(localStorage.getItem('useremail') as string)
+
   const [selectedStock] = useAtom(selectedCompanyAtom) // select 한 종목
   const [likedCompanyList] = useAtom(LikedCompanyListAtom) // 관심 기업 리스트
   const [isLiked, setIsLiked] = useState(false) // 관심 기업 여부
