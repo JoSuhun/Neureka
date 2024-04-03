@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import * as c from '../styles/News/CarouselStyle'
 
 import bgimage from '/image/background_paper.jpg'
+import defaultImage from '/image/defaultImage.png'
 import { useNavigate } from 'react-router-dom'
 import { HotNews } from '@src/types/NewsType'
 
@@ -22,7 +23,13 @@ const CarouselItem = ({ news }: Props) => {
       >
         <c.CarouselContent>
           <c.HeadLine className="title">{news.headline_title}</c.HeadLine>
-          <c.Thumbnail src={news.headline_thumbnail_url} />
+          <c.Thumbnail
+            src={
+              news.headline_thumbnail_url
+                ? news.headline_thumbnail_url
+                : defaultImage
+            }
+          />
           <c.Info>
             <c.Date>{news.headline_date}</c.Date>
             <c.Press>{news.headline_press}</c.Press>
