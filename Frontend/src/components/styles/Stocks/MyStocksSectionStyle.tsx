@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded'
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
 
 export const Container = styled.div`
   min-height: 40vh;
@@ -37,6 +39,10 @@ export const Item = styled.div`
   font-size: 0.8rem;
   font-weight: 500;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   cursor: pointer;
 
   &:hover {
@@ -49,4 +55,26 @@ export const NoneItem = styled.p`
   font-size: 0.8rem;
   font-weight: 500;
   color: #000;
+`
+
+export const SubscribeButton = styled(NotificationAddIcon)`
+  color: darkgray;
+  font-size: 1.3rem !important;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`
+
+export const SubscribingButton = styled(NotificationsActiveRoundedIcon)`
+  color: #ffc700;
+  font-size: 1.3rem !important;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `

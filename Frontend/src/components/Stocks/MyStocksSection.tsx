@@ -2,6 +2,7 @@ import { useAtom, useAtomValue } from 'jotai'
 import { isUserEmailAtom } from '@src/stores/authAtom'
 import { selectedCompanyAtom } from '@src/stores/stockAtom'
 import { CompanyType, CompanyLikeType } from '@src/types/CompanyType'
+import Tooltip from '@src/common/Tooltip'
 import * as m from '@src/components/styles/Stocks/MyStocksSectionStyle'
 
 const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
@@ -24,7 +25,24 @@ const MyStocksSection = (props: { data: CompanyLikeType[] }) => {
                 key={item.company.companyId}
                 onClick={() => handleClick(item.company)}
               >
-                {item.company.companyName} ({item.company.code})
+                <div>
+                  {item.company.companyName} ({item.company.code})
+                </div>
+                {item.isSendmail ? (
+                  <Tooltip
+                    message={'이 기업을 구독중이에요! 구독을 취소하시겠습니까?'}
+                  >
+                    <m.SubscribingButton />
+                  </Tooltip>
+                ) : (
+                  <Tooltip
+                    message={
+                      '매일 아침, 이 기업의 요약 기사 메일을 받아보세요!'
+                    }
+                  >
+                    <m.SubscribeButton />
+                  </Tooltip>
+                )}
               </m.Item>
             ))
           ) : (
