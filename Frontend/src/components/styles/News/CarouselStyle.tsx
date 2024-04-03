@@ -13,33 +13,34 @@ export const Wrapper = styled.div`
   position: relative;
   @media screen and (max-width: 992px) {
     .carousel {
-      height: 55vh;
+      height: auto;
     }
     .carousel-item {
-      p {
-        font-size: 1.7rem;
+      .title {
+        font-size: 1rem;
       }
     }
   }
   @media screen and (max-width: 768px) {
     .carousel {
-      height: 50vh;
     }
     .carousel-item {
-      p {
-        font-size: 1.5rem;
+      img {
+        display: none;
+      }
+      .info {
+        display: none;
       }
     }
   }
   @media screen and (max-width: 576px) {
     .carousel {
-      height: 40vh;
     }
   }
 `
 
 export const Container = styled.div`
-  height: 40vh;
+  height: auto;
   width: 40vw;
 `
 
@@ -109,14 +110,13 @@ export const CarouselContent = styled.div`
 export const HeadLine = styled.p`
   /* background-color: var(--color-navy); */
   /* color: white; */
-  width: 90%;
+  /* width: 90%; */
+  margin: 0 30px;
   margin-bottom: 2%;
   /* position: absolute; */
   /* top: 10%;
   left: 0; */
   font-size: 1.3rem;
-
-  margin-left: 30px;
 `
 export const Info = styled.p`
   font-size: 1rem;
@@ -143,4 +143,5 @@ export const Thumbnail = styled.img`
   aspect-ratio: 2;
   object-fit: cover;
   margin-left: 30px;
+  margin-bottom: 20px;
 `

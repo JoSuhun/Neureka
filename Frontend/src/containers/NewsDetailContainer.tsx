@@ -23,6 +23,8 @@ import TextToSpeechContainer from './TextToSpeechContainer'
 import { markedWordsAtom, toggleMarkingAtom } from '@src/stores/dictionaryAtom'
 import { Word, UserWord } from '@src/types/WordType'
 import Loading from '@src/common/Loading'
+import SlideBar from '@src/components/Main/SlideBar'
+import backgroundimage from '/image/background_paper.jpg'
 
 type Props = {
   newsId: string
@@ -84,7 +86,6 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     queryKey: ['news-detail', newsId],
     queryFn: () => fetchNewsDetail(newsId, userEmail),
     onSuccess: res => {
-      console.warn(res)
       if (res.status === undefined) {
         // navigate(-1)
         navigate('/news')
@@ -101,7 +102,6 @@ const NewsDetailContainer = ({ newsId }: Props) => {
   } = useQuery({
     queryKey: 'news-grade',
     queryFn: () => fetchGetGrade(userEmail, newsId),
-    onSuccess: res => console.log(res.data),
   })
 
   const {
@@ -124,11 +124,8 @@ const NewsDetailContainer = ({ newsId }: Props) => {
     },
   )
 
-  const { mutate: userInterestMutate } = useMutation(
-    (data: UserInterest) => fetchUserInterest(data),
-    {
-      onSuccess: res => console.log(res.data),
-    },
+  const { mutate: userInterestMutate } = useMutation((data: UserInterest) =>
+    fetchUserInterest(data),
   )
 
   useEffect(() => {
@@ -148,7 +145,6 @@ const NewsDetailContainer = ({ newsId }: Props) => {
       const filtered: Word[] = []
       res.data?.forEach((word: UserWord) => filtered.push(word.dictionary))
       SetMarkedWords(filtered)
-      console.log(filtered)
     },
   })
   if (isNewsListLoading) {
@@ -161,8 +157,12 @@ const NewsDetailContainer = ({ newsId }: Props) => {
 
   return (
     <>
-      <n.HeaderImage bgimage={bgimage} />
-      <n.Container>
+      {/* <n.HeaderImage bgimage={bgimage} /> */}
+      <SlideBar />
+      <n.Container
+        // style={{ marginTop: '20px' }}
+        $backgroundimage={backgroundimage}
+      >
         <n.SearchSection className={openDictionary ? 'show' : 'none'}>
           <LeftSearchSection data={wordsData?.data} mini={true} />
         </n.SearchSection>
@@ -170,21 +170,23 @@ const NewsDetailContainer = ({ newsId }: Props) => {
           <TextToSpeechContainer articleContent={newsData?.data.detail_text} />
         </n.TTSSection>
 
-        <n.GoMoreBtn onClick={goSearch}>
-          {openDictionary || openTTS ? <n.Clear /> : null}
-        </n.GoMoreBtn>
+        <div className="sidebar">
+          <n.GoMoreBtn onClick={goSearch}>
+            {openDictionary || openTTS ? <n.Clear /> : null}
+          </n.GoMoreBtn>
 
-        <n.SelectBox className={more ? 'show' : 'none'}>
-          <n.Select onClick={goDictionary}>단어 검색하기</n.Select>
-          <n.Select onClick={goTTS}>음성 뉴스 듣기</n.Select>
-        </n.SelectBox>
+          <n.SelectBox className={more ? 'show' : 'none'}>
+            <n.Select onClick={goDictionary}>단어 검색하기</n.Select>
+            <n.Select onClick={goTTS}>음성 뉴스 듣기</n.Select>
+          </n.SelectBox>
+        </div>
 
         <ArticleContent newsData={newsData?.data} />
         {isLogin ? (
           <ArticleGrade grade={newsGrade?.data} newsId={newsId} />
         ) : null}
         <SimilarArticle otherNewsData={otherNews as OtherNews[]} />
-        <BackBtn />
+        {/* <BackBtn /> */}
       </n.Container>
     </>
   )
