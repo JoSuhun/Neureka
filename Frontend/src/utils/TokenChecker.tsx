@@ -39,10 +39,9 @@ const TokenChecker = (props: Props) => {
   const navigate = useNavigate()
 
   const update = () => {
-    const tokenExpireTime = localStorage.getItem('tokenExpireTime')
-
     if (localStorage.getItem('isLogin') == 'true') {
       const now = new Date().getTime()
+      const tokenExpireTime = localStorage.getItem('tokenExpireTime')
       const loginTime = Math.round(
         (now - parseInt(tokenExpireTime as string)) / 1000 / 60,
       )
@@ -68,6 +67,7 @@ const TokenChecker = (props: Props) => {
         })
         removeCookie('Authorization')
         removeCookie('refresh')
+        removeCookie('JSESSIONID')
         localStorage.removeItem('accessToken')
         localStorage.removeItem('userInfo')
         navigate('/')
@@ -76,6 +76,8 @@ const TokenChecker = (props: Props) => {
     } else {
       removeCookie('Authorization')
       removeCookie('refresh')
+      removeCookie('JSESSIONID')
+
       return
     }
   }
