@@ -10,12 +10,45 @@ export const HeaderImage = styled.div<{ bgimage: string }>`
   background-size: cover;
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{ $backgroundimage: string }>`
   margin: 0 10%;
-  background-color: var(--color-lightgrey);
+  background-image: url(${props => props.$backgroundimage});
+  background-size: cover;
+  position: relative;
+
+  /* background-color: var(--color-lightgrey); */
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 100px;
+  &::before {
+    background: linear-gradient(
+        -45deg,
+        white 16px,
+        red 16px,
+        blue 16px,
+        transparent 0
+      ),
+      linear-gradient(45deg, white 16px, transparent 0);
+    background-position: left top;
+    background-repeat: repeat-x;
+    background-size: 15px 32px;
+    content: ' ';
+    display: block;
+
+    height: 32px;
+    width: 100%;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  @media screen and (max-width: 992px) {
+    .sidebar {
+      display: none;
+    }
+  }
 `
 
 export const PlusBtn = styled.span`

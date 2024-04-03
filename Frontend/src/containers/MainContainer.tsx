@@ -71,6 +71,9 @@ const MainContainer = (props: Props) => {
         console.log('유저정보 불러옴')
       }
     },
+    onError: () => {
+      return
+    },
   })
 
   useEffect(() => {

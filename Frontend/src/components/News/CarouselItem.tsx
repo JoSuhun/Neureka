@@ -30,7 +30,7 @@ const CarouselItem = ({ news }: Props) => {
                 : defaultImage
             }
           />
-          <c.Info>
+          <c.Info className="info">
             <c.Date>{news.headline_date}</c.Date>
             <c.Press>{news.headline_press}</c.Press>
           </c.Info>

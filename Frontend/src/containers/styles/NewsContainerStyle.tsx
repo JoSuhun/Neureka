@@ -38,8 +38,6 @@ export const Header = styled.div<{ bgimage: string }>`
   }
   @media screen and (max-width: 1200px) {
     &.header {
-      flex-direction: column;
-      height: auto;
     }
     .left {
       width: 100%;
