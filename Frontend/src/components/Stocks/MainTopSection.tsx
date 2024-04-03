@@ -6,7 +6,6 @@ import {
 } from '@src/stores/stockAtom'
 import Tooltip from '@src/common/Tooltip'
 import * as s from '@src/components/styles/Stocks/MainTopSectionStyle'
-import Swal from 'sweetalert2'
 
 const MainTopSection = (props: {
   handleAddMyStock: () => void
