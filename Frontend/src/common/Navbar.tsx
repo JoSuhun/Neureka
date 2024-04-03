@@ -52,6 +52,7 @@ const Navbar = () => {
     setIsLogin(false)
     removeCookie('Authorization')
     removeCookie('refresh')
+    removeCookie('JSESSIONID')
     setUserEmail('')
     localStorage.removeItem('accessToken')
     localStorage.removeItem('userInfo')
