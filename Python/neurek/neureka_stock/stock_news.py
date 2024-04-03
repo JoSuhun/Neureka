@@ -129,7 +129,7 @@ def crawling_news(keyword):
     temp_news_list = []
 
     with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 20)]
+        futures = [executor.submit(process_news_item, i, soup) for i in range(1, 10)]
         for future in as_completed(futures):
             news_data = future.result()
             if news_data:
