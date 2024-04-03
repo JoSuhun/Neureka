@@ -347,7 +347,9 @@ class HeadlineNews:
         for document in documents_list:
             # ObjectId를 문자열로 변환
             document['_id'] = str(document['_id'])
-        return documents_list
+
+        # 6개만 보내주도록 변경
+        return documents_list[:6]
 
 
 # TODO 책갈피 : 유저 추천 기사를 위한 유저 테이블
