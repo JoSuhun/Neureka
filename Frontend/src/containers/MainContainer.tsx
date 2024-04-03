@@ -58,6 +58,7 @@ const MainContainer = (props: Props) => {
     queryFn: () => fetchUserInfo(userEmail as string),
     onSuccess: res => {
       if (res.data) {
+        console.log(res.data)
         setUserInfo({
           birth: res.data.birth,
           email: res.data.email,
@@ -67,6 +68,7 @@ const MainContainer = (props: Props) => {
           phone: res.data.phone,
           userInfoId: res.data.userInfoId,
         })
+        console.log('유저정보 불러옴')
       }
     },
   })
@@ -74,7 +76,6 @@ const MainContainer = (props: Props) => {
   useEffect(() => {
     if (isLogin) {
       userInfoRef()
-      console.log('유저정보 불러옴')
     }
   }, [userEmail])
 

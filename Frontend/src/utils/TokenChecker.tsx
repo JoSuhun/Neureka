@@ -7,13 +7,14 @@ import {
   isLoginAtom,
   isAccessTokenAtom,
   isRefreshTokenAtom,
-  isExpireTimeAtom,
   isUserAtom,
   isUserEmailAtom,
 } from '@src/stores/authAtom'
 import { getCookie, removeCookie } from './loginCookie'
 import { CollectionsBookmarkOutlined } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
+import { Tokenlogout } from '@src/hooks/logout'
 
 type Props = {}
 
@@ -21,15 +22,12 @@ const TokenChecker = (props: Props) => {
   const [isLogin, setIsLogin] = useAtom(isLoginAtom)
   const [accessToken, setAccessToken] = useAtom(isAccessTokenAtom)
   const [refreshToken, setRefreshToken] = useAtom(isRefreshTokenAtom)
-  const [expireTime, setExpireTime] = useAtom(isExpireTimeAtom)
   const [userInfo, setUserInfo] = useAtom(isUserAtom)
   const [userEmail, setUserEmail] = useAtom(isUserEmailAtom)
 
   const refresh = async () => {
     const res = await axios.post('http://localhost:8080/reissue')
 
-    const now = new Date().getTime()
-    setExpireTime(now)
     setAccessToken(res.headers.authorization)
     setRefreshToken(getCookie('refresh'))
 
@@ -41,18 +39,21 @@ const TokenChecker = (props: Props) => {
   const update = () => {
     if (localStorage.getItem('isLogin') == 'true') {
       const now = new Date().getTime()
-      const tokenExpireTime = localStorage.getItem('tokenExpireTime')
+      const accessToken = localStorage.getItem('accessToken')
+      const tokenExpireTime =
+        (jwtDecode(accessToken as string).exp as number) * 1000
+
       const loginTime = Math.round(
-        (now - parseInt(tokenExpireTime as string)) / 1000 / 60,
+        ((tokenExpireTime as number) - now) / 1000 / 60,
       )
 
-      console.log('로그인 시간: ' + loginTime + '분')
+      console.log('로그인 시간: ' + loginTime + '분 남음')
 
-      if (loginTime < 60) {
+      if (loginTime > 0) {
         refresh()
       } else {
+        navigate('/')
         setIsLogin(false)
-        setExpireTime(null)
         setAccessToken('')
         setRefreshToken('')
         setUserEmail('')
@@ -65,19 +66,14 @@ const TokenChecker = (props: Props) => {
           birth: null,
           gender: null,
         })
-        removeCookie('Authorization')
-        removeCookie('refresh')
-        removeCookie('JSESSIONID')
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('userInfo')
         navigate('/')
+        Tokenlogout()
         console.log('토큰 만료로 로그아웃됨')
       }
     } else {
       removeCookie('Authorization')
       removeCookie('refresh')
       removeCookie('JSESSIONID')
-
       return
     }
   }
