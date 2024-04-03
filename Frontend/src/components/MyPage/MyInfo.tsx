@@ -104,8 +104,7 @@ const MyInfo = (props: Props) => {
       <m.Category>
         <m.Title>이름</m.Title>
         <m.Content
-          value={name}
-          defaultValue={name ? name : '이름을 입력해주세요'}
+          value={name ? name : '이름을 입력해주세요'}
           onChange={event => {
             setName(event.target.value as string)
           }}

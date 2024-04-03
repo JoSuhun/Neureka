@@ -2,9 +2,10 @@ import React from 'react'
 
 import * as c from '../styles/News/CustomizedNewsStyle'
 
-import image from '/image/thumbnail-sample.gif'
 import { RecommendNews } from '@src/types/NewsType'
 import { useNavigate } from 'react-router-dom'
+
+import defaultImage from '/image/defaultImage.png'
 
 type Props = {
   news: RecommendNews
@@ -15,7 +16,9 @@ const CustomizedNewsItem = ({ news }: Props) => {
   return (
     <>
       <c.NewsList onClick={() => navigate(`newsdetail/${news._id}`)}>
-        <c.NewsThumbnail image={news.thumbnail_url} />
+        <c.NewsThumbnail
+          image={news.thumbnail_url ? news.thumbnail_url : defaultImage}
+        />
         <c.NewsSection>
           <c.NewsTitle className="news-title">{news.article_title}</c.NewsTitle>
           <c.NewsContent className="news-content">

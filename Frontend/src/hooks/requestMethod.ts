@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { Tokenlogout } from './logout'
+import { useAtom } from 'jotai'
+import { isLoginAtom } from '@src/stores/authAtom'
 
 const BASE_URL = 'http://localhost:8080/api/v1/'
 
@@ -22,10 +25,8 @@ export const setClientHeaders = (token: string) => {
 publicRequest.interceptors.request.use(
   config => {
     if (accessToken) {
-      console.log('토큰')
       config.headers['Authorization'] = accessToken
     } else {
-      console.log('zz')
       delete config.headers['Authorization'] // 토큰이 없을 때 헤더에서 제거
     }
     return config
@@ -44,18 +45,13 @@ publicRequest.interceptors.response.use(
     console.log(error.response)
     if (error.response?.status === 403) {
       console.log('토큰 없음')
-      localStorage.removeItem('accessToken')
       console.log(error)
-
-      error.config.headers = {
-        Authorization: accessToken,
-      }
+      Tokenlogout()
     } else if (error.response?.status === 401) {
       console.log('토큰 만료')
-      localStorage.removeItem('accessToken')
+      Tokenlogout()
       console.log(error)
     } else {
-      localStorage.removeItem('accessToken')
       return error
     }
   },
