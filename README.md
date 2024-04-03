@@ -152,7 +152,8 @@
     - 감성분석
         - KLUE RoBERTa 모델 사용( 출처 : Hugging Face )
     - 기사 요약
-        - SMTP 모델 사용 ( 출처 : Hugging Face )
+        - 기사요약 모델 사용 ( 출처 : Hugging Face )
+        - SMTP 프로토콜을 이용하여 사용자의 이메일로 전송
     - TTS(Text-To-Speech)
         - speechSynthesis 사용
 
