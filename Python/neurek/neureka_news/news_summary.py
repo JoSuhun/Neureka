@@ -5,7 +5,7 @@ from transformers import BartForConditionalGeneration
 import requests
 import time
 from bs4 import BeautifulSoup
-from .models import DetailsArticle
+from neurek.neureka_news.models import DetailsArticle
 
 model_type = 2
 if model_type == 1:
@@ -55,7 +55,7 @@ def news_summary_id(_id):
 
 def news_summary(text):
     # 토크나이저를 사용하여 뉴스기사 원문을 모델이 인식할 수 있는 토큰형태로 바꿔줍니다.
-    input_ids = tokenizer.encode(text)
+    input_ids = tokenizer.encode(text, max_length=1024, truncation=True)
     # print(input_ids)
 
     # 모델에 넣기 전 문장의 시작과 끝을 나타내는 토큰을 추가합니다.
@@ -80,13 +80,13 @@ def news_summary(text):
 
 
 # 테스트 용
-# if __name__ == "__main__":
-#     start_time = time.time()
-#
-#     # _id
-#     news_summary_id("")
-#
-#     end_time = time.time()  # 종료 시간 저장
-#     elapsed_time = end_time - start_time  # 경과 시간 계산
-#
-#     print(f"Execution time: {elapsed_time} seconds")
+if __name__ == "__main__":
+    start_time = time.time()
+
+    # _id
+    news_summary_id("660befb895108de55394f4ca")
+
+    end_time = time.time()  # 종료 시간 저장
+    elapsed_time = end_time - start_time  # 경과 시간 계산
+
+    print(f"Execution time: {elapsed_time} seconds")
