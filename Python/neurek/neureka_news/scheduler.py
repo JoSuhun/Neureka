@@ -43,9 +43,10 @@ def main():
     schedule = BlockingScheduler(timezone='Asia/Seoul')
     # schedule.add_job(test, 'interval', seconds=5, id='test')
     schedule.add_job(reload_headline, 'interval', minutes=5, id='headline')
-    schedule.add_job(start_crawling, 'interval', minutes=10, id='crawling')
+    # schedule.add_job(start_crawling, 'interval', minutes=60, id='crawling')
+    # schedule.add_job(start_crawling, 'interval', minutes=10, id='crawling')
     # schedule.add_job(reload_headline, 'cron', hour=9, minute=00, id='headline')
-    # schedule.add_job(start_crawling, 'cron', hour=9, minute=00, id='crawling')
+    schedule.add_job(start_crawling, 'cron', hour=6, minute=00, id='crawling')
 
     schedule.start()
 
