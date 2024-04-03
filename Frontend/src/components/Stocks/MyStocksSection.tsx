@@ -31,7 +31,7 @@ const MyStocksSection = (props: {
                 </m.CompanyInfo>
                 {item.isSendmail ? (
                   <Tooltip
-                    message={'이 기업을 구독중이에요! 구독을 취소하시겠습니까?'}
+                    message={'기업을 구독중이에요! 구독을 취소하시겠습니까?'}
                   >
                     <m.SubscribingButton
                       onClick={() =>
@@ -40,11 +40,7 @@ const MyStocksSection = (props: {
                     />
                   </Tooltip>
                 ) : (
-                  <Tooltip
-                    message={
-                      '매일 아침, 이 기업의 요약 기사 메일을 받아보세요!'
-                    }
-                  >
+                  <Tooltip message={'기업의 요약 기사 메일을 받아보세요!'}>
                     <m.SubscribeButton
                       onClick={() => handleSubscribeCompany(item.company.code)}
                     />
