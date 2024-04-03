@@ -60,13 +60,13 @@ const MyInfo = ({ userInfoData }: Props) => {
   }
 
   useEffect(() => {
-    setId(userInfoData.userInfoId as number)
-    setNickname(userInfoData.nickname as string)
+    setId(userInfoData?.userInfoId as number)
+    setNickname(userInfoData?.nickname as string)
     setEmail(userEmail as string)
-    setPhone(userInfoData.phone as string)
-    setBirth(userInfoData.birth as string)
-    setGender(userInfoData.gender as boolean)
-    setName(userInfoData.name as string)
+    setPhone(userInfoData?.phone as string)
+    setBirth(userInfoData?.birth as string)
+    setGender(userInfoData?.gender as boolean)
+    setName(userInfoData?.name as string)
   }, [userInfoData])
 
   const phoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
