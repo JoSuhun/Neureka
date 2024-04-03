@@ -52,7 +52,6 @@ const WordCard = ({ word, marked, side }: Props) => {
 
   // 즐겨찾기 버튼 클릭 이벤트
   const handleMark = () => {
-    console.log(word)
     const titleWithoutTags = word?.title
       ? word.title.replace(/(<([^>]+)>)/gi, '')
       : ''
