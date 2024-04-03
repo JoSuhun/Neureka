@@ -13,6 +13,7 @@ import com.ssafy.stocker.company.service.SendMailService;
 import com.ssafy.stocker.user.entity.UserEntity;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -38,10 +39,10 @@ public class SendMailServiceImpl implements SendMailService {
     private final WebClient webClient ;
     private final TemplateEngine templateEngine;
     private final ObjectMapper objectMapper;
-    public SendMailServiceImpl(UserCompanyRepository userCompanyRepository, JavaMailSender javaMailSender, WebClient.Builder webClientBuilder,TemplateEngine templateEngine, ObjectMapper objectMapper){
+    public SendMailServiceImpl(UserCompanyRepository userCompanyRepository, JavaMailSender javaMailSender, WebClient.Builder webClientBuilder,TemplateEngine templateEngine, ObjectMapper objectMapper,@Value("${releaseHostName}") String releaseHostName){
         this.userCompanyRepository = userCompanyRepository;
         this.javaMailSender = javaMailSender;
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build() ;
+        this.webClient = webClientBuilder.baseUrl("http://"+releaseHostName+":8000").build() ;
         this.templateEngine = templateEngine;
         this.objectMapper = objectMapper;
     }
