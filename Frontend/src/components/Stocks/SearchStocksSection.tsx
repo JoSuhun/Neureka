@@ -60,17 +60,23 @@ const SearchStocksSection = (props: { data: CompanyType[] }) => {
         </s.SearchBox>
         {showDropdown && (
           <s.ResultWrap>
-            {filteredStocks.map(stock => (
-              <s.ResultItem
-                key={stock.code}
-                onClick={() => handleSelectStock(stock)}
-              >
-                <span>
-                  {stock.companyName} ({stock.code})
-                </span>
-                <s.ArrowIcon />
+            {filteredStocks.length === 0 && searchTerm.trim() !== '' ? (
+              <s.ResultItem>
+                <span>검색어가 없습니다.</span>
               </s.ResultItem>
-            ))}
+            ) : (
+              filteredStocks.map(stock => (
+                <s.ResultItem
+                  key={stock.code}
+                  onClick={() => handleSelectStock(stock)}
+                >
+                  <span>
+                    {stock.companyName} ({stock.code})
+                  </span>
+                  <s.ArrowIcon />
+                </s.ResultItem>
+              ))
+            )}
           </s.ResultWrap>
         )}
       </s.Wrap>
