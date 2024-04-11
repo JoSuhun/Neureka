@@ -1,0 +1,19 @@
+$docker ps -a
+깔려있는 모든 프로세스 확인
+
+redis 가   없을시 
+$docker pull redis
+redis 이미지 다운로드 받기 (최초 1회 실행)
+
+$docker ps - a 
+redis 설치 됐는지 확인
+
+$docker run -p 6379:6379 redis
+6379 포트로  redis 실행
+
+$docker ps 
+실행중인 도커 프로세스 보여줌 redis 가 실행중인지 확인하기
+
+
+ 
+
