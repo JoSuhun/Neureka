@@ -45,28 +45,28 @@
 ## 5. 주요 기능 시연
 
 ### 메인
-![메인](/uploads/5749cda41cef0db69c8606e798a585b9/메인.webp)
+<img src='./exec/img/메인.gif'/>
 
 ### 기사전체
-![기사전체](/uploads/914a7eaed7b7a946a6a97bd7de13bebe/기사전체.webp)
+<img src='./exec/img/기사전체.gif'/>
 
 ### 기사상세
-![기사상세](/uploads/25ba77b24be83b889806d7f33ebb1192/기사상세.webp)
+<img src='./exec/img/기사상세.gif'/>
 
 ### 기업
-![기업](/uploads/d2d5b2e2575c054fbb60c5618877a811/기업.webp)
+<img src='./exec/img/기업.gif'/>
 
 ### 튜토리얼
-![튜토리얼](/uploads/ba32099a6e4b8290e4604244a3986448/튜토리얼.webp)
+<img src='./exec/img/튜토리얼.gif'/>
 
 ### 사전
-![사전](/uploads/0de6311d580914af7741afba15723777/사전.webp)
+<img src='./exec/img/사전.gif'/>
 
 ### tts
-![tts](/uploads/b07967ef0648cd5af4fcfd2dcad06693/tts.webp)
+<img src='./exec/img/tts.gif'/>
 
 ### 메일링
-![메일링](/uploads/f5524984c47dab68e9a4326750355afa/메일링.webp)
+<img src='./exec/img/메일링.gif'/>
 
 
 ## 6. 기술 스택 및 개발환경
